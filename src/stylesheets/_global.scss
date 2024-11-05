@@ -1,0 +1,11 @@
+@use "./variables";
+
+body {
+  background-color: variables.$color-primary-bg;
+  font-family: "Ubuntu", "Noto Sans TC";
+}
+
+.product-on-sale {
+  text-decoration: line-through;
+  color: gray;
+}

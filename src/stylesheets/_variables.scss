@@ -1,0 +1,40 @@
+//* bg color
+$color-primary-bg: #ffffff;
+$color-secondary-bg: #272727;
+$color-third-bg: gray;
+$color-fourth-bg: #d2d2d2;
+$color-fifth-bg: #555555;
+$color-sixth-bg: #f1f1f1;
+$color-seventh-bg: #f6f5f3;
+$color-eight-bg: lightgray;
+$color-ninth-bg: #f8d7da;
+
+//* text color
+$color-primary-text: #272727;
+$color-secondary-text: #ffffff;
+$color-third-text: gray;
+$color-fourth-text: red;
+$color-fifth-text: #19110b;
+$color-sixth-text: #d2d2d2;
+
+//* other color
+$color-success: lime;
+$color-error: pink;
+
+//* outline or border color
+$line-primary-line: solid #272727;
+$line-secondary-line: solid #eae8e4;
+$line-third-line: solid #f1f1f1;
+$line-fourth-line: solid firebrick;
+$line-fifth: solid #d4d9de;
+$line-seventh: solid red;
+
+//* semi transparent bg
+$semi-color-primary-bg-8: rgba(255, 255, 255, 0.8);
+$semi-color-primary-bg-5: rgba(255, 255, 255, 0.5);
+$semi-color-secondary-bg-7: rgba(0, 0, 0, 0.75);
+
+//* semi transparent line
+$semi-color-primary-line: solid rgba(0, 0, 0, 0.7);
+
+// $temp-color: #efefef;
