@@ -1,4 +1,4 @@
-@forward "./variables";
+@use "./variables";
 
 @mixin img-cover-center {
   object-fit: cover;

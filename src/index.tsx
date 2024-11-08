@@ -1,15 +1,17 @@
 import { StrictMode } from "react";
 import { HashRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import axios from "axios";
 
-import App from "./App.tsx";
+import { store } from "./store/store";
+
+import App from "./App";
 
 import "./stylesheets/_reset.scss";
 import "./stylesheets/main.scss";
 
-axios.defaults.baseURL =
-  process.env.REACT_APP_API_URL || "http://localhost:3000";
+axios.defaults.baseURL = process.env.APP_API_URL || "http://localhost:3000";
 
 const element = document.getElementById("root") as HTMLElement;
 
@@ -18,7 +20,9 @@ const root = ReactDOM.createRoot(element);
 root.render(
   <StrictMode>
     <HashRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </HashRouter>
   </StrictMode>
 );

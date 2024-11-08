@@ -17,6 +17,7 @@ module.exports = {
     filename: "main.js",
     path: resolve(__dirname, "build"),
   },
+
   module: {
     rules: [
       {
@@ -41,7 +42,15 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ["@svgr/webpack", "file-loader"],
+      },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   devServer: {
     static: [

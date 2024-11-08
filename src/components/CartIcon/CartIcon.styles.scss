@@ -1,0 +1,30 @@
+@use "../../stylesheets/animation";
+
+.cart-icon {
+  display: flex;
+  position: relative;
+  width: min-content;
+  align-items: center;
+
+  &__logo {
+    width: 30px;
+    height: 30px;
+    &--bump {
+      animation: bump 300ms ease-out;
+    }
+  }
+  &__count {
+    display: flex;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+    background-color: red;
+    top: -20%;
+    right: -20%;
+  }
+}
+
