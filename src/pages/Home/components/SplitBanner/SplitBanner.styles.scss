@@ -1,0 +1,100 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.split-banner {
+  display: flex;
+  width: 100%;
+  height: min-content;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__left {
+    display: flex;
+    width: 100%;
+    padding: 2rem 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: variables.$color-primary-text;
+    &-title {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    &-sentence {
+      width: 100%;
+      line-height: 1.5rem;
+      text-align: start;
+    }
+    &-btn {
+      position: relative;
+      padding: 5px;
+      background-color: variables.$color-primary-bg;
+      opacity: 0.6;
+      font-weight: bold;
+      color: variables.$color-primary-text;
+      cursor: pointer;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: variables.$color-secondary-bg;
+        transition: width 0.3s;
+      }
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+  &__right {
+    width: 100%;
+    height: 100%;
+    &-img,
+    &-img-men {
+      width: 100%;
+      height: 700px;
+      @include mixin.img-cover-center;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    flex-direction: row;
+    &-men {
+      flex-direction: row-reverse;
+    }
+    &__right,
+    &__left {
+      width: 50%;
+    }
+    &__left {
+      opacity: 0;
+      &--active {
+        opacity: 1;
+        transition: opacity 3s ease-out;
+      }
+    }
+    &__right {
+      overflow: hidden;
+      &-img-men {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      &-img {
+        transform: translateX(100%);
+        opacity: 0;
+        @include mixin.img-cover-center;
+        &--active {
+          transform: translateX(0);
+          opacity: 1;
+          transition: transform 1.5s ease-in-out, opacity 1.5s ease-out;
+        }
+      }
+    }
+
+    &-left-sentence {
+      width: 36vh;
+    }
+  }
+}

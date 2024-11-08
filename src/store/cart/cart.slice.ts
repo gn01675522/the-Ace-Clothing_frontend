@@ -9,16 +9,16 @@ import {
 
 import type { CartItems, Cart } from "./cart.types";
 
-type INITIAL_STATE_TYPE = {
-  cart: Cart;
-  loadingItems: CartItems[];
-  tempData: null;
-  isLoading: boolean;
-  isModalOpen: boolean;
-  error: string | null;
+type CartState = {
+  readonly cart: Cart;
+  readonly loadingItems: CartItems[];
+  readonly tempData: null;
+  readonly isLoading: boolean;
+  readonly isModalOpen: boolean;
+  readonly error: string | null;
 };
 
-const INITIAL_STATE: INITIAL_STATE_TYPE = {
+const INITIAL_STATE: CartState = {
   cart: { carts: [], total: 0, final_total: 0 },
   loadingItems: [],
   tempData: null,

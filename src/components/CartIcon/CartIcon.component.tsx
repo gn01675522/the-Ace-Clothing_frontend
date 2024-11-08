@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/redux-hooks";
 
 import { ReactComponent as CartLogo } from "../../assets/cart.svg";
 
@@ -10,7 +10,7 @@ import "./CartIcon.styles.scss";
 
 const CartIcon: FC = () => {
   const [isItemChange, setIsItemChange] = useState(false);
-  const quantity = useSelector(selectCartItemsQuantity);
+  const quantity = useAppSelector(selectCartItemsQuantity);
 
   const btnClasses = `cart-icon__logo ${
     isItemChange ? "cart-icon__logo--bump" : ""

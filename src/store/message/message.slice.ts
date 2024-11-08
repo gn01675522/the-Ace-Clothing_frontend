@@ -1,18 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Action } from "@reduxjs/toolkit";
 
-const INITIAL_STATE = {
+type MessageState = {
+  readonly hasMessage: boolean;
+  readonly message: string[];
+};
+
+const INITIAL_STATE: MessageState = {
   hasMessage: false,
   message: [],
 };
 
 //********** Helper **********
-const successMessageHelper = (res) => ({
+const successMessageHelper = (res: { data: { message: string } }) => ({
   type: "success",
   title: "更新成功",
   text: res.data.message,
 });
 
-const errorMessageHelper = (error) => ({
+const errorMessageHelper = (error: {
+  response: { data: { message: string } };
+}) => ({
   type: "danger",
   title: "失敗",
   text: Array.isArray(error?.response?.data?.message)

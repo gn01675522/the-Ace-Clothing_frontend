@@ -1,0 +1,51 @@
+@use "../../../../stylesheets/mixin";
+
+.scroll-list {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  button {
+    display: none;
+    @include mixin.normalBreakPoint(large) {
+      display: unset;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-75%);
+      &:hover {
+        opacity: 0.8;
+      }
+      &:first-of-type {
+        left: -25px;
+      }
+      &:last-of-type {
+        right: -25px;
+      }
+    }
+  }
+  &__content {
+    width: 100%;
+    padding: 0 1rem;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &-list {
+      display: grid;
+      width: max-content;
+      height: 100%;
+      grid-template-rows: 1fr;
+      grid-auto-flow: column dense;
+      gap: 1rem;
+      overflow: auto;
+    }
+    @include mixin.normalBreakPoint(medium) {
+      padding: unset;
+    }
+  }
+
+  &__left-arrow,
+  &__right-arrow {
+    width: 15px;
+    height: 15px;
+  }
+}

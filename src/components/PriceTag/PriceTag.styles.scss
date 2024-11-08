@@ -1,0 +1,13 @@
+@use "../../stylesheets//variables";
+
+.price-tag__sell-price {
+  color: variables.$color-fourth-text;
+  font-weight: bold;
+}
+
+.price-tag__origin-price {
+  color: variables.$color-primary-text;
+  .product-on-sale {
+    font-weight: light;
+  }
+}

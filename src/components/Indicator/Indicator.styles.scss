@@ -1,0 +1,22 @@
+@use "../../stylesheets/variables";
+
+.indicator {
+  display: flex;
+  position: absolute;
+  gap: 8px;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
+  &__dots {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 0.6;
+    background: variables.$color-sixth-bg;
+    outline: 1px variables.$line-third-line;
+    cursor: pointer;
+  }
+  &__dots--active {
+    background: variables.$color-secondary-bg;
+  }
+}

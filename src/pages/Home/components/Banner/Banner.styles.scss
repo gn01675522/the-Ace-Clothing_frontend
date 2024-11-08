@@ -1,0 +1,115 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.banner {
+  position: relative;
+  width: 100%;
+  left: 0;
+  &__image {
+    width: 100%;
+    height: 500px;
+    @include mixin.img-cover-center;
+    @media screen and (min-width: 1200px) {
+      height: 700px;
+    }
+  }
+  &__content {
+    position: absolute;
+    width: max-content;
+    height: min-content;
+    top: 30%;
+    right: 50%;
+    color: white;
+    letter-spacing: 2px;
+    transform: translateX(50%);
+    text-shadow: 2px 2px 2px black;
+    &-title {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 3rem;
+    }
+    &-text {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    @include mixin.normalBreakPoint(medium) {
+      &-title {
+        font-size: 36px;
+        font-weight: 900;
+        margin-bottom: 3rem;
+      }
+      &-text {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+    }
+    @media screen and (min-width: 1200px) {
+      &-title {
+        font-size: 50px;
+        font-weight: 900;
+        margin-bottom: 6rem;
+      }
+      &-text {
+        font-size: 35px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    &:hover {
+      opacity: 0.8;
+    }
+    &:nth-of-type(1) {
+      left: 16px;
+      z-index: 1;
+    }
+    &:nth-of-type(2) {
+      right: 16px;
+      z-index: 1;
+    }
+    @include mixin.normalBreakPoint(medium) {
+      &:nth-of-type(1) {
+        left: 24px;
+      }
+      &:nth-of-type(2) {
+        right: 24px;
+      }
+    }
+    @include mixin.normalBreakPoint(large) {
+      &:nth-of-type(1) {
+        left: 32px;
+      }
+      &:nth-of-type(2) {
+        right: 32px;
+      }
+    }
+  }
+  &__cta {
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
+    font-weight: bold;
+    bottom: 15%;
+    right: 50%;
+    background-color: variables.$color-primary-bg;
+    opacity: 0.7;
+    color: variables.$color-primary-text;
+    transform: translateX(50%);
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.banner__left-arrow,
+.banner__right-arrow {
+  width: 20px;
+  height: 20px;
+}

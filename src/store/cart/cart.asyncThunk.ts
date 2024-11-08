@@ -4,7 +4,7 @@ import axios from "axios";
 import { setHandleMessage } from "../message/message.slice";
 
 import type { AxiosError } from "axios";
-import type { Cart, CartItems, CartItemAddToCart } from "./cart.types";
+import type { Cart, CartItemAddToCart } from "./cart.types";
 
 //* fetch 目前的購物車內商品資訊
 export const fetchCartItemsAsync = createAppAsyncThunk<
@@ -40,10 +40,10 @@ export const setAddItemToCartAsync = createAppAsyncThunk<
     dispatch(fetchCartItemsAsync());
   } catch (e) {
     const error = e as AxiosError<string>;
-    dispatch(setHandleMessage({ type: "error", res: error }));
     if (!error.response) {
       throw e;
     }
+    dispatch(setHandleMessage({ type: "error", res: error }));
     return rejectWithValue(error.response.data);
   }
 });
@@ -62,10 +62,10 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<
     dispatch(fetchCartItemsAsync());
   } catch (e) {
     const error = e as AxiosError<string>;
-    dispatch(setHandleMessage({ type: "error", res: error }));
     if (!error.response) {
       throw e;
     }
+    dispatch(setHandleMessage({ type: "error", res: error }));
     return rejectWithValue(error.response.data);
   }
 });
@@ -93,10 +93,10 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       dispatch(fetchCartItemsAsync());
     } catch (e) {
       const error = e as AxiosError<string>;
-      dispatch(setHandleMessage({ type: "error", res: error }));
       if (!error.response) {
         throw e;
       }
+      dispatch(setHandleMessage({ type: "error", res: error }));
       return rejectWithValue(error.response.data);
     }
   }

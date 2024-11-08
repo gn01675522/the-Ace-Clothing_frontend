@@ -1,0 +1,204 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+//******************** 長方形按鈕 start ********************//
+
+.btn-rect-bl-nm {
+  width: 100%;
+  height: 40px;
+  background-color: variables.$color-secondary-bg;
+  color: variables.$color-secondary-text;
+  cursor: pointer;
+  @include mixin.hover-button-effect-secondary;
+  &:disabled {
+    background-color: variables.$color-fourth-bg;
+    color: variables.$color-third-text;
+  }
+}
+//* 一般長方形黑底按鈕
+
+.btn-rect-bl-me {
+  height: 30px;
+  padding: 4px 10px;
+  background-color: variables.$color-secondary-bg;
+  color: variables.$color-secondary-text;
+  cursor: pointer;
+  @include mixin.hover-button-effect-secondary;
+}
+//* 中等長方形黑底按鈕
+
+.btn-rect-bl-Sm {
+  width: 60px;
+  height: 30px;
+  padding: 0 10px;
+  background-color: variables.$color-secondary-bg;
+  color: variables.$color-secondary-text;
+  cursor: pointer;
+  @include mixin.hover-button-effect-secondary;
+}
+//* 小型長方形黑底按鈕
+
+.btn-rect-wh-lg {
+  width: 100%;
+  height: 100%;
+  background-color: variables.$color-primary-bg;
+  border: none;
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+  transition: background-color 0.6s ease-out, color 0.6s ease-out;
+  @include mixin.hover-button-effect;
+}
+//* 大型長方形白底按鈕，帶動畫，沒 border
+
+.btn-rect-wh-bd {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px variables.$line-fifth;
+  color: variables.$color-primary-text;
+  background-color: variables.$color-primary-bg;
+  cursor: pointer;
+  &:hover {
+    color: variables.$color-secondary-text;
+    background-color: rgba(35, 35, 35, 0.8);
+    transition: color 0.4s ease-out, background-color 0.4s ease-out;
+  }
+  &:disabled {
+    background-color: unset;
+    color: variables.$color-third-text;
+  }
+}
+//* 大型長方形白底按鈕，帶動畫，有 border
+
+.btn-rect-wh-nm {
+  width: 100%;
+  height: 100%;
+  color: variables.$color-primary-text;
+  background-color: variables.$color-primary-bg;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  @include mixin.hover-button-effect;
+}
+//* 一般長方形白底按鈕
+
+.btn-rect-wh-sm {
+  width: 50px;
+  height: 40px;
+  background-color: variables.$color-primary-bg;
+  color: variables.$color-secondary-bg;
+  cursor: pointer;
+  @include mixin.shallow-shadow;
+  @include mixin.hover-button-effect;
+  &:disabled {
+    background-color: unset;
+    color: variables.$color-third-text;
+  }
+}
+// 小型長方形白底按鈕，帶陰影
+
+//******************** 長方形按鈕 end ********************//
+
+//******************** 正方形按鈕 start ********************//
+
+.btn-sq-bl-me {
+  width: 60px;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: variables.$color-primary-bg;
+  color: variables.$color-primary-text;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  @include mixin.hover-button-effect;
+}
+//* 中型正方形黑底按鈕
+
+.btn-sq-bl-sm {
+  width: 40px;
+  height: 40px;
+  background-color: variables.$color-secondary-bg;
+  color: variables.$color-secondary-text;
+  @include mixin.hover-button-effect-secondary;
+  cursor: pointer;
+  &:disabled {
+    background-color: variables.$color-fourth-bg;
+    color: variables.$color-secondary-text;
+  }
+}
+//* 小型正方形黑底按鈕
+
+.btn-sq-wh-sm {
+  width: 50px;
+  height: 50px;
+  color: black;
+  background: white;
+  border: 1px variables.$line-fifth;
+  cursor: pointer;
+  &:hover {
+    color: variables.$color-secondary-text;
+    background-color: rgba(35, 35, 35, 0.8);
+    transition: color 0.4s ease-out, background-color 0.4s ease-out;
+  }
+  &:disabled {
+    background-color: #f1f1f1;
+  }
+}
+//* 小型正方形白底按鈕
+
+.btn-sq-wh-opacity-l-sm {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: variables.$color-primary-bg;
+  opacity: 0;
+  cursor: pointer;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  &::after {
+    content: "<";
+  }
+}
+//* 小型正方形白色半透明按鈕，位置左
+
+.btn-sq-wh-opacity-r-sm {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: variables.$color-primary-bg;
+  opacity: 0;
+  cursor: pointer;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  &::after {
+    content: ">";
+  }
+}
+//* 小型正方形白色半透明按鈕，位置右
+
+//******************** 正方形按鈕 end ********************//
+
+//******************** 圓弧角按鈕 start ********************//
+.btn-arc-bl-lg {
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  border-radius: 8px;
+  background-color: variables.$color-secondary-bg;
+  color: variables.$color-secondary-text;
+  cursor: pointer;
+  @include mixin.hover-button-effect-secondary;
+}
+//* 大型圓弧角黑底按鈕
+
+.btn-arc-white-opacity-sm {
+  width: 50px;
+  height: 50px;
+  opacity: 0.6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+//******************** 圓弧角按鈕 end ********************//
