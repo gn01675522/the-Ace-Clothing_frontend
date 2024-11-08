@@ -1,0 +1,74 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+.products-card {
+  width: 100%;
+  height: min-content;
+  padding: 10px;
+  color: variables.$color-primary-text;
+  background-color: variables.$color-primary-bg;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    @include mixin.light-shadow;
+  }
+  &:hover > &__preview > &__img {
+    @include mixin.img-cubic-transition;
+  }
+  &:hover > &__preview > &__function {
+    display: unset;
+    opacity: 0.8;
+    z-index: 10;
+  }
+
+  &__preview {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    outline: 2px variables.$line-primary-line;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    @include mixin.img-cover-center;
+  }
+  &__content {
+    display: flex;
+    width: 100%;
+    height: min-content;
+    flex-direction: column;
+    justify-content: space-between;
+    &-info {
+      display: flex;
+      width: 100%;
+      margin-top: 10px;
+      justify-content: space-between;
+      align-items: center;
+      &-title {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      &-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      &-favorite {
+        width: 25px;
+        height: 25px;
+        color: black;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+    &-price {
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-between;
+      font-weight: lighter;
+      font-size: 20px;
+    }
+  }
+}

@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Action } from "@reduxjs/toolkit";
+import type { AppDispatch } from "../store";
+
+type Message = {
+  type: string;
+  text: string;
+};
 
 type MessageState = {
   readonly hasMessage: boolean;
-  readonly message: string[];
+  readonly message: Message;
 };
 
 const INITIAL_STATE: MessageState = {
   hasMessage: false,
-  message: [],
+  message: { text: "", type: "" },
 };
 
 //********** Helper **********
@@ -52,11 +57,12 @@ export const messageSlice = createSlice({
 
 const { setClearMessage, setMessage } = messageSlice.actions;
 
-export const setHandleMessage = (payload) => (dispatch) => {
-  dispatch(setMessage(payload));
-  setTimeout(() => {
-    dispatch(setClearMessage());
-  }, 3000);
-};
+export const setHandleMessage =
+  (payload: Message) => (dispatch: AppDispatch) => {
+    dispatch(setMessage(payload));
+    setTimeout(() => {
+      dispatch(setClearMessage());
+    }, 3000);
+  };
 
 export const messageReducer = messageSlice.reducer;

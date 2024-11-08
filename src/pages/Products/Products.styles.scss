@@ -1,0 +1,42 @@
+@use "../../stylesheets/mixin";
+
+.products {
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 2rem;
+  gap: 2rem;
+  &__title {
+    margin-bottom: 1rem;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto, 1fr);
+    justify-content: space-around;
+    grid-gap: 2rem;
+  }
+  &__function {
+    display: flex;
+    justify-content: center;
+  }
+  @include mixin.normalBreakPoint(small) {
+    &__content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    &__content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    &__content {
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1rem;
+    }
+  }
+}
