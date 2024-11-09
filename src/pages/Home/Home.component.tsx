@@ -13,9 +13,9 @@ import "./Home.styles.scss";
 const Home: FC = () => {
   const [firstBannerDetect, setFirstBannerDetect] = useState(false);
   const [thirdBannerDetect, setThirdBannerDetect] = useState(false);
-  const scrollDetectParentRef = useRef(null);
-  const firstBannerRef = useRef(null);
-  const thirdBannerRef = useRef(null);
+  const scrollDetectParentRef = useRef<HTMLDivElement>(null);
+  const firstBannerRef = useRef<HTMLDivElement>(null);
+  const thirdBannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const firstBanner = firstBannerRef.current;

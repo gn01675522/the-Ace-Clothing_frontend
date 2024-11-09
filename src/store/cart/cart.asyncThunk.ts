@@ -32,10 +32,11 @@ export const setAddItemToCartAsync = createAppAsyncThunk<
   { rejectValue: string }
 >("cart/setAddItemToCart", async (data, { dispatch, rejectWithValue }) => {
   try {
-    const res = await axios.post(
+    const res = (await axios.post(
       `/v2/api/${process.env.APP_API_PATH}/cart`,
       data
-    );
+    )) as AxiosError<string>;
+
     dispatch(setHandleMessage({ type: "success", res }));
     dispatch(fetchCartItemsAsync());
   } catch (e) {
@@ -55,9 +56,9 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<
   { rejectValue: string }
 >("cart/setRemoveItemfromCart", async (id, { dispatch, rejectWithValue }) => {
   try {
-    const res = await axios.delete(
+    const res = (await axios.delete(
       `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
-    );
+    )) as AxiosError<string>;
     dispatch(setHandleMessage({ type: "success", res }));
     dispatch(fetchCartItemsAsync());
   } catch (e) {
@@ -85,10 +86,10 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       data: { product_id: item.product_id, qty: quantity },
     };
     try {
-      const res = await axios.put(
+      const res = (await axios.put(
         `/v2/api/${process.env.APP_API_PATH}/cart/${item.id}`,
         data
-      );
+      )) as AxiosError<string>;
       dispatch(setHandleMessage({ type: "success", res }));
       dispatch(fetchCartItemsAsync());
     } catch (e) {

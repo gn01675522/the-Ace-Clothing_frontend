@@ -1,0 +1,223 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+.product-detail {
+  width: 100%;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-detail__sale {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  &-wrapper {
+    height: min-content;
+    position: relative;
+    &:hover button {
+      opacity: 0.6;
+      transition: opacity 0.3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
+  }
+
+  &-preview {
+    white-space: nowrap;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    &-item {
+      display: inline-block;
+      width: 100%;
+      height: calc(100vh - 60px);
+      img {
+        width: 100%;
+        height: 100%;
+        outline: 2px variables.$line-primary-line;
+        @include mixin.img-cover-center;
+      }
+      &--show {
+        display: unset;
+      }
+      &--hide {
+        display: none;
+      }
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    flex-direction: row;
+    justify-content: space-between;
+    &-wrapper {
+      position: sticky;
+      width: 50%;
+      top: 0;
+      button {
+        display: none;
+      }
+    }
+    &-preview {
+      height: min-content;
+      white-space: unset;
+    }
+  }
+}
+
+.product-detail__sale-info {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem 8vw 2rem 8vw;
+  flex-direction: column;
+  justify-content: center;
+
+  @include mixin.normalBreakPoint(medium) {
+    position: sticky;
+    width: 50%;
+    height: min-content;
+    top: 0;
+    padding: 6vh 4vw;
+  }
+  @include mixin.normalBreakPoint(large) {
+    padding: 6vh 10vw;
+  }
+}
+
+.product-detail__sale-info-content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  justify-content: space-between;
+  border-bottom: 1px variables.$line-secondary-line;
+  &-title-set {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  &-subtitle {
+    font-size: 16px;
+  }
+  &-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: variables.$color-fifth-text;
+    text-align: start;
+    letter-spacing: 0;
+    margin-top: 10px;
+  }
+  &-price {
+    display: flex;
+    font-weight: lighter;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 3rem;
+    color: variables.$color-fifth-text;
+    &-sell {
+      font-size: 16px;
+      font-weight: bold;
+      color: variables.$color-fourth-text;
+    }
+
+    &-area {
+      display: flex;
+      gap: 10px;
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &-right {
+    display: flex;
+    align-items: flex-start;
+  }
+  @media screen and (min-width: 1320px) {
+    &-title {
+      font-size: 2rem;
+    }
+  }
+}
+
+.product-detail__sale-function {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  height: min-content;
+  &-alert {
+    font-size: 8px;
+    color: variables.$color-fourth-text;
+  }
+
+  &-quantity {
+    display: flex;
+    width: 100%;
+    border: 1px variables.$line-fifth;
+    border-radius: 4px;
+    justify-content: space-between;
+    button {
+      width: 50px;
+    }
+  }
+  &-entry {
+    width: calc(100% - 100px);
+    border: none;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &-favorite {
+    width: 20px;
+    height: 20px;
+    color: black;
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+.product-detail__description {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  &-material {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px variables.$line-secondary-line;
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px variables.$line-primary-line;
+      &-title {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 1.5rem;
+        padding-bottom: 1rem;
+      }
+    }
+  }
+  &-content {
+    line-height: 1.5rem;
+  }
+
+  &-info {
+    &-item {
+      margin-left: 18px;
+      line-height: 1.5rem;
+      list-style-type: disc;
+      list-style-position: outside;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    &-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
