@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FC } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Banner from "./components/Banner/Banner.component";
 import ScrollList, {
@@ -7,6 +7,8 @@ import ScrollList, {
 import FullWidthBanner from "./components/FullWidthBanner/FullWidthBanner.component";
 import SplitBanner from "./components/SplitBanner/SplitBanner.component";
 import Categories from "../../components/Categories/Categories.component";
+
+import type { FC } from "react";
 
 import "./Home.styles.scss";
 

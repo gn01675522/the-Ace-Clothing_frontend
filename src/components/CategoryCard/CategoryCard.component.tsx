@@ -1,5 +1,6 @@
-import { FC } from "react";
 import { NavLink, useMatch } from "react-router-dom";
+
+import type { FC } from "react";
 
 import "./CategoryCard.styles.scss";
 

@@ -3,12 +3,22 @@ import type { RootState, AppDispatch } from "./store";
 
 import type { AxiosError } from "axios";
 
-export type RejectTypes = {
-  error: string;
+type RejectTypes = {
+  message: string;
+  success: boolean;
 };
 
-export const createAppAsyncThunk = createAsyncThunk.withTypes<{
+export type AxiosRejectTypes = AxiosError<RejectTypes>;
+
+export type ThunkAPIConfig = {
   state: RootState;
   dispatch: AppDispatch;
-  rejectValue: AxiosError<RejectTypes>;
-}>();
+  rejectValue: AxiosRejectTypes;
+  extra?: unknown;
+  serializedErrorType?: unknown;
+  pendingMeta?: unknown;
+  fulfilledMeta?: unknown;
+  rejectedMeta?: unknown;
+};
+
+export const createAppAsyncThunk = createAsyncThunk.withTypes<ThunkAPIConfig>();

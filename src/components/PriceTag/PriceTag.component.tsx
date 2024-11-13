@@ -1,6 +1,6 @@
-import { FC } from "react";
-
 import { formatNumberWithCommas } from "../../utils/common.utils";
+
+import type { FC } from "react";
 
 import "./PriceTag.styles.scss";
 

@@ -1,8 +1,8 @@
-import { FC } from "react";
-
 import CategoryCard from "../CategoryCard/CategoryCard.component";
 
 import { CATEGORIES_DATA } from "./categories.data";
+
+import type { FC } from "react";
 
 import "./Categories.styles.scss";
 

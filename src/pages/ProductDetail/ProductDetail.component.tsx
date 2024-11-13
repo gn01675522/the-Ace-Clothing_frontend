@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FC, MouseEvent } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams } from "react-router-dom";
 
@@ -27,6 +27,7 @@ import {
 import { selectUserFavorite } from "../../store/user/user.selector";
 import { setUserFavorite } from "../../store/user/user.slice";
 
+import type { FC, MouseEvent } from "react";
 import type { Product } from "../../store/userProduct/userProduct.types";
 
 import "./ProductDetail.styles.scss";
@@ -57,21 +58,16 @@ const ProductDetail: FC = () => {
   //* 根據 productInCart 的數量來進行顧客購買最大數量的設定
   const remainingQuantity = 5 - (productInCart?.qty || 0);
 
-  const {
-    imageUrl,
-    imagesUrl,
-    title,
-    origin_price,
-    price,
-    content,
-    description,
-  } = product as Product;
-
   //* 折扣數字，只取整數，小數點無條件捨去
-  const discountRate = Math.trunc((1 - price / origin_price) * 100);
+  const discountRate = Math.trunc(
+    (1 - product?.price! / product?.origin_price!) * 100
+  );
 
   //* 直接將主圖片以及次要圖片組合成一個陣列，方便後續渲染 jsx；如果 imagesUrl 沒有圖片的話，就改成空陣列
-  const pictureSet = [imageUrl, ...(Array.isArray(imagesUrl) ? imagesUrl : [])];
+  const pictureSet = [
+    product?.imageUrl,
+    ...(Array.isArray(product?.imagesUrl) ? product?.imagesUrl : []),
+  ];
 
   //* 以 ul 為目標，如果按鈕回傳的為 prev，那麼就減少 imgWidth，讓圖片由右往左，反之。
   const onChangeImg = (type: "prev" | "next") => {
@@ -95,8 +91,10 @@ const ProductDetail: FC = () => {
 
   const addToCart = () => {
     const productData = {
-      product_id: id!,
-      qty: itemQuantity,
+      data: {
+        product_id: id!,
+        qty: itemQuantity,
+      },
     };
 
     dispatch(setAddItemToCartAsync(productData));
@@ -105,7 +103,7 @@ const ProductDetail: FC = () => {
   const onAddFavorite = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
-    const newList = [...wishlist, id];
+    const newList = [...wishlist, id] as string[];
     dispatch(setUserFavorite(newList));
   };
 
@@ -161,7 +159,7 @@ const ProductDetail: FC = () => {
                 ref={imgContainerRef}
                 key={i}
               >
-                <img src={img} alt={`${title} ${i + 1}`} />
+                <img src={img} alt={`${product?.title} ${i + 1}`} />
               </li>
             ))}
           </ul>
@@ -184,22 +182,27 @@ const ProductDetail: FC = () => {
                 the Ace Clothing
               </h3>
               <h1 className="product-detail__sale-info-content-title">
-                {title}
+                {product?.title}
               </h1>
             </div>
             <div className="product-detail__sale-info-content-price">
-              {origin_price > price && (
+              {product?.origin_price! > product?.price! && (
                 <p className="product-detail__sale-info-content-price-sell">
                   {discountRate + "% off"}
                 </p>
               )}
               <div className="product-detail__sale-info-content-price-area">
-                <PriceTag origin_price={origin_price} price={price} />
+                <PriceTag
+                  origin_price={product?.origin_price!}
+                  price={product?.price!}
+                />
               </div>
             </div>
           </div>
           <div className="product-detail__description">
-            <div className="product-detail__description-content">{content}</div>
+            <div className="product-detail__description-content">
+              {product?.content}
+            </div>
             <div className="product-detail__description-material">
               <div className="product-detail__description-material-header">
                 <h2 className="product-detail__description-material-header-title">
@@ -207,7 +210,7 @@ const ProductDetail: FC = () => {
                 </h2>
               </div>
               <ul className="product-detail__description-info">
-                {description?.split("-").map((item: string) => (
+                {product?.description?.split("-").map((item: string) => (
                   <li
                     key={item}
                     className="product-detail__description-info-item"

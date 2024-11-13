@@ -1,0 +1,137 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.cart-item {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: min-content;
+  border: 1px solid #eae8e4;
+  background-color: variables.$color-primary-bg;
+}
+
+.cart-item__left {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  padding: 10px;
+  &-img {
+    width: 120px;
+    height: 120px;
+    @include mixin.img-cover-center;
+  }
+  @include mixin.normalBreakPoint(medium) {
+    position: unset;
+    width: 300px;
+    height: 300px;
+    padding: unset;
+    &-img {
+      width: 300px;
+      height: 100%;
+    }
+  }
+}
+
+.cart-item__right {
+  width: 100%;
+  height: 100%;
+  &-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 140px;
+    padding: 0 0 0 150px;
+    gap: 8px;
+    border-bottom: 1px variables.$line-secondary-line;
+    justify-content: center;
+    align-items: flex-start;
+    &-title {
+      width: 100%;
+      font-size: 1.5rem;
+    }
+    &-category {
+      font-size: 14px;
+      font-weight: lighter;
+    }
+  }
+  &-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 120px;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px variables.$line-secondary-line;
+    &-content {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      &-item {
+        font-size: 20px;
+        font-weight: lighter;
+      }
+      &-remove {
+        font-size: 1rem;
+        font-weight: lighter;
+        color: variables.$color-primary-text;
+        background-color: transparent;
+        cursor: pointer;
+        &:hover {
+          color: variables.$color-third-text;
+        }
+      }
+      &-count {
+        display: flex;
+        height: 100%;
+        padding: 10px 0;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+  }
+  &-footer {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border: 1px variables.$line-fifth;
+    border-radius: 4px;
+    justify-content: space-between;
+    button {
+      width: 40px;
+      height: 100%;
+    }
+    &-entry {
+      width: calc(100% - 100px);
+      border: none;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    &-header {
+      padding: 10px;
+      &-title {
+        font-size: 1.2rem;
+      }
+      &-category {
+        font-size: 1rem;
+      }
+    }
+    &-footer {
+      &-remove {
+        border-radius: unset;
+      }
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    &-header {
+      &-title {
+        font-size: 1.5rem;
+      }
+      &-category {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

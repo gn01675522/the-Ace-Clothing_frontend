@@ -1,7 +1,8 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { SESSION_CONTENT_DATA } from "../../session.data";
+
+import type { FC } from "react";
 
 import "./FullWidthBanner.styles.scss";
 

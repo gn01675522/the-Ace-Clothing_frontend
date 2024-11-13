@@ -1,10 +1,12 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../store/redux-hooks";
 
 import { ReactComponent as CartLogo } from "../../assets/cart.svg";
 
 import { selectCartItemsQuantity } from "../../store/cart/cart.selector";
+
+import type { FC } from "react";
 
 import "./CartIcon.styles.scss";
 

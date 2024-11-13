@@ -3,82 +3,87 @@ import axios from "axios";
 
 import { setHandleMessage } from "../message/message.slice";
 
-import type { AxiosError } from "axios";
-import type { Cart, CartItemAddToCart } from "./cart.types";
+import type { AxiosResponse } from "axios";
+import type { AxiosRejectTypes } from "../redux-utils";
+import type { CartItems, Cart, CartItemAddToCart } from "./cart.types";
 
 //* fetch 目前的購物車內商品資訊
-export const fetchCartItemsAsync = createAppAsyncThunk<
-  Cart,
-  void,
-  { rejectValue: string }
->("cart/fetchCartItems", async (_, { rejectWithValue }) => {
-  try {
-    const res = await axios.get(`/v2/api/${process.env.APP_API_PATH}/cart`);
+export const fetchCartItemsAsync = createAppAsyncThunk<Cart, void>(
+  "cart/fetchCartItems",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/v2/api/${process.env.APP_API_PATH}/cart`);
 
-    return res.data.data;
-  } catch (e) {
-    const error = e as AxiosError<string>;
-    if (!error.response) {
-      throw e;
+      return res.data.data;
+    } catch (e) {
+      const error = e as AxiosRejectTypes;
+
+      if (!error.response) {
+        throw e;
+      }
+
+      return rejectWithValue(error);
     }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
 //* 新增商品至購物車
 export const setAddItemToCartAsync = createAppAsyncThunk<
   void,
-  CartItemAddToCart,
-  { rejectValue: string }
+  { data: CartItemAddToCart }
 >("cart/setAddItemToCart", async (data, { dispatch, rejectWithValue }) => {
   try {
     const res = (await axios.post(
       `/v2/api/${process.env.APP_API_PATH}/cart`,
       data
-    )) as AxiosError<string>;
+    )) as AxiosResponse;
 
     dispatch(setHandleMessage({ type: "success", res }));
+
     dispatch(fetchCartItemsAsync());
   } catch (e) {
-    const error = e as AxiosError<string>;
+    const error = e as AxiosRejectTypes;
+
     if (!error.response) {
       throw e;
     }
+
     dispatch(setHandleMessage({ type: "error", res: error }));
-    return rejectWithValue(error.response.data);
+
+    return rejectWithValue(error);
   }
 });
 
 //* 從購物車內移除商品
-export const setRemoveItemFromCartAsync = createAppAsyncThunk<
-  void,
-  string,
-  { rejectValue: string }
->("cart/setRemoveItemfromCart", async (id, { dispatch, rejectWithValue }) => {
-  try {
-    const res = (await axios.delete(
-      `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
-    )) as AxiosError<string>;
-    dispatch(setHandleMessage({ type: "success", res }));
-    dispatch(fetchCartItemsAsync());
-  } catch (e) {
-    const error = e as AxiosError<string>;
-    if (!error.response) {
-      throw e;
+export const setRemoveItemFromCartAsync = createAppAsyncThunk<void, string>(
+  "cart/setRemoveItemfromCart",
+  async (id, { dispatch, rejectWithValue }) => {
+    try {
+      const res = (await axios.delete(
+        `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
+      )) as AxiosResponse;
+
+      dispatch(setHandleMessage({ type: "success", res }));
+
+      dispatch(fetchCartItemsAsync());
+    } catch (e) {
+      const error = e as AxiosRejectTypes;
+
+      if (!error.response) {
+        throw e;
+      }
+
+      dispatch(setHandleMessage({ type: "error", res: error }));
+
+      return rejectWithValue(error);
     }
-    dispatch(setHandleMessage({ type: "error", res: error }));
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
 //* 修改購物車內商品
 export const setUpdateCartItemAsync = createAppAsyncThunk<
   void,
-  {
-    item: { id: string; loadingItems: []; product_id: string };
-    quantity: number;
-  },
-  { rejectValue: string }
+  { item: CartItems; quantity: number }
 >(
   "cart/setUpdateCartItem",
   async ({ item, quantity }, { dispatch, rejectWithValue }) => {
@@ -89,16 +94,48 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       const res = (await axios.put(
         `/v2/api/${process.env.APP_API_PATH}/cart/${item.id}`,
         data
-      )) as AxiosError<string>;
+      )) as AxiosResponse;
+
       dispatch(setHandleMessage({ type: "success", res }));
+
       dispatch(fetchCartItemsAsync());
     } catch (e) {
-      const error = e as AxiosError<string>;
+      const error = e as AxiosRejectTypes;
+
       if (!error.response) {
         throw e;
       }
+
       dispatch(setHandleMessage({ type: "error", res: error }));
-      return rejectWithValue(error.response.data);
+
+      return rejectWithValue(error);
+    }
+  }
+);
+
+//* 於購物車內加入 coupon
+export const setAddCouponForCartAsync = createAppAsyncThunk<void, string>(
+  "client/setAddCouponForCart",
+  async (code, { dispatch, rejectWithValue }) => {
+    try {
+      const res = (await axios.post(
+        `v2/api/${process.env.APP_API_PATH}/coupon`,
+        {
+          data: { code },
+        }
+      )) as AxiosResponse;
+
+      dispatch(setHandleMessage({ type: "success", res }));
+    } catch (e) {
+      const error = e as AxiosRejectTypes;
+
+      if (!error.response) {
+        throw e;
+      }
+
+      dispatch(setHandleMessage({ type: "error", res: error }));
+
+      return rejectWithValue(error);
     }
   }
 );

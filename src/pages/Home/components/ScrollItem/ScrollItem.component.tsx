@@ -1,4 +1,4 @@
-import { CSSProperties, FC, MouseEvent } from "react";
+import { CSSProperties } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,8 @@ import PriceTag from "../../../../components/PriceTag/PriceTag.component";
 
 import { setUserFavorite } from "../../../../store/user/user.slice";
 import { selectUserFavorite } from "../../../../store/user/user.selector";
+
+import type { FC, MouseEvent } from "react";
 
 import "./ScrollItem.styles.scss";
 

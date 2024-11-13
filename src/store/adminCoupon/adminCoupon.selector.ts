@@ -1,0 +1,29 @@
+import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
+
+const selectAdminCouponsReducer = (state: RootState) => state.adminCoupon;
+
+export const selectAdminCoupons = createSelector(
+  [selectAdminCouponsReducer],
+  (adminCoupon) => adminCoupon.coupons
+);
+
+export const selectAdminCouponsPagination = createSelector(
+  [selectAdminCouponsReducer],
+  (adminCoupon) => adminCoupon.pagination
+);
+
+export const selectAdminCouponsIsLoading = createSelector(
+  [selectAdminCouponsReducer],
+  (adminCoupon) => adminCoupon.isLoading
+);
+
+export const selectAdminCouponsIsModalOpen = createSelector(
+  [selectAdminCouponsReducer],
+  (adminCoupon) => adminCoupon.isModalOpen
+);
+
+export const selectAdminCouponsTempData = createSelector(
+  [selectAdminCouponsReducer],
+  (adminCoupon) => adminCoupon.tempData
+);

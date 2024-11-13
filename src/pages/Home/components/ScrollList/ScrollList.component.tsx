@@ -1,11 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  FC,
-  MouseEvent,
-} from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { ReactComponent as LeftArrow } from "../../../../assets/left-arrow.svg";
@@ -23,6 +16,8 @@ import {
 } from "../../../../store/userProduct/userProduct.selector";
 
 import { computedWidthByContainerHelper } from "./ScrollList.helpers";
+
+import type { FC, MouseEvent } from "react";
 
 import "./ScrollList.styles.scss";
 

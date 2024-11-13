@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
@@ -27,6 +27,8 @@ import { selectUserFavorite } from "../../store/user/user.selector";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 import { PRODUCT_CATEGORIES } from "../../shared/types";
+
+import type { FC } from "react";
 
 import "./Products.styles.scss";
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as LeftArrow } from "../../../../assets/left-arrow.svg";
@@ -9,6 +9,8 @@ import Button, {
 } from "../../../../components/Button/Button.component";
 
 import { BANNER_DATA } from "./Banner.data";
+
+import type { FC } from "react";
 
 import "./Banner.styles.scss";
 

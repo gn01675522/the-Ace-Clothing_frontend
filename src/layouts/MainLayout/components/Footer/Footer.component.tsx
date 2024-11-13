@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Facebook } from "../../../../assets/facebook.svg";
@@ -6,6 +5,8 @@ import { ReactComponent as Line } from "../../../../assets/line.svg";
 import { ReactComponent as Instagram } from "../../../../assets/instagram.svg";
 
 import { FOOTER_DATA } from "./footer.data";
+
+import type { FC } from "react";
 
 import "./Footer.styles.scss";
 

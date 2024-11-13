@@ -1,8 +1,4 @@
-import { FC } from "react";
-//* 需要傳入的資料：
-//* 1. 頁面切換函式：onChangePage
-//* 2. 頁面數量：pageCount
-//* 3. 目前頁面：currentPage
+import type { FC } from "react";
 
 import "./Pagination.styles.scss";
 

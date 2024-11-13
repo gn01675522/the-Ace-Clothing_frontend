@@ -1,7 +1,3 @@
-//* 使用方式：
-//* 1. 傳入單筆 product 資料(物件形式)
-//* 2. 傳入產品 urlParam，目的是為了 Link 的路由能符合商品種類
-import { FC, MouseEvent } from "react";
 import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
@@ -12,6 +8,7 @@ import PriceTag from "../PriceTag/PriceTag.component";
 import { setUserFavorite } from "../../store/user/user.slice";
 import { selectUserFavorite } from "../../store/user/user.selector";
 
+import type { FC, MouseEvent } from "react";
 import type { Product } from "../../store/userProduct/userProduct.types";
 import type { PRODUCT_CATEGORIES } from "../../shared/types";
 

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   fetchCartItemsAsync,
@@ -7,15 +7,16 @@ import {
   setUpdateCartItemAsync,
 } from "./cart.asyncThunk";
 
-import type { CartItems, Cart } from "./cart.types";
+import type { AxiosRejectTypes } from "../redux-utils";
+import type { Cart } from "./cart.types";
 
 type CartState = {
   readonly cart: Cart;
-  readonly loadingItems: CartItems[];
-  readonly tempData: null;
+  readonly loadingItems: string[];
+  readonly tempData: string | null;
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
-  readonly error: string | null;
+  readonly error: AxiosRejectTypes | null;
 };
 
 const INITIAL_STATE: CartState = {
@@ -31,10 +32,10 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: INITIAL_STATE,
   reducers: {
-    setCartIsModalOpen(state, action) {
+    setCartIsModalOpen(state, action: PayloadAction<boolean>) {
       state.isModalOpen = action.payload;
     },
-    setCartTempData(state, action) {
+    setCartTempData(state, action: PayloadAction<string>) {
       state.tempData = action.payload;
     },
   },
@@ -44,14 +45,12 @@ export const cartSlice = createSlice({
       .addCase(fetchCartItemsAsync.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchCartItemsAsync.fulfilled, (state, action) => {
-        state.cart = action.payload;
+      .addCase(fetchCartItemsAsync.fulfilled, (state, { payload }) => {
+        state.cart = payload;
         state.isLoading = false;
       })
-      .addCase(fetchCartItemsAsync.rejected, (state, action) => {
-        if (typeof action.payload === "string") {
-          state.error = action.payload;
-        }
+      .addCase(fetchCartItemsAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
         state.isLoading = false;
       })
       //**************************************** 取得 API 內的 Carts 資料 End ****************************************
@@ -62,10 +61,8 @@ export const cartSlice = createSlice({
       .addCase(setAddItemToCartAsync.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(setAddItemToCartAsync.rejected, (state, action) => {
-        if (typeof action.payload === "string") {
-          state.error = action.payload;
-        }
+      .addCase(setAddItemToCartAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
         state.isLoading = false;
       })
       //**************************************** 於 API 內新增 Carts 資料 End ****************************************
@@ -76,16 +73,14 @@ export const cartSlice = createSlice({
       .addCase(setRemoveItemFromCartAsync.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(setRemoveItemFromCartAsync.rejected, (state, action) => {
-        if (typeof action.payload === "string") {
-          state.error = action.payload;
-        }
+      .addCase(setRemoveItemFromCartAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
         state.isLoading = false;
       })
       //**************************************** 於 API 內刪除 Carts 資料 End ****************************************
       //**************************************** 於 API 內更新 Carts 資料 Start ****************************************
-      .addCase(setUpdateCartItemAsync.pending, (state, action) => {
-        // state.loadingItems = [...state.loadingItems, action.meta.arg.item.id];
+      .addCase(setUpdateCartItemAsync.pending, (state, { meta }) => {
+        state.loadingItems = [...state.loadingItems, meta.arg.item.id];
         state.isLoading = true;
       })
       .addCase(setUpdateCartItemAsync.fulfilled, (state) => {
@@ -93,10 +88,8 @@ export const cartSlice = createSlice({
         state.isLoading = false;
         //* 之所以 loadingItems 會使用空陣列是因為原先的防呆方法會在購物車內快速調整兩個商品的時候造成其中一個商品 select 被永久 disabled
       })
-      .addCase(setUpdateCartItemAsync.rejected, (state, action) => {
-        if (typeof action.payload === "string") {
-          state.error = action.payload;
-        }
+      .addCase(setUpdateCartItemAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
         state.isLoading = false;
       });
     //**************************************** 於 API 內更新 Carts 資料 End ****************************************

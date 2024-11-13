@@ -1,8 +1,8 @@
 export type Product = {
+  id: string;
   category: string;
   content: string;
   description: string;
-  id: string;
   imageUrl: string;
   imagesUrl: string[];
   is_enabled: 1 | 0;
@@ -13,7 +13,7 @@ export type Product = {
   unit: string;
 };
 
-export type ProductById = {
+export type ProductWithId = {
   success: boolean;
   product: Product;
 };

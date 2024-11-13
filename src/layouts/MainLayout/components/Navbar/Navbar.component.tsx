@@ -1,8 +1,10 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { ReactComponent as AceLogo } from "../../../../assets/ace.svg";
 import CartIcon from "../../../../components/CartIcon/CartIcon.component";
+
+import type { FC } from "react";
 
 import "./Navbar.styles.scss";
 

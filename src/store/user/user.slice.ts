@@ -1,26 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { setCurrentUserAsync } from "./user.asyncThunk";
 
+import type { AxiosRejectTypes } from "../redux-utils";
+
 type UserState = {
   readonly isSuccess: boolean;
-  readonly message: string;
   readonly favorite: string[];
   readonly isLoading: boolean;
+  readonly error: AxiosRejectTypes | null;
 };
 
 const INITIAL_STATE: UserState = {
   isSuccess: false,
-  message: "",
   favorite: JSON.parse(localStorage.getItem("wishlist") as string) || [],
   isLoading: false,
+  error: null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState: INITIAL_STATE,
   reducers: {
-    setUserFavorite(state, action) {
+    setUserFavorite(state, action: PayloadAction<string[]>) {
       state.favorite = action.payload;
     },
   },
@@ -29,14 +31,12 @@ export const userSlice = createSlice({
       .addCase(setCurrentUserAsync.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(setCurrentUserAsync.fulfilled, (state, action) => {
-        state.isSuccess = action.payload;
+      .addCase(setCurrentUserAsync.fulfilled, (state, { payload }) => {
+        state.isSuccess = payload;
         state.isLoading = false;
       })
-      .addCase(setCurrentUserAsync.rejected, (state, action) => {
-        if (typeof action.payload === "string") {
-          state.message = action.payload;
-        }
+      .addCase(setCurrentUserAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
         state.isLoading = false;
       });
   },

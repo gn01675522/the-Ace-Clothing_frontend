@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+import type { AxiosResponse } from "axios";
 import type { AppDispatch } from "../store";
-import type { AxiosError } from "axios";
+import type { AxiosRejectTypes } from "../redux-utils";
 
 type Message = {
   type: "success" | "error" | "danger" | "";
@@ -60,7 +62,10 @@ export const messageSlice = createSlice({
 const { setClearMessage, setMessage } = messageSlice.actions;
 
 export const setHandleMessage =
-  (payload: { res: AxiosError<string>; type: "success" | "error" | "" }) =>
+  (payload: {
+    res: AxiosRejectTypes | AxiosResponse;
+    type: "success" | "error" | "";
+  }) =>
   (dispatch: AppDispatch) => {
     dispatch(setMessage(payload));
     setTimeout(() => {
