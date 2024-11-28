@@ -1,4 +1,4 @@
-export type AdminProduct = {
+export interface AdminProduct {
   id: string;
   category: string;
   content: string;
@@ -11,9 +11,9 @@ export type AdminProduct = {
   unit: string;
   imageUrl: string;
   imagesUrl: string[];
-};
+}
 
-export type AdminProductForCreate = {
+export interface AdminProductForCreate {
   title: string;
   category: string;
   origin_price: number;
@@ -25,11 +25,11 @@ export type AdminProductForCreate = {
   is_enabled: number;
   imageUrl: string;
   imagesUrl: string[];
-};
+}
 
-export type AdminProductRes = {
+export interface AdminProductRes {
   success: boolean;
   products: {
     [key: string]: AdminProduct;
   };
-};
+}

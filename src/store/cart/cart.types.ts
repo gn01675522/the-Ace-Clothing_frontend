@@ -1,4 +1,4 @@
-export type CartItems = {
+export interface CartItems {
   id: string;
   coupon: {
     code: string;
@@ -26,15 +26,15 @@ export type CartItems = {
   product_id: string;
   qty: number;
   total: number;
-};
+}
 
-export type Cart = {
+export interface Cart {
   carts: CartItems[];
   total: number;
   final_total: number;
-};
+}
 
-export type CartItemAddToCart = {
+export interface CartItemAddToCart {
   product_id: string;
   qty: number;
-};
+}

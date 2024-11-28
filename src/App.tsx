@@ -9,6 +9,7 @@ const ProductDetail = lazy(
   () => import("./pages/ProductDetail/ProductDetail.component")
 );
 const Cart = lazy(() => import("./pages/Cart/Cart.component"));
+const Checkout = lazy(() => import("./pages/Checkout/Checkout.component"));
 
 const App: FC = () => {
   console.log(process.env.APP_API_URL);
@@ -21,6 +22,7 @@ const App: FC = () => {
             <Route path=":category" element={<Products />} />
             <Route path=":category/:id" element={<ProductDetail />} />
             <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </Suspense>
