@@ -2,8 +2,8 @@ import { CSSProperties } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as WhiteHeart } from "../../../../assets/whiteHeart.svg";
-import { ReactComponent as RedHeart } from "../../../../assets/redHeart.svg";
+import WhiteHeartSVGIcon from "../../../../components/SVGIcons/WhiteHeartSVGIcon.component";
+import RedHeartSVGIcon from "../../../../components/SVGIcons/RedHeartSVGIcon.component";
 import PriceTag from "../../../../components/PriceTag/PriceTag.component";
 
 import { setUserFavorite } from "../../../../store/user/user.slice";
@@ -69,9 +69,9 @@ const ScrollItem: FC<PropsType> = ({
           }
         >
           {isFavorite ? (
-            <RedHeart className="scroll-item__info-favorite" />
+            <RedHeartSVGIcon className="scroll-item__info-favorite" />
           ) : (
-            <WhiteHeart className="scroll-item__info-favorite" />
+            <WhiteHeartSVGIcon className="scroll-item__info-favorite" />
           )}
         </div>
       </div>

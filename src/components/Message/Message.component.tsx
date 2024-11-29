@@ -1,5 +1,5 @@
-import { ReactComponent as Check } from "../../assets/check.svg";
-import { ReactComponent as Cross } from "../../assets/cross.svg";
+import CrossSVGIcon from "../SVGIcons/CrossSVGIcon.component";
+import CheckSVGIcon from "../SVGIcons/CheckSVGIcon.component";
 
 import { useSelector } from "react-redux";
 import { selectMessage } from "../../store/message/message.selector";
@@ -13,8 +13,8 @@ enum MESSAGE_TYPE {
 
 const getIcon = (type: MESSAGE_TYPE) =>
   ({
-    [MESSAGE_TYPE.success]: Check,
-    [MESSAGE_TYPE.danger]: Cross,
+    [MESSAGE_TYPE.success]: CheckSVGIcon,
+    [MESSAGE_TYPE.danger]: CrossSVGIcon,
   }[type]);
 
 const Message = () => {

@@ -45,7 +45,51 @@ module.exports = {
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        use: ["@svgr/webpack", "file-loader"],
+        use: ["@svgr/webpack"],
+      },
+      // {
+      //   test: /\.svg$/i,
+      //   oneOf: [
+      //     {
+      //       // 當 SVG 作為 React 組件導入時
+      //       issuer: /\.[jt]sx?$/,
+      //       use: [
+      //         {
+      //           loader: "@svgr/webpack",
+      //           options: {
+      //             svgo: true, // 啟用 SVGO
+      //             svgoConfig: {
+      //               plugins: [
+      //                 {
+      //                   name: "preset-default",
+      //                   params: {
+      //                     overrides: {
+      //                       removeViewBox: false, // 保留 viewBox
+      //                       removeXMLNS: false, // 保留 xmlns
+      //                       removeDimensions: false, // 保留 width 和 height
+      //                     },
+      //                   },
+      //                 },
+      //               ],
+      //             },
+      //           },
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       type: "asset/resource",
+      //       generator: {
+      //         filename: "images/[hash][ext][query]",
+      //       },
+      //     },
+      //   ],
+      // },
+      {
+        test: /\.(png|jpe?g|gif|bmp|ico)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[hash][ext][query]",
+        },
       },
     ],
   },

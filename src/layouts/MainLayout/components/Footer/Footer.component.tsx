@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { ReactComponent as Facebook } from "../../../../assets/facebook.svg";
-import { ReactComponent as Line } from "../../../../assets/line.svg";
-import { ReactComponent as Instagram } from "../../../../assets/instagram.svg";
+import FacebookSVGIcon from "../../../../components/SVGIcons/FacebookSVGIcon.component";
+import LineSVGIcon from "../../../../components/SVGIcons/LineSVGIcon.component";
+import InstagramSVGIcon from "../../../../components/SVGIcons/InstagramSVGIcon.component";
 
 import { FOOTER_DATA } from "./footer.data";
 
@@ -18,9 +18,9 @@ const SYMBOL_TYPE = {
 
 const symbol = (type: string) =>
   ({
-    [SYMBOL_TYPE.facebook]: <Facebook className="facebook-icon" />,
-    [SYMBOL_TYPE.instagram]: <Instagram className="instagram-icon" />,
-    [SYMBOL_TYPE.line]: <Line className="line-icon" />,
+    [SYMBOL_TYPE.facebook]: <FacebookSVGIcon className="facebook-icon" />,
+    [SYMBOL_TYPE.instagram]: <InstagramSVGIcon className="instagram-icon" />,
+    [SYMBOL_TYPE.line]: <LineSVGIcon className="line-icon" />,
   }[type]);
 
 const Footer: FC = () => {

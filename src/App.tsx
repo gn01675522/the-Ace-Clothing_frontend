@@ -11,6 +11,10 @@ const ProductDetail = lazy(
 const Cart = lazy(() => import("./pages/Cart/Cart.component"));
 const Checkout = lazy(() => import("./pages/Checkout/Checkout.component"));
 const Success = lazy(() => import("./pages/Success/Success.component"));
+const AboutUs = lazy(() => import("./pages/AboutUs/AboutUs.component"));
+const InfoSource = lazy(
+  () => import("./pages/InfoSource/InfoSource.component")
+);
 
 const App: FC = () => {
   console.log(process.env.APP_API_URL);
@@ -25,6 +29,8 @@ const App: FC = () => {
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="success/:orderId" element={<Success />} />
+            <Route path="about" element={<AboutUs />} />
+            <Route path="info-source" element={<InfoSource />} />
           </Route>
         </Routes>
       </Suspense>

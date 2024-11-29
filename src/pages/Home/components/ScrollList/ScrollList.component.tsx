@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
-import { ReactComponent as LeftArrow } from "../../../../assets/left-arrow.svg";
-import { ReactComponent as RightArrow } from "../../../../assets/right-arrow.svg";
+import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
+import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
 import ScrollItem from "../ScrollItem/ScrollItem.component";
 import Button, {
   BUTTON_TYPE_CLASS,
@@ -182,7 +182,7 @@ const ScrollList: FC<PropsType> = ({ type }) => {
         onMouseLeave={onStopScroll}
         title="previous"
       >
-        <LeftArrow className="scroll-list__left-arrow" />
+        <LeftArrowSVGIcon className="scroll-list__left-arrow" />
       </Button>
       <Button
         type="button"
@@ -192,7 +192,7 @@ const ScrollList: FC<PropsType> = ({ type }) => {
         onMouseLeave={onStopScroll}
         title="next"
       >
-        <RightArrow className="scroll-list__right-arrow" />
+        <RightArrowSVGIcon className="scroll-list__right-arrow" />
       </Button>
     </div>
   );

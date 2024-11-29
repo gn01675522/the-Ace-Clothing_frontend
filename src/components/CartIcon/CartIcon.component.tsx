@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../store/redux-hooks";
 
-import { ReactComponent as CartLogo } from "../../assets/cart.svg";
+import CartSVGIcon from "../SVGIcons/CartSVGIcon.component";
 
 import { selectCartItemsQuantity } from "../../store/cart/cart.selector";
 
@@ -34,7 +34,7 @@ const CartIcon: FC = () => {
 
   return (
     <NavLink className="cart-icon" to="/cart" aria-label="cart link">
-      <CartLogo className={btnClasses} />
+      <CartSVGIcon className={btnClasses} />
       {quantity !== 0 && <div className="cart-icon__count">{quantity}</div>}
     </NavLink>
   );

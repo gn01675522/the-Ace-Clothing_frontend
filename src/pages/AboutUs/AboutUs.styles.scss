@@ -1,0 +1,88 @@
+@use "../../stylesheets/mixin";
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9rem;
+  padding: 6rem 0;
+  &__title {
+    font-size: 60px;
+    font-weight: bold;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    letter-spacing: 2px;
+    line-height: 25px;
+  }
+  @include mixin.normalBreakPoint(medium) {
+    padding: 6rem 2rem;
+  }
+  @include mixin.normalBreakPoint(large) {
+    padding: 6rem 5rem;
+  }
+}
+
+.about-us__content-left,
+.about-us__content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  &-img {
+    width: 100%;
+    height: 400px;
+    @include mixin.img-cover-center;
+  }
+  &-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    padding: 0 1rem;
+    &-title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    flex-direction: unset;
+    &-img,
+    &-section {
+      width: 50%;
+    }
+    &-section {
+      padding: 0 3rem;
+    }
+  }
+}
+
+.about-us__content-left {
+  flex-direction: column-reverse;
+  @include mixin.normalBreakPoint(medium) {
+    flex-direction: row;
+  }
+}
+
+.about-us__content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  &-section {
+    padding: 0 1rem;
+    &-title {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  &-img {
+    width: 100%;
+    height: 600px;
+    @include mixin.img-cover-center;
+  }
+}

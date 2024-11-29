@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams } from "react-router-dom";
 
-import { ReactComponent as WhiteHeart } from "../../assets/whiteHeart.svg";
-import { ReactComponent as RedHeart } from "../../assets/redHeart.svg";
+import WhiteHeartSVGIcon from "../../components/SVGIcons/WhiteHeartSVGIcon.component";
+import RedHeartSVGIcon from "../../components/SVGIcons/RedHeartSVGIcon.component";
 import Message from "../../components/Message/Message.component";
 import PriceTag from "../../components/PriceTag/PriceTag.component";
 import Button, {
@@ -268,9 +268,9 @@ const ProductDetail: FC = () => {
               }
             >
               {isFavorite ? (
-                <RedHeart className="product-detail__sale-function-favorite" />
+                <RedHeartSVGIcon className="product-detail__sale-function-favorite" />
               ) : (
-                <WhiteHeart className="product-detail__sale-function-favorite" />
+                <WhiteHeartSVGIcon className="product-detail__sale-function-favorite" />
               )}
               <p>加入收藏清單</p>
             </div>

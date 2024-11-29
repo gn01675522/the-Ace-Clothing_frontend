@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as LeftArrow } from "../../../../assets/left-arrow.svg";
-import { ReactComponent as RightArrow } from "../../../../assets/right-arrow.svg";
+import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
+import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
 import Indicator from "../../../../components/Indicator/Indicator.component";
 import Button, {
   BUTTON_TYPE_CLASS,
@@ -61,13 +61,13 @@ const Banner: FC = () => {
         buttonType={BUTTON_TYPE_CLASS.arcWhiteOpacitySm}
         onClick={() => onClickToChangeBanner("prev")}
       >
-        <LeftArrow className="banner__left-arrow" />
+        <LeftArrowSVGIcon className="banner__left-arrow" />
       </Button>
       <Button
         buttonType={BUTTON_TYPE_CLASS.arcWhiteOpacitySm}
         onClick={() => onClickToChangeBanner("next")}
       >
-        <RightArrow className="banner__right-arrow" />
+        <RightArrowSVGIcon className="banner__right-arrow" />
       </Button>
       <div className="banner__content">
         <h1 className="banner__content-title">

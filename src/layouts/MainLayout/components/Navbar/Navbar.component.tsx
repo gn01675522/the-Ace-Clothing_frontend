@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import { ReactComponent as AceLogo } from "../../../../assets/ace.svg";
+import AceSVGIcon from "../../../../components/SVGIcons/AceSVGIcon.component";
 import CartIcon from "../../../../components/CartIcon/CartIcon.component";
 
 import type { FC } from "react";
@@ -49,7 +49,7 @@ const NavBar: FC = () => {
           title="check to open nav list"
         />
         <NavLink to="/" aria-label="home page" className="navbar__home-logo">
-          <AceLogo className="navbar__home-logo-icon" />
+          <AceSVGIcon className="navbar__home-logo-icon" />
         </NavLink>
         <div className="navbar__list">
           {navOption.map((option) => (

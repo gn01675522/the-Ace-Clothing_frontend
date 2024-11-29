@@ -1,8 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as WhiteHeart } from "../../assets/whiteHeart.svg";
-import { ReactComponent as RedHeart } from "../../assets/redHeart.svg";
+import WhiteHeartSVGIcon from "../SVGIcons/WhiteHeartSVGIcon.component";
+import RedHeartSVGIcon from "../SVGIcons/RedHeartSVGIcon.component";
 import PriceTag from "../PriceTag/PriceTag.component";
 
 import { setUserFavorite } from "../../store/user/user.slice";
@@ -60,9 +60,9 @@ const ProductCard: FC<PropsType> = ({ product, urlParam, isFavorite }) => {
             }
           >
             {isFavorite ? (
-              <RedHeart className="products-card__content-info-favorite" />
+              <RedHeartSVGIcon className="products-card__content-info-favorite" />
             ) : (
-              <WhiteHeart className="products-card__content-info-favorite" />
+              <WhiteHeartSVGIcon className="products-card__content-info-favorite" />
             )}
           </div>
         </div>

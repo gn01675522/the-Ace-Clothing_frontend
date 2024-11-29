@@ -1,0 +1,69 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+.info-source {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 6rem 2rem;
+  align-items: center;
+  &__title {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    align-items: unset;
+    &__content {
+      &-main {
+        flex-direction: unset;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}
+
+.info-source__card {
+  display: flex;
+  width: 70vw;
+  outline: 1px variables.$line-primary-line;
+  word-break: break-all;
+  gap: 10px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  justify-content: space-between;
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  &-author,
+  &-source {
+    text-decoration: underline;
+    padding-bottom: 5px;
+  }
+  &-view {
+    width: 150px;
+    height: 150px;
+    &-img {
+      width: 100%;
+      height: 100%;
+      background-color: variables.$color-primary-bg;
+      // @include mixin.img-cover-center;
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    width: 500px;
+  }
+}
