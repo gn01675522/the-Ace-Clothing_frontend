@@ -9,7 +9,7 @@ import type { AxiosRejectTypes } from "../redux-utils";
 //* 設定登入 token
 export const setCurrentUserAsync = createAppAsyncThunk<
   boolean,
-  { token: string; expired: string }
+  { username: string; password: string }
 >("user/setCurrentUser", async (data, { dispatch, rejectWithValue }) => {
   try {
     const res = (await axios.post(`/v2/admin/signin`, data)) as AxiosResponse;

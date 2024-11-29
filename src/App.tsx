@@ -16,6 +16,7 @@ const InfoSource = lazy(
   () => import("./pages/InfoSource/InfoSource.component")
 );
 const Member = lazy(() => import("./pages/Member/Member.component"));
+const Login = lazy(() => import("./pages/Login/Login.component"));
 
 const App: FC = () => {
   console.log(process.env.APP_API_URL);
@@ -34,6 +35,7 @@ const App: FC = () => {
             <Route path="info-source" element={<InfoSource />} />
             <Route path="member/:option" element={<Member />} />
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
     </div>
