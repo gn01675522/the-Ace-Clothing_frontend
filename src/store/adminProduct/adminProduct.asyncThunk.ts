@@ -22,7 +22,7 @@ export const fetchAdminProductAsync = createAppAsyncThunk<
 >("adminProduct/fetchAdminProduct", async (_, { rejectWithValue }) => {
   try {
     const res = await axios.get(
-      `/v2/api/${process.env.REACT_APP_API_PATH}/admin/products/all`
+      `/v2/api/${process.env.APP_API_PATH}/admin/products/all`
     );
 
     return { products: res.data.products };
@@ -43,7 +43,7 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.delete(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/product/${id}`
+        `/v2/api/${process.env.APP_API_PATH}/admin/product/${id}`
       )) as AxiosResponse;
 
       dispatch(setHandleMessage({ type: "success", res }));
@@ -71,7 +71,7 @@ export const updateAdminProductAsync = createAppAsyncThunk<void, AdminProduct>(
     const newFormData = cleanedDataHelper(formData);
     try {
       const res = (await axios.put(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/product/${formData.id}`,
+        `/v2/api/${process.env.APP_API_PATH}/admin/product/${formData.id}`,
         { data: newFormData }
       )) as AxiosResponse;
 
@@ -103,7 +103,7 @@ export const createAdminProductAsync = createAppAsyncThunk<
     const newFormData = cleanedDataHelper(data);
     try {
       const res = (await axios.post(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/product`,
+        `/v2/api/${process.env.APP_API_PATH}/admin/product`,
         { data: newFormData }
       )) as AxiosResponse;
 

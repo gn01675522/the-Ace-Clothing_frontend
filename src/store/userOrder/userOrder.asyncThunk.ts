@@ -17,7 +17,7 @@ export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(
     };
     try {
       const res = await axios.post(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/order`,
+        `/v2/api/${process.env.APP_API_PATH}/order`,
         form
       );
       return res.data.orderId;
@@ -40,7 +40,7 @@ export const fetchUserSingleOrderAsync = createAppAsyncThunk<
 >("userOrder/fetchUserSingleOrder", async (orderId, { rejectWithValue }) => {
   try {
     const res = await axios.get(
-      `/v2/api/${process.env.REACT_APP_API_PATH}/order/${orderId}`
+      `/v2/api/${process.env.APP_API_PATH}/order/${orderId}`
     );
 
     return res.data.order;
@@ -61,9 +61,7 @@ export const fetchUserOrdersAsync = createAppAsyncThunk<
   void
 >("userOrder/fetchUserOrders", async (_, { rejectWithValue }) => {
   try {
-    const res = await axios.get(
-      `/v2/api/${process.env.REACT_APP_API_PATH}/orders`
-    );
+    const res = await axios.get(`/v2/api/${process.env.APP_API_PATH}/orders`);
 
     return res.data.orders;
   } catch (e) {

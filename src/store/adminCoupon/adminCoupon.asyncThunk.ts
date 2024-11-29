@@ -24,7 +24,7 @@ export const fetchAdminCouponsAsync = createAppAsyncThunk<
 >("adminCoupons/fetchAdminCoupons", async (page = 1, { rejectWithValue }) => {
   try {
     const res = await axios.get(
-      `/v2/api/${process.env.REACT_APP_API_PATH}/admin/coupons?page=${page}`
+      `/v2/api/${process.env.APP_API_PATH}/admin/coupons?page=${page}`
     );
 
     return { coupons: res.data.coupons, pagination: res.data.pagination };
@@ -45,7 +45,7 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.delete(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/coupon/${id}`
+        `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${id}`
       )) as AxiosResponse;
 
       dispatch(setHandleMessage({ type: "success", res }));
@@ -76,7 +76,7 @@ export const createAdminCouponAsync = createAppAsyncThunk<
 
     try {
       const res = (await axios.post(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/coupon`,
+        `/v2/api/${process.env.APP_API_PATH}/admin/coupon`,
         { data: newFormData }
       )) as AxiosResponse;
 
@@ -108,7 +108,7 @@ export const updateAdminCouponAsync = createAppAsyncThunk<
 
     try {
       const res = (await axios.put(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/coupon/${newFormData.id}`,
+        `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${newFormData.id}`,
         { data: newFormData }
       )) as AxiosResponse;
 

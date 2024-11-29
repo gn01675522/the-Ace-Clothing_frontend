@@ -15,7 +15,7 @@ export const fetchAdminOrdersAsync = createAppAsyncThunk<
 >("adminOrders/fetchAdminOrders", async (page = 1, { rejectWithValue }) => {
   try {
     const res = await axios.get(
-      `/v2/api/${process.env.REACT_APP_API_PATH}/admin/orders?page=${page}`
+      `/v2/api/${process.env.APP_API_PATH}/admin/orders?page=${page}`
     );
 
     return {
@@ -39,7 +39,7 @@ export const updateAdminOrdersAsync = createAppAsyncThunk<void, Order>(
   async (data, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.put(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/order/${data.id}`,
+        `/v2/api/${process.env.APP_API_PATH}/admin/order/${data.id}`,
         { data }
       )) as AxiosResponse;
 
@@ -67,7 +67,7 @@ export const deleteAdminOrdersAsync = createAppAsyncThunk<void, string>(
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.delete(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/admin/order/${id}`
+        `/v2/api/${process.env.APP_API_PATH}/admin/order/${id}`
       )) as AxiosResponse;
 
       dispatch(setHandleMessage({ type: "success", res }));
