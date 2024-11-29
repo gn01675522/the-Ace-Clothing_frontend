@@ -26,15 +26,15 @@ const INFO_CATEGORY = [
   { category: "apis", data: apis },
 ];
 
-const CATEGORY_TYPE = {
-  logos: "logos",
-  icons: "icons",
-  pictures: "pictures",
-  apis: "apis",
-};
+enum CATEGORY_TYPE {
+  logos = "logos",
+  icons = "icons",
+  pictures = "pictures",
+  apis = "apis",
+}
 
 const attachment = (
-  category: string
+  category: CATEGORY_TYPE
 ): (JSX.Element | string)[] | string[] | undefined =>
   ({
     [CATEGORY_TYPE.logos]: [
@@ -68,7 +68,9 @@ const InfoSource = () => {
           <h2 className="info-source__content-title">{item.category} 出處</h2>
           <div className="info-source__content-main">
             {item.data.map((data, i) => {
-              const AttachmentImg = attachment(item.category)?.[i];
+              const AttachmentImg = attachment(
+                item.category as CATEGORY_TYPE
+              )?.[i];
               return (
                 <div className="info-source__card" key={data.title}>
                   <div className="info-source__card-content">

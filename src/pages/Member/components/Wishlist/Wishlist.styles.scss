@@ -1,0 +1,77 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.wishlist {
+  display: flex;
+  width: 100%;
+  height: min-content;
+  flex-direction: column;
+  gap: 1rem;
+  @include mixin.normalBreakPoint(medium) {
+    all: unset;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 450px;
+    grid-gap: 10px;
+  }
+  @include mixin.normalBreakPoint(large) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wishlist__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 150px;
+  justify-content: space-between;
+  outline: 1px variables.$line-primary-line;
+  &-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    &-img {
+      width: 100px;
+      height: 110px;
+      background-color: variables.$color-secondary-bg;
+      @include mixin.img-cover-center;
+    }
+    &-info {
+      display: flex;
+      width: calc(100% - 100px);
+      padding: 10px;
+      flex-direction: column;
+      justify-content: space-around;
+      &-item {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+  &-function {
+    display: flex;
+    width: 100%;
+    height: 40px;
+  }
+  @include mixin.normalBreakPoint(medium) {
+    width: 100%;
+    height: 100%;
+    &-content {
+      height: calc(100% - 40px);
+      flex-direction: column;
+      &-img {
+        width: 100%;
+        height: 80%;
+      }
+      &-info {
+        width: 100%;
+        &-item {
+          :nth-child(1) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

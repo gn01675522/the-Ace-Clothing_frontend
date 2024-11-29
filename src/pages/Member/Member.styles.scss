@@ -1,0 +1,70 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+.member {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 6rem 2rem;
+  &__title {
+    font-size: 60px;
+    text-align: center;
+  }
+  &__function {
+    display: flex;
+    width: 100%;
+    input {
+      width: calc(100% - 40px);
+    }
+    @include mixin.normalBreakPoint(medium) {
+      gap: 1rem;
+      justify-content: center;
+      input {
+        width: 30vw;
+        font-size: 1rem;
+      }
+      button {
+        width: 50px;
+        height: 40px;
+      }
+    }
+  }
+  &__tab {
+    width: 100%;
+    min-height: 500px;
+    outline: 1px variables.$line-primary-line;
+    &-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      &-item {
+        width: 50%;
+        height: 40px;
+        line-height: 40px;
+        color: variables.$color-primary-text;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent black black transparent;
+        text-align: center;
+        background-color: variables.$color-sixth-bg;
+        &-last {
+          border-color: transparent transparent black transparent;
+        }
+      }
+      .active {
+        background-color: variables.$color-primary-bg;
+        border-bottom: transparent;
+      }
+    }
+    &-content {
+      padding: 1rem;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    padding: 6rem 1rem;
+  }
+  @include mixin.normalBreakPoint(large) {
+    padding: 6rem 10vw;
+  }
+}
