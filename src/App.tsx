@@ -17,9 +17,12 @@ const InfoSource = lazy(
 );
 const Member = lazy(() => import("./pages/Member/Member.component"));
 const Login = lazy(() => import("./pages/Login/Login.component"));
+const Dashboard = lazy(() => import("./layouts/Dashboard/Dashboard.component"));
+const Categories = lazy(
+  () => import("./components/Categories/Categories.component")
+);
 
 const App: FC = () => {
-  console.log(process.env.APP_API_URL);
   return (
     <div className="App">
       <Suspense>
@@ -36,6 +39,10 @@ const App: FC = () => {
             <Route path="member/:option" element={<Member />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Dashboard />}>
+            <Route index element={<Navigate to="products" />} />
+            <Route path="products" element={<Categories />} />
+          </Route>
         </Routes>
       </Suspense>
     </div>

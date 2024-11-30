@@ -1,0 +1,151 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/mixin";
+
+.dashboard-header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  padding: 0 2rem;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  @include mixin.shadow;
+  &__title {
+    color: variables.$color-primary-text;
+  }
+}
+
+.dashboard-header__blocker {
+  width: 100%;
+  height: 60px;
+}
+//* 填補 navbar 因 fixed 而導致的浮空
+
+.dashboard__trigger {
+  display: none;
+  &:checked ~ .dashboard-main .dashboard-main__navbar {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  &:checked
+    ~ .dashboard-header
+    .dashboard-header__burger
+    .dashboard-header__burger-line {
+    background: transparent;
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+//* 漢堡觸發器
+
+.dashboard-header__burger {
+  display: flex;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &-line {
+    width: 24px;
+    height: 2px;
+    background: variables.$color-secondary-bg;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+    transition: all 0.5s ease-in-out;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      background: variables.$color-secondary-bg;
+      border-radius: inherit;
+      box-shadow: inherit;
+      transition: inherit;
+    }
+    &::before {
+      transform: translateY(-8px);
+    }
+    &::after {
+      transform: translateY(8px);
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    display: none;
+  }
+}
+//* 漢堡符號
+
+.dashboard-main {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  &__navbar {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: min-content;
+    flex-direction: column;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 0.3s ease-out 0.15s, opacity 0.3s ease-out 0.15s;
+    z-index: 1000;
+    &-list {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      text-align: center;
+      &-link {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        font-weight: bold;
+        background-color: variables.$color-primary-bg;
+        color: variables.$color-primary-text;
+        transition: 0.3s ease-out;
+        @include mixin.hover-button-effect;
+      }
+      .active {
+        background-color: variables.$color-secondary-bg;
+        color: variables.$color-secondary-text;
+      }
+    }
+  }
+  &__content {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+  }
+  @include mixin.normalBreakPoint(large) {
+    flex-direction: row;
+    &__navbar {
+      position: static;
+      width: 150px;
+      height: calc(100vh - 60px);
+      justify-content: center;
+      background-color: variables.$color-primary-bg;
+      transform: unset;
+      &-list {
+        height: 100%;
+      }
+    }
+    &__content {
+      width: 100%;
+    }
+  }
+}
