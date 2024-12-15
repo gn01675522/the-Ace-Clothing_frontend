@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+import { useAppDispatch } from "../../store/redux-hooks";
 
-import { ReactComponent as NoImage } from "../../assets/noImage.svg";
+import NoImageSVGLogo from "../SVGIcons/NoImageSVGLogo.component";
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import ModalPortal from "../ModalPortal/ModalPortal.component";
 
-import { setAdminProductModalOpen } from "../../store/adminProduct/adminProduct.slice";
 import {
   updateAdminProductAsync,
   createAdminProductAsync,
 } from "../../store/adminProduct/adminProduct.asyncThunk";
-
-import { selectAdminProductTempData } from "../../store/adminProduct/adminProduct.selector";
 
 import { formContent } from "./formContent.data";
 
@@ -40,24 +38,23 @@ const defaultFormData: AdminProductForCreate = {
 
 type PropsType = {
   createOrEdit: "create" | "edit";
+  targetData: AdminProduct | null;
+  onClickToCloseModal: () => void;
 };
 
-const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
+const ProductModal: FC<PropsType> = ({
+  createOrEdit,
+  targetData,
+  onClickToCloseModal,
+}) => {
   const [formData, setFormData] = useState<
     AdminProductForCreate | AdminProduct
   >(defaultFormData);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
-  const tempData = useAppSelector(selectAdminProductTempData);
-
   const dispatch = useAppDispatch();
 
   const { category } = useParams();
-
-  //* 關閉 modal 功能
-  const onCloseModal = () => {
-    dispatch(setAdminProductModalOpen(false));
-  };
 
   //* 增加新增 imagesUrl 的 input
   const onAddInput = () => {
@@ -110,6 +107,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
     } else {
       dispatch(updateAdminProductAsync(formData as AdminProduct));
     }
+    onClickToCloseModal();
   };
 
   //* 避免 user 新增到小數點
@@ -123,13 +121,13 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
   useEffect(() => {
     if (createOrEdit === "create") {
       setFormData({ ...defaultFormData, category: `${category}-` });
-    } else if (createOrEdit === "edit" && tempData) {
-      setFormData(tempData);
+    } else if (createOrEdit === "edit" && targetData) {
+      setFormData(targetData);
     }
-  }, [createOrEdit, tempData, category]);
+  }, [createOrEdit, targetData, category]);
 
   return (
-    <>
+    <ModalPortal backdropClose={onClickToCloseModal}>
       <div className="product-modal">
         <div className="product-modal__header">
           <h1 className="product-modal__header-title">
@@ -141,7 +139,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={onCloseModal}
+            onClick={onClickToCloseModal}
           >
             ｘ
           </Button>
@@ -171,7 +169,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
                   className="product-modal__body-upper-left-img"
                 />
               ) : (
-                <NoImage className="product-modal__body-upper-left-alt" />
+                <NoImageSVGLogo className="product-modal__body-upper-left-alt" />
               )}
               <label
                 className="product-modal__body-upper-left-label"
@@ -245,7 +243,6 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
                     {content.title}
                   </label>
                   <textarea
-                    // type={content.type}
                     id={content.id}
                     name={content.id}
                     placeholder={content.placeholder}
@@ -301,7 +298,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
                         className="product-modal__body-lower-content-item-img"
                       />
                     ) : (
-                      <NoImage className="product-modal__body-lower-content-item-alt" />
+                      <NoImageSVGLogo className="product-modal__body-lower-content-item-alt" />
                     )}
                     <label
                       className="product-modal__body-lower-content-item-label"
@@ -344,7 +341,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={onCloseModal}
+            onClick={onClickToCloseModal}
           >
             關閉
           </Button>
@@ -358,7 +355,7 @@ const ProductModal: FC<PropsType> = ({ createOrEdit }) => {
           </Button>
         </div>
       </div>
-    </>
+    </ModalPortal>
   );
 };
 

@@ -15,7 +15,7 @@ const InstagramSVGIcon: FC<PropsType> = ({ className }) => {
       y="0px"
       width="100%"
       viewBox="0 0 512 512"
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
       xmlSpace="preserve"
     >
       <path

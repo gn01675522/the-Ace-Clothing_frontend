@@ -16,7 +16,7 @@ const NoImageSVGLogo: FC<PropsType> = ({ className }) => {
       width="500px"
       height="500px"
       viewBox="0 0 500 500"
-      enable-background="new 0 0 500 500"
+      enableBackground="new 0 0 500 500"
       xmlSpace="preserve"
     >
       <g>

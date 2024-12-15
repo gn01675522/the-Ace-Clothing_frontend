@@ -18,18 +18,6 @@ export const selectAdminProductIsLoading = createSelector(
   (adminProduct) => adminProduct.isLoading
 );
 
-//* 取出暫存資料
-export const selectAdminProductTempData = createSelector(
-  [selectAdminProductReducer],
-  (adminProduct) => adminProduct.tempData
-);
-
-//* 取出 modal 開啟狀態
-export const selectAdminProductIsModalOpen = createSelector(
-  [selectAdminProductReducer],
-  (adminProduct) => adminProduct.isModalOpen
-);
-
 //* 取出 error 訊息
 export const selectAdminProductError = createSelector(
   [selectAdminProductReducer],

@@ -12,16 +12,12 @@ import type { AdminProduct } from "./adminProduct.types";
 
 type AdminProductState = {
   readonly products: AdminProduct[];
-  readonly tempData: AdminProduct | null;
-  readonly isModalOpen: boolean;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
 };
 
 const INITIAL_STATE: AdminProductState = {
   products: [],
-  tempData: null,
-  isModalOpen: false,
   isLoading: false,
   error: null,
 };
@@ -29,14 +25,7 @@ const INITIAL_STATE: AdminProductState = {
 export const adminProductSlice = createSlice({
   name: "adminProduct",
   initialState: INITIAL_STATE,
-  reducers: {
-    setAdminProductTempData(state, action: PayloadAction<AdminProduct>) {
-      state.tempData = action.payload;
-    },
-    setAdminProductModalOpen(state, action: PayloadAction<boolean>) {
-      state.isModalOpen = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAdminProductAsync.pending, (state) => {
@@ -57,7 +46,6 @@ export const adminProductSlice = createSlice({
       })
       .addCase(deleteAdminProductAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(deleteAdminProductAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
@@ -70,7 +58,6 @@ export const adminProductSlice = createSlice({
       })
       .addCase(updateAdminProductAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(updateAdminProductAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
@@ -83,7 +70,6 @@ export const adminProductSlice = createSlice({
       })
       .addCase(createAdminProductAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(createAdminProductAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
@@ -93,6 +79,5 @@ export const adminProductSlice = createSlice({
   },
 });
 
-export const { setAdminProductModalOpen, setAdminProductTempData } =
-  adminProductSlice.actions;
+export const {} = adminProductSlice.actions;
 export const adminProductReducer = adminProductSlice.reducer;

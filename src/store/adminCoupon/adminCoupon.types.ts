@@ -1,6 +1,7 @@
 import type { Pagination } from "../../shared/types/types";
 
 export interface AdminCoupon {
+  id: string;
   title: string;
   is_enabled: 1 | 0;
   percent: number;

@@ -1,0 +1,42 @@
+@use "../../stylesheets/variables";
+
+.admin-table {
+  width: 100%;
+  height: min-content;
+  background-color: variables.$color-primary-bg;
+  &__header {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: variables.$color-third-bg;
+    color: white;
+    &-row {
+      width: 100%;
+      text-align: center;
+      th {
+        outline: 1px variables.$line-primary-line;
+      }
+    }
+  }
+  &__body {
+    &-row {
+      height: 45px;
+      td {
+        outline: 1px variables.$line-primary-line;
+        text-align: center;
+      }
+      &:nth-child(even) {
+        background-color: variables.$color-fourth-bg;
+        button {
+          background-color: transparent;
+        }
+      }
+    }
+    &-actions {
+      display: flex;
+      height: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
