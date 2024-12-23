@@ -25,7 +25,7 @@ export interface Order {
 
 export interface AdminOrder {
   success: boolean;
-  orders: AdminOrder[];
+  orders: Order[];
   pagination: Pagination;
   messages: string[];
 }

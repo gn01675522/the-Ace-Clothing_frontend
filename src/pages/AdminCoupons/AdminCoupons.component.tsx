@@ -10,11 +10,13 @@ import AdminTable from "../../components/AdminTable/AdminTable.component";
 import DeleteModal, {
   DELETE_MODAL_TYPE,
 } from "../../components/DeleteModal/DeleteModal.component";
+import Loading from "../../components/Loading/Loading.component";
 
 import { fetchAdminCouponsAsync } from "../../store/adminCoupon/adminCoupon.asyncThunk";
 import {
   selectAdminCoupons,
   selectAdminCouponsPagination,
+  selectAdminCouponsIsLoading,
 } from "../../store/adminCoupon/adminCoupon.selector";
 
 import type { FC } from "react";
@@ -40,6 +42,7 @@ const AdminCoupons: FC = () => {
 
   const coupons = useAppSelector(selectAdminCoupons);
   const pagination = useAppSelector(selectAdminCouponsPagination);
+  const isLoading = useAppSelector(selectAdminCouponsIsLoading);
 
   const onChangePageHandler = (page: number) => {
     dispatch(fetchAdminCouponsAsync(page));
@@ -61,46 +64,49 @@ const AdminCoupons: FC = () => {
   }, []);
 
   return (
-    <div className="admin-coupons">
-      {isModalOpen && (
-        <CouponModal
-          createOrEdit={createOrEdit}
-          targetData={targetData}
-          backdropClose={setIsModalOpen}
+    <>
+      {isLoading && <Loading />}
+      <div className="admin-coupons">
+        {isModalOpen && (
+          <CouponModal
+            createOrEdit={createOrEdit}
+            targetData={targetData}
+            backdropClose={setIsModalOpen}
+          />
+        )}
+        {isDeleteModalOpen && (
+          <DeleteModal
+            dataType={DELETE_MODAL_TYPE.adminCoupon}
+            id={deleteTarget.id}
+            title={deleteTarget.title}
+            closeAction={setIsDeleteModalOpen}
+          />
+        )}
+        <h3 className="admin-coupons__title">優惠券列表</h3>
+        <div className="admin-coupons__content">
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
+            onClick={() => openCouponModal("create")}
+          >
+            建立新優惠券
+          </Button>
+        </div>
+        <AdminTable
+          data={coupons}
+          columns={tableColumns}
+          onClickToEditHandler={openCouponModal}
+          onClickToDeleteHandler={onClikIsDeleteModalOpen}
         />
-      )}
-      {isDeleteModalOpen && (
-        <DeleteModal
-          dataType={DELETE_MODAL_TYPE.adminCoupon}
-          id={deleteTarget.id}
-          title={deleteTarget.title}
-          closeAction={setIsDeleteModalOpen}
-        />
-      )}
-      <h3 className="admin-coupons__title">優惠券列表</h3>
-      <div className="admin-coupons__content">
-        <Button
-          type="button"
-          buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
-          onClick={() => openCouponModal("create")}
-        >
-          建立新優惠券
-        </Button>
+        <div className="admin-coupons__function">
+          <Pagination
+            currentPage={pagination?.current_page || 1}
+            onChangePage={onChangePageHandler}
+            pageCount={pagination?.total_pages || 1}
+          />
+        </div>
       </div>
-      <AdminTable
-        data={coupons}
-        columns={tableColumns}
-        onClickToEditHandler={openCouponModal}
-        onClickToDeleteHandler={onClikIsDeleteModalOpen}
-      />
-      <div className="admin-coupons__function">
-        <Pagination
-          currentPage={pagination?.current_page || 1}
-          onChangePage={onChangePageHandler}
-          pageCount={pagination?.total_pages || 1}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

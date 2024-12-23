@@ -5,13 +5,9 @@ import OrderCard from "../OrderCard/OrderCard.component";
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
 import ModalPortal from "../ModalPortal/ModalPortal.component";
 
-import { setAdminOrdersIsModalOpen } from "../../store/adminOrder/adminOrder.slice";
 import { updateAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
 
-import {
-  selectAdminOrdersTempData,
-  selectAdminOrdersIsLoading,
-} from "../../store/adminOrder/adminOrder.selector";
+import { selectAdminOrdersIsLoading } from "../../store/adminOrder/adminOrder.selector";
 
 import type { FC, ChangeEvent } from "react";
 import type { Order } from "../../store/adminOrder/adminOrders.type";
@@ -28,35 +24,26 @@ const formContent = {
 };
 
 type PropsType = {
+  targetData: Order;
   backdropClose: () => void;
 };
 
-const OrderModal: FC<PropsType> = ({ backdropClose }) => {
-  const tempOrder = useAppSelector(selectAdminOrdersTempData);
+const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
+  const [formData, setFormData] = useState<Order | null>(null);
+
   const isLoading = useAppSelector(selectAdminOrdersIsLoading);
 
-  const [formData, setFormData] = useState({
-    is_paid: "",
-    status: 0,
-    ...tempOrder,
-  });
-
   const dispatch = useAppDispatch();
-
-  //* 關閉 modal 函式
-  const onCloseModalHandler = () => {
-    dispatch(setAdminOrdersIsModalOpen(false));
-  };
 
   //* 捕捉 input 輸入，並根據輸入資料種類來修改 formData
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement & HTMLInputElement>
   ) => {
     const { name, value, checked } = e.target;
-    if (["is_paid"].includes(name)) {
-      setFormData((preState) => ({ ...preState, [name]: checked }));
+    if (name === "is_paid") {
+      setFormData((prev) => (prev ? { ...prev, [name]: checked } : prev));
     } else {
-      setFormData((preState) => ({ ...preState, [name]: value }));
+      setFormData((prev) => (prev ? { ...prev, [name]: value } : prev));
     }
   };
 
@@ -66,26 +53,21 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
   };
 
   useEffect(() => {
-    if (tempOrder)
-      setFormData({
-        ...tempOrder,
-        is_paid: tempOrder.is_paid,
-        status: tempOrder.status,
-      });
-  }, [tempOrder]);
+    if (targetData) setFormData({ ...targetData });
+  }, [targetData]);
 
   return (
     <ModalPortal backdropClose={backdropClose}>
       <div className="order-modal">
         <div className="order-modal__header">
           <h1 className="order-modal__header-title">
-            {`訂單編號： ${formData.id}`}
+            {`訂單編號： ${formData?.id}`}
           </h1>
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={onCloseModalHandler}
+            onClick={backdropClose}
           >
             ｘ
           </Button>
@@ -106,7 +88,7 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
                     </span>
                     <div className="order-modal__body-customer-info-data">
                       <span className="order-modal__body-customer-info-data-span">
-                        {tempOrder?.user[info.id as keyof Order["user"]] ||
+                        {targetData?.user[info.id as keyof Order["user"]] ||
                           "無"}
                       </span>
                     </div>
@@ -122,14 +104,14 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
                     className="order-modal__body-payment-status-isPaid-title"
                     htmlFor="is_paid"
                   >
-                    付款狀態 ({formData.is_paid ? "已付款" : "未付款"})
+                    付款狀態 ({formData?.is_paid ? "已付款" : "未付款"})
                   </label>
                   <input
                     className="order-modal__body-payment-status-isPaid-input"
                     type="checkbox"
                     name="is_paid"
                     id="is_paid"
-                    checked={!!formData.is_paid}
+                    checked={!!formData?.is_paid}
                     onChange={handleChange}
                     disabled={isLoading}
                   />
@@ -142,7 +124,7 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
                   <select
                     className="order-modal__body-payment-status-progress-select"
                     name="status"
-                    value={formData.status}
+                    value={formData?.status}
                     onChange={handleChange}
                     disabled={isLoading}
                   >
@@ -157,15 +139,15 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
           </div>
 
           <div className="order-modal__body-order">
-            {tempOrder?.products && (
+            {targetData?.products && (
               <>
-                <OrderCard products={Object.values(tempOrder.products)} />
+                <OrderCard products={Object.values(targetData.products)} />
                 <div className="order-modal__body-order-total">
                   <div className="order-modal__body-order-total-title">
                     總金額：
                   </div>
                   <div className="order-modal__body-order-price">
-                    ${Math.round(tempOrder.total)} 元
+                    ${Math.round(targetData.total)} 元
                   </div>
                 </div>
               </>
@@ -177,7 +159,7 @@ const OrderModal: FC<PropsType> = ({ backdropClose }) => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={onCloseModalHandler}
+            onClick={backdropClose}
           >
             關閉
           </Button>

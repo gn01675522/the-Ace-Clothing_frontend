@@ -27,11 +27,15 @@ const AdminProducts = lazy(
 const AdminCoupons = lazy(
   () => import("./pages/AdminCoupons/AdminCoupons.component")
 );
+const AdminOrders = lazy(
+  () => import("./pages/AdminOrders/AdminOrders.component")
+);
+const Loading = lazy(() => import("./components/Loading/Loading.component"));
 
 const App: FC = () => {
   return (
     <div className="App">
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -50,6 +54,7 @@ const App: FC = () => {
             <Route path="products/:category" element={<AdminProducts />} />
             <Route path="products" element={<Categories />} />
             <Route path="coupons" element={<AdminCoupons />} />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
         </Routes>
       </Suspense>

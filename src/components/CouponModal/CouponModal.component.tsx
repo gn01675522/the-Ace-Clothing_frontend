@@ -82,6 +82,7 @@ const CouponModal: FC<PropsType> = ({
       };
       dispatch(updateAdminCouponAsync(data));
     }
+    backdropClose(false);
   };
 
   useEffect(() => {

@@ -14,7 +14,6 @@ type AdminOrderState = {
   readonly orders: Order[];
   readonly pagination: Pagination | null;
   readonly tempData: Order | null;
-  readonly isModalOpen: boolean;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
 };
@@ -23,7 +22,6 @@ const INITIAL_STATE: AdminOrderState = {
   orders: [],
   pagination: null,
   tempData: null,
-  isModalOpen: false,
   isLoading: false,
   error: null,
 };
@@ -32,9 +30,6 @@ export const adminOrderSlice = createSlice({
   name: "adminOrders",
   initialState: INITIAL_STATE,
   reducers: {
-    setAdminOrdersIsModalOpen(state, action: PayloadAction<boolean>) {
-      state.isModalOpen = action.payload;
-    },
     setAdminOrdersTempData(state, action: PayloadAction<Order>) {
       state.tempData = action.payload;
     },
@@ -60,7 +55,6 @@ export const adminOrderSlice = createSlice({
       })
       .addCase(updateAdminOrdersAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(updateAdminOrdersAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
@@ -73,7 +67,6 @@ export const adminOrderSlice = createSlice({
       })
       .addCase(deleteAdminOrdersAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(deleteAdminOrdersAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
@@ -83,6 +76,5 @@ export const adminOrderSlice = createSlice({
   },
 });
 
-export const { setAdminOrdersIsModalOpen, setAdminOrdersTempData } =
-  adminOrderSlice.actions;
+export const { setAdminOrdersTempData } = adminOrderSlice.actions;
 export const adminOrderReducer = adminOrderSlice.reducer;
