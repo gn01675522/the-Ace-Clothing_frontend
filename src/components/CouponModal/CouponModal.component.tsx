@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalBackdrop from "../ModalPortal/ModalBackdrop.component";
+import ModalPortal from "../ModalPortal/ModalPortal.component";
 
 import { selectAdminCouponsTempData } from "../../store/adminCoupon/adminCoupon.selector";
-import { setAdminCouponsOpen } from "../../store/adminCoupon/adminCoupon.slice";
 
 import {
   createAdminCouponAsync,
@@ -15,15 +14,22 @@ import {
 import { formContent } from "./formContent.data";
 import { formatTimestampInMilliSeconds } from "../../utils/common.utils";
 
-import type { FC, ChangeEvent } from "react";
+import type {
+  FC,
+  ChangeEvent,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import type {
   AdminCoupon,
   AdminCouponWithId,
+  CreateAdminCoupon,
 } from "../../store/adminCoupon/adminCoupon.types";
 
 import "./CouponModal.styles.scss";
 
-const defaultCreateData: AdminCoupon = {
+const defaultCreateData: CreateAdminCoupon = {
   title: "",
   is_enabled: 1,
   percent: 80,
@@ -32,19 +38,26 @@ const defaultCreateData: AdminCoupon = {
 };
 
 type PropsType = {
+  targetData: AdminCoupon | null;
   createOrEdit: "create" | "edit";
-  backdropClose: () => void;
+  backdropClose: Dispatch<SetStateAction<boolean>>;
 };
 
-const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
-  const [formData, setFormData] = useState(defaultCreateData);
+const CouponModal: FC<PropsType> = ({
+  createOrEdit,
+  targetData,
+  backdropClose,
+}) => {
+  const [formData, setFormData] = useState<
+    CreateAdminCoupon | AdminCouponWithId
+  >(defaultCreateData);
   const [date, setDate] = useState(new Date());
 
   const dispatch = useAppDispatch();
 
   const tempCoupon = useAppSelector(selectAdminCouponsTempData);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     if (name === "percent") {
       setFormData({ ...formData, [name]: Number(value) });
@@ -55,14 +68,13 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
     }
   };
 
-  const onCloseModalHandler = () => {
-    dispatch(setAdminCouponsOpen(false));
+  const onClickToClose = (e: MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) backdropClose(false);
   };
 
   const onSubmitHandler = () => {
     if (createOrEdit == "create") {
-      const data = { formData, date };
-      dispatch(createAdminCouponAsync(data));
+      dispatch(createAdminCouponAsync({ formData, date }));
     } else {
       const data = { formData, date } as {
         formData: AdminCouponWithId;
@@ -73,14 +85,14 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
   };
 
   useEffect(() => {
-    if (createOrEdit === "edit" && tempCoupon) {
-      setFormData(tempCoupon);
+    if (createOrEdit === "edit" && targetData) {
+      setFormData(targetData);
       setDate((prev) => (tempCoupon ? new Date(tempCoupon.due_date) : prev));
     }
   }, [createOrEdit, tempCoupon]);
 
   return (
-    <ModalBackdrop backdropClose={backdropClose}>
+    <ModalPortal backdropClose={onClickToClose}>
       <div className="coupon-modal">
         <div className="coupon-modal__header">
           <h1 className="coupon-modal__header-title">
@@ -92,7 +104,7 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={onCloseModalHandler}
+            onClick={onClickToClose}
           >
             ｘ
           </Button>
@@ -112,7 +124,7 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
               id="is_enabled"
               name="is_enabled"
               checked={!!formData.is_enabled}
-              onChange={handleChange}
+              onChange={onChangeHandler}
             />
           </div>
           <div className="coupon-modal__body-content">
@@ -141,14 +153,19 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
                     value={
                       content.id === "due_date"
                         ? formatTimestampInMilliSeconds(date)
-                        : formData[content.id as keyof AdminCoupon]
+                        : formData[
+                            content.id as keyof (
+                              | AdminCouponWithId
+                              | CreateAdminCoupon
+                            )
+                          ]
                     }
                     onChange={
                       content.id === "due_date"
                         ? (e) => {
                             setDate(new Date(e.target.value));
                           }
-                        : handleChange
+                        : onChangeHandler
                     }
                   />
                 </div>
@@ -161,7 +178,7 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={onCloseModalHandler}
+            onClick={onClickToClose}
           >
             關閉
           </Button>
@@ -175,7 +192,7 @@ const CouponModal: FC<PropsType> = ({ createOrEdit, backdropClose }) => {
           </Button>
         </div>
       </div>
-    </ModalBackdrop>
+    </ModalPortal>
   );
 };
 

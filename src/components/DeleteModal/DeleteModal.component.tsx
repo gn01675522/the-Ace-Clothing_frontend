@@ -1,14 +1,14 @@
 import { useAppDispatch } from "../../store/redux-hooks";
 
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalBackdrop from "../ModalPortal/ModalBackdrop.component";
+import ModalPortal from "../ModalPortal/ModalPortal.component";
 
 import { deleteAdminProductAsync } from "../../store/adminProduct/adminProduct.asyncThunk";
 
 import { deleteAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
 import { deleteAdminCouponsAsync } from "../../store/adminCoupon/adminCoupon.asyncThunk";
 
-import type { FC } from "react";
+import type { FC, Dispatch, SetStateAction, MouseEvent } from "react";
 import type { AsyncThunk } from "@reduxjs/toolkit";
 import type { ThunkAPIConfig } from "../../store/redux-utils";
 
@@ -41,26 +41,25 @@ type PropsType = {
   dataType: DELETE_MODAL_TYPE;
   id: string;
   title: string;
-  onClickToCloseModal: () => void;
+  closeAction: Dispatch<SetStateAction<boolean>>;
 };
 
-const DeleteModal: FC<PropsType> = ({
-  dataType,
-  id,
-  title,
-  onClickToCloseModal,
-}) => {
+const DeleteModal: FC<PropsType> = ({ dataType, id, title, closeAction }) => {
   const actionTarget = deleteAction(dataType);
 
   const dispatch = useAppDispatch();
 
+  const onClickToClose = (e: MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) closeAction(false);
+  };
+
   const onClickToDeleteHandler = () => {
     dispatch(actionTarget(id));
-    onClickToCloseModal();
+    closeAction(false);
   };
 
   return (
-    <ModalBackdrop backdropClose={onClickToCloseModal}>
+    <ModalPortal backdropClose={onClickToClose}>
       <div className="delete-modal">
         <div className="delete-modal__header">
           <h1 className="delete-modal__header-title">刪除確認</h1>
@@ -68,7 +67,7 @@ const DeleteModal: FC<PropsType> = ({
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={onClickToCloseModal}
+            onClick={onClickToClose}
           >
             ｘ
           </Button>
@@ -78,7 +77,7 @@ const DeleteModal: FC<PropsType> = ({
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={onClickToCloseModal}
+            onClick={onClickToClose}
           >
             取消
           </Button>
@@ -91,7 +90,7 @@ const DeleteModal: FC<PropsType> = ({
           </Button>
         </div>
       </div>
-    </ModalBackdrop>
+    </ModalPortal>
   );
 };
 

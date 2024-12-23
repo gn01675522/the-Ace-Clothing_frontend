@@ -15,7 +15,6 @@ type AdminCouponState = {
   readonly coupons: AdminCoupon[];
   readonly pagination: Pagination | null;
   readonly tempData: AdminCouponWithId | null;
-  readonly isModalOpen: boolean;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
 };
@@ -24,7 +23,6 @@ const INITIAL_STATE: AdminCouponState = {
   coupons: [],
   pagination: null,
   tempData: null,
-  isModalOpen: false,
   isLoading: false,
   error: null,
 };
@@ -33,15 +31,13 @@ export const adminCouponSlice = createSlice({
   name: "adminCoupon",
   initialState: INITIAL_STATE,
   reducers: {
-    setAdminCouponsOpen(state, action: PayloadAction<boolean>) {
-      state.isModalOpen = action.payload;
-    },
     setAdminCouponsTempData(state, action: PayloadAction<AdminCouponWithId>) {
       state.tempData = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
+      //**************************************** 取得 API 內的 Admin Coupons 資料 Start ****************************************
       .addCase(fetchAdminCouponsAsync.pending, (state) => {
         state.isLoading = true;
       })
@@ -54,49 +50,45 @@ export const adminCouponSlice = createSlice({
         if (payload) state.error = payload;
         state.isLoading = false;
       })
-      //* 取得 API 內的 Admin Coupons 資料 ****************************************
-
+      //**************************************** 取得 API 內的 Admin Coupons 資料 End ****************************************
+      //**************************************** 刪除 API 內的 Admin Coupons 資料 Start ****************************************
       .addCase(deleteAdminCouponsAsync.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(deleteAdminCouponsAsync.fulfilled, (state) => {
-        state.isModalOpen = false;
         state.isLoading = false;
       })
       .addCase(deleteAdminCouponsAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
         state.isLoading = false;
       })
-      //* 刪除 API 內的 Admin Coupons 資料 ****************************************
-
+      //**************************************** 刪除 API 內的 Admin Coupons 資料 End ****************************************
+      //**************************************** 於 API 內創建 Admin Coupons 資料 Start ****************************************
       .addCase(createAdminCouponAsync.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(createAdminCouponAsync.fulfilled, (state) => {
-        state.isModalOpen = false;
         state.isLoading = false;
       })
       .addCase(createAdminCouponAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
         state.isLoading = false;
       })
-      //* 於 API 內創建 Admin Coupons 資料 ****************************************
-
+      //**************************************** 於 API 內創建 Admin Coupons 資料 End ****************************************
+      //**************************************** 更新 API 內的 Admin Coupons 資料 Start ****************************************
       .addCase(updateAdminCouponAsync.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(updateAdminCouponAsync.fulfilled, (state) => {
         state.isLoading = false;
-        state.isModalOpen = false;
       })
       .addCase(updateAdminCouponAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
         state.isLoading = false;
       });
-    //* 更新 API 內的 Admin Coupons 資料 ****************************************
+    //**************************************** 更新 API 內的 Admin Coupons 資料 End ****************************************
   },
 });
 
-export const { setAdminCouponsOpen, setAdminCouponsTempData } =
-  adminCouponSlice.actions;
+export const { setAdminCouponsTempData } = adminCouponSlice.actions;
 export const adminCouponReducer = adminCouponSlice.reducer;

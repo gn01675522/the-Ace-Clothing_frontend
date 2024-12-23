@@ -13,7 +13,14 @@ import {
 
 import { formContent } from "./formContent.data";
 
-import type { ChangeEvent, FC, KeyboardEvent } from "react";
+import type {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import type { Product } from "../../store/userProduct/userProduct.types";
 import type {
   AdminProduct,
@@ -39,13 +46,13 @@ const defaultFormData: AdminProductForCreate = {
 type PropsType = {
   createOrEdit: "create" | "edit";
   targetData: AdminProduct | null;
-  onClickToCloseModal: () => void;
+  closeAction: Dispatch<SetStateAction<boolean>>;
 };
 
 const ProductModal: FC<PropsType> = ({
   createOrEdit,
   targetData,
-  onClickToCloseModal,
+  closeAction,
 }) => {
   const [formData, setFormData] = useState<
     AdminProductForCreate | AdminProduct
@@ -65,6 +72,10 @@ const ProductModal: FC<PropsType> = ({
     if (isToggleOpen === false) {
       setIsToggleOpen(true);
     }
+  };
+
+  const onClickToClose = (e: MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) closeAction(false);
   };
 
   //* 刪除 imagesUrl
@@ -107,7 +118,7 @@ const ProductModal: FC<PropsType> = ({
     } else {
       dispatch(updateAdminProductAsync(formData as AdminProduct));
     }
-    onClickToCloseModal();
+    closeAction(false);
   };
 
   //* 避免 user 新增到小數點
@@ -127,7 +138,7 @@ const ProductModal: FC<PropsType> = ({
   }, [createOrEdit, targetData, category]);
 
   return (
-    <ModalPortal backdropClose={onClickToCloseModal}>
+    <ModalPortal backdropClose={onClickToClose}>
       <div className="product-modal">
         <div className="product-modal__header">
           <h1 className="product-modal__header-title">
@@ -139,7 +150,7 @@ const ProductModal: FC<PropsType> = ({
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={onClickToCloseModal}
+            onClick={onClickToClose}
           >
             ｘ
           </Button>
@@ -341,7 +352,7 @@ const ProductModal: FC<PropsType> = ({
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={onClickToCloseModal}
+            onClick={onClickToClose}
           >
             關閉
           </Button>

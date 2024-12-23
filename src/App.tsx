@@ -24,6 +24,9 @@ const Categories = lazy(
 const AdminProducts = lazy(
   () => import("./pages/AdminProducts/AdminProducts.component")
 );
+const AdminCoupons = lazy(
+  () => import("./pages/AdminCoupons/AdminCoupons.component")
+);
 
 const App: FC = () => {
   return (
@@ -44,8 +47,9 @@ const App: FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Dashboard />}>
             <Route index element={<Navigate to="products" />} />
+            <Route path="products/:category" element={<AdminProducts />} />
             <Route path="products" element={<Categories />} />
-            <Route path=":category" element={<AdminProducts />} />
+            <Route path="coupons" element={<AdminCoupons />} />
           </Route>
         </Routes>
       </Suspense>

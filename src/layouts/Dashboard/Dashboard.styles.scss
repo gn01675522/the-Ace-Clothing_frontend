@@ -17,12 +17,13 @@
   }
 }
 
+//* 填補 navbar 因 fixed 而導致的浮空
 .dashboard-header__blocker {
   width: 100%;
   height: 60px;
 }
-//* 填補 navbar 因 fixed 而導致的浮空
 
+//* 漢堡觸發器
 .dashboard__trigger {
   display: none;
   &:checked ~ .dashboard-main .dashboard-main__navbar {
@@ -42,8 +43,8 @@
     }
   }
 }
-//* 漢堡觸發器
 
+//* 漢堡符號
 .dashboard-header__burger {
   display: flex;
   position: relative;
@@ -84,7 +85,6 @@
     display: none;
   }
 }
-//* 漢堡符號
 
 .dashboard-main {
   display: flex;

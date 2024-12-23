@@ -9,6 +9,14 @@ export interface AdminCoupon {
   code: string;
 }
 
+export interface CreateAdminCoupon {
+  title: string;
+  is_enabled: 1 | 0;
+  percent: number;
+  due_date: number;
+  code: string;
+}
+
 export interface AdminCouponWithId extends AdminCoupon {
   id: string;
 }

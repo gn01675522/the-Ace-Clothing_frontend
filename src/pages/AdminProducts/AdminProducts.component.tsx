@@ -88,9 +88,6 @@ const AdminProducts: FC = () => {
 
   const onClickIsNormalModalOpen = () => setIsModalOpen(!isModalOpen);
 
-  const onClickIsDeleteModalOpen = () =>
-    setIsDeleteModalOpen(!isDeleteModalOpen);
-
   //* 開啟編輯商品或是新增商品 modal
   const onOpenProductModal = (
     type: CreateOrEditType,
@@ -102,11 +99,8 @@ const AdminProducts: FC = () => {
   };
 
   //* 打開刪除 modal
-  const onClickToDeleteProductHandler = (target: {
-    id: string;
-    title: string;
-  }) => {
-    setDeleteTarget({ id: target.id, title: target.title });
+  const onClickToDeleteProductHandler = (target?: AdminProduct) => {
+    if (target) setDeleteTarget({ id: target.id, title: target.title });
     setIsDeleteModalOpen(!isDeleteModalOpen);
   };
 
@@ -121,7 +115,7 @@ const AdminProducts: FC = () => {
         <ProductModal
           createOrEdit={createOrEdit}
           targetData={targetData}
-          onClickToCloseModal={onClickIsNormalModalOpen}
+          closeAction={onClickIsNormalModalOpen}
         />
       )}
       {isDeleteModalOpen && (
@@ -129,7 +123,7 @@ const AdminProducts: FC = () => {
           dataType={DELETE_MODAL_TYPE.adminProduct}
           id={deleteTarget.id}
           title={deleteTarget.title}
-          onClickToCloseModal={onClickIsDeleteModalOpen}
+          closeAction={setIsDeleteModalOpen}
         />
       )}
       <h3 className="admin-products__title">

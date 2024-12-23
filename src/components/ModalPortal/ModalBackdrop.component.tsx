@@ -1,10 +1,10 @@
-import type { FC, ReactNode } from "react";
+import type { FC, ReactNode, MouseEvent } from "react";
 
 import "./ModalBackdrop.styles.scss";
 
 type PropsType = {
   children: ReactNode;
-  backdropClose: () => void;
+  backdropClose: (e: MouseEvent<HTMLElement>) => void;
 };
 
 const ModalBackdrop: FC<PropsType> = ({ children, backdropClose }) => {

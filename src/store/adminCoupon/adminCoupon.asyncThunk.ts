@@ -5,7 +5,11 @@ import { setHandleMessage } from "../message/message.slice";
 
 import type { AxiosResponse } from "axios";
 import type { AxiosRejectTypes } from "../redux-utils";
-import type { AdminCoupon, AdminCouponWithId } from "./adminCoupon.types";
+import type {
+  AdminCoupon,
+  AdminCouponWithId,
+  CreateAdminCoupon,
+} from "./adminCoupon.types";
 import type { Pagination } from "../../shared/types/types";
 
 //******************** Helper ********************
@@ -68,7 +72,7 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
 //* 創造 admin coupons 資料
 export const createAdminCouponAsync = createAppAsyncThunk<
   void,
-  { formData: AdminCoupon; date: Date }
+  { formData: CreateAdminCoupon; date: Date }
 >(
   "adminCoupons/createAdminCoupons",
   async ({ formData, date }, { dispatch, rejectWithValue }) => {
