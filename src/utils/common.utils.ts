@@ -42,7 +42,9 @@ export const translateCategoryToChinese = (category: string): string => {
 };
 
 //* 將傳入值做格式處理，這邊進來的是 timestamp 以毫秒計算。
-export const formatTimestampInMilliSeconds = (date: number | Date): string => {
+export const formatTimestampInMilliSeconds = (
+  date: number | string | Date
+): string => {
   const newDate = new Date(date);
   const getYear = newDate.getFullYear().toString();
   const getMonth = (newDate.getMonth() + 1).toString().padStart(2, "0");

@@ -40,37 +40,36 @@ const AdminOrders: FC = () => {
   const pagination = useAppSelector(selectAdminOrdersPagination);
   const isLoading = useAppSelector(selectAdminOrdersIsLoading);
 
+  const orderForTable = orders.map((order) => ({
+    ...order,
+    email: order.user.email,
+  }));
+
   const onChangePageHandler = (page: number) => {
     dispatch(fetchAdminOrdersAsync(page));
   };
 
-  const onClickIsModalOpen = () => setIsModalOpen(!isModalOpen);
-
-  const onClickToOpenModal = (type: "edit" | "create", order?: Order) => {
-    if (order) setTargetData(order);
+  const onClickToOpenModal = (order: Order) => {
+    setTargetData(order);
     setIsModalOpen(!isModalOpen);
   };
 
   //* 打開刪除 modal
   const onOpenOrdersDeleteModal = (order: Order) => {
-    console.log("Test", order);
     setDeleteTarget({ id: order.id, title: order.id });
     setIsDeleteModalOpen(true);
   };
 
   useEffect(() => {
     dispatch(fetchAdminOrdersAsync());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
       {isLoading && <Loading />}
       <div className="admin-orders">
         {isModalOpen && targetData && (
-          <OrderModal
-            targetData={targetData}
-            backdropClose={onClickIsModalOpen}
-          />
+          <OrderModal targetData={targetData} closeAction={setIsModalOpen} />
         )}
         {isDeleteModalOpen && (
           <DeleteModal
@@ -82,8 +81,8 @@ const AdminOrders: FC = () => {
         )}
         <h3 className="admin-orders__title">訂單列表</h3>
         <div className="admin-orders__content">
-          <AdminTable
-            data={orders}
+          <AdminTable<Order>
+            data={orderForTable}
             columns={tableColumns}
             onClickToEditHandler={onClickToOpenModal}
             onClickToDeleteHandler={onOpenOrdersDeleteModal}

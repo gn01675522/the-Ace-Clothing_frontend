@@ -19,20 +19,30 @@ import {
   selectAdminCouponsIsLoading,
 } from "../../store/adminCoupon/adminCoupon.selector";
 
-import type { FC } from "react";
+import { formatTimestampInMilliSeconds } from "../../utils/common.utils";
+
+import type { FC, ReactNode } from "react";
 import type { AdminCoupon } from "../../store/adminCoupon/adminCoupon.types";
 
 import "./AdminCoupons.styles.scss";
 
-const tableColumns = [
+const tableColumns: Array<{
+  header: string;
+  accessor: keyof AdminCoupon;
+  render?: (value: AdminCoupon[keyof AdminCoupon]) => ReactNode;
+}> = [
   { header: "優惠碼", accessor: "code" },
   { header: "折扣", accessor: "percent" },
-  { header: "到期日", accessor: "due_date" },
+  {
+    header: "到期日",
+    accessor: "due_date",
+    render: (value) => formatTimestampInMilliSeconds(value),
+  },
   { header: "啟用狀態", accessor: "is_enabled" },
-] as { header: string; accessor: keyof AdminCoupon }[];
+];
 
 const AdminCoupons: FC = () => {
-  const [createOrEdit, setCreateOrEdit] = useState<"create" | "edit">("create");
+  const [optionType, setOptionType] = useState<"create" | "edit">("create");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [targetData, setTargetData] = useState<AdminCoupon | null>(null);
@@ -48,14 +58,19 @@ const AdminCoupons: FC = () => {
     dispatch(fetchAdminCouponsAsync(page));
   };
 
-  const openCouponModal = (type: "create" | "edit", product?: AdminCoupon) => {
-    setCreateOrEdit(type);
-    if (type === "edit") setTargetData(product!);
+  const onClickToEditHandler = (product: AdminCoupon) => {
+    setOptionType("edit");
+    setTargetData(product);
     setIsModalOpen(!isModalOpen);
   };
 
-  const onClikIsDeleteModalOpen = (target?: AdminCoupon) => {
-    if (target) setDeleteTarget({ id: target.id, title: target.title });
+  const onClickToCreateHandler = () => {
+    setOptionType("create");
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const onClikIsDeleteModalOpen = (target: AdminCoupon) => {
+    setDeleteTarget({ id: target.id, title: target.title });
     setIsDeleteModalOpen(!isDeleteModalOpen);
   };
 
@@ -69,7 +84,7 @@ const AdminCoupons: FC = () => {
       <div className="admin-coupons">
         {isModalOpen && (
           <CouponModal
-            createOrEdit={createOrEdit}
+            createOrEdit={optionType}
             targetData={targetData}
             backdropClose={setIsModalOpen}
           />
@@ -87,15 +102,15 @@ const AdminCoupons: FC = () => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
-            onClick={() => openCouponModal("create")}
+            onClick={onClickToCreateHandler}
           >
             建立新優惠券
           </Button>
         </div>
-        <AdminTable
+        <AdminTable<AdminCoupon>
           data={coupons}
           columns={tableColumns}
-          onClickToEditHandler={openCouponModal}
+          onClickToEditHandler={onClickToEditHandler}
           onClickToDeleteHandler={onClikIsDeleteModalOpen}
         />
         <div className="admin-coupons__function">

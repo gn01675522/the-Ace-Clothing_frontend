@@ -9,7 +9,13 @@ import { updateAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncT
 
 import { selectAdminOrdersIsLoading } from "../../store/adminOrder/adminOrder.selector";
 
-import type { FC, ChangeEvent } from "react";
+import type {
+  FC,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  MouseEvent,
+} from "react";
 import type { Order } from "../../store/adminOrder/adminOrders.type";
 
 import "./OrderModal.styles.scss";
@@ -25,10 +31,10 @@ const formContent = {
 
 type PropsType = {
   targetData: Order;
-  backdropClose: () => void;
+  closeAction: Dispatch<SetStateAction<boolean>>;
 };
 
-const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
+const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
   const [formData, setFormData] = useState<Order | null>(null);
 
   const isLoading = useAppSelector(selectAdminOrdersIsLoading);
@@ -47,6 +53,10 @@ const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
     }
   };
 
+  const onClickToClose = (e: MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) closeAction(false);
+  };
+
   //* 提交表單函式
   const submit = () => {
     dispatch(updateAdminOrdersAsync(formData as Order));
@@ -57,7 +67,7 @@ const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
   }, [targetData]);
 
   return (
-    <ModalPortal backdropClose={backdropClose}>
+    <ModalPortal backdropClose={onClickToClose}>
       <div className="order-modal">
         <div className="order-modal__header">
           <h1 className="order-modal__header-title">
@@ -67,7 +77,7 @@ const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
             type="button"
             buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
             aria-label="Close"
-            onClick={backdropClose}
+            onClick={onClickToClose}
           >
             ｘ
           </Button>
@@ -159,7 +169,7 @@ const OrderModal: FC<PropsType> = ({ targetData, backdropClose }) => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-            onClick={backdropClose}
+            onClick={onClickToClose}
           >
             關閉
           </Button>

@@ -88,19 +88,20 @@ const AdminProducts: FC = () => {
 
   const onClickIsNormalModalOpen = () => setIsModalOpen(!isModalOpen);
 
-  //* 開啟編輯商品或是新增商品 modal
-  const onOpenProductModal = (
-    type: CreateOrEditType,
-    product?: AdminProduct
-  ) => {
-    setCreateOrEdit(type);
-    if (type === "edit") setTargetData(product!);
+  const onClickToEditHandler = (product: AdminProduct) => {
+    setCreateOrEdit("edit");
+    setTargetData(product!);
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const onClickToCreateHandler = () => {
+    setCreateOrEdit("create");
     setIsModalOpen(!isModalOpen);
   };
 
   //* 打開刪除 modal
-  const onClickToDeleteProductHandler = (target?: AdminProduct) => {
-    if (target) setDeleteTarget({ id: target.id, title: target.title });
+  const onClickToDeleteProductHandler = (target: AdminProduct) => {
+    setDeleteTarget({ id: target.id, title: target.title });
     setIsDeleteModalOpen(!isDeleteModalOpen);
   };
 
@@ -133,7 +134,7 @@ const AdminProducts: FC = () => {
         <Button
           type="button"
           buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
-          onClick={() => onOpenProductModal("create")}
+          onClick={onClickToCreateHandler}
         >
           建立新商品
         </Button>
@@ -141,7 +142,7 @@ const AdminProducts: FC = () => {
       <AdminTable
         data={productsInPage}
         columns={tableColumns}
-        onClickToEditHandler={onOpenProductModal}
+        onClickToEditHandler={onClickToEditHandler}
         onClickToDeleteHandler={onClickToDeleteProductHandler}
       />
       <div className="admin-products__function">
