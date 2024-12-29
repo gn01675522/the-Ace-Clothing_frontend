@@ -1,57 +1,56 @@
 const webpack = require("webpack");
 const { resolve, join } = require("path");
-const dotenv = require("dotenv");
-
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const env = dotenv.config().parsed;
+const mode =
+  process.env.NODE_ENV === "production" ? "production" : "development";
 
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
-
-module.exports = {
+const config = {
   entry: "./src/index.tsx",
   output: {
-    filename: "main.js",
+    filename: "[name].[contenthash].js",
     path: resolve(__dirname, "build"),
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              ["@babel/preset-react", { runtime: "automatic" }],
-              "@babel/preset-typescript",
-            ],
+        oneOf: [
+          {
+            test: /\.(js|jsx|ts|tsx)$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                presets: [
+                  "@babel/preset-env",
+                  ["@babel/preset-react", { runtime: "automatic" }],
+                  "@babel/preset-typescript",
+                ],
+              },
+            },
           },
-        },
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: ["@svgr/webpack"],
-      },
-      {
-        test: /\.(png|jpe?g|gif|bmp|ico)$/i,
-        type: "asset/resource",
-        generator: {
-          filename: "images/[hash][ext][query]",
-        },
+          {
+            test: /\.css$/,
+            use: ["style-loader", "css-loader"],
+          },
+          {
+            test: /\.scss$/,
+            use: ["style-loader", "css-loader", "sass-loader"],
+          },
+          {
+            test: /\.svg$/i,
+            issuer: /\.[jt]sx?$/,
+            use: ["@svgr/webpack"],
+          },
+          {
+            test: /\.(png|jpe?g|gif|bmp|ico)$/i,
+            type: "asset/resource",
+            generator: {
+              filename: "images/[hash][ext][query]",
+            },
+          },
+        ],
       },
     ],
   },
@@ -71,6 +70,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
     }),
     new webpack.DefinePlugin({
       "process.env.APP_API_URL": JSON.stringify(process.env.APP_API_URL || ""),
@@ -78,7 +81,27 @@ module.exports = {
         process.env.APP_API_PATH || ""
       ),
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: mode === "production" ? "static" : "disabled",
+      openAnalyzer: false,
+      reportFilename: "bundle-report.html",
+    }),
   ],
-  mode: "development",
-  devtool: process.env.NODE_ENV === "development" ? "source-map" : false,
+  optimization: {
+    // minimize: mode === "production",
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
+  mode: mode,
+  devtool: mode === "development" ? "source-map" : false,
 };
+
+module.exports = config;
