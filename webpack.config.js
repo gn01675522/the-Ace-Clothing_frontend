@@ -17,7 +17,6 @@ module.exports = {
     filename: "main.js",
     path: resolve(__dirname, "build"),
   },
-
   module: {
     rules: [
       {
@@ -73,8 +72,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
-    new webpack.DefinePlugin(envKeys),
+    new webpack.DefinePlugin({
+      "process.env.APP_API_URL": JSON.stringify(process.env.APP_API_URL || ""),
+      "process.env.APP_API_PATH": JSON.stringify(
+        process.env.APP_API_PATH || ""
+      ),
+    }),
   ],
   mode: "development",
-  devtool: "source-map",
+  devtool: process.env.NODE_ENV === "development" ? "source-map" : false,
 };
