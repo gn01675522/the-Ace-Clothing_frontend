@@ -2,9 +2,9 @@ const webpack = require("webpack");
 const { resolve, join } = require("path");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
-const mode =
-  process.env.NODE_ENV === "production" ? "production" : "development";
+const mode = process.env.NODE_ENV;
 
 const config = {
   entry: "./src/index.tsx",
@@ -75,11 +75,9 @@ const config = {
         removeComments: true,
       },
     }),
-    new webpack.DefinePlugin({
-      "process.env.APP_API_URL": JSON.stringify(process.env.APP_API_URL || ""),
-      "process.env.APP_API_PATH": JSON.stringify(
-        process.env.APP_API_PATH || ""
-      ),
+    new Dotenv({
+      path: "./.env",
+      systemvars: true,
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: mode === "production" ? "static" : "disabled",
@@ -88,7 +86,6 @@ const config = {
     }),
   ],
   optimization: {
-    // minimize: mode === "production",
     runtimeChunk: "single",
     splitChunks: {
       cacheGroups: {
