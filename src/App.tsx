@@ -1,9 +1,11 @@
 import { FC, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import ClientRoutes from "./routes/Client.routes";
-import AdminRoutes from "./routes/Admin.routes";
+// import ClientRoutes from "./routes/Client.routes";
+// import AdminRoutes from "./routes/Admin.routes";
 
+const ClientRoutes = lazy(() => import("./routes/Client.routes"));
+const AdminRoutes = lazy(() => import("./routes/Admin.routes"));
 const Login = lazy(() => import("./pages/Login/Login.component"));
 const Loading = lazy(() => import("./components/Loading/Loading.component"));
 
