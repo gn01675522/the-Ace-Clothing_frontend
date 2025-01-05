@@ -1,16 +1,19 @@
-const { resolve, join } = require("path");
+const { resolve } = require("path");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
 
 const { merge } = require("webpack-merge");
+
+const { devConfig } = require("./webpack.dev.config");
+const { prodConfig } = require("./webpack.prod.config");
 
 const baseConfig = {
   entry: "./src/index.tsx",
   output: {
     filename: "js/[name].[contenthash:10].js",
     path: resolve(__dirname, "build"),
+    clean: true,
   },
   module: {
     rules: [
@@ -67,87 +70,6 @@ const baseConfig = {
       reportFilename: "bundle-report.html",
     }),
   ],
-};
-
-const devConfig = {
-  mode: "development",
-  devtool: "eval-source-map",
-  devServer: {
-    static: [
-      { directory: join(__dirname, "build") },
-      { directory: join(__dirname, "public") },
-    ],
-    compress: true,
-    port: 3000,
-    hot: true,
-    open: true,
-  },
-  module: {
-    rules: [
-      {
-        oneOf: [
-          {
-            test: /\.css$/,
-            use: ["style-loader", "css-loader"],
-          },
-          {
-            test: /\.scss$/,
-            use: ["style-loader", "css-loader", "sass-loader"],
-          },
-        ],
-      },
-    ],
-  },
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      },
-    },
-  },
-};
-
-const prodConfig = {
-  mode: "production",
-  devtool: false,
-  module: {
-    rules: [
-      {
-        oneOf: [
-          {
-            test: /\.css$/,
-            use: [MiniCssExtractPlugin.loader, "css-loader"],
-          },
-          {
-            test: /\.scss$/,
-            use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-          },
-        ],
-      },
-    ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "css/[name].[contenthash:10].css",
-    }),
-  ],
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      },
-    },
-  },
 };
 
 module.exports = (env, args) => {
