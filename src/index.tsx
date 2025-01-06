@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
-import { HashRouter } from "react-router-dom";
+// import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import axios from "axios";
@@ -19,10 +20,10 @@ const root = ReactDOM.createRoot(element);
 
 root.render(
   <StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>
 );
