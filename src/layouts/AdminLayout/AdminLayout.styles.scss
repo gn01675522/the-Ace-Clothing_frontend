@@ -1,7 +1,7 @@
 @use "../../stylesheets/variables";
 @use "../../stylesheets/mixin";
 
-.dashboard-header {
+.admin-layout-header {
   display: flex;
   position: fixed;
   width: 100%;
@@ -18,22 +18,22 @@
 }
 
 //* 填補 navbar 因 fixed 而導致的浮空
-.dashboard-header__blocker {
+.admin-layout-header__blocker {
   width: 100%;
   height: 60px;
 }
 
 //* 漢堡觸發器
-.dashboard__trigger {
+.admin-layout__trigger {
   display: none;
-  &:checked ~ .dashboard-main .dashboard-main__navbar {
+  &:checked ~ .admin-layout-main .admin-layout-main__navbar {
     opacity: 1;
     transform: scale(1, 1);
   }
   &:checked
-    ~ .dashboard-header
-    .dashboard-header__burger
-    .dashboard-header__burger-line {
+    ~ .admin-layout-header
+    .admin-layout-header__burger
+    .admin-layout-header__burger-line {
     background: transparent;
     &::before {
       transform: rotate(45deg);
@@ -45,7 +45,7 @@
 }
 
 //* 漢堡符號
-.dashboard-header__burger {
+.admin-layout-header__burger {
   display: flex;
   position: relative;
   width: 60px;
@@ -86,7 +86,7 @@
   }
 }
 
-.dashboard-main {
+.admin-layout-main {
   display: flex;
   position: relative;
   width: 100%;

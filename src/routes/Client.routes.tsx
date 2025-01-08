@@ -1,8 +1,10 @@
 import { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
 
-import MainLayout from "../layouts/MainLayout/MainLayout.component";
+import type { RouteObject } from "react-router-dom";
 
+const MainLayout = lazy(
+  () => import("../layouts/MainLayout/MainLayout.component")
+);
 const Home = lazy(() => import("../pages/Home/Home.component"));
 const Products = lazy(() => import("../pages/Products/Products.component"));
 const ProductDetail = lazy(
@@ -17,20 +19,22 @@ const InfoSource = lazy(
 );
 const Member = lazy(() => import("../pages/Member/Member.component"));
 
-const ClientRoutes = () => (
-  <Routes>
-    <Route path="/" element={<MainLayout />}>
-      <Route index element={<Home />} />
-      <Route path=":category" element={<Products />} />
-      <Route path=":category/:id" element={<ProductDetail />} />
-      <Route path="cart" element={<Cart />} />
-      <Route path="checkout" element={<Checkout />} />
-      <Route path="success/:orderId" element={<Success />} />
-      <Route path="about" element={<AboutUs />} />
-      <Route path="info-source" element={<InfoSource />} />
-      <Route path="member/:option" element={<Member />} />
-    </Route>
-  </Routes>
-);
+const clientRoutes: RouteObject[] = [
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: ":category", element: <Products /> },
+      { path: ":category/:id", element: <ProductDetail /> },
+      { path: "cart", element: <Cart /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "success/:orderId", element: <Success /> },
+      { path: "about", element: <AboutUs /> },
+      { path: "info-source", element: <InfoSource /> },
+      { path: "member/:option", element: <Member /> },
+    ],
+  },
+];
 
-export default ClientRoutes;
+export default clientRoutes;

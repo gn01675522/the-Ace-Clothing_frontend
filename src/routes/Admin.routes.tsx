@@ -1,8 +1,11 @@
 import { lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-import Dashboard from "../layouts/Dashboard/Dashboard.component";
+import type { RouteObject } from "react-router-dom";
 
+const AdminLayout = lazy(
+  () => import("../layouts/AdminLayout/AdminLayout.component")
+);
 const AdminProducts = lazy(
   () => import("../pages/AdminProducts/AdminProducts.component")
 );
@@ -16,16 +19,18 @@ const AdminOrders = lazy(
   () => import("../pages/AdminOrders/AdminOrders.component")
 );
 
-const AdminRoutes = () => (
-  <Routes>
-    <Route element={<Dashboard />}>
-      <Route index element={<Navigate to="products" />} />
-      <Route path="products/:category" element={<AdminProducts />} />
-      <Route path="products" element={<Categories />} />
-      <Route path="coupons" element={<AdminCoupons />} />
-      <Route path="orders" element={<AdminOrders />} />
-    </Route>
-  </Routes>
-);
+const adminRoutes: RouteObject[] = [
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <Navigate to="products" replace /> },
+      { path: "products/:category", element: <AdminProducts /> },
+      { path: "products", element: <Categories /> },
+      { path: "coupons", element: <AdminCoupons /> },
+      { path: "orders", element: <AdminOrders /> },
+    ],
+  },
+];
 
-export default AdminRoutes;
+export default adminRoutes;

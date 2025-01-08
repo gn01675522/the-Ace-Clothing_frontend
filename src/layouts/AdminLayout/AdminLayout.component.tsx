@@ -12,7 +12,7 @@ import { selectHasMessage } from "../../store/message/message.selector";
 
 import type { FC } from "react";
 
-import "./Dashboard.styles.scss";
+import "./AdminLayout.styles.scss";
 
 const DASHBOARD_OPTIONS = [
   { id: "1", title: "產品列表", route: "products" },
@@ -20,7 +20,7 @@ const DASHBOARD_OPTIONS = [
   { id: "3", title: "訂單列表", route: "orders" },
 ];
 
-const Dashboard: FC = () => {
+const AdminLayout: FC = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const navigate = useNavigate();
   const hasMessage = useAppSelector(selectHasMessage);
@@ -64,17 +64,17 @@ const Dashboard: FC = () => {
     <>
       {hasMessage && <Message />}
       <input
-        className="dashboard__trigger"
+        className="admin-layout__trigger"
         type="checkbox"
-        id="dashboard-trigger"
+        id="admin-layout-trigger"
         checked={isListOpen ? true : false}
         onChange={onOpenList}
       />
-      <nav className="dashboard-header">
-        <label className="dashboard-header__burger" htmlFor="dashboard-trigger">
-          <div className="dashboard-header__burger-line" />
+      <nav className="admin-layout-header">
+        <label className="admin-layout-header__burger" htmlFor="admin-layout-trigger">
+          <div className="admin-layout-header__burger-line" />
         </label>
-        <NavLink className="dashboard-header__title" to="/admin/products">
+        <NavLink className="admin-layout-header__title" to="/admin/products">
           the Ace 後台管理系統
         </NavLink>
         <Button
@@ -85,16 +85,16 @@ const Dashboard: FC = () => {
           登出
         </Button>
       </nav>
-      <div className="dashboard-header__blocker" />
+      <div className="admin-layout-header__blocker" />
 
-      <div className="dashboard-main">
-        <div className="dashboard-main__navbar">
-          <div className="dashboard-main__navbar-list">
+      <div className="admin-layout-main">
+        <div className="admin-layout-main__navbar">
+          <div className="admin-layout-main__navbar-list">
             {DASHBOARD_OPTIONS.map((option) => {
               return (
                 <NavLink
                   key={option.id}
-                  className="dashboard-main__navbar-list-link"
+                  className="admin-layout-main__navbar-list-link"
                   to={`/admin/${option.route}`}
                   onClick={onOpenList}
                 >
@@ -104,9 +104,9 @@ const Dashboard: FC = () => {
             })}
           </div>
         </div>
-        <div className="dashboard-main__content">
+        <div className="admin-layout-main__content">
           {token && <Outlet />}
-          <span className="dashboard-main__content-hint">
+          <span className="admin-layout-main__content-hint">
             * 請使用平板或桌上型電腦查看，以確保最佳瀏覽體驗。
           </span>
         </div>
@@ -115,4 +115,4 @@ const Dashboard: FC = () => {
   );
 };
 
-export default Dashboard;
+export default AdminLayout;

@@ -32,6 +32,7 @@ module.exports = {
     filename: "static/js/[name].[contenthash:10].js",
     chunkFilename: "static/js/[name].[contenthash:10].chunk.js",
     assetModuleFilename: "static/media/[hash:10][ext][query]",
+    publicPath: "/",
     clean: true,
   },
   module: {

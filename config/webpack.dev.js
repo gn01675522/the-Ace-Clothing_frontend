@@ -29,6 +29,7 @@ module.exports = {
     filename: "static/js/[name].js",
     chunkFilename: "static/js/[name].chunk.js",
     assetModuleFilename: "static/media/[hash:10][ext][query]",
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -106,7 +107,7 @@ module.exports = {
       chunks: "all",
     },
     runtimeChunk: {
-      name: (entrypoint) => `runtime-${entrypoint.name}.js`,
+      name: (entrypoint) => `runtime-${entrypoint.name}`,
     },
   },
 };
