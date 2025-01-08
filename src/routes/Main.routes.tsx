@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 
-import clientRoutes from "./client.routes";
-import adminRoutes from "./admin.routes";
+import { clientRoutes } from "./Client.routes"; 
+import { adminRoutes } from "./Admin.routes";
 
 import type { RouteObject } from "react-router-dom";
 

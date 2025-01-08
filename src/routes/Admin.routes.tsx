@@ -19,7 +19,7 @@ const AdminOrders = lazy(
   () => import("../pages/AdminOrders/AdminOrders.component")
 );
 
-const adminRoutes: RouteObject[] = [
+export const adminRoutes: RouteObject[] = [
   {
     path: "/admin",
     element: <AdminLayout />,
@@ -32,5 +32,3 @@ const adminRoutes: RouteObject[] = [
     ],
   },
 ];
-
-export default adminRoutes;

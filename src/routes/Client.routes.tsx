@@ -19,7 +19,7 @@ const InfoSource = lazy(
 );
 const Member = lazy(() => import("../pages/Member/Member.component"));
 
-const clientRoutes: RouteObject[] = [
+export const clientRoutes: RouteObject[] = [
   {
     path: "/",
     element: <MainLayout />,
@@ -36,5 +36,3 @@ const clientRoutes: RouteObject[] = [
     ],
   },
 ];
-
-export default clientRoutes;
