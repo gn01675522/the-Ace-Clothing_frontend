@@ -40,8 +40,9 @@ const Cart: FC = () => {
   const dispatch = useAppDispatch();
 
   const addCoupon = async () => {
-    dispatch(setAddCouponForCartAsync(inputValue));
+    await dispatch(setAddCouponForCartAsync(inputValue));
     setApplyCoupon(inputValue);
+    await dispatch(fetchCartItemsAsync());
   };
 
   const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,7 @@ const Cart: FC = () => {
 
   useEffect(() => {
     dispatch(fetchCartItemsAsync());
-  }, [dispatch, applyCoupon]);
+  }, [dispatch]);
 
   return (
     <div className="cart">

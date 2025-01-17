@@ -5,6 +5,7 @@ import {
   setAddItemToCartAsync,
   setRemoveItemFromCartAsync,
   setUpdateCartItemAsync,
+  setAddCouponForCartAsync,
 } from "./cart.asyncThunk";
 
 import type { AxiosRejectTypes } from "../redux-utils";
@@ -91,8 +92,19 @@ export const cartSlice = createSlice({
       .addCase(setUpdateCartItemAsync.rejected, (state, { payload }) => {
         if (payload) state.error = payload;
         state.isLoading = false;
+      })
+      //**************************************** 於 API 內更新 Carts 資料 End ****************************************
+      .addCase(setAddCouponForCartAsync.pending, (state, { meta }) => {
+        state.isLoading = true;
+      })
+      .addCase(setAddCouponForCartAsync.fulfilled, (state) => {
+        state.isLoading = false;
+        //* 之所以 loadingItems 會使用空陣列是因為原先的防呆方法會在購物車內快速調整兩個商品的時候造成其中一個商品 select 被永久 disabled
+      })
+      .addCase(setAddCouponForCartAsync.rejected, (state, { payload }) => {
+        if (payload) state.error = payload;
+        state.isLoading = false;
       });
-    //**************************************** 於 API 內更新 Carts 資料 End ****************************************
   },
 });
 
