@@ -12,7 +12,7 @@ describe("button tests", () => {
     expect(button).toHaveClass("btn-rect-bl-nm");
   });
 
-  test("should render base class button when passed rectBlackMe type", () => {
+  test("should render the specific class when passed button type", () => {
     render(<Button buttonType={BUTTON_TYPE_CLASS.rectBlackMe} />);
 
     const button = screen.getByRole("button");
