@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 
 import Button, { BUTTON_TYPE_CLASS } from "../Button.component";
 
-describe("button tests", () => {
-  test("should render btn-rect-bl-nm class button when nothing passed", () => {
+describe("Button test suite.", () => {
+  test("Renders with default props and applies the 'btn-rect-bl-nm' class.", () => {
     render(<Button />);
 
     const button = screen.getByRole("button");
@@ -12,7 +12,7 @@ describe("button tests", () => {
     expect(button).toHaveClass("btn-rect-bl-nm");
   });
 
-  test("should render the specific class when passed button type", () => {
+  test("Applies the correct class when a specific button type is passed.", () => {
     render(<Button buttonType={BUTTON_TYPE_CLASS.rectBlackMe} />);
 
     const button = screen.getByRole("button");
@@ -20,7 +20,7 @@ describe("button tests", () => {
     expect(button).toHaveClass("btn-rect-bl-me");
   });
 
-  test("should be disabled if isLoading is true", () => {
+  test("Renders as disabled when the 'isLoading' prop is true.", () => {
     render(<Button isLoading={true} />);
 
     const button = screen.getByRole("button");
@@ -28,7 +28,7 @@ describe("button tests", () => {
     expect(button).toBeDisabled();
   });
 
-  test("trigger function when clicking the button", async () => {
+  test("Calls the event handler function when the button is clicked.", async () => {
     const onClick = jest.fn();
     const user = userEvent.setup();
 

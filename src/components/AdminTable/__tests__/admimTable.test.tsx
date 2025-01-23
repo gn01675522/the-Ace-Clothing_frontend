@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import AdminTable from "../AdminTable.component";
@@ -17,13 +17,14 @@ const data: dataType[] = [
 ];
 
 const columns = [
+  { header: "id", accessor: "id" },
   { header: "name", accessor: "name" },
   { header: "age", accessor: "age" },
   { header: "gender", accessor: "gender" },
 ] as { header: string; accessor: keyof dataType }[];
 
-describe("admin table tests", () => {
-  test("should call onClickToEdit and onClickToDelete with correct arguments when buttons are clicked", async () => {
+describe("Admin Table test suite.", () => {
+  test("Calls onClickToEdit and onClickToDelete when edit and delete buttons are clicked.", async () => {
     const onClickToEdit = jest.fn((arg) => arg);
     const onClickToDelete = jest.fn((arg) => arg);
     const user = userEvent.setup();
@@ -53,7 +54,7 @@ describe("admin table tests", () => {
     expect(onClickToDelete).toHaveBeenCalledWith(data[0]);
   });
 
-  test("should render all headers correctly", () => {
+  test("Renders all headers correctly using test data.", () => {
     render(
       <AdminTable<dataType>
         data={data}
@@ -68,7 +69,7 @@ describe("admin table tests", () => {
     });
   });
 
-  test("should render all data rows correctly", () => {
+  test("Renders all data rows correctly using test data.", () => {
     render(
       <AdminTable<dataType>
         data={data}
@@ -78,11 +79,19 @@ describe("admin table tests", () => {
       />
     );
 
-    data.forEach((row) => {
-      expect(screen.getByText(row.id)).toBeInTheDocument();
-      expect(screen.getByText(row.name)).toBeInTheDocument();
-      expect(screen.getByText(row.age)).toBeInTheDocument();
-      expect(screen.getByText(row.gender)).toBeInTheDocument();
+    const rows = screen.getAllByRole("row");
+
+    //* 由於 header 也會是一行，所以這邊的 length 會 +1
+    expect(rows).toHaveLength(data.length + 1);
+
+    rows.slice(1).forEach((rowElement, index) => {
+      const rowData = data[index];
+      const { getByText } = within(rowElement);
+
+      expect(getByText(rowData.id.toString())).toBeInTheDocument();
+      expect(getByText(rowData.name)).toBeInTheDocument();
+      expect(getByText(rowData.age.toString())).toBeInTheDocument();
+      expect(getByText(rowData.gender)).toBeInTheDocument();
     });
   });
 });

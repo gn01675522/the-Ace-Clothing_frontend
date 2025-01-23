@@ -20,7 +20,7 @@ type CartState = {
   readonly error: AxiosRejectTypes | null;
 };
 
-const INITIAL_STATE: CartState = {
+export const INITIAL_STATE: CartState = {
   cart: { carts: [], total: 0, final_total: 0 },
   loadingItems: [],
   tempData: null,
