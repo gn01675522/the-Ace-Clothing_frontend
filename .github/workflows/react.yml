@@ -2,7 +2,7 @@ name: the Ace clothing CI
 on:
   push:
     branches: [main, dev, feat, fix]
-job:
+jobs:
   test:
     run-on: ubuntu-latest
     steps:
