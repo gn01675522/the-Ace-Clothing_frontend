@@ -1,0 +1,17 @@
+name: the Ace clothing CI
+on:
+  push:
+    branches: [main, dev, feat, fix]
+job:
+  test:
+    run-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run tests
+          run: npm test -- --coverage
+      - run: npm install
+      - run: npm test
