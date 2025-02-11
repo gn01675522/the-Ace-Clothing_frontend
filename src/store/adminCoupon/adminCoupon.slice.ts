@@ -30,11 +30,7 @@ const INITIAL_STATE: AdminCouponState = {
 export const adminCouponSlice = createSlice({
   name: "adminCoupon",
   initialState: INITIAL_STATE,
-  reducers: {
-    setAdminCouponsTempData(state, action: PayloadAction<AdminCouponWithId>) {
-      state.tempData = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       //**************************************** 取得 API 內的 Admin Coupons 資料 Start ****************************************
@@ -90,5 +86,5 @@ export const adminCouponSlice = createSlice({
   },
 });
 
-export const { setAdminCouponsTempData } = adminCouponSlice.actions;
+export const {} = adminCouponSlice.actions;
 export const adminCouponReducer = adminCouponSlice.reducer;

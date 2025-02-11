@@ -4,8 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
 import ModalPortal from "../ModalPortal/ModalPortal.component";
 
-import { selectAdminCouponsTempData } from "../../store/adminCoupon/adminCoupon.selector";
-
 import {
   createAdminCouponAsync,
   updateAdminCouponAsync,
@@ -29,11 +27,19 @@ import type {
 
 import "./CouponModal.styles.scss";
 
-const defaultCreateData: CreateAdminCoupon = {
+type DefaultData = {
+  title: string;
+  is_enabled: 0 | 1;
+  percent: number;
+  due_date: string;
+  code: string;
+};
+
+const defaultCreateData: DefaultData = {
   title: "",
   is_enabled: 1,
   percent: 80,
-  due_date: 1555459200,
+  due_date: formatTimestampInMilliSeconds(new Date()),
   code: "testCode",
 };
 
@@ -48,14 +54,11 @@ const CouponModal: FC<PropsType> = ({
   targetData,
   backdropClose,
 }) => {
-  const [formData, setFormData] = useState<
-    CreateAdminCoupon | AdminCouponWithId
-  >(defaultCreateData);
-  const [date, setDate] = useState(new Date());
+  const [formData, setFormData] = useState<DefaultData | AdminCouponWithId>(
+    defaultCreateData
+  );
 
   const dispatch = useAppDispatch();
-
-  const tempCoupon = useAppSelector(selectAdminCouponsTempData);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -72,11 +75,16 @@ const CouponModal: FC<PropsType> = ({
     if (e.target === e.currentTarget) backdropClose(false);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e: MouseEvent<HTMLElement>) => {
     if (createOrEdit == "create") {
-      dispatch(createAdminCouponAsync({ formData, date }));
+      dispatch(
+        createAdminCouponAsync({
+          formData: formData as CreateAdminCoupon,
+          date: new Date(formData.due_date),
+        })
+      );
     } else {
-      const data = { formData, date } as {
+      const data = { formData, date: new Date(formData.due_date) } as {
         formData: AdminCouponWithId;
         date: Date;
       };
@@ -87,10 +95,15 @@ const CouponModal: FC<PropsType> = ({
 
   useEffect(() => {
     if (createOrEdit === "edit" && targetData) {
-      setFormData(targetData);
-      setDate((prev) => (tempCoupon ? new Date(tempCoupon.due_date) : prev));
+      const newData = {
+        ...targetData,
+        due_date: targetData
+          ? formatTimestampInMilliSeconds(targetData.due_date)
+          : defaultCreateData.due_date,
+      };
+      setFormData(newData);
     }
-  }, [createOrEdit, tempCoupon]);
+  }, [createOrEdit]);
 
   return (
     <ModalPortal backdropClose={onClickToClose}>
@@ -153,21 +166,15 @@ const CouponModal: FC<PropsType> = ({
                     className="coupon-modal__body-content-group-input"
                     value={
                       content.id === "due_date"
-                        ? formatTimestampInMilliSeconds(date)
+                        ? formatTimestampInMilliSeconds(formData[content.id])
                         : formData[
                             content.id as keyof (
                               | AdminCouponWithId
-                              | CreateAdminCoupon
+                              | DefaultData
                             )
                           ]
                     }
-                    onChange={
-                      content.id === "due_date"
-                        ? (e) => {
-                            setDate(new Date(e.target.value));
-                          }
-                        : onChangeHandler
-                    }
+                    onChange={onChangeHandler}
                   />
                 </div>
               );
