@@ -8,9 +8,6 @@ import { formatTimestampInMilliSeconds } from "../../../utils/common.utils";
 import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
 
 describe("CouponModal test suite.", () => {
-  // 傳入 backdropClose，並按下關閉時，要能關閉整個 components
-  // 傳入 backdropClose，並按下儲存時，要能儲存資料，接著關閉整個 components
-
   test("When the value of createOrEdit is ‘create’, the form within the modal should either only display the default data or be empty.", () => {
     renderWithProviders(
       <CouponModal
