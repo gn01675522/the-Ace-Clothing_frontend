@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import OrderCard from "../../components/OrderCard/OrderCard.component";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
-import Input from "../../components/Input/Input.component";
+// import Input from "../../components/Input/Input.component";
 import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../components/Button/Button.component";
@@ -14,11 +14,11 @@ import { selectCartItems } from "../../store/cart/cart.selector";
 import { selectUserOrderId } from "../../store/userOrder/userOrder.selector";
 import { setPostUserOrderAsync } from "../../store/userOrder/userOrder.asyncThunk";
 
-import { INPUT_CATEGORY } from "../../components/Input/Input.rules";
+import { INPUT_CATEGORY, inputRules } from "./input.rules";
 
 import type { FC } from "react";
 import type { SubmitHandler } from "react-hook-form";
-import type { FormInputs } from "../../components/Input/Input.rules";
+import type { FormInputs } from "./input.rules";
 
 import "./Checkout.styles.scss";
 
@@ -72,11 +72,21 @@ const Checkout: FC = () => {
         <div className="checkout__form-group">
           {formContent.map(({ category, config }) => (
             <div className="checkout__form-item" key={category}>
-              <Input
-                category={category}
-                config={config}
-                errors={errors}
-                register={register}
+              <label htmlFor={category} className="checkout__form-item__input__label">
+                {config.labelText}
+                {errors[category] && (
+                  <div className="checkout__form-item__input__label--invalid-feedback">
+                    *{errors[category]?.message}
+                  </div>
+                )}
+              </label>
+              <input
+                id={category}
+                type={config.type}
+                className={`checkout__form-item__input__entry ${
+                  errors[category] ? "checkout__form-item__input__entry--invalid" : ""
+                }`}
+                {...register(category, inputRules(category))}
               />
             </div>
           ))}

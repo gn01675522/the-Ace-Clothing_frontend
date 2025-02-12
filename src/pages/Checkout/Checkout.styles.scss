@@ -36,6 +36,24 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    &__input__label {
+      display: flex;
+      gap: 10px;
+      &--invalid-feedback {
+        color: variables.$color-fourth-text;
+      }
+    }
+    &__input__entry {
+      width: 100%;
+      height: 3rem;
+      outline: 1px variables.$line-secondary-line;
+      &:focus {
+        outline: 1px variables.$line-primary-line;
+      }
+      &--invalid {
+        outline: 2px variables.$line-fourth-line;
+      }
+    }
   }
   &-actions {
     outline: 1px variables.$line-secondary-line;
