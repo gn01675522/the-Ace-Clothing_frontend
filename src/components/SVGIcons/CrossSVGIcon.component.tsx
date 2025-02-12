@@ -8,6 +8,7 @@ const CrossSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
+      aria-label="cross icon"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
