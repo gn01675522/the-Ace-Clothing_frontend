@@ -66,6 +66,8 @@ const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
     if (targetData) setFormData({ ...targetData });
   }, [targetData]);
 
+  console.log(formData);
+
   return (
     <ModalPortal backdropClose={onClickToClose}>
       <div className="order-modal">

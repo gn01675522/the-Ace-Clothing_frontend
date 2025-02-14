@@ -69,7 +69,7 @@ const Success: FC = () => {
             返回首頁
           </Link>
         </div>
-        <OrderCard products={products} />
+        <OrderCard products={products!} />
       </div>
       <div className="success__recommend">
         <h2 className="success__recommend-title">您或許還想買</h2>

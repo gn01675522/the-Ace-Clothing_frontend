@@ -7,6 +7,7 @@ export interface AdminCoupon {
   percent: number;
   due_date: number;
   code: string;
+  num: number;
 }
 
 export interface CreateAdminCoupon {

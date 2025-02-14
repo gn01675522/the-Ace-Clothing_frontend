@@ -1,8 +1,26 @@
 import { formatNumberWithCommas } from "../../utils/common.utils";
 
+import type { FC } from "react";
+import type { Product } from "store/userProduct/userProduct.types";
+import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+
 import "./OrderCard.styles.scss";
 
-const OrderCard = ({ products }) => {
+export type OrderCardProductsType = {
+  id: string;
+  product_id: string;
+  qty: number;
+  coupon: AdminCoupon;
+  final_total: number;
+  product: Product;
+  total: number;
+};
+
+type PropsType = {
+  products: OrderCardProductsType[];
+};
+
+const OrderCard: FC<PropsType> = ({ products }) => {
   return (
     <div className="order-card">
       <input

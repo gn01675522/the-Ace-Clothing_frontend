@@ -7,6 +7,16 @@ import { formatTimestampInMilliSeconds } from "../../../utils/common.utils";
 
 import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
 
+const mockCoupon: AdminCoupon = {
+  id: "1234567",
+  title: "just for test",
+  is_enabled: 0,
+  percent: 65,
+  due_date: 1736553600000,
+  code: "justForTest",
+  num: 2,
+};
+
 describe("CouponModal test suite.", () => {
   test("When the value of createOrEdit is ‘create’, the form within the modal should either only display the default data or be empty.", () => {
     renderWithProviders(
@@ -33,15 +43,6 @@ describe("CouponModal test suite.", () => {
     expect(isEnabledCheckbox).toBeChecked();
   });
   test("When createOrEdit is set to ‘edit’, the form within the modal will display the corresponding values based on the provided targetData.", async () => {
-    const mockCoupon: AdminCoupon = {
-      id: "1234567",
-      title: "just for test",
-      is_enabled: 0,
-      percent: 65,
-      due_date: 1736553600000,
-      code: "justForTest",
-    };
-
     renderWithProviders(
       <CouponModal
         targetData={mockCoupon}
@@ -66,15 +67,6 @@ describe("CouponModal test suite.", () => {
   });
   test("Clicking on the 'x', '關閉' buttons triggers the backdropClose callback.", async () => {
     const onClick = jest.fn();
-
-    const mockCoupon: AdminCoupon = {
-      id: "1234567",
-      title: "just for test",
-      is_enabled: 0,
-      percent: 65,
-      due_date: 1736553600000,
-      code: "justForTest",
-    };
 
     renderWithProviders(
       <CouponModal

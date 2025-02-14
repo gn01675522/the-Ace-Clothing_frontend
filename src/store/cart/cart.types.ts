@@ -1,13 +1,7 @@
+import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
 export interface CartItems {
   id: string;
-  coupon: {
-    code: string;
-    due_date: number;
-    id: string;
-    is_enabled: 1 | 0;
-    percent: number;
-    title: string;
-  };
+  coupon: AdminCoupon;
   final_total: number;
   product: {
     category: string;

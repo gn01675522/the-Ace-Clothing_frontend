@@ -1,4 +1,6 @@
 import type { Pagination } from "../../shared/types/types";
+import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { Product } from "store/userProduct/userProduct.types";
 
 export interface Order {
   title: string;
@@ -10,7 +12,11 @@ export interface Order {
     {
       id: string;
       product_id: string;
-      qty: string;
+      qty: number;
+      coupon: AdminCoupon;
+      final_total: number;
+      product: Product;
+      total: number;
     }
   ];
   status: number;

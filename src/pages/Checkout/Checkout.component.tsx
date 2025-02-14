@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 import OrderCard from "../../components/OrderCard/OrderCard.component";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
-// import Input from "../../components/Input/Input.component";
 import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../components/Button/Button.component";
@@ -72,7 +71,10 @@ const Checkout: FC = () => {
         <div className="checkout__form-group">
           {formContent.map(({ category, config }) => (
             <div className="checkout__form-item" key={category}>
-              <label htmlFor={category} className="checkout__form-item__input__label">
+              <label
+                htmlFor={category}
+                className="checkout__form-item__input__label"
+              >
                 {config.labelText}
                 {errors[category] && (
                   <div className="checkout__form-item__input__label--invalid-feedback">
@@ -84,7 +86,9 @@ const Checkout: FC = () => {
                 id={category}
                 type={config.type}
                 className={`checkout__form-item__input__entry ${
-                  errors[category] ? "checkout__form-item__input__entry--invalid" : ""
+                  errors[category]
+                    ? "checkout__form-item__input__entry--invalid"
+                    : ""
                 }`}
                 {...register(category, inputRules(category))}
               />

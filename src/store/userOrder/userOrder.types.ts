@@ -1,5 +1,7 @@
 import type { UserBasicInfo } from "../../shared/types/interface";
 import type { Pagination } from "../../shared/types/types";
+import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { Product } from "store/userProduct/userProduct.types";
 
 export interface OrderDetail {
   create_at: number;
@@ -9,7 +11,11 @@ export interface OrderDetail {
   products: {
     id: string;
     product_id: string;
-    qty: string;
+    qty: number;
+    coupon: AdminCoupon;
+    final_total: number;
+    product: Product;
+    total: number;
   }[];
   total: number;
   user: UserBasicInfo;
