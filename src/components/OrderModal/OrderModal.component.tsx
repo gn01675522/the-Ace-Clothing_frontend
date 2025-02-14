@@ -60,13 +60,12 @@ const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
   //* 提交表單函式
   const submit = () => {
     dispatch(updateAdminOrdersAsync(formData as Order));
+    closeAction(false);
   };
 
   useEffect(() => {
     if (targetData) setFormData({ ...targetData });
   }, [targetData]);
-
-  console.log(formData);
 
   return (
     <ModalPortal backdropClose={onClickToClose}>
@@ -100,7 +99,9 @@ const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
                     </span>
                     <div className="order-modal__body-customer-info-data">
                       <span className="order-modal__body-customer-info-data-span">
-                        {targetData?.user[info.id as keyof Order["user"]] ||
+                        {(info.id === "message"
+                          ? targetData.message
+                          : targetData?.user[info.id as keyof Order["user"]]) ||
                           "無"}
                       </span>
                     </div>
