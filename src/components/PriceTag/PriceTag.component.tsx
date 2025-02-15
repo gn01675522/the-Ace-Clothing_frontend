@@ -19,7 +19,7 @@ const PriceTag: FC<PriceTagProps> = ({ origin_price, price }) => {
       )}
       <p
         className={`price-tag__origin-price ${
-          price < origin_price ? "product-on-sale" : ""
+          origin_price > price ? "product-on-sale" : ""
         }`}
       >
         NT$ {formatNumberWithCommas(origin_price)}
