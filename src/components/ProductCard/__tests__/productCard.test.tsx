@@ -1,4 +1,4 @@
-import { screen, fireEvent } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../utils/test.utils";
 
 import ProductCard from "../ProductCard.component";
