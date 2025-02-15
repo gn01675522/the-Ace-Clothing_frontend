@@ -18,7 +18,7 @@ describe("ModalBackdrop test suite.", () => {
 
     expect(childrenElment).toBeInTheDocument();
   });
-  test("Calls backdropClose when clicking backdrop.", async () => {
+  test("Calls backdropClose when clicking backdrop.", () => {
     const onClick = jest.fn();
     const childrenText = "test";
 
@@ -32,7 +32,7 @@ describe("ModalBackdrop test suite.", () => {
 
     expect(backdropElement).toBeInTheDocument();
 
-    await fireEvent.click(backdropElement!);
+    fireEvent.click(backdropElement!);
 
     expect(onClick).toHaveBeenCalled();
   });

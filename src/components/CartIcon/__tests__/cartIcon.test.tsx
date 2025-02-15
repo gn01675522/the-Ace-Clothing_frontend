@@ -44,6 +44,7 @@ describe("Cart Icon test suite.", () => {
           is_enabled: 1,
           percent: 20,
           title: "testCode",
+          num: 1,
         },
         final_total: 1500,
         product: {

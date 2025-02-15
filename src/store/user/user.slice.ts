@@ -8,12 +8,14 @@ type UserState = {
   readonly isSuccess: boolean;
   readonly favorite: string[];
   readonly isLoading: boolean;
+  readonly message: string;
   readonly error: AxiosRejectTypes | null;
 };
 
 const INITIAL_STATE: UserState = {
   isSuccess: false,
   favorite: JSON.parse(localStorage.getItem("wishlist") as string) || [],
+  message: "",
   isLoading: false,
   error: null,
 };

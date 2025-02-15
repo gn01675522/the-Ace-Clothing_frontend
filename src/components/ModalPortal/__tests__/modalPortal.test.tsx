@@ -16,7 +16,7 @@ describe("ModalPortal test suite.", () => {
     expect(screen.getByText(childrenText)).toBeInTheDocument();
   });
 
-  test("Should calls backdropClose callback when backdrop is clicked.", async () => {
+  test("Should calls backdropClose callback when backdrop is clicked.", () => {
     const childrenText = "test";
 
     render(
@@ -31,7 +31,7 @@ describe("ModalPortal test suite.", () => {
 
     expect(backdropElement).toBeInTheDocument();
 
-    await fireEvent.click(backdropElement!);
+    fireEvent.click(backdropElement!);
 
     expect(onClick).toHaveBeenCalled();
   });

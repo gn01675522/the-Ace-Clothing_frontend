@@ -84,7 +84,7 @@ describe("OrderModal test suite.", () => {
     expect(isPaidInputElement).toBeChecked();
     expect(deliveryStateElement).toBeInTheDocument();
   });
-  test("Clicking on the 'x', '儲存', '關閉' buttons triggers the backdropClose callback.", async () => {
+  test("Clicking on the 'x', '儲存', '關閉' buttons triggers the backdropClose callback.", () => {
     renderWithProviders(
       <OrderModal targetData={orderData} closeAction={onClick} />
     );
@@ -92,9 +92,9 @@ describe("OrderModal test suite.", () => {
     const saveButton = screen.getByText(/儲存/i);
     const closeXButton = screen.getByLabelText(/Close/i);
 
-    await fireEvent.click(closeButton);
-    await fireEvent.click(saveButton);
-    await fireEvent.click(closeXButton);
+    fireEvent.click(closeButton);
+    fireEvent.click(saveButton);
+    fireEvent.click(closeXButton);
 
     expect(onClick).toHaveBeenCalledTimes(3);
   });

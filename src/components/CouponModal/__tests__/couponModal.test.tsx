@@ -65,7 +65,7 @@ describe("CouponModal test suite.", () => {
       formatTimestampInMilliSeconds(new Date(1736553600000))
     );
   });
-  test("Clicking on the 'x', '關閉' buttons triggers the backdropClose callback.", async () => {
+  test("Clicking on the 'x', '關閉' buttons triggers the backdropClose callback.", () => {
     const onClick = jest.fn();
 
     renderWithProviders(
@@ -80,9 +80,9 @@ describe("CouponModal test suite.", () => {
     const saveButton = screen.getByText(/儲存/i);
     const closeXButton = screen.getByLabelText(/Close/i);
 
-    await fireEvent.click(closeButton);
-    await fireEvent.click(saveButton);
-    await fireEvent.click(closeXButton);
+    fireEvent.click(closeButton);
+    fireEvent.click(saveButton);
+    fireEvent.click(closeXButton);
 
     expect(onClick).toHaveBeenCalledTimes(3);
   });

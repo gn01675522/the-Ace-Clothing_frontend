@@ -34,11 +34,11 @@ describe("Pagination test suite.", () => {
     expect(prevButton).toBeDisabled();
   });
 
-  test("Should call onChangePage when clicking a page number.", async () => {
+  test("Should call onChangePage when clicking a page number.", () => {
     render(<Pagination onChangePage={onClick} pageCount={5} currentPage={2} />);
 
     const pageLink = screen.getByText("4");
-    await fireEvent.click(pageLink);
+    fireEvent.click(pageLink);
 
     expect(onClick).toHaveBeenCalledWith(4);
   });

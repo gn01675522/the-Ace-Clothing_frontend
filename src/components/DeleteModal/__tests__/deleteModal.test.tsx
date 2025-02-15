@@ -6,7 +6,7 @@ import DeleteModal from "../DeleteModal.component";
 import { DELETE_MODAL_TYPE } from "../DeleteModal.component";
 
 describe("DeleteModal test suite.", () => {
-  test("Clicking on the 'ｘ', '取消', '確認刪除' buttons triggers the closeAction callback.", async () => {
+  test("Clicking on the 'ｘ', '取消', '確認刪除' buttons triggers the closeAction callback.", () => {
     const onClick = jest.fn();
     renderWithProviders(
       <DeleteModal
@@ -21,9 +21,9 @@ describe("DeleteModal test suite.", () => {
     const closeXButton = screen.getByLabelText(/Close/i);
     const confirmDeleteButton = screen.getByText(/確認刪除/i);
 
-    await fireEvent.click(closeButton);
-    await fireEvent.click(closeXButton);
-    await fireEvent.click(confirmDeleteButton);
+    fireEvent.click(closeButton);
+    fireEvent.click(closeXButton);
+    fireEvent.click(confirmDeleteButton);
 
     expect(onClick).toHaveBeenCalledTimes(3);
   });
