@@ -4,13 +4,9 @@ import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../../../components/Button/Button.component";
 
-import {
-  setCartIsModalOpen,
-  setCartTempData,
-  setUpdateCartItemAsync,
-  selectCartLoadingItems,
-  type CartItems,
-} from "../../../../features/cart/index";
+import { setCartIsModalOpen, setCartTempData } from "../../store/cart.slice";
+import { setUpdateCartItemAsync } from "../../store/cart.asyncThunk";
+import { selectCartLoadingItems } from "../../store/cart.selector";
 
 import {
   translateGenderToChinese,
@@ -19,7 +15,8 @@ import {
 
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
-import type { FC } from "react";
+import type { FC, MouseEvent } from "react";
+import type { CartItems } from "../../DTOs/cart.types";
 
 import "./CartItem.styles.scss";
 
@@ -27,7 +24,8 @@ type PropsType = {
   item: CartItems;
 };
 
-const CartItem: FC<PropsType> = ({ item }) => {
+//todo need refactor
+export const CartItem: FC<PropsType> = ({ item }) => {
   const { id: itemId, qty, final_total } = item;
   const { category, title, imageUrl } = item.product;
 
@@ -45,10 +43,14 @@ const CartItem: FC<PropsType> = ({ item }) => {
     dispatch(setUpdateCartItemAsync({ item, quantity }));
   };
 
-  //* 刪除購物車元件
-  const checkedToRemoveItemFromCart = () => {
-    dispatch(setCartTempData(itemId));
-    dispatch(setCartIsModalOpen(true));
+  const onClickToChangeCartItems = (e: MouseEvent<HTMLButtonElement>) => {
+    const { name } = e.currentTarget;
+    if ((name === "minor" && qty > 1) || name === "add") {
+      updateCartItem(name);
+    } else {
+      dispatch(setCartTempData(itemId));
+      dispatch(setCartIsModalOpen(true));
+    }
   };
 
   return (
@@ -80,8 +82,9 @@ const CartItem: FC<PropsType> = ({ item }) => {
           <div className="cart-item__right-body-content">
             <button
               type="button"
+              name="delete"
               className="cart-item__right-body-content-remove"
-              onClick={checkedToRemoveItemFromCart}
+              onClick={onClickToChangeCartItems}
             >
               刪除
             </button>
@@ -94,12 +97,8 @@ const CartItem: FC<PropsType> = ({ item }) => {
         <div className="cart-item__right-footer">
           <Button
             buttonType={BUTTON_TYPE_CLASS.squareWhiteSm}
-            //* 如果數量等於 1 那麼按下減號鍵就讓它變成刪除功能
-            onClick={
-              qty === 1
-                ? checkedToRemoveItemFromCart
-                : () => updateCartItem("minor")
-            }
+            name="minor"
+            onClick={onClickToChangeCartItems}
           >
             -
           </Button>
@@ -111,7 +110,8 @@ const CartItem: FC<PropsType> = ({ item }) => {
           />
           <Button
             buttonType={BUTTON_TYPE_CLASS.squareWhiteSm}
-            onClick={() => updateCartItem("add")}
+            name="add"
+            onClick={onClickToChangeCartItems}
             disabled={qty >= 5 || loadingItems.includes(itemId)}
           >
             +
@@ -121,5 +121,3 @@ const CartItem: FC<PropsType> = ({ item }) => {
     </div>
   );
 };
-
-export default CartItem;
