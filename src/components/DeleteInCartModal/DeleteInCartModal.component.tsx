@@ -3,9 +3,11 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
 import ModalPortal from "../ModalPortal/ModalPortal.component";
 
-import { setCartIsModalOpen } from "../../store/cart/cart.slice";
-import { selectCartTempData } from "../../store/cart/cart.selector";
-import { setRemoveItemFromCartAsync } from "../../store/cart/cart.asyncThunk";
+import {
+  setCartIsModalOpen,
+  selectCartTempData,
+  setRemoveItemFromCartAsync,
+} from "../../features/cart/index";
 
 import type { FC } from "react";
 

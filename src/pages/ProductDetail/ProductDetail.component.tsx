@@ -18,17 +18,14 @@ import { selectHasMessage } from "../../store/message/message.selector";
 import {
   setAddItemToCartAsync,
   fetchCartItemsAsync,
-} from "../../store/cart/cart.asyncThunk";
-import {
   selectCartIsLoading,
   selectCartItems,
-} from "../../store/cart/cart.selector";
+} from "../../features/cart/index";
 
 import { selectUserFavorite } from "../../store/user/user.selector";
 import { setUserFavorite } from "../../store/user/user.slice";
 
 import type { FC, MouseEvent } from "react";
-import type { Product } from "../../store/userProduct/userProduct.types";
 
 import "./ProductDetail.styles.scss";
 

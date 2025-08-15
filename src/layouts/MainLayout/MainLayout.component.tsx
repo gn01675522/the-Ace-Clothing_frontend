@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./components/Navbar/Navbar.component";
 import Footer from "./components/Footer/Footer.component";
 
-import { fetchCartItemsAsync } from "../../store/cart/cart.asyncThunk";
+import { fetchCartItemsAsync } from "../../features/cart/index";
 
 import type { FC } from "react";
 

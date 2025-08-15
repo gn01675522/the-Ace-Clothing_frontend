@@ -5,12 +5,12 @@ import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../../../components/Button/Button.component";
 
-import { fetchCartItemsAsync } from "../../../../store/cart/cart.asyncThunk";
-import { setAddItemToCartAsync } from "../../../../store/cart/cart.asyncThunk";
 import {
+  fetchCartItemsAsync,
+  setAddItemToCartAsync,
   selectCartItems,
   selectCartIsLoading,
-} from "../../../../store/cart/cart.selector";
+} from "../../../../features/cart/index";
 
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 

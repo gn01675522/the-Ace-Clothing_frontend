@@ -9,7 +9,7 @@ import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../components/Button/Button.component";
 
-import { selectCartItems } from "../../store/cart/cart.selector";
+import { selectCartItems } from "../../features/cart/index";
 import { selectUserOrderId } from "../../store/userOrder/userOrder.selector";
 import { setPostUserOrderAsync } from "../../store/userOrder/userOrder.asyncThunk";
 

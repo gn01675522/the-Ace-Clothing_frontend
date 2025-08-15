@@ -1,11 +1,11 @@
-import { createAppAsyncThunk } from "../redux-utils";
+import { createAppAsyncThunk } from "../../../store/redux-utils";
 import axios from "axios";
 
-import { setHandleMessage } from "../message/message.slice";
+import { setHandleMessage } from "../../../store/message/message.slice";
 
 import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { CartItems, Cart, CartItemAddToCart } from "./cart.types";
+import type { AxiosRejectTypes } from "../../../store/redux-utils";
+import type { CartItems, Cart, CartItemAddToCart } from "../DTOs/cart.types";
 
 //* fetch 目前的購物車內商品資訊
 export const fetchCartItemsAsync = createAppAsyncThunk<Cart, void>(
