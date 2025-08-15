@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "utils/test.utils";
+import { renderWithProviders } from "../../../../../utils/test.utils";
 
 import { CartIcon } from "../CartIcon.component";
 
