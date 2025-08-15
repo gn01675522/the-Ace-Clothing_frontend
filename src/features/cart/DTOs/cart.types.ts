@@ -1,4 +1,4 @@
-import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { AdminCoupon } from "../../../store/adminCoupon/adminCoupon.types";
 
 export interface CartItems {
   id: string;
