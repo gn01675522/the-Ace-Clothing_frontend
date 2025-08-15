@@ -11,16 +11,15 @@ import Button, {
   BUTTON_TYPE_CLASS,
 } from "../../components/Button/Button.component";
 
-import { setCartIsModalOpen } from "../../store/cart/cart.slice";
-import { fetchCartItemsAsync } from "../../store/cart/cart.asyncThunk";
 import {
+  setCartIsModalOpen,
+  fetchCartItemsAsync,
+  setAddCouponForCartAsync,
   selectCartItems,
   selectCartModalOpen,
   selectCartIsLoading,
-} from "../../store/cart/cart.selector";
+} from "../../features/cart/index";
 import { selectHasMessage } from "../../store/message/message.selector";
-
-import { setAddCouponForCartAsync } from "../../store/cart/cart.asyncThunk";
 
 import { formatNumberWithCommas } from "../../utils/common.utils";
 

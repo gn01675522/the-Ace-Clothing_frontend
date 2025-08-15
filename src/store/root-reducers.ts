@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import { userReducer } from "./user/user.slice";
-import { cartReducer } from "./cart/cart.slice";
+import { cartReducer } from "../features/cart/index";
 import { userProductReducer } from "./userProduct/userProduct.slice";
 import { messageReducer } from "./message/message.slice";
 import { adminCouponReducer } from "./adminCoupon/adminCoupon.slice";

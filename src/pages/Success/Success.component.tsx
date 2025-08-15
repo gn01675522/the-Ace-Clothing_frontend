@@ -18,7 +18,7 @@ import { fetchUserProductAsync } from "../../store/userProduct/userProduct.async
 import { selectRecommendProducts } from "../../store/userProduct/userProduct.selector";
 import { selectUserFavorite } from "../../store/user/user.selector";
 
-import { fetchCartItemsAsync } from "../../store/cart/cart.asyncThunk";
+import { fetchCartItemsAsync } from "../../features/cart/index";
 import { fetchUserSingleOrderAsync } from "../../store/userOrder/userOrder.asyncThunk";
 import { setClearUserOrderState } from "../../store/userOrder/userOrder.slice";
 

@@ -7,9 +7,11 @@ import Button, {
 import {
   setCartIsModalOpen,
   setCartTempData,
-} from "../../../../store/cart/cart.slice";
-import { setUpdateCartItemAsync } from "../../../../store/cart/cart.asyncThunk";
-import { selectCartLoadingItems } from "../../../../store/cart/cart.selector";
+  setUpdateCartItemAsync,
+  selectCartLoadingItems,
+  type CartItems,
+} from "../../../../features/cart/index";
+
 import {
   translateGenderToChinese,
   translateCategoryToChinese,
@@ -18,7 +20,6 @@ import {
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { CartItems } from "../../../../store/cart/cart.types";
 
 import "./CartItem.styles.scss";
 

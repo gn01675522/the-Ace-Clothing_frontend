@@ -8,8 +8,8 @@ import {
   setAddCouponForCartAsync,
 } from "./cart.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { Cart } from "./cart.types";
+import type { AxiosRejectTypes } from "../../../store/redux-utils";
+import type { Cart } from "../DTOs/cart.types";
 
 type CartState = {
   readonly cart: Cart;

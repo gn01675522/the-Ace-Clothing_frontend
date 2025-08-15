@@ -1,11 +1,11 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "utils/test.utils";
 
-import CartIcon from "../CartIcon.component";
+import { CartIcon } from "../CartIcon.component";
 
-import { INITIAL_STATE } from "../../../store/cart/cart.slice";
+import { INITIAL_STATE } from "../../../store/cart.slice";
 
-import type { CartItems } from "../../../store/cart/cart.types";
+import type { CartItems } from "../../../DTOs/cart.types";
 
 describe("Cart Icon test suite.", () => {
   test("Renders only the cart icon when the cart is empty.", () => {
