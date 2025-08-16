@@ -2,22 +2,22 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
-import OrderModal from "../../components/OrderModal/OrderModal.component";
+import {
+  OrderModal,
+  selectAdminOrders,
+  selectAdminOrdersPagination,
+  selectAdminOrdersIsLoading,
+  type Order,
+} from "../../features/order/index";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
 import DeleteModal, {
   DELETE_MODAL_TYPE,
 } from "../../components/DeleteModal/DeleteModal.component";
 import Loading from "../../components/Loading/Loading.component";
 
-import { fetchAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
-import {
-  selectAdminOrders,
-  selectAdminOrdersPagination,
-  selectAdminOrdersIsLoading,
-} from "../../store/adminOrder/adminOrder.selector";
+import { fetchAdminOrdersAsync } from "../../features/order/store/admin/adminOrder.asyncThunk";
 
 import type { FC } from "react";
-import type { Order } from "../../store/adminOrder/adminOrders.type";
 
 import "./AdminOrders.styles.scss";
 

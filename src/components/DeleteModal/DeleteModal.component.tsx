@@ -5,7 +5,7 @@ import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
 import { deleteAdminProductAsync } from "../../features/product/index";
 
-import { deleteAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
+import { deleteAdminOrdersAsync } from "../../features/order/store/admin/adminOrder.asyncThunk";
 import { deleteAdminCouponsAsync } from "../../features/admin-coupon/index";
 
 import type { FC, Dispatch, SetStateAction, MouseEvent } from "react";

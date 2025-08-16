@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useForm } from "react-hook-form";
 
-import OrderCard from "../../components/OrderCard/OrderCard.component";
+import { OrderCard } from "../../features/order/index";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { selectCartItems } from "../../features/cart/index";
-import { selectUserOrderId } from "../../store/userOrder/userOrder.selector";
-import { setPostUserOrderAsync } from "../../store/userOrder/userOrder.asyncThunk";
+import {
+  selectUserOrderId,
+  setPostUserOrderAsync,
+} from "../../features/order/index";
 
 import { INPUT_CATEGORY, inputRules } from "./input.rules";
 

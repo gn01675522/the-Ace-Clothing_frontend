@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
+import type { RootState } from "../../../../store/store";
 
 const selectAdminOrdersReducer = (state: RootState) => state.adminOrder;
 
@@ -16,11 +16,6 @@ export const selectAdminOrdersPagination = createSelector(
 export const selectAdminOrdersIsLoading = createSelector(
   [selectAdminOrdersReducer],
   (adminOrder) => adminOrder.isLoading
-);
-
-export const selectAdminOrdersIsModalOpen = createSelector(
-  [selectAdminOrdersReducer],
-  (adminOrder) => adminOrder.isModalOpen
 );
 
 export const selectAdminOrdersTempData = createSelector(

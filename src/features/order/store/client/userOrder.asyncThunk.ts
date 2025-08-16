@@ -1,9 +1,12 @@
-import { createAppAsyncThunk } from "../redux-utils";
+import { createAppAsyncThunk } from "../../../../store/redux-utils";
 import axios from "axios";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { OrderDetail, OrderDetailWithNum } from "./userOrder.types";
-import type { UserBasicInfo } from "../../shared/types/interface";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type {
+  OrderDetail,
+  OrderDetailWithNum,
+} from "../../DTOs/userOrder.types";
+import type { UserBasicInfo } from "../../../../shared/types/interface";
 
 //* 提交訂單
 export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(

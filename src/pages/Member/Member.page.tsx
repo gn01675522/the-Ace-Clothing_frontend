@@ -6,7 +6,7 @@ import OrderDetails from "./components/OrderDetail/OrderDetails.component";
 import Wishlist from "./components/Wishlist/Wishlist.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
-import { fetchUserOrdersAsync } from "../../store/userOrder/userOrder.asyncThunk";
+import { fetchUserOrdersAsync } from "../../features/order/index";
 import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
 import { setUserFavorite } from "../../store/user/user.slice";
 

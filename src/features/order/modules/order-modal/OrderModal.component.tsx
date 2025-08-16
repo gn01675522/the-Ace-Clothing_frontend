@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
-import OrderCard from "../OrderCard/OrderCard.component";
-import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import { ModalPortal } from "../ModalPortal/ModalPortal.component";
+import OrderCard from "../../components/order-card/OrderCard.component";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  ModalPortal,
+} from "../../../../components/index";
 
-import { updateAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
-
-import { selectAdminOrdersIsLoading } from "../../store/adminOrder/adminOrder.selector";
+import { updateAdminOrdersAsync } from "../../store/admin/adminOrder.asyncThunk";
+import { selectAdminOrdersIsLoading } from "../../store/admin/adminOrder.selector";
 
 import type {
   FC,
@@ -16,7 +18,7 @@ import type {
   SetStateAction,
   MouseEvent,
 } from "react";
-import type { Order } from "../../store/adminOrder/adminOrders.type";
+import type { Order } from "../../DTOs/adminOrders.type";
 
 import "./OrderModal.styles.scss";
 

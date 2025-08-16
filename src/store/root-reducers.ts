@@ -8,8 +8,8 @@ import {
 } from "../features/product/index";
 import { messageReducer } from "./message/message.slice";
 import { adminCouponReducer } from "../features/admin-coupon/store/adminCoupon.slice";
-import { adminOrderReducer } from "./adminOrder/adminOrder.slice";
-import { userOrderReducer } from "./userOrder/userOrder.slice";
+import { adminOrderReducer } from "../features/order/store/admin/adminOrder.slice";
+import { userOrderReducer } from "../features/order/store/client/userOrder.slice";
 
 export const rootReducer = combineReducers({
   user: userReducer,

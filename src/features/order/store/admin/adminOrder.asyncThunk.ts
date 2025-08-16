@@ -1,12 +1,11 @@
-import { createAppAsyncThunk } from "../redux-utils";
-import axios from "axios";
+import { createAppAsyncThunk } from "../../../../store/redux-utils";
+import axios, { type AxiosResponse } from "axios";
 
-import { setHandleMessage } from "../message/message.slice";
+import { setHandleMessage } from "../../../../store/message/message.slice";
 
-import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { Pagination } from "../../shared/types/types";
-import type { Order } from "./adminOrders.type";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { Pagination } from "../../../../shared/types/types";
+import type { Order } from "../../DTOs/adminOrders.type";
 
 //* 擷取 admin orders api 中的資料
 export const fetchAdminOrdersAsync = createAppAsyncThunk<

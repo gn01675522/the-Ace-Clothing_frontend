@@ -1,6 +1,6 @@
-import type { Pagination } from "../../shared/types/types";
-import type { AdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.types";
-import type { Product } from "features/product/DTOs/userProduct.types";
+import type { Pagination } from "../../../shared/types/types";
+import type { AdminCoupon } from "../../admin-coupon/index";
+import type { Product } from "../../product/DTOs/userProduct.types";
 
 export interface Order {
   title: string;
