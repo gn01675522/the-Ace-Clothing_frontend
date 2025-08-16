@@ -1,3 +1,3 @@
-export * from "./delete-in-cart-modal/DeleteInCartModal.component";
-export * from "./delete-modal/DeleteModal.component";
-export * from "./admin-table/AdminTable.component";
+export * from "./delete-in-cart-modal/DeleteInCartModal.module";
+export * from "./delete-modal/DeleteModal.module";
+export * from "./admin-table/AdminTable.module";
