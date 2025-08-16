@@ -5,19 +5,17 @@ import type { RouteObject } from "react-router-dom";
 const MainLayout = lazy(
   () => import("../layouts/MainLayout/MainLayout.component")
 );
-const Home = lazy(() => import("../pages/Home/Home.page"));
-const Products = lazy(() => import("../pages/Products/Products.page"));
+const Home = lazy(() => import("../pages/home/Home.page"));
+const Products = lazy(() => import("../pages/products/Products.page"));
 const ProductDetail = lazy(
-  () => import("../pages/ProductDetail/ProductDetail.page")
+  () => import("../pages/product-detail/ProductDetail.page")
 );
-const Cart = lazy(() => import("../pages/Cart/Cart.page"));
-const Checkout = lazy(() => import("../pages/Checkout/Checkout.page"));
-const Success = lazy(() => import("../pages/Success/Success.page"));
-const AboutUs = lazy(() => import("../pages/AboutUs/AboutUs.page"));
-const InfoSource = lazy(
-  () => import("../pages/InfoSource/InfoSource.page")
-);
-const Member = lazy(() => import("../pages/Member/Member.page"));
+const Cart = lazy(() => import("../pages/cart/Cart.page"));
+const Checkout = lazy(() => import("../pages/checkout/Checkout.page"));
+const Success = lazy(() => import("../pages/success/Success.page"));
+const AboutUs = lazy(() => import("../pages/about-us/AboutUs.page"));
+const InfoSource = lazy(() => import("../pages/info-source/InfoSource.page"));
+const Member = lazy(() => import("../pages/member/Member.page"));
 
 export const clientRoutes: RouteObject[] = [
   {
