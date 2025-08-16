@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
 import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
 import ScrollItem from "../ScrollItem/ScrollItem.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import { selectUserFavorite } from "../../../../store/user/user.selector";
 import { fetchUserProductAsync } from "../../../../store/userProduct/userProduct.asyncThunk";

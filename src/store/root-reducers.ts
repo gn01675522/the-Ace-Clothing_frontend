@@ -4,7 +4,7 @@ import { userReducer } from "./user/user.slice";
 import { cartReducer } from "../features/cart/index";
 import { userProductReducer } from "./userProduct/userProduct.slice";
 import { messageReducer } from "./message/message.slice";
-import { adminCouponReducer } from "./adminCoupon/adminCoupon.slice";
+import { adminCouponReducer } from "../features/admin-coupon/store/adminCoupon.slice";
 import { adminProductReducer } from "./adminProduct/adminProduct.slice";
 import { adminOrderReducer } from "./adminOrder/adminOrder.slice";
 import { userOrderReducer } from "./userOrder/userOrder.slice";

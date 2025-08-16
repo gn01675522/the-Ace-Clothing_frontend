@@ -8,9 +8,7 @@ import ProductModal from "../../components/ProductModal/ProductModal.component";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
 import DeleteModal from "../../components/DeleteModal/DeleteModal.component";
 import { DELETE_MODAL_TYPE } from "../../components/DeleteModal/DeleteModal.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { fetchAdminProductAsync } from "../../store/adminProduct/adminProduct.asyncThunk";
 

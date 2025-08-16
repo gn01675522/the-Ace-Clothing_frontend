@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import { selectUserOrders } from "../../../../store/userOrder/userOrder.selector";
 

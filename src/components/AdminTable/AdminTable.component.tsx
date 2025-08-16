@@ -1,4 +1,4 @@
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
 
 import type { ReactNode } from "react";
 

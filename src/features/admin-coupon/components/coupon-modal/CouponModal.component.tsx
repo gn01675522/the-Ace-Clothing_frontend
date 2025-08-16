@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+import { useAppDispatch } from "../../../../store/redux-hooks";
 
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalPortal from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
+import { ModalPortal } from "../../../../components/index";
 
 import {
   createAdminCouponAsync,
   updateAdminCouponAsync,
-} from "../../store/adminCoupon/adminCoupon.asyncThunk";
+} from "../../store/adminCoupon.asyncThunk";
 
 import { formContent } from "./formContent.data";
-import { formatTimestampInMilliSeconds } from "../../utils/common.utils";
+import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
 
 import type {
   FC,
@@ -23,7 +23,7 @@ import type {
   AdminCoupon,
   AdminCouponWithId,
   CreateAdminCoupon,
-} from "../../store/adminCoupon/adminCoupon.types";
+} from "../../DTOs/adminCoupon.types";
 
 import "./CouponModal.styles.scss";
 
@@ -49,7 +49,7 @@ type PropsType = {
   backdropClose: Dispatch<SetStateAction<boolean>>;
 };
 
-const CouponModal: FC<PropsType> = ({
+export const CouponModal: FC<PropsType> = ({
   createOrEdit,
   targetData,
   backdropClose,
@@ -203,5 +203,3 @@ const CouponModal: FC<PropsType> = ({
     </ModalPortal>
   );
 };
-
-export default CouponModal;

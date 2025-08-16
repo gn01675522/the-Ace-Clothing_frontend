@@ -1,7 +1,7 @@
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Button, { BUTTON_TYPE_CLASS } from "../Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button.component";
 
 describe("Button test suite.", () => {
   test("Renders with default props and applies the 'btn-rect-bl-nm' class.", () => {

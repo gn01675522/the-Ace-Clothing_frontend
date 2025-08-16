@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalPortal from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
 import {
   setCartIsModalOpen,

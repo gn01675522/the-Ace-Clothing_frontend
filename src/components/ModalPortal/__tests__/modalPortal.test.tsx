@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import ModalPortal from "../ModalPortal.component";
+import { ModalPortal } from "../ModalPortal.component";
 
 const onClick = jest.fn();
 

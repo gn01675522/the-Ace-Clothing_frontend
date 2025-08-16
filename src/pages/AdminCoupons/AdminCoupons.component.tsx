@@ -2,27 +2,25 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import Pagination from "../../components/Pagination/Pagination.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
-import CouponModal from "../../components/CouponModal/CouponModal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
 import DeleteModal, {
   DELETE_MODAL_TYPE,
 } from "../../components/DeleteModal/DeleteModal.component";
 import Loading from "../../components/Loading/Loading.component";
 
-import { fetchAdminCouponsAsync } from "../../store/adminCoupon/adminCoupon.asyncThunk";
 import {
+  CouponModal,
+  fetchAdminCouponsAsync,
   selectAdminCoupons,
   selectAdminCouponsPagination,
   selectAdminCouponsIsLoading,
-} from "../../store/adminCoupon/adminCoupon.selector";
+  type AdminCoupon,
+} from "../../features/admin-coupon/index";
 
 import { formatTimestampInMilliSeconds } from "../../utils/common.utils";
 
 import type { FC, ReactNode } from "react";
-import type { AdminCoupon } from "../../store/adminCoupon/adminCoupon.types";
 
 import "./AdminCoupons.styles.scss";
 

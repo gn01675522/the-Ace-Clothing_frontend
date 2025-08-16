@@ -1,11 +1,11 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import CouponModal from "../CouponModal.component";
+import { CouponModal } from "../CouponModal.component";
 
-import { formatTimestampInMilliSeconds } from "../../../utils/common.utils";
+import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
 
-import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { AdminCoupon } from "../../../DTOs/adminCoupon.types";
 
 const mockCoupon: AdminCoupon = {
   id: "1234567",

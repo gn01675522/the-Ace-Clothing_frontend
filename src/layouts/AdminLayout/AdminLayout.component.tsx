@@ -4,9 +4,7 @@ import { useAppSelector } from "../../store/redux-hooks";
 import axios from "axios";
 
 import Message from "../../components/Message/Message.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 
@@ -71,7 +69,10 @@ const AdminLayout: FC = () => {
         onChange={onOpenList}
       />
       <nav className="admin-layout-header">
-        <label className="admin-layout-header__burger" htmlFor="admin-layout-trigger">
+        <label
+          className="admin-layout-header__burger"
+          htmlFor="admin-layout-trigger"
+        >
           <div className="admin-layout-header__burger-line" />
         </label>
         <NavLink className="admin-layout-header__title" to="/admin/products">

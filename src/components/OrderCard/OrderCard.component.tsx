@@ -2,7 +2,7 @@ import { formatNumberWithCommas } from "../../utils/common.utils";
 
 import type { FC } from "react";
 import type { Product } from "store/userProduct/userProduct.types";
-import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { AdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.types";
 
 import "./OrderCard.styles.scss";
 

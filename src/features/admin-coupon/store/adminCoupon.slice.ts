@@ -7,9 +7,9 @@ import {
   updateAdminCouponAsync,
 } from "./adminCoupon.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { AdminCoupon, AdminCouponWithId } from "./adminCoupon.types";
-import type { Pagination } from "../../shared/types/types";
+import type { AxiosRejectTypes } from "../../../store/redux-utils";
+import type { AdminCoupon, AdminCouponWithId } from "../DTOs/adminCoupon.types";
+import type { Pagination } from "../../../shared/types/types";
 
 type AdminCouponState = {
   readonly coupons: AdminCoupon[];

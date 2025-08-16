@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import {
   fetchCartItemsAsync,
