@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import OrderCard from "../OrderCard.component";
 
-import { formatNumberWithCommas } from "../../../utils/common.utils";
+import { formatNumberWithCommas } from "../../../../../utils/common.utils";
 
 import type { OrderCardProductsType } from "../OrderCard.component";
 
