@@ -9,7 +9,7 @@ import {
 } from "./cart.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
-import type { Cart } from "../DTOs/cart.types";
+import type { Cart } from "../DTOs/cart.dtos";
 
 type CartState = {
   readonly cart: Cart;
