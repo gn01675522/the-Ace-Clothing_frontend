@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import { useCartDetectedQuantity } from "../../hooks/cart.hooks";
+import { useDetectedCartQuantity } from "../../hooks/cart.hooks";
 
 import { CartSVGIcon } from "../../../../components/index";
 
@@ -8,8 +8,8 @@ import type { FC } from "react";
 
 import "./CartIcon.styles.scss";
 
-const CartIcon: FC = () => {
-  const { quantity, isItemChange } = useCartDetectedQuantity();
+export const CartIcon: FC = () => {
+  const { quantity, isItemChange } = useDetectedCartQuantity();
 
   const btnClasses = `cart-icon__logo ${
     isItemChange ? "cart-icon__logo--bump" : ""
@@ -22,5 +22,3 @@ const CartIcon: FC = () => {
     </NavLink>
   );
 };
-
-export default CartIcon;

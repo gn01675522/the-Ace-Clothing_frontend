@@ -1,7 +1,8 @@
-export { default as CartIcon } from "./components/cart-icon/CartIcon.component";
-export { default as CartItem } from "./components/cart-item/CartItem.component";
+export * from "./modules/cart-item/CartItem.module";
 
-export * from "./DTOs/cart.types";
+export * from "./components/cart-icon/CartIcon.component";
+
+export * from "./DTOs/cart.dtos";
 
 export * from "./hooks/cart.hooks";
 

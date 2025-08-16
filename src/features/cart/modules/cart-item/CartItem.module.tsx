@@ -14,7 +14,7 @@ import {
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC, MouseEvent } from "react";
-import type { CartItems } from "../../DTOs/cart.types";
+import type { CartItems } from "../../DTOs/cart.dtos";
 
 import "./CartItem.styles.scss";
 
@@ -23,7 +23,7 @@ type PropsType = {
 };
 
 //todo need refactor
-const CartItem: FC<PropsType> = ({ item }) => {
+export const CartItem: FC<PropsType> = ({ item }) => {
   const { id: itemId, qty, final_total } = item;
   const { category, title, imageUrl } = item.product;
 
@@ -119,5 +119,3 @@ const CartItem: FC<PropsType> = ({ item }) => {
     </div>
   );
 };
-
-export default CartItem;

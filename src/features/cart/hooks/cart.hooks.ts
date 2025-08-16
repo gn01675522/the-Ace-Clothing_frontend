@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "../../../store/redux-hooks";
 import { selectCartItemsQuantity } from "../store/cart.selector";
 
-export const useCartDetectedQuantity = () => {
+export const useDetectedCartQuantity = () => {
   const [isItemChange, setIsItemChange] = useState(false);
+
   const quantity = useAppSelector(selectCartItemsQuantity);
 
   useEffect(() => {
