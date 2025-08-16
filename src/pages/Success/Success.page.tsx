@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams, Link } from "react-router-dom";
 
-import { OrderCard } from "../../features/order/index";
-import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
+import { OrderCard, SummaryCard } from "../../features/order/index";
+
 import { ProductCard } from "../../features/product/index";
 
 import {

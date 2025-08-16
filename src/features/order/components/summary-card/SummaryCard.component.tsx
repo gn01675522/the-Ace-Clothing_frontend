@@ -1,4 +1,4 @@
-import { formatNumberWithCommas } from "../../utils/common.utils";
+import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
 
@@ -11,7 +11,7 @@ type PropsType = {
   };
 };
 
-const SummaryCard: FC<PropsType> = ({ total, userData }) => {
+export const SummaryCard: FC<PropsType> = ({ total, userData }) => {
   return (
     <div className="summary-card">
       <h2 className="summary-card__title">訂單資訊</h2>
@@ -51,5 +51,3 @@ const SummaryCard: FC<PropsType> = ({ total, userData }) => {
     </div>
   );
 };
-
-export default SummaryCard;

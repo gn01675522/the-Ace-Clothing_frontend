@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../utils/test.utils";
 
-import DeleteModal from "../DeleteModal.component";
+import { DeleteModal } from "../DeleteModal.component";
 
 import { DELETE_MODAL_TYPE } from "../DeleteModal.component";
 

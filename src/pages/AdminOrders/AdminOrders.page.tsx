@@ -10,9 +10,7 @@ import {
   type Order,
 } from "../../features/order/index";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
-import DeleteModal, {
-  DELETE_MODAL_TYPE,
-} from "../../components/DeleteModal/DeleteModal.component";
+import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 import Loading from "../../components/Loading/Loading.component";
 
 import { fetchAdminOrdersAsync } from "../../features/order/store/admin/adminOrder.asyncThunk";

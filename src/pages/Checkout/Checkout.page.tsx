@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useForm } from "react-hook-form";
 
-import { OrderCard } from "../../features/order/index";
-import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
+import { OrderCard, SummaryCard } from "../../features/order/index";
+
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { selectCartItems } from "../../features/cart/index";

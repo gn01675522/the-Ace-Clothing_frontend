@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 
-import SummaryCard from "../SummaryCard.component";
+import { SummaryCard } from "../SummaryCard.component";
 
-import { formatNumberWithCommas } from "../../../utils/common.utils";
+import { formatNumberWithCommas } from "../../../../../utils/common.utils";
 
 describe("SummaryCard test suite.", () => {
   const mockData = {

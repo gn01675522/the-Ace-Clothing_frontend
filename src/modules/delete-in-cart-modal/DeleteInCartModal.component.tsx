@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import { ModalPortal } from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS, ModalPortal } from "../../components/index";
 
 import {
   setCartIsModalOpen,
@@ -17,7 +16,7 @@ type PropsType = {
   backdropClose: () => void;
 };
 
-const DeleteInCartModal: FC<PropsType> = ({ backdropClose }) => {
+export const DeleteInCartModal: FC<PropsType> = ({ backdropClose }) => {
   const dispatch = useAppDispatch();
 
   const itemId = useAppSelector(selectCartTempData);
@@ -56,5 +55,3 @@ const DeleteInCartModal: FC<PropsType> = ({ backdropClose }) => {
     </ModalPortal>
   );
 };
-
-export default DeleteInCartModal;

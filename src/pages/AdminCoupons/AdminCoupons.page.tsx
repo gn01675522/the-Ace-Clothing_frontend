@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { Pagination } from "../../features/navigation/index";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
-import DeleteModal, {
-  DELETE_MODAL_TYPE,
-} from "../../components/DeleteModal/DeleteModal.component";
+import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 import Loading from "../../components/Loading/Loading.component";
 
 import {
