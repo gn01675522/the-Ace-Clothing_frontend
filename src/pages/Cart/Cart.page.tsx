@@ -7,9 +7,7 @@ import { CartItem } from "../../features/cart/index";
 import Categories from "../../components/Categories/Categories.component";
 import Loading from "../../components/Loading/Loading.component";
 import DeleteInCartModal from "../../components/DeleteInCartModal/DeleteInCartModal.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import {
   setCartIsModalOpen,

@@ -10,7 +10,7 @@ const Products = lazy(() => import("../pages/Products/Products.component"));
 const ProductDetail = lazy(
   () => import("../pages/ProductDetail/ProductDetail.component")
 );
-const Cart = lazy(() => import("../pages/Cart/Cart.component"));
+const Cart = lazy(() => import("../pages/Cart/Cart.page"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout.component"));
 const Success = lazy(() => import("../pages/Success/Success.component"));
 const AboutUs = lazy(() => import("../pages/AboutUs/AboutUs.component"));

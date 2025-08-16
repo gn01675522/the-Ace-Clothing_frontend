@@ -44,7 +44,7 @@ export type ButtonProps = {
   isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   children,
   buttonType,
   isLoading,
@@ -58,5 +58,3 @@ const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;

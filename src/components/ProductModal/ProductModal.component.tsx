@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../store/redux-hooks";
 
 import NoImageSVGLogo from "../SVGIcons/NoImageSVGLogo.component";
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalPortal from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
 import {
   updateAdminProductAsync,

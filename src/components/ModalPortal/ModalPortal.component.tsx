@@ -12,7 +12,7 @@ type PropsType = {
   backdropClose: (e: MouseEvent<HTMLElement>) => void;
 };
 
-const ModalPortal: FC<PropsType> = ({
+export const ModalPortal: FC<PropsType> = ({
   children,
   backdropClose,
   ...otherProps
@@ -28,5 +28,3 @@ const ModalPortal: FC<PropsType> = ({
     </>
   );
 };
-
-export default ModalPortal;

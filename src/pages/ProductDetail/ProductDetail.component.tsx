@@ -6,9 +6,7 @@ import WhiteHeartSVGIcon from "../../components/SVGIcons/WhiteHeartSVGIcon.compo
 import RedHeartSVGIcon from "../../components/SVGIcons/RedHeartSVGIcon.component";
 import Message from "../../components/Message/Message.component";
 import PriceTag from "../../components/PriceTag/PriceTag.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { fetchUserSingleProductAsync } from "../../store/userProduct/userProduct.asyncThunk";
 import { selectUserSingleProduct } from "../../store/userProduct/userProduct.selector";

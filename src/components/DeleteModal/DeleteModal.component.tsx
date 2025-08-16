@@ -1,12 +1,12 @@
 import { useAppDispatch } from "../../store/redux-hooks";
 
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalPortal from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
 import { deleteAdminProductAsync } from "../../store/adminProduct/adminProduct.asyncThunk";
 
 import { deleteAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
-import { deleteAdminCouponsAsync } from "../../store/adminCoupon/adminCoupon.asyncThunk";
+import { deleteAdminCouponsAsync } from "../../features/admin-coupon/index";
 
 import type { FC, Dispatch, SetStateAction, MouseEvent } from "react";
 import type { AsyncThunk } from "@reduxjs/toolkit";

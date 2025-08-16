@@ -1,4 +1,4 @@
-import type { Pagination } from "../../shared/types/types";
+import type { Pagination } from "../../../shared/types/types";
 
 export interface AdminCoupon {
   id: string;

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import OrderCard from "../OrderCard/OrderCard.component";
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import ModalPortal from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
 import { updateAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
 

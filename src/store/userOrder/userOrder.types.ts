@@ -1,6 +1,6 @@
 import type { UserBasicInfo } from "../../shared/types/interface";
 import type { Pagination } from "../../shared/types/types";
-import type { AdminCoupon } from "store/adminCoupon/adminCoupon.types";
+import type { AdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.types";
 import type { Product } from "store/userProduct/userProduct.types";
 
 export interface OrderDetail {

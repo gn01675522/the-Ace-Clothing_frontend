@@ -5,9 +5,7 @@ import { useForm } from "react-hook-form";
 
 import OrderCard from "../../components/OrderCard/OrderCard.component";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { selectCartItems } from "../../features/cart/index";
 import { selectUserOrderId } from "../../store/userOrder/userOrder.selector";

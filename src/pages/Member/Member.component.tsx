@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import OrderDetails from "./components/OrderDetail/OrderDetails.component";
 import Wishlist from "./components/Wishlist/Wishlist.component";
-import Button, {
-  BUTTON_TYPE_CLASS,
-} from "../../components/Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { fetchUserOrdersAsync } from "../../store/userOrder/userOrder.asyncThunk";
 import { fetchUserProductAsync } from "../../store/userProduct/userProduct.asyncThunk";

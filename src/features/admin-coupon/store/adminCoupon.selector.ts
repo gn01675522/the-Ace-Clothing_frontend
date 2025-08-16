@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
+import type { RootState } from "../../../store/store";
 
 const selectAdminCouponsReducer = (state: RootState) => state.adminCoupon;
 
