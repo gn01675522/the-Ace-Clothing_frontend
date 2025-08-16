@@ -9,7 +9,7 @@ import {
   selectAdminOrdersIsLoading,
   type Order,
 } from "../../features/order/index";
-import AdminTable from "../../components/AdminTable/AdminTable.component";
+import { AdminTable } from "../../modules/index";
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 import Loading from "../../components/Loading/Loading.component";
 
