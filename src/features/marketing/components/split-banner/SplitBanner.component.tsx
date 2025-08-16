@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { SESSION_CONTENT_DATA } from "../../session.data";
+import { SESSION_CONTENT_DATA } from "../../../../features/marketing/config/session.data";
 
 import type { FC } from "react";
 

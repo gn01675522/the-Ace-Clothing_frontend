@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
-import Banner from "./components/Banner/Banner.component";
-import ScrollList, {
+import {
+  Banner,
+  FullWidthBanner,
+  SplitBanner,
+  ScrollList,
   SCROLL_TYPE,
-} from "./components/ScrollList/ScrollList.component";
-import FullWidthBanner from "./components/FullWidthBanner/FullWidthBanner.component";
-import SplitBanner from "./components/SplitBanner/SplitBanner.component";
+} from "../../features/marketing/index";
+
 import { Categories } from "../../features/navigation/index";
 
 import type { FC } from "react";

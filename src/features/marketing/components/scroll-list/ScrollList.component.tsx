@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
 import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
-import ScrollItem from "../ScrollItem/ScrollItem.component";
+import ScrollItem from "../scroll-item/ScrollItem.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import { selectUserFavorite } from "../../../../store/user/user.selector";
@@ -15,14 +15,11 @@ import {
 
 import { computedWidthByContainerHelper } from "./ScrollList.helpers";
 
+import { SCROLL_TYPE } from "../../types/marketing.types";
+
 import type { FC, MouseEvent } from "react";
 
 import "./ScrollList.styles.scss";
-
-export enum SCROLL_TYPE {
-  newArrival = "newArrival",
-  onSale = "onSale",
-}
 
 const scrollList = (type: SCROLL_TYPE) =>
   ({
