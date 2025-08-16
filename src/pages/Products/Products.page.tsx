@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
-import Loading from "../../components/Loading/Loading.component";
+import { Loading, Message } from "../../components/index";
 import {
   ProductCard,
   clearUserProduct,
@@ -19,7 +19,6 @@ import {
   selectBohemianProducts,
   fetchUserProductAsync,
 } from "../../features/product/index";
-import Message from "../../components/Message/Message.component";
 
 import { selectUserFavorite } from "../../features/user/index";
 

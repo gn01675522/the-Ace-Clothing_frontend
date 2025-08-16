@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
-import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
-import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  LeftArrowSVGIcon,
+  RightArrowSVGIcon,
+} from "../../../../components/index";
 import ScrollItem from "../scroll-item/ScrollItem.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import { selectUserFavorite } from "../../../user/index";
 

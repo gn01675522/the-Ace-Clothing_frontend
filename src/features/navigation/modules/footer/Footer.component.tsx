@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 
-import FacebookSVGIcon from "../../../../components/SVGIcons/FacebookSVGIcon.component";
-import LineSVGIcon from "../../../../components/SVGIcons/LineSVGIcon.component";
-import InstagramSVGIcon from "../../../../components/SVGIcons/InstagramSVGIcon.component";
+import {
+  FacebookSVGIcon,
+  LineSVGIcon,
+  InstagramSVGIcon,
+} from "../../../../components/index";
 
 import { FOOTER_DATA } from "./footer.data";
 

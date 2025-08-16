@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
 import "./InfoSource.styles.scss";
 
-import AceSVGIcon from "../../components/SVGIcons/AceSVGIcon.component";
-import LineSVGIcon from "../../components/SVGIcons/LineSVGIcon.component";
-import InstagramSVGIcon from "../../components/SVGIcons/InstagramSVGIcon.component";
-import FacebookSVGIcon from "../../components/SVGIcons/FacebookSVGIcon.component";
-import CartSVGIcon from "../../components/SVGIcons/CartSVGIcon.component";
-import NoImageSVGLogo from "../../components/SVGIcons/NoImageSVGLogo.component";
-import WhiteHeartSVGIcon from "../../components/SVGIcons/WhiteHeartSVGIcon.component";
-import RedHeartSVGIcon from "../../components/SVGIcons/RedHeartSVGIcon.component";
-import CheckSVGIcon from "../../components/SVGIcons/CheckSVGIcon.component";
-import CrossSVGIcon from "../../components/SVGIcons/CrossSVGIcon.component";
-import LeftArrowSVGIcon from "../../components/SVGIcons/LeftArrowSVGIcon.component";
-import RightArrowSVGIcon from "../../components/SVGIcons/RightArrowSVGIcon.component";
+import {
+  AceSVGIcon,
+  CartSVGIcon,
+  CrossSVGIcon,
+  CheckSVGIcon,
+  LineSVGIcon,
+  InstagramSVGIcon,
+  FacebookSVGIcon,
+  NoImageSVGLogo,
+  WhiteHeartSVGIcon,
+  RedHeartSVGIcon,
+  LeftArrowSVGIcon,
+  RightArrowSVGIcon,
+} from "../../components/index";
 import hexSchool from "../../assets/hexSchool.png";
 
 import { INFO_SOURCE_DATA } from "./infoSource.data";

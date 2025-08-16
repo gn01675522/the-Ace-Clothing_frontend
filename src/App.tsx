@@ -1,10 +1,9 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 
 import MainRoutes from "./routes/Main.routes";
+import { Loading } from "./components/index";
 
 import type { FC } from "react";
-
-const Loading = lazy(() => import("./components/Loading/Loading.component"));
 
 const App: FC = () => {
   return (

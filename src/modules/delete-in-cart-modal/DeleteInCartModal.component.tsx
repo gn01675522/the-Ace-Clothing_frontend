@@ -1,6 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import { Button, BUTTON_TYPE_CLASS, ModalPortal } from "../../components/index";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  ModalContainer,
+} from "../../components/index";
 
 import {
   setCartIsModalOpen,
@@ -32,7 +36,7 @@ export const DeleteInCartModal: FC<PropsType> = ({ backdropClose }) => {
   //* 若為 checked，則移除購物車單項物件；反之為關閉 modal
 
   return (
-    <ModalPortal backdropClose={backdropClose}>
+    <ModalContainer backdropClose={backdropClose}>
       <div className="delete-in-cart-modal">
         <h1 className="delete-in-cart-modal__content">確認刪除此商品嗎？</h1>
         <div className="delete-in-cart-modal__function">
@@ -52,6 +56,6 @@ export const DeleteInCartModal: FC<PropsType> = ({ backdropClose }) => {
           </Button>
         </div>
       </div>
-    </ModalPortal>
+    </ModalContainer>
   );
 };

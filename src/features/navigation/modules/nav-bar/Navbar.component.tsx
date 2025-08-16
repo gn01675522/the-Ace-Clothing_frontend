@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import AceSVGIcon from "../../../../components/SVGIcons/AceSVGIcon.component";
+import { AceSVGIcon } from "../../../../components/index";
 import { CartIcon } from "../../../cart/index";
 
 import type { FC } from "react";

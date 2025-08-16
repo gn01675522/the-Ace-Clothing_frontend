@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import AceSVGIcon from "../../components/SVGIcons/AceSVGIcon.component";
-import Loading from "../../components/Loading/Loading.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
-import Message from "../../components/Message/Message.component";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  Loading,
+  Message,
+  AceSVGIcon,
+} from "../../components/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 import {

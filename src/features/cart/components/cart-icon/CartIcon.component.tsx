@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import { useCartDetectedQuantity } from "../../hooks/cart.hooks";
 
-import CartSVGIcon from "../../../../components/SVGIcons/CartSVGIcon.component";
+import { CartSVGIcon } from "../../../../components/index";
 
 import type { FC } from "react";
 

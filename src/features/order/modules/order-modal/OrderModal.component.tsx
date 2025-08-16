@@ -5,7 +5,7 @@ import OrderCard from "../../components/order-card/OrderCard.component";
 import {
   Button,
   BUTTON_TYPE_CLASS,
-  ModalPortal,
+  ModalContainer,
 } from "../../../../components/index";
 
 import { updateAdminOrdersAsync } from "../../store/admin/adminOrder.asyncThunk";
@@ -70,7 +70,7 @@ const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
   }, [targetData]);
 
   return (
-    <ModalPortal backdropClose={onClickToClose}>
+    <ModalContainer backdropClose={onClickToClose}>
       <div className="order-modal">
         <div className="order-modal__header">
           <h1 className="order-modal__header-title">
@@ -187,7 +187,7 @@ const OrderModal: FC<PropsType> = ({ targetData, closeAction }) => {
           </Button>
         </div>
       </div>
-    </ModalPortal>
+    </ModalContainer>
   );
 };
 

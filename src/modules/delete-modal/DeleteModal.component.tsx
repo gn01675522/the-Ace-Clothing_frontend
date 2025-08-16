@@ -1,6 +1,10 @@
 import { useAppDispatch } from "../../store/redux-hooks";
 
-import { Button, BUTTON_TYPE_CLASS, ModalPortal } from "../../components/index";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  ModalContainer,
+} from "../../components/index";
 
 import { deleteAdminProductAsync } from "../../features/product/index";
 
@@ -63,7 +67,7 @@ export const DeleteModal: FC<PropsType> = ({
   };
 
   return (
-    <ModalPortal backdropClose={onClickToClose}>
+    <ModalContainer backdropClose={onClickToClose}>
       <div className="delete-modal">
         <div className="delete-modal__header">
           <h1 className="delete-modal__header-title">刪除確認</h1>
@@ -94,6 +98,6 @@ export const DeleteModal: FC<PropsType> = ({
           </Button>
         </div>
       </div>
-    </ModalPortal>
+    </ModalContainer>
   );
 };

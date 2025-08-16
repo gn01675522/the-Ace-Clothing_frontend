@@ -3,8 +3,7 @@ import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { useAppSelector } from "../../store/redux-hooks";
 import axios from "axios";
 
-import Message from "../../components/Message/Message.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
+import { Button, BUTTON_TYPE_CLASS, Message } from "../../components/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 
