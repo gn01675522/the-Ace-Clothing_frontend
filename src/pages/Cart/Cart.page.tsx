@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import Message from "../../components/Message/Message.component";
 import { CartItem } from "../../features/cart/index";
-import Categories from "../../components/Categories/Categories.component";
+import { Categories } from "../../features/navigation/index";
 import Loading from "../../components/Loading/Loading.component";
 import DeleteInCartModal from "../../components/DeleteInCartModal/DeleteInCartModal.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";

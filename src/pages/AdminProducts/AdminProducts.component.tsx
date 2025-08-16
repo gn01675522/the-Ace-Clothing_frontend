@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import Pagination from "../../components/Pagination/Pagination.component";
+import { Pagination } from "../../features/navigation/index";
 import Loading from "../../components/Loading/Loading.component";
 import ProductModal from "../../components/ProductModal/ProductModal.component";
 import AdminTable from "../../components/AdminTable/AdminTable.component";

@@ -23,7 +23,7 @@ type PropsType = {
 };
 
 //todo need refactor
-export const CartItem: FC<PropsType> = ({ item }) => {
+const CartItem: FC<PropsType> = ({ item }) => {
   const { id: itemId, qty, final_total } = item;
   const { category, title, imageUrl } = item.product;
 
@@ -119,3 +119,5 @@ export const CartItem: FC<PropsType> = ({ item }) => {
     </div>
   );
 };
+
+export default CartItem;

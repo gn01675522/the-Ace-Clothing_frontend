@@ -8,7 +8,7 @@ import type { FC } from "react";
 
 import "./CartIcon.styles.scss";
 
-export const CartIcon: FC = () => {
+const CartIcon: FC = () => {
   const { quantity, isItemChange } = useCartDetectedQuantity();
 
   const btnClasses = `cart-icon__logo ${
@@ -22,3 +22,5 @@ export const CartIcon: FC = () => {
     </NavLink>
   );
 };
+
+export default CartIcon;

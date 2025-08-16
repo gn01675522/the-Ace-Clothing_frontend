@@ -6,7 +6,7 @@ import ScrollList, {
 } from "./components/ScrollList/ScrollList.component";
 import FullWidthBanner from "./components/FullWidthBanner/FullWidthBanner.component";
 import SplitBanner from "./components/SplitBanner/SplitBanner.component";
-import Categories from "../../components/Categories/Categories.component";
+import { Categories } from "../../features/navigation/index";
 
 import type { FC } from "react";
 
