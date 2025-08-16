@@ -1,12 +1,12 @@
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 
-import { clientRoutes } from "./Client.routes"; 
+import { clientRoutes } from "./Client.routes";
 import { adminRoutes } from "./Admin.routes";
 
 import type { RouteObject } from "react-router-dom";
 
-const Login = lazy(() => import("../pages/Login/Login.page"));
+const Login = lazy(() => import("../pages/login/Login.page"));
 
 const combinedRoutes: RouteObject[] = [
   {

@@ -7,16 +7,16 @@ const AdminLayout = lazy(
   () => import("../layouts/AdminLayout/AdminLayout.component")
 );
 const AdminProducts = lazy(
-  () => import("../pages/AdminProducts/AdminProducts.page")
+  () => import("../pages/admin-products/AdminProducts.page")
 );
 const Categories = lazy(
   () => import("../features/navigation/modules/categories/Categories.component")
 );
 const AdminCoupons = lazy(
-  () => import("../pages/AdminCoupons/AdminCoupons.page")
+  () => import("../pages/admin-coupons/AdminCoupons.page")
 );
 const AdminOrders = lazy(
-  () => import("../pages/AdminOrders/AdminOrders.page")
+  () => import("../pages/admin-orders/AdminOrders.page")
 );
 
 export const adminRoutes: RouteObject[] = [
