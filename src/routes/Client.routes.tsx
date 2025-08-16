@@ -3,7 +3,7 @@ import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 
 const MainLayout = lazy(
-  () => import("../layouts/MainLayout/MainLayout.component")
+  () => import("../layouts/main-layout/MainLayout.component")
 );
 const Home = lazy(() => import("../pages/home/Home.page"));
 const Products = lazy(() => import("../pages/products/Products.page"));
