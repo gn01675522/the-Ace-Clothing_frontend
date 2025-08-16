@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 import OrderCard from "../../components/OrderCard/OrderCard.component";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
-import ProductCard from "../../components/ProductCard/ProductCard.component";
+import { ProductCard } from "../../features/product/index";
 
 import {
   selectUserOrderProducts,
@@ -12,10 +12,12 @@ import {
   selectUserSingleOrder,
 } from "../../store/userOrder/userOrder.selector";
 
-import { clearUserProduct } from "../../store/userProduct/userProduct.slice";
+import {
+  clearUserProduct,
+  selectRecommendProducts,
+} from "../../features/product/index";
 
-import { fetchUserProductAsync } from "../../store/userProduct/userProduct.asyncThunk";
-import { selectRecommendProducts } from "../../store/userProduct/userProduct.selector";
+import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
 import { selectUserFavorite } from "../../store/user/user.selector";
 
 import { fetchCartItemsAsync } from "../../features/cart/index";

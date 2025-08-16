@@ -7,11 +7,11 @@ import ScrollItem from "../scroll-item/ScrollItem.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import { selectUserFavorite } from "../../../../store/user/user.selector";
-import { fetchUserProductAsync } from "../../../../store/userProduct/userProduct.asyncThunk";
+import { fetchUserProductAsync } from "../../../product/store/client/userProduct.asyncThunk";
 import {
   selectNewUserProducts,
   selectUserProductsOnSale,
-} from "../../../../store/userProduct/userProduct.selector";
+} from "../../../product/index";
 
 import { computedWidthByContainerHelper } from "./ScrollList.helpers";
 

@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { PRODUCT_CATEGORIES } from "../../shared/types";
+import { RootState } from "../../../../store/store";
+import { PRODUCT_CATEGORIES } from "../../../../shared/types";
 
 const selectUserProductReducer = (state: RootState) => state.userProduct;
 

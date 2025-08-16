@@ -5,8 +5,8 @@ import {
   fetchUserSingleProductAsync,
 } from "./userProduct.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { Product, ProductWithId } from "./userProduct.types";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { Product, ProductWithId } from "../../DTOs/userProduct.types";
 
 type UserProductState = {
   readonly products: Product[];

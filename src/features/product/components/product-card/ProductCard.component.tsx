@@ -1,16 +1,16 @@
-import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
+import { useAppSelector, useAppDispatch } from "../../../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
-import WhiteHeartSVGIcon from "../SVGIcons/WhiteHeartSVGIcon.component";
-import RedHeartSVGIcon from "../SVGIcons/RedHeartSVGIcon.component";
-import PriceTag from "../PriceTag/PriceTag.component";
+import WhiteHeartSVGIcon from "../../../../components/SVGIcons/WhiteHeartSVGIcon.component";
+import RedHeartSVGIcon from "../../../../components/SVGIcons/RedHeartSVGIcon.component";
+import PriceTag from "../../../../components/PriceTag/PriceTag.component";
 
-import { setUserFavorite } from "../../store/user/user.slice";
-import { selectUserFavorite } from "../../store/user/user.selector";
+import { setUserFavorite } from "../../../../store/user/user.slice";
+import { selectUserFavorite } from "../../../../store/user/user.selector";
 
 import type { FC, MouseEvent } from "react";
-import type { Product } from "../../store/userProduct/userProduct.types";
-import type { PRODUCT_CATEGORIES } from "../../shared/types";
+import type { Product } from "../../DTOs/userProduct.types";
+import type { PRODUCT_CATEGORIES } from "../../../../shared/types";
 
 import "./ProductCard.styles.scss";
 

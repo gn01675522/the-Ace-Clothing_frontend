@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../../store/redux-hooks";
+import { useAppDispatch } from "../../../../store/redux-hooks";
 
-import NoImageSVGLogo from "../SVGIcons/NoImageSVGLogo.component";
-import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import { ModalPortal } from "../ModalPortal/ModalPortal.component";
+import NoImageSVGLogo from "../../../../components/SVGIcons/NoImageSVGLogo.component";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  ModalPortal,
+} from "../../../../components/index";
 
 import {
   updateAdminProductAsync,
   createAdminProductAsync,
-} from "../../store/adminProduct/adminProduct.asyncThunk";
+} from "../../store/admin/adminProduct.asyncThunk";
 
 import { formContent } from "./formContent.data";
 
@@ -21,11 +24,12 @@ import type {
   Dispatch,
   SetStateAction,
 } from "react";
-import type { Product } from "../../store/userProduct/userProduct.types";
+import type { Product } from "../../DTOs/userProduct.types";
+
 import type {
   AdminProduct,
   AdminProductForCreate,
-} from "../../store/adminProduct/adminProduct.types";
+} from "../../DTOs/adminProduct.types";
 
 import "./ProductModal.styles.scss";
 

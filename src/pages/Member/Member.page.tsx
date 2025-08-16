@@ -7,14 +7,14 @@ import Wishlist from "./components/Wishlist/Wishlist.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { fetchUserOrdersAsync } from "../../store/userOrder/userOrder.asyncThunk";
-import { fetchUserProductAsync } from "../../store/userProduct/userProduct.asyncThunk";
+import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
 import { setUserFavorite } from "../../store/user/user.slice";
 
-import { selectUserProducts } from "../../store/userProduct/userProduct.selector";
+import { selectUserProducts } from "../../features/product/index";
 import { selectUserFavorite } from "../../store/user/user.selector";
 
 import type { FC, FormEvent, ChangeEvent } from "react";
-import type { Product } from "../../store/userProduct/userProduct.types";
+import type { Product } from "../../features/product/DTOs/userProduct.types";
 
 import "./Member.styles.scss";
 
