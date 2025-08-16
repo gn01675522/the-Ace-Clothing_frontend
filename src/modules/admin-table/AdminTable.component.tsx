@@ -1,4 +1,4 @@
-import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import type { ReactNode } from "react";
 
@@ -14,7 +14,9 @@ type AdminTableHeaderPropsType<T> = {
   columns: Column<T>[];
 };
 
-const AdminTableHeader = <T,>({ columns }: AdminTableHeaderPropsType<T>) => {
+export const AdminTableHeader = <T,>({
+  columns,
+}: AdminTableHeaderPropsType<T>) => {
   return (
     <thead className="admin-table__header">
       <tr className="admin-table__header-row">
@@ -89,7 +91,7 @@ type AdminPropsType<T extends { id: string | number }> = {
   onClickToDeleteHandler: (target: T) => void;
 };
 
-const AdminTable = <T extends { id: string | number }>({
+export const AdminTable = <T extends { id: string | number }>({
   data,
   columns,
   onClickToEditHandler,
@@ -112,5 +114,3 @@ const AdminTable = <T extends { id: string | number }>({
     </table>
   );
 };
-
-export default AdminTable;
