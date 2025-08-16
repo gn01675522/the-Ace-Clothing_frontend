@@ -4,15 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
 import Loading from "../../components/Loading/Loading.component";
-import ProductModal from "../../components/ProductModal/ProductModal.component";
-import AdminTable from "../../components/AdminTable/AdminTable.component";
-import DeleteModal from "../../components/DeleteModal/DeleteModal.component";
-import { DELETE_MODAL_TYPE } from "../../components/DeleteModal/DeleteModal.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
-
-import { fetchAdminProductAsync } from "../../store/adminProduct/adminProduct.asyncThunk";
-
 import {
+  ProductModal,
+  fetchAdminProductAsync,
   selectAdminProductIsLoading,
   selectAdminProducts,
   selectAdminMensProducts,
@@ -20,10 +14,14 @@ import {
   selectAdminHatsProducts,
   selectAdminShoesProducts,
   selectAdminAccessoriesProducts,
-} from "../../store/adminProduct/adminProduct.selector";
+} from "../../features/product/index";
+import AdminTable from "../../components/AdminTable/AdminTable.component";
+import DeleteModal from "../../components/DeleteModal/DeleteModal.component";
+import { DELETE_MODAL_TYPE } from "../../components/DeleteModal/DeleteModal.component";
+import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import type { FC } from "react";
-import type { AdminProduct } from "../../store/adminProduct/adminProduct.types";
+import type { AdminProduct } from "../../features/product/DTOs/adminProduct.types";
 
 import "./AdminProducts.styles.scss";
 

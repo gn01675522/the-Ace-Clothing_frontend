@@ -1,11 +1,14 @@
-import { createAppAsyncThunk } from "../redux-utils";
+import { createAppAsyncThunk } from "../../../../store/redux-utils";
 import axios from "axios";
 
-import { setHandleMessage } from "../message/message.slice";
+import { setHandleMessage } from "../../../../store/message/message.slice";
 
 import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { AdminProduct, AdminProductForCreate } from "./adminProduct.types";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type {
+  AdminProduct,
+  AdminProductForCreate,
+} from "../../DTOs/adminProduct.types";
 
 //********** Helper **********
 const cleanedDataHelper = (formData: AdminProduct | AdminProductForCreate) => {

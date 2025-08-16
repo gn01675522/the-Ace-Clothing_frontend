@@ -13,7 +13,7 @@ import {
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { Product } from "../../../../store/userProduct/userProduct.types";
+import type { Product } from "../../../../features/product/DTOs/userProduct.types";
 
 import "./Wishlist.styles.scss";
 

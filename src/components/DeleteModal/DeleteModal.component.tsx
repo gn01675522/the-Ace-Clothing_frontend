@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../store/redux-hooks";
 import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
 import { ModalPortal } from "../ModalPortal/ModalPortal.component";
 
-import { deleteAdminProductAsync } from "../../store/adminProduct/adminProduct.asyncThunk";
+import { deleteAdminProductAsync } from "../../features/product/index";
 
 import { deleteAdminOrdersAsync } from "../../store/adminOrder/adminOrder.asyncThunk";
 import { deleteAdminCouponsAsync } from "../../features/admin-coupon/index";

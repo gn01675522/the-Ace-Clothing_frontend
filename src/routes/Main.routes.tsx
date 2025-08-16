@@ -6,7 +6,7 @@ import { adminRoutes } from "./Admin.routes";
 
 import type { RouteObject } from "react-router-dom";
 
-const Login = lazy(() => import("../pages/Login/Login.component"));
+const Login = lazy(() => import("../pages/Login/Login.page"));
 
 const combinedRoutes: RouteObject[] = [
   {

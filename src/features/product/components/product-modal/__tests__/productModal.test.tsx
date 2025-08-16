@@ -1,8 +1,8 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "../../../../../utils/test.utils";
 
 import ProductModal from "../ProductModal.component";
-import type { AdminProduct } from "store/adminProduct/adminProduct.types";
+import type { AdminProduct } from "features/product/DTOs/adminProduct.types";
 
 describe("ProductModal test suite.", () => {
   const onClick = jest.fn();
@@ -84,9 +84,13 @@ describe("ProductModal test suite.", () => {
     const titleElement = screen.getByText(`產品名稱：${productData.title}`);
     const categoryElement = screen.getByDisplayValue(productData.category);
     const unitElement = screen.getByDisplayValue(productData.unit);
-    const originPriceElement = screen.getByDisplayValue(`${productData.origin_price}`);
+    const originPriceElement = screen.getByDisplayValue(
+      `${productData.origin_price}`
+    );
     const priceElement = screen.getByDisplayValue(`${productData.price}`);
-    const descriptionElement = screen.getByDisplayValue(productData.description);
+    const descriptionElement = screen.getByDisplayValue(
+      productData.description
+    );
     const contentElement = screen.getByDisplayValue(productData.content);
     const isEnabledButtonElement = screen.getByLabelText("是否啟用");
 

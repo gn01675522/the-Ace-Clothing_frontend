@@ -5,13 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
 import Loading from "../../components/Loading/Loading.component";
-import ProductCard from "../../components/ProductCard/ProductCard.component";
+import { ProductCard } from "../../features/product/index";
 import Message from "../../components/Message/Message.component";
 
-import { clearUserProduct } from "../../store/userProduct/userProduct.slice";
-import { fetchUserProductAsync } from "../../store/userProduct/userProduct.asyncThunk";
-
 import {
+  clearUserProduct,
   selectUserProductIsLoading,
   selectUserProducts,
   selectUserMensProducts,
@@ -21,7 +19,8 @@ import {
   selectUserAccessoriesProducts,
   selectUrbanProducts,
   selectBohemianProducts,
-} from "../../store/userProduct/userProduct.selector";
+} from "../../features/product/index";
+import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
 
 import { selectUserFavorite } from "../../store/user/user.selector";
 

@@ -7,8 +7,8 @@ import {
   createAdminProductAsync,
 } from "./adminProduct.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { AdminProduct } from "./adminProduct.types";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { AdminProduct } from "../../DTOs/adminProduct.types";
 
 type AdminProductState = {
   readonly products: AdminProduct[];

@@ -1,10 +1,10 @@
-import { createAppAsyncThunk } from "../redux-utils";
+import { createAppAsyncThunk } from "../../../../store/redux-utils";
 import axios from "axios";
 
-import { setHandleMessage } from "../message/message.slice";
+import { setHandleMessage } from "../../../../store/message/message.slice";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { Product, ProductWithId } from "./userProduct.types";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { Product, ProductWithId } from "../../DTOs/userProduct.types";
 
 //* 取得 api 裡面全部的產品資訊
 export const fetchUserProductAsync = createAppAsyncThunk<Product[], void>(

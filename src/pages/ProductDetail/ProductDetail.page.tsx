@@ -8,8 +8,8 @@ import Message from "../../components/Message/Message.component";
 import PriceTag from "../../components/PriceTag/PriceTag.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
-import { fetchUserSingleProductAsync } from "../../store/userProduct/userProduct.asyncThunk";
-import { selectUserSingleProduct } from "../../store/userProduct/userProduct.selector";
+import { fetchUserSingleProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
+import { selectUserSingleProduct } from "../../features/product/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 
