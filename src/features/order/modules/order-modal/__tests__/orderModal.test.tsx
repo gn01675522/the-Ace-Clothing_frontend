@@ -1,9 +1,9 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "../../../../../utils/test.utils";
 
 import OrderModal from "../OrderModal.component";
 
-import type { Order } from "store/adminOrder/adminOrders.type";
+import type { Order } from "../../../DTOs/adminOrders.type";
 
 describe("OrderModal test suite.", () => {
   const orderData = {
