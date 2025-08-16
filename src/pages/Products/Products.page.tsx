@@ -5,10 +5,8 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
 import Loading from "../../components/Loading/Loading.component";
-import { ProductCard } from "../../features/product/index";
-import Message from "../../components/Message/Message.component";
-
 import {
+  ProductCard,
   clearUserProduct,
   selectUserProductIsLoading,
   selectUserProducts,
@@ -19,10 +17,11 @@ import {
   selectUserAccessoriesProducts,
   selectUrbanProducts,
   selectBohemianProducts,
+  fetchUserProductAsync,
 } from "../../features/product/index";
-import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
+import Message from "../../components/Message/Message.component";
 
-import { selectUserFavorite } from "../../store/user/user.selector";
+import { selectUserFavorite } from "../../features/user/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 import { PRODUCT_CATEGORIES } from "../../shared/types";

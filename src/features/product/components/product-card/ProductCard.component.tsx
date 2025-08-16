@@ -5,8 +5,7 @@ import WhiteHeartSVGIcon from "../../../../components/SVGIcons/WhiteHeartSVGIcon
 import RedHeartSVGIcon from "../../../../components/SVGIcons/RedHeartSVGIcon.component";
 import PriceTag from "../../../../components/PriceTag/PriceTag.component";
 
-import { setUserFavorite } from "../../../../store/user/user.slice";
-import { selectUserFavorite } from "../../../../store/user/user.selector";
+import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 
 import type { FC, MouseEvent } from "react";
 import type { Product } from "../../DTOs/userProduct.types";

@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import OrderDetails from "./components/OrderDetail/OrderDetails.component";
-import Wishlist from "./components/Wishlist/Wishlist.component";
+import { OrderDetails } from "../../features/order/index";
+import { Wishlist, selectUserFavorite } from "../../features/user/index";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import { fetchUserOrdersAsync } from "../../features/order/index";
 import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
-import { setUserFavorite } from "../../store/user/user.slice";
+import { setUserFavorite } from "../../features/user/store/user.slice";
 
 import { selectUserProducts } from "../../features/product/index";
-import { selectUserFavorite } from "../../store/user/user.selector";
 
 import type { FC, FormEvent, ChangeEvent } from "react";
 import type { Product } from "../../features/product/DTOs/userProduct.types";

@@ -1,23 +1,23 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import { userReducer } from "./user/user.slice";
+import { userReducer } from "../features/user/index";
 import { cartReducer } from "../features/cart/index";
 import {
   userProductReducer,
   adminProductReducer,
 } from "../features/product/index";
+import { adminCouponReducer } from "../features/admin-coupon/index";
+import { adminOrderReducer } from "../features/order/index";
+import { userOrderReducer } from "../features/order/index";
 import { messageReducer } from "./message/message.slice";
-import { adminCouponReducer } from "../features/admin-coupon/store/adminCoupon.slice";
-import { adminOrderReducer } from "../features/order/store/admin/adminOrder.slice";
-import { userOrderReducer } from "../features/order/store/client/userOrder.slice";
 
 export const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   userProduct: userProductReducer,
-  message: messageReducer,
   adminProduct: adminProductReducer,
   adminCoupon: adminCouponReducer,
   adminOrder: adminOrderReducer,
   userOrder: userOrderReducer,
+  message: messageReducer,
 });

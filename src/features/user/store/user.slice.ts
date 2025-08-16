@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { setCurrentUserAsync } from "./user.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
+import type { AxiosRejectTypes } from "../../../store/redux-utils";
 
 type UserState = {
   readonly isSuccess: boolean;

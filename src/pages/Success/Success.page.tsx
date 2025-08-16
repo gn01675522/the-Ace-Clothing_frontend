@@ -19,7 +19,7 @@ import {
 } from "../../features/product/index";
 
 import { fetchUserProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
-import { selectUserFavorite } from "../../store/user/user.selector";
+import { selectUserFavorite } from "../../features/user/index";
 
 import { fetchCartItemsAsync } from "../../features/cart/index";
 import { setClearUserOrderState } from "../../features/order/store/client/userOrder.slice";

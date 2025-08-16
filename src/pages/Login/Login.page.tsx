@@ -8,12 +8,12 @@ import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 import Message from "../../components/Message/Message.component";
 
 import { selectHasMessage } from "../../store/message/message.selector";
-import { setCurrentUserAsync } from "../../store/user/user.asyncThunk";
 import {
+  setCurrentUserAsync,
   selectUserLoginIsSuccess,
   selectUserLoginIsLoading,
   selectUserLoginMessage,
-} from "../../store/user/user.selector";
+} from "../../features/user/index";
 
 import type { FC, ChangeEvent } from "react";
 
