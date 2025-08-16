@@ -6,9 +6,9 @@ import {
   deleteAdminOrdersAsync,
 } from "./adminOrder.asyncThunk";
 
-import type { AxiosRejectTypes } from "../redux-utils";
-import type { Order } from "./adminOrders.type";
-import type { Pagination } from "../../shared/types/types";
+import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { Order } from "../../DTOs/adminOrders.type";
+import type { Pagination } from "../../../../shared/types/types";
 
 type AdminOrderState = {
   readonly orders: Order[];

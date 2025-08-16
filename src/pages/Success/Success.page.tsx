@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams, Link } from "react-router-dom";
 
-import OrderCard from "../../components/OrderCard/OrderCard.component";
+import { OrderCard } from "../../features/order/index";
 import SummaryCard from "../../components/SummaryCard/SummaryCard.component";
 import { ProductCard } from "../../features/product/index";
 
@@ -10,7 +10,8 @@ import {
   selectUserOrderProducts,
   selectUserOrderTotalPrice,
   selectUserSingleOrder,
-} from "../../store/userOrder/userOrder.selector";
+  fetchUserSingleOrderAsync,
+} from "../../features/order/index";
 
 import {
   clearUserProduct,
@@ -21,8 +22,7 @@ import { fetchUserProductAsync } from "../../features/product/store/client/userP
 import { selectUserFavorite } from "../../store/user/user.selector";
 
 import { fetchCartItemsAsync } from "../../features/cart/index";
-import { fetchUserSingleOrderAsync } from "../../store/userOrder/userOrder.asyncThunk";
-import { setClearUserOrderState } from "../../store/userOrder/userOrder.slice";
+import { setClearUserOrderState } from "../../features/order/store/client/userOrder.slice";
 
 import type { FC } from "react";
 import type { PRODUCT_CATEGORIES } from "../../shared/types";
