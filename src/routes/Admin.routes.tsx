@@ -10,7 +10,7 @@ const AdminProducts = lazy(
   () => import("../pages/AdminProducts/AdminProducts.component")
 );
 const Categories = lazy(
-  () => import("../components/Categories/Categories.component")
+  () => import("../features/navigation/modules/categories/Categories.component")
 );
 const AdminCoupons = lazy(
   () => import("../pages/AdminCoupons/AdminCoupons.component")

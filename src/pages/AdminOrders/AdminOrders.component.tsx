@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import Pagination from "../../components/Pagination/Pagination.component";
+import { Pagination } from "../../features/navigation/index";
 import OrderModal from "../../components/OrderModal/OrderModal.component";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
 import DeleteModal, {
