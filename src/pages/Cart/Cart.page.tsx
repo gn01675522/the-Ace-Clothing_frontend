@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { NavLink } from "react-router-dom";
 
-import Message from "../../components/Message/Message.component";
 import { CartItem } from "../../features/cart/index";
 import { Categories } from "../../features/navigation/index";
-import Loading from "../../components/Loading/Loading.component";
 import { DeleteInCartModal } from "../../modules/index";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  Loading,
+  Message,
+} from "../../components/index";
 
 import {
   setCartIsModalOpen,

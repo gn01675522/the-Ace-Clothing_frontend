@@ -11,7 +11,7 @@ import {
 } from "../../features/order/index";
 import { AdminTable } from "../../modules/index";
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
-import Loading from "../../components/Loading/Loading.component";
+import { Loading } from "../../components/index";
 
 import { fetchAdminOrdersAsync } from "../../features/order/store/admin/adminOrder.asyncThunk";
 

@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import LeftArrowSVGIcon from "../../../../components/SVGIcons/LeftArrowSVGIcon.component";
-import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon.component";
-import Indicator from "../../../../components/Indicator/Indicator.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  Indicator,
+  LeftArrowSVGIcon,
+  RightArrowSVGIcon,
+} from "../../../../components/index";
 
 import { BANNER_DATA } from "./Banner.data";
 

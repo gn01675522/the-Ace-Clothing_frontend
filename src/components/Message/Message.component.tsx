@@ -1,8 +1,10 @@
-import CrossSVGIcon from "../SVGIcons/CrossSVGIcon.component";
-import CheckSVGIcon from "../SVGIcons/CheckSVGIcon.component";
+import { CrossSVGIcon } from "../SVG-icons/CrossSVGIcon.component";
+import { CheckSVGIcon } from "../SVG-icons/CheckSVGIcon.component";
 
 import { useSelector } from "react-redux";
 import { selectMessage } from "../../store/message/message.selector";
+
+import type { FC } from "react";
 
 import "./Message.styles.scss";
 
@@ -17,7 +19,7 @@ const getIcon = (type: MESSAGE_TYPE) =>
     [MESSAGE_TYPE.danger]: CrossSVGIcon,
   }[type]);
 
-const Message = () => {
+export const Message: FC = () => {
   const message = useSelector(selectMessage);
   const { type, text } = message;
   const MessageIcon = getIcon(type as MESSAGE_TYPE);
@@ -37,5 +39,3 @@ const Message = () => {
     </>
   );
 };
-
-export default Message;

@@ -1,17 +1,16 @@
 import { screen, render, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
-import ModalBackdrop from "../ModalBackdrop.component";
+import { Backdrop } from "../../backdrop/Backdrop.component";
 
-describe("ModalBackdrop test suite.", () => {
+describe("Backdrop test suite.", () => {
   test("Should render children correctly.", () => {
     const onClick = () => {};
     const childrenText = "test";
 
     render(
-      <ModalBackdrop backdropClose={onClick}>
+      <Backdrop backdropClose={onClick}>
         <div>{childrenText}</div>
-      </ModalBackdrop>
+      </Backdrop>
     );
 
     const childrenElment = screen.getByText(childrenText);
@@ -23,9 +22,9 @@ describe("ModalBackdrop test suite.", () => {
     const childrenText = "test";
 
     const { container } = render(
-      <ModalBackdrop backdropClose={onClick}>
+      <Backdrop backdropClose={onClick}>
         <div>{childrenText}</div>
-      </ModalBackdrop>
+      </Backdrop>
     );
 
     const backdropElement = container.querySelector(".modal__backdrop");

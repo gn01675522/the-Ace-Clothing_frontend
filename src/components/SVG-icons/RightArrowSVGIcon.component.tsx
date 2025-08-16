@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const RightArrowSVGIcon: FC<PropsType> = ({ className }) => {
+export const RightArrowSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -78,5 +78,3 @@ z"
     </svg>
   );
 };
-
-export default RightArrowSVGIcon;

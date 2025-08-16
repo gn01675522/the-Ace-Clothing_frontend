@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const LineSVGIcon: FC<PropsType> = ({ className }) => {
+export const LineSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -282,5 +282,3 @@ z"
     </svg>
   );
 };
-
-export default LineSVGIcon;

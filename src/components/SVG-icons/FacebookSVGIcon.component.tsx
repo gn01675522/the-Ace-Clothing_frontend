@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const FacebookSVGIcon: FC<PropsType> = ({ className }) => {
+export const FacebookSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -139,5 +139,3 @@ z"
     </svg>
   );
 };
-
-export default FacebookSVGIcon;

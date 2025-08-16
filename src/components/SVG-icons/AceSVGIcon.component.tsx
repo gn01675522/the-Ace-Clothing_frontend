@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const AceSVGIcon: FC<PropsType> = ({ className }) => {
+export const AceSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -31,5 +31,3 @@ const AceSVGIcon: FC<PropsType> = ({ className }) => {
     </svg>
   );
 };
-
-export default AceSVGIcon;

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import { Pagination } from "../../features/navigation/index";
-import Loading from "../../components/Loading/Loading.component";
 import {
   ProductModal,
   fetchAdminProductAsync,
@@ -18,7 +17,7 @@ import {
 import { AdminTable } from "../../modules/index";
 
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
+import { Button, BUTTON_TYPE_CLASS, Loading } from "../../components/index";
 
 import type { FC } from "react";
 import type { AdminProduct } from "../../features/product/DTOs/adminProduct.types";

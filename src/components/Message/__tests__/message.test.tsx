@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../utils/test.utils";
 
-import Message from "../Message.component";
+import { Message } from "../Message.component";
 
 describe("Message test suite.", () => {
   test("Should render message correctly.", () => {

@@ -9,7 +9,7 @@ type PriceTagProps = {
   price: number;
 };
 
-const PriceTag: FC<PriceTagProps> = ({ origin_price, price }) => {
+export const PriceTag: FC<PriceTagProps> = ({ origin_price, price }) => {
   return (
     <>
       {origin_price > price && (
@@ -27,5 +27,3 @@ const PriceTag: FC<PriceTagProps> = ({ origin_price, price }) => {
     </>
   );
 };
-
-export default PriceTag;

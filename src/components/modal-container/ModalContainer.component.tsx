@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 
-import ModalBackdrop from "./ModalBackdrop.component";
+import { Backdrop } from "../backdrop/Backdrop.component";
 
 import type { FC, ReactNode, MouseEvent } from "react";
 
@@ -12,7 +12,7 @@ type PropsType = {
   backdropClose: (e: MouseEvent<HTMLElement>) => void;
 };
 
-export const ModalPortal: FC<PropsType> = ({
+export const ModalContainer: FC<PropsType> = ({
   children,
   backdropClose,
   ...otherProps
@@ -20,9 +20,9 @@ export const ModalPortal: FC<PropsType> = ({
   return (
     <>
       {createPortal(
-        <ModalBackdrop backdropClose={backdropClose} {...otherProps}>
+        <Backdrop backdropClose={backdropClose} {...otherProps}>
           {children}
-        </ModalBackdrop>,
+        </Backdrop>,
         portalElement
       )}
     </>

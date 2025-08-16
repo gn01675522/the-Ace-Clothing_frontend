@@ -1,8 +1,10 @@
 import ReactLoading from "react-loading";
 
+import type { FC } from "react";
+
 import "./Loading.styles.scss";
 
-const Loading = () => {
+export const Loading: FC = () => {
   return (
     <>
       <div className="loading">
@@ -11,5 +13,3 @@ const Loading = () => {
     </>
   );
 };
-
-export default Loading;

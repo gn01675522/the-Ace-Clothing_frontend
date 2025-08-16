@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAppDispatch } from "../../../../store/redux-hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
-import { ModalPortal } from "../../../../components/index";
+import { ModalContainer } from "../../../../components/index";
 
 import {
   createAdminCouponAsync,
@@ -106,7 +106,7 @@ export const CouponModal: FC<PropsType> = ({
   }, [createOrEdit]);
 
   return (
-    <ModalPortal backdropClose={onClickToClose}>
+    <ModalContainer backdropClose={onClickToClose}>
       <div className="coupon-modal">
         <div className="coupon-modal__header">
           <h1 className="coupon-modal__header-title">
@@ -200,6 +200,6 @@ export const CouponModal: FC<PropsType> = ({
           </Button>
         </div>
       </div>
-    </ModalPortal>
+    </ModalContainer>
   );
 };

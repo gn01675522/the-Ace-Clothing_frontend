@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const InstagramSVGIcon: FC<PropsType> = ({ className }) => {
+export const InstagramSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -5138,5 +5138,3 @@ z"
     </svg>
   );
 };
-
-export default InstagramSVGIcon;

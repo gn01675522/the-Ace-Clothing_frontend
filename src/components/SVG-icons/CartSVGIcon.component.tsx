@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const CartSVGIcon: FC<PropsType> = ({ className }) => {
+export const CartSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -163,5 +163,3 @@ z"
     </svg>
   );
 };
-
-export default CartSVGIcon;

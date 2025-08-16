@@ -1,9 +1,11 @@
 import { useAppSelector, useAppDispatch } from "../../../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
-import WhiteHeartSVGIcon from "../../../../components/SVGIcons/WhiteHeartSVGIcon.component";
-import RedHeartSVGIcon from "../../../../components/SVGIcons/RedHeartSVGIcon.component";
-import PriceTag from "../../../../components/PriceTag/PriceTag.component";
+import {
+  PriceTag,
+  WhiteHeartSVGIcon,
+  RedHeartSVGIcon,
+} from "../../../../components/index";
 
 import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 

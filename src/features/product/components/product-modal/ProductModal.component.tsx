@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../store/redux-hooks";
 
-import NoImageSVGLogo from "../../../../components/SVGIcons/NoImageSVGLogo.component";
 import {
   Button,
   BUTTON_TYPE_CLASS,
-  ModalPortal,
+  ModalContainer,
+  NoImageSVGLogo,
 } from "../../../../components/index";
 
 import {
@@ -142,7 +142,7 @@ const ProductModal: FC<PropsType> = ({
   }, [createOrEdit, targetData, category]);
 
   return (
-    <ModalPortal backdropClose={onClickToClose}>
+    <ModalContainer backdropClose={onClickToClose}>
       <div className="product-modal">
         <div className="product-modal__header">
           <h1 className="product-modal__header-title">
@@ -370,7 +370,7 @@ const ProductModal: FC<PropsType> = ({
           </Button>
         </div>
       </div>
-    </ModalPortal>
+    </ModalContainer>
   );
 };
 

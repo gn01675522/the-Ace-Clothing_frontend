@@ -1,16 +1,16 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ModalPortal } from "../ModalPortal.component";
+import { ModalContainer } from "../ModalContainer.component";
 
 const onClick = jest.fn();
 
-describe("ModalPortal test suite.", () => {
+describe("ModalContainer test suite.", () => {
   test("Should renders children inside the portal.", () => {
     const childrenText = "test";
 
     render(
-      <ModalPortal backdropClose={onClick}>
+      <ModalContainer backdropClose={onClick}>
         <div>{childrenText}</div>
-      </ModalPortal>
+      </ModalContainer>
     );
 
     expect(screen.getByText(childrenText)).toBeInTheDocument();
@@ -20,9 +20,9 @@ describe("ModalPortal test suite.", () => {
     const childrenText = "test";
 
     render(
-      <ModalPortal backdropClose={onClick}>
+      <ModalContainer backdropClose={onClick}>
         <div>{childrenText}</div>
-      </ModalPortal>
+      </ModalContainer>
     );
 
     const backdropElement = document

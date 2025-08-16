@@ -2,14 +2,19 @@ import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams } from "react-router-dom";
 
-import WhiteHeartSVGIcon from "../../components/SVGIcons/WhiteHeartSVGIcon.component";
-import RedHeartSVGIcon from "../../components/SVGIcons/RedHeartSVGIcon.component";
-import Message from "../../components/Message/Message.component";
-import PriceTag from "../../components/PriceTag/PriceTag.component";
-import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
+import {
+  Button,
+  BUTTON_TYPE_CLASS,
+  Message,
+  RedHeartSVGIcon,
+  WhiteHeartSVGIcon,
+  PriceTag,
+} from "../../components/index";
 
-import { fetchUserSingleProductAsync } from "../../features/product/store/client/userProduct.asyncThunk";
-import { selectUserSingleProduct } from "../../features/product/index";
+import {
+  selectUserSingleProduct,
+  fetchUserSingleProductAsync,
+} from "../../features/product/index";
 
 import { selectHasMessage } from "../../store/message/message.selector";
 

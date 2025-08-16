@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const NoImageSVGLogo: FC<PropsType> = ({ className }) => {
+export const NoImageSVGLogo: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -133,5 +133,3 @@ const NoImageSVGLogo: FC<PropsType> = ({ className }) => {
     </svg>
   );
 };
-
-export default NoImageSVGLogo;

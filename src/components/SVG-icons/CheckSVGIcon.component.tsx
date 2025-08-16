@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const CheckSVGIcon: FC<PropsType> = ({ className }) => {
+export const CheckSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -182,5 +182,3 @@ z"
     </svg>
   );
 };
-
-export default CheckSVGIcon;

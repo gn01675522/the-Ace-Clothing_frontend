@@ -8,7 +8,11 @@ type IndicatorProps = {
   onChangeImg: (i: number) => void;
 };
 
-const Indicator: FC<IndicatorProps> = ({ imgCount, imgNum, onChangeImg }) => {
+export const Indicator: FC<IndicatorProps> = ({
+  imgCount,
+  imgNum,
+  onChangeImg,
+}) => {
   const indicator = [...new Array(imgCount)].map((_, i) => (
     <div
       className={`indicator__dots ${
@@ -20,5 +24,3 @@ const Indicator: FC<IndicatorProps> = ({ imgCount, imgNum, onChangeImg }) => {
   ));
   return <div className="indicator">{indicator}</div>;
 };
-
-export default Indicator;

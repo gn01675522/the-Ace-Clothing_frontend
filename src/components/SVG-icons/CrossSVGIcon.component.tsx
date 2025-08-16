@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const CrossSVGIcon: FC<PropsType> = ({ className }) => {
+export const CrossSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -421,5 +421,3 @@ z"
     </svg>
   );
 };
-
-export default CrossSVGIcon;

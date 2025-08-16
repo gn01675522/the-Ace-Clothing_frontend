@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import PriceTag from "../PriceTag.component";
+import { PriceTag } from "../PriceTag.component";
 
 import { formatNumberWithCommas } from "../../../utils/common.utils";
 

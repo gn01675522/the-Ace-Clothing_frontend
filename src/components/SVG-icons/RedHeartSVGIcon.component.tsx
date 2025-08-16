@@ -4,7 +4,7 @@ type PropsType = {
   className: string;
 };
 
-const RedHeartSVGIcon: FC<PropsType> = ({ className }) => {
+export const RedHeartSVGIcon: FC<PropsType> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -110,5 +110,3 @@ z"
     </svg>
   );
 };
-
-export default RedHeartSVGIcon;
