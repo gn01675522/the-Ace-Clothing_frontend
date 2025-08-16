@@ -16,8 +16,8 @@ import {
   selectAdminAccessoriesProducts,
 } from "../../features/product/index";
 import AdminTable from "../../components/AdminTable/AdminTable.component";
-import DeleteModal from "../../components/DeleteModal/DeleteModal.component";
-import { DELETE_MODAL_TYPE } from "../../components/DeleteModal/DeleteModal.component";
+
+import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 import { Button, BUTTON_TYPE_CLASS } from "../../components/index";
 
 import type { FC } from "react";

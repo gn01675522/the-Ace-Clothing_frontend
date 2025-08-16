@@ -1,7 +1,6 @@
 import { useAppDispatch } from "../../store/redux-hooks";
 
-import { Button, BUTTON_TYPE_CLASS } from "../Button/Button.component";
-import { ModalPortal } from "../ModalPortal/ModalPortal.component";
+import { Button, BUTTON_TYPE_CLASS, ModalPortal } from "../../components/index";
 
 import { deleteAdminProductAsync } from "../../features/product/index";
 
@@ -44,7 +43,12 @@ type PropsType = {
   closeAction: Dispatch<SetStateAction<boolean>>;
 };
 
-const DeleteModal: FC<PropsType> = ({ dataType, id, title, closeAction }) => {
+export const DeleteModal: FC<PropsType> = ({
+  dataType,
+  id,
+  title,
+  closeAction,
+}) => {
   const actionTarget = deleteAction(dataType);
 
   const dispatch = useAppDispatch();
@@ -93,5 +97,3 @@ const DeleteModal: FC<PropsType> = ({ dataType, id, title, closeAction }) => {
     </ModalPortal>
   );
 };
-
-export default DeleteModal;
