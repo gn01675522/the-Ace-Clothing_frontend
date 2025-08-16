@@ -3,14 +3,12 @@ import { useSelector } from "react-redux";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
-import {
-  selectUserOrders,
-  type OrderDetail,
-} from "../../../../features/order/index";
+import { selectUserOrders } from "../../store/client/userOrder.selector";
 
 import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
+import type { OrderDetail } from "../../DTOs/userOrder.types";
 
 import "./OrderDetails.styles.scss";
 

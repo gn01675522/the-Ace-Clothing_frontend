@@ -1,5 +1,6 @@
-export { default as OrderCard } from "./components/order-card/OrderCard.component";
 export { default as OrderModal } from "./modules/order-modal/OrderModal.component";
+export { default as OrderCard } from "./components/order-card/OrderCard.component";
+export { default as OrderDetails } from "./components/order-detail/OrderDetails.component";
 
 export * from "./store/client/userOrder.asyncThunk";
 export * from "./store/client/userOrder.selector";

@@ -6,9 +6,10 @@ import RightArrowSVGIcon from "../../../../components/SVGIcons/RightArrowSVGIcon
 import ScrollItem from "../scroll-item/ScrollItem.component";
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
-import { selectUserFavorite } from "../../../../store/user/user.selector";
-import { fetchUserProductAsync } from "../../../product/store/client/userProduct.asyncThunk";
+import { selectUserFavorite } from "../../../user/index";
+
 import {
+  fetchUserProductAsync,
   selectNewUserProducts,
   selectUserProductsOnSale,
 } from "../../../product/index";

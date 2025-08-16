@@ -1,10 +1,12 @@
-import { createAppAsyncThunk } from "../redux-utils";
+import {
+  createAppAsyncThunk,
+  type AxiosRejectTypes,
+} from "../../../store/redux-utils";
 import axios from "axios";
 
-import { setHandleMessage } from "../message/message.slice";
+import { setHandleMessage } from "../../../store/message/message.slice";
 
 import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../redux-utils";
 
 //* 設定登入 token
 export const setCurrentUserAsync = createAppAsyncThunk<

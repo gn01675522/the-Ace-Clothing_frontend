@@ -20,8 +20,7 @@ import {
   selectCartItems,
 } from "../../features/cart/index";
 
-import { selectUserFavorite } from "../../store/user/user.selector";
-import { setUserFavorite } from "../../store/user/user.slice";
+import { selectUserFavorite, setUserFavorite } from "../../features/user/index";
 
 import type { FC, MouseEvent } from "react";
 
