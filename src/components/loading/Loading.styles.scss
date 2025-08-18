@@ -1,3 +1,6 @@
+@use "../../stylesheets/variables";
+@use "../../stylesheets/animation";
+
 .loading {
   position: fixed;
   display: flex;
@@ -10,4 +13,14 @@
   align-items: center;
   backdrop-filter: blur(5px);
   z-index: 10000;
+}
+
+.loader {
+  width: 75px;
+  height: 75px;
+  border: 15px solid #dddddd;
+  border-radius: 50%;
+  opacity: 70%;
+  border-top-color: variables.$color-third-bg;
+  animation: loading 0.75s ease infinite;
 }

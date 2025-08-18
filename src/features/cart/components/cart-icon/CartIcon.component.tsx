@@ -8,17 +8,33 @@ import type { FC } from "react";
 
 import "./CartIcon.styles.scss";
 
-export const CartIcon: FC = () => {
+type PropsType = {
+  wrapperClass?: string;
+  iconClass?: string;
+  quantityClass?: string;
+};
+
+export const CartIcon: FC<PropsType> = ({
+  wrapperClass,
+  iconClass,
+  quantityClass,
+}) => {
   const { quantity, isItemChange } = useDetectedCartQuantity();
 
-  const btnClasses = `cart-icon__logo ${
+  const wrapperClasses = `cart-icon ${wrapperClass ? wrapperClass : ""}`;
+
+  const iconClasses = `cart-icon__logo ${
     isItemChange ? "cart-icon__logo--bump" : ""
+  } ${iconClass ? iconClass : ""}`;
+
+  const quantityClasses = `cart-icon__count ${
+    quantityClass ? quantityClass : ""
   }`;
 
   return (
-    <NavLink className="cart-icon" to="/cart" aria-label="cart link">
-      <CartSVGIcon className={btnClasses} />
-      {quantity !== 0 && <div className="cart-icon__count">{quantity}</div>}
+    <NavLink className={wrapperClasses} to="/cart" aria-label="cart link">
+      <CartSVGIcon className={iconClasses} />
+      {quantity !== 0 && <div className={quantityClasses}>{quantity}</div>}
     </NavLink>
   );
 };
