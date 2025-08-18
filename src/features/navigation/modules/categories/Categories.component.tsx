@@ -6,7 +6,7 @@ import type { FC } from "react";
 
 import "./Categories.styles.scss";
 
-const Categories: FC = () => {
+export const Categories: FC = () => {
   return (
     <div className="categories">
       {CATEGORIES_DATA.map((category, i) => (
@@ -15,5 +15,3 @@ const Categories: FC = () => {
     </div>
   );
 };
-
-export default Categories;

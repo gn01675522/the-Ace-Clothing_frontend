@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
-import { Pagination } from "../../features/navigation/index";
+import { Pagination } from "../../modules/index";
 import { Loading, Message } from "../../components/index";
 import {
   ProductCard,

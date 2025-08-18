@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { useDropdownControl } from "../../hooks/navigation.hooks";
+import {
+  useDropdownControl,
+  useFetchCartItems,
+} from "../../hooks/navigation.hooks";
 
 import { Hamburger } from "../../components/hamburger/Hamburger.component";
 import { DropdownList } from "../../components/dropdown-list/DropdownList.component";
@@ -19,9 +21,11 @@ const navOption = [
   { title: "飾品", link: "/accessories" },
 ];
 
-const NavBar: FC = () => {
+export const NavBar: FC = () => {
   const { isDropdownOpen, dropdownRef, onClickIsDropdownOpen } =
     useDropdownControl();
+
+  useFetchCartItems();
 
   return (
     <nav className="navbar">
@@ -40,5 +44,3 @@ const NavBar: FC = () => {
     </nav>
   );
 };
-
-export default NavBar;

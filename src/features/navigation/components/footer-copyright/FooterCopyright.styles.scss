@@ -1,0 +1,17 @@
+@use "../../../../stylesheets/variables";
+
+.footer-copyright {
+  width: 100%;
+  height: min-content;
+  padding: 15px 0 15px 1rem;
+  line-height: 32px;
+  background-color: variables.$color-secondary-bg;
+  word-break: break-all;
+  color: variables.$color-secondary-text;
+  &__link {
+    color: variables.$color-primary-text;
+    background-color: variables.$color-primary-bg;
+    border-radius: 4px;
+    padding: 2px 5px;
+  }
+}
