@@ -1,0 +1,42 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.hamburger {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  transition: all 0.5s ease-in-out;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &__line {
+    position: relative;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+    &::before {
+      transform: translateY(-8px);
+    }
+    &::after {
+      transform: translateY(8px);
+    }
+  }
+  &__line,
+  &__line::before,
+  &__line::after {
+    width: 24px;
+    height: 2px;
+    background: variables.$color-secondary-bg;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+    transition: all 0.5s ease-in-out;
+  }
+  &__active {
+  }
+}

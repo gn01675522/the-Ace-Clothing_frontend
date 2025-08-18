@@ -17,8 +17,12 @@ const MainLayout: FC = () => {
 
   return (
     <>
-      <NavBar />
-      <Outlet />
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

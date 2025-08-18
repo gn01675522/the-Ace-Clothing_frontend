@@ -2,44 +2,19 @@
 @use "../../../../stylesheets/mixin";
 
 .navbar {
+  position: relative;
   display: flex;
-  position: fixed;
   width: 100%;
   height: 60px;
   padding: 0 1rem;
   line-height: 60px;
+  gap: 10px;
   background-color: variables.$color-primary-bg;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
   @include mixin.shadow;
 
-  &__trigger {
-    display: none;
-  }
-  &__trigger:checked ~ &__list {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-  &__trigger:checked ~ &__burger &__burger-line {
-    background: transparent;
-    &::before {
-      transform: rotate(45deg);
-    }
-    &::after {
-      transform: rotate(-45deg);
-    }
-  }
-  &__home-logo {
-    display: flex;
-    height: 100%;
-    margin-right: auto;
-    align-items: center;
-    &-icon {
-      width: 40px;
-      height: 40px;
-    }
-  }
   @include mixin.normalBreakPoint(medium) {
     padding: 0 4rem;
   }
@@ -52,96 +27,15 @@
   }
 }
 
-.navbar__burger {
-  display: flex;
-  position: relative;
-  width: 30px;
-  height: 30px;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.5s ease-in-out;
-  border-radius: 8px;
-  cursor: pointer;
-
-  &-line {
-    width: 24px;
-    height: 2px;
-    background: variables.$color-secondary-bg;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
-    transition: all 0.5s ease-in-out;
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      width: inherit;
-      height: inherit;
-      background: variables.$color-secondary-bg;
-      border-radius: inherit;
-      box-shadow: inherit;
-      transition: inherit;
-    }
-    &::before {
-      transform: translateY(-8px);
-    }
-    &::after {
-      transform: translateY(8px);
-    }
+.navbar__cart-icon {
+  margin-left: auto;
+  @include mixin.normalBreakPoint(large) {
+    margin-left: unset;
   }
+}
+
+.navbar__hamburger {
   @include mixin.normalBreakPoint(large) {
     display: none;
   }
-}
-
-.navbar__list {
-  display: grid;
-  position: absolute;
-  width: 100%;
-  top: 60px;
-  left: 0;
-  background: variables.$color-primary-bg;
-  text-align: center;
-  opacity: 0;
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 0.3s ease-out 0.15s, opacity 0.3s ease-out 0.15s;
-  z-index: -1;
-  @include mixin.shadow;
-
-  &-link {
-    width: 100%;
-    font-weight: bold;
-    color: variables.$color-primary-text;
-    text-decoration: none;
-    text-align: center;
-    transition: 0.3s ease-out;
-    @include mixin.hover-button-effect;
-  }
-  .active {
-    background-color: variables.$color-secondary-bg;
-    color: variables.$color-secondary-text;
-  }
-  @include mixin.normalBreakPoint(large) {
-    all: unset;
-    display: flex;
-    width: 100%;
-    &-link {
-      padding: 0 10px;
-    }
-  }
-}
-
-.navbar__actions {
-  display: flex;
-  width: min-content;
-  margin-right: 1rem;
-  @include mixin.normalBreakPoint(large) {
-    width: 100%;
-    justify-content: end;
-    margin-right: unset;
-  }
-}
-
-.block {
-  height: 60px;
 }
