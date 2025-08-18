@@ -8,7 +8,7 @@ type PropsType = {
   currentPage: number;
 };
 
-const Pagination: FC<PropsType> = ({
+export const Pagination: FC<PropsType> = ({
   onChangePage,
   pageCount,
   currentPage,
@@ -60,5 +60,3 @@ const Pagination: FC<PropsType> = ({
     </nav>
   );
 };
-
-export default Pagination;

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useAppDispatch } from "../../../store/redux-hooks";
+import { fetchCartItemsAsync } from "../../cart/index";
 
 export const useDropdownControl = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -63,4 +65,12 @@ export const useDropdownControl = () => {
     setIsDropdownOpen,
     onClickIsDropdownOpen,
   };
+};
+
+export const useFetchCartItems = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCartItemsAsync());
+  }, []);
 };
