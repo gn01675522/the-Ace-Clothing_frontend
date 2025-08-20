@@ -30,7 +30,6 @@ export const useDropdownControl = () => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      console.log("trigger click", dropdownRef.current);
 
       if (
         dropdownRef.current &&

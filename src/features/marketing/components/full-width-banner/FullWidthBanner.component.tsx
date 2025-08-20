@@ -9,7 +9,8 @@ import "./FullWidthBanner.styles.scss";
 type PropsType = {
   type: "boho" | "urban";
 };
-const FullWidthBanner: FC<PropsType> = ({ type }) => {
+
+export const FullWidthBanner: FC<PropsType> = ({ type }) => {
   const data = SESSION_CONTENT_DATA.fullWidthBanner[type];
   const { title, sentence, img, link } = data;
 
@@ -30,5 +31,3 @@ const FullWidthBanner: FC<PropsType> = ({ type }) => {
     </div>
   );
 };
-
-export default FullWidthBanner;
