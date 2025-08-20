@@ -8,7 +8,7 @@ import {
 } from "./adminCoupon.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
-import type { AdminCoupon, AdminCouponWithId } from "../DTOs/adminCoupon.types";
+import type { AdminCoupon, AdminCouponWithId } from "../DTOs/adminCoupon.dtos";
 import type { Pagination } from "../../../shared/types/types";
 
 type AdminCouponState = {

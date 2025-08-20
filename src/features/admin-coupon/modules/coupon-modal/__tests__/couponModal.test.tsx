@@ -5,7 +5,7 @@ import { CouponModal } from "../CouponModal.component";
 
 import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
 
-import type { AdminCoupon } from "../../../DTOs/adminCoupon.types";
+import type { AdminCoupon } from "../../../DTOs/adminCoupon.dtos";
 
 const mockCoupon: AdminCoupon = {
   id: "1234567",

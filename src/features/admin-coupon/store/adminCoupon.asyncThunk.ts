@@ -9,7 +9,7 @@ import type {
   AdminCoupon,
   AdminCouponWithId,
   CreateAdminCoupon,
-} from "../DTOs/adminCoupon.types";
+} from "../DTOs/adminCoupon.dtos";
 import type { Pagination } from "../../../shared/types/types";
 
 //******************** Helper ********************

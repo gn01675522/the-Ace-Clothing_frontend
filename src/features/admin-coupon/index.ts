@@ -1,6 +1,6 @@
-export * from "./components/coupon-modal/CouponModal.component";
+export * from "./modules/coupon-modal/CouponModal.component";
 
-export * from "./DTOs/adminCoupon.types";
+export * from "./DTOs/adminCoupon.dtos";
 
 export * from "./store/adminCoupon.asyncThunk";
 export * from "./store/adminCoupon.selector";
