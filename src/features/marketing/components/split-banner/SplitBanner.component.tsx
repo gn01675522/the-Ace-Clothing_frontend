@@ -11,7 +11,7 @@ type PropsType = {
   inView: boolean;
 };
 
-const SplitBanner: FC<PropsType> = ({ type, inView }) => {
+export const SplitBanner: FC<PropsType> = ({ type, inView }) => {
   const data = SESSION_CONTENT_DATA.splitBanner[type];
   const { title, sentence, img, link } = data;
   const btnContent = `選購${type === "women" ? "女" : "男"}裝`;
@@ -43,5 +43,3 @@ const SplitBanner: FC<PropsType> = ({ type, inView }) => {
     </div>
   );
 };
-
-export default SplitBanner;

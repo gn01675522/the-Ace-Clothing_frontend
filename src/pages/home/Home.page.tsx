@@ -5,7 +5,7 @@ import {
   FullWidthBanner,
   SplitBanner,
   ScrollList,
-  SCROLL_TYPE,
+  SCROLL_CLASSES,
 } from "../../features/marketing/index";
 
 import { Categories } from "../../features/navigation/index";
@@ -76,7 +76,7 @@ const Home: FC = () => {
         </div>
         <div className="home__session">
           <h2 className="home__session-title">新到貨</h2>
-          <ScrollList type={SCROLL_TYPE.newArrival} />
+          <ScrollList type={SCROLL_CLASSES.newArrival} />
         </div>
         <div className="home__session" ref={firstBannerRef}>
           <SplitBanner type="women" inView={firstBannerDetect ? true : false} />
@@ -92,7 +92,7 @@ const Home: FC = () => {
         </div>
         <div className="home__session">
           <h2 className="home__session-title">促銷</h2>
-          <ScrollList type={SCROLL_TYPE.onSale} />
+          <ScrollList type={SCROLL_CLASSES.onSale} />
         </div>
       </div>
     </>

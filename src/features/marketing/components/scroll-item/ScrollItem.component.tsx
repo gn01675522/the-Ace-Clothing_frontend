@@ -19,15 +19,13 @@ type PropsType = {
   urlParam: string;
   isDragging: boolean;
   isFavorite: boolean;
-  style: CSSProperties;
 };
 
-const ScrollItem: FC<PropsType> = ({
+export const ScrollItem: FC<PropsType> = ({
   product,
   urlParam,
   isDragging,
   isFavorite,
-  style,
 }) => {
   const wishlist = useAppSelector(selectUserFavorite);
   const { id, title, imageUrl, origin_price, price } = product;
@@ -52,7 +50,6 @@ const ScrollItem: FC<PropsType> = ({
       to={`/${urlParam}/${id}`}
       className={`scroll-item scroll-item${isDragging ? "--dragging" : ""}`}
       draggable="false"
-      style={style}
     >
       <div className="scroll-item__preview">
         <img
@@ -82,5 +79,3 @@ const ScrollItem: FC<PropsType> = ({
     </Link>
   );
 };
-
-export default ScrollItem;
