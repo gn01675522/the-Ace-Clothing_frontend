@@ -1,20 +1,25 @@
+import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+
 import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
 
 import { adminCouponFormConfig } from "../../config/admin-coupon.config";
 
-import type { FC, ChangeEvent } from "react";
-import type { AdminCouponWithId } from "../../DTOs/adminCoupon.dtos";
-import type { AdminCouponFormType } from "../../types/admin-coupon.types";
+import type { FC } from "react";
+import type {
+  IGetAdminCoupon,
+  ICreateAdminCoupon,
+} from "../../DTOs/adminCoupon.dtos";
 
-type PropsType = {
-  onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
-  formData: AdminCouponFormType | AdminCouponWithId;
-};
+import "./AdminCouponModalBody.styles.scss";
 
-export const AdminCouponModalBody: FC<PropsType> = ({
-  onChangeHandler,
-  formData,
-}) => {
+export const AdminCouponModalBody: FC = () => {
+  const {
+    formControl: {
+      formData: { form },
+      onChangeHandler,
+    },
+  } = useAdminCouponContext();
+
   return (
     <div className="coupon-modal__body">
       <div className="coupon-modal__body-check">
@@ -26,7 +31,7 @@ export const AdminCouponModalBody: FC<PropsType> = ({
           type="checkbox"
           id="is_enabled"
           name="is_enabled"
-          checked={!!formData.is_enabled}
+          checked={!!form.is_enabled}
           onChange={onChangeHandler}
         />
       </div>
@@ -52,11 +57,11 @@ export const AdminCouponModalBody: FC<PropsType> = ({
                 className="coupon-modal__body-content-group-input"
                 value={
                   content.id === "due_date"
-                    ? formatTimestampInMilliSeconds(formData[content.id])
-                    : formData[
+                    ? formatTimestampInMilliSeconds(form[content.id])
+                    : form[
                         content.id as keyof (
-                          | AdminCouponWithId
-                          | AdminCouponFormType
+                          | IGetAdminCoupon
+                          | ICreateAdminCoupon
                         )
                       ]
                 }

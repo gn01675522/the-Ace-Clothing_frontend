@@ -1,26 +1,26 @@
+import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
-import type { FC, MouseEvent } from "react";
-import type { AdminCouponWithId } from "../../DTOs/adminCoupon.dtos";
-import type { AdminCouponFormType } from "../../types/admin-coupon.types";
+import type { FC } from "react";
 
-type PropsType = {
-  onClickToClose: (e: MouseEvent<HTMLButtonElement>) => void;
-  onSubmitHandler: () => void;
-  formData: AdminCouponFormType | AdminCouponWithId;
-};
+export const AdminCouponModalFooter: FC = () => {
+  const {
+    modalControl: { setIsModalOpen },
+    formControl: { submitForm, isSaveToSave },
+  } = useAdminCouponContext();
 
-export const AdminCouponModalFooter: FC<PropsType> = ({
-  onClickToClose,
-  onSubmitHandler,
-  formData,
-}) => {
+  const onSubmitHandler = () => {
+    submitForm();
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="coupon-modal__footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={onClickToClose}
+        onClick={() => setIsModalOpen(false)}
       >
         關閉
       </Button>
@@ -28,7 +28,7 @@ export const AdminCouponModalFooter: FC<PropsType> = ({
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
         onClick={onSubmitHandler}
-        disabled={formData.title.length === 0}
+        disabled={!isSaveToSave}
       >
         儲存
       </Button>

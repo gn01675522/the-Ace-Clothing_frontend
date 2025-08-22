@@ -1,13 +1,14 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import { CouponModal } from "../CouponModal.component";
+import { CouponModal } from "../CouponModal.module";
 
 import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
+import { ADMIN_COUPON_FORM_CLASSES } from "../../../types/admin-coupon.types";
 
-import type { AdminCoupon } from "../../../DTOs/adminCoupon.dtos";
+import type { IGetAdminCoupon } from "../../../DTOs/adminCoupon.dtos";
 
-const mockCoupon: AdminCoupon = {
+const mockCoupon: IGetAdminCoupon = {
   id: "1234567",
   title: "just for test",
   is_enabled: 0,
@@ -22,7 +23,7 @@ describe("CouponModal test suite.", () => {
     renderWithProviders(
       <CouponModal
         targetData={null}
-        createOrEdit="create"
+        createOrEdit={ADMIN_COUPON_FORM_CLASSES.create}
         backdropClose={() => {}}
       />
     );
@@ -46,7 +47,7 @@ describe("CouponModal test suite.", () => {
     renderWithProviders(
       <CouponModal
         targetData={mockCoupon}
-        createOrEdit="edit"
+        createOrEdit={ADMIN_COUPON_FORM_CLASSES.edit}
         backdropClose={() => {}}
       />
     );
@@ -71,7 +72,7 @@ describe("CouponModal test suite.", () => {
     renderWithProviders(
       <CouponModal
         targetData={mockCoupon}
-        createOrEdit="edit"
+        createOrEdit={ADMIN_COUPON_FORM_CLASSES.edit}
         backdropClose={onClick}
       />
     );

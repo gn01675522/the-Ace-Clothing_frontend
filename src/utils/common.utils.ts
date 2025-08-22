@@ -62,3 +62,8 @@ export const formatTimestampInSeconds = (date: number): string => {
 
   return `${getYear}-${getMonth}-${getDate}`;
 };
+
+export const formatDateToMilliSeconds = (date: string) => {
+  const timestamp = new Date(date).getTime();
+  return timestamp;
+};

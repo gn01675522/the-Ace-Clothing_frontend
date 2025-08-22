@@ -6,24 +6,14 @@ import { setHandleMessage } from "../../../store/message/message.slice";
 import type { AxiosResponse } from "axios";
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
 import type {
-  AdminCoupon,
-  AdminCouponWithId,
-  CreateAdminCoupon,
+  IGetAdminCoupon,
+  ICreateAdminCoupon,
 } from "../DTOs/adminCoupon.dtos";
-import type { Pagination } from "../../../shared/types/types";
+import type { PaginationType } from "../../../shared/types/types";
 
-//******************** Helper ********************
-//* 這個 helper 會在每次操作 api 時候 (新增、更新)，把資料帶來此處來進行處理，主要目標為時間格式轉換
-const formatDataHelper = <T>(formData: T, date: Date): T => {
-  const time = date.getTime();
-  const newFormData = { ...formData, due_date: time };
-  return newFormData;
-};
-
-//******************** Helper ********************
 //* 擷取 api 上關於 admin coupons 的資料
 export const fetchAdminCouponsAsync = createAppAsyncThunk<
-  { coupons: AdminCoupon[]; pagination: Pagination },
+  { coupons: IGetAdminCoupon[]; pagination: PaginationType },
   number | undefined
 >("adminCoupons/fetchAdminCoupons", async (page = 1, { rejectWithValue }) => {
   try {
@@ -72,16 +62,14 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
 //* 創造 admin coupons 資料
 export const createAdminCouponAsync = createAppAsyncThunk<
   void,
-  { formData: CreateAdminCoupon; date: Date }
+  ICreateAdminCoupon
 >(
   "adminCoupons/createAdminCoupons",
-  async ({ formData, date }, { dispatch, rejectWithValue }) => {
-    const newFormData = formatDataHelper(formData, date);
-
+  async (formData, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.post(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon`,
-        { data: newFormData }
+        { data: formData }
       )) as AxiosResponse;
 
       dispatch(setHandleMessage({ type: "success", res }));
@@ -104,16 +92,14 @@ export const createAdminCouponAsync = createAppAsyncThunk<
 //* 更新 api 上關於 admin coupons 的資料
 export const updateAdminCouponAsync = createAppAsyncThunk<
   void,
-  { formData: AdminCouponWithId; date: Date }
+  IGetAdminCoupon
 >(
   "adminCoupons/updateAdminCoupons",
-  async ({ formData, date }, { dispatch, rejectWithValue }) => {
-    const newFormData = formatDataHelper(formData, date);
-
+  async (formData, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.put(
-        `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${newFormData.id}`,
-        { data: newFormData }
+        `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${formData.id}`,
+        { data: formData }
       )) as AxiosResponse;
 
       dispatch(setHandleMessage({ type: "success", res }));
