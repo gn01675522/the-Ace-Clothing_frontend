@@ -7,6 +7,8 @@ import { fetchAdminCouponsAsync } from "../../store/adminCoupon.asyncThunk";
 
 import type { FC } from "react";
 
+import "./AdminCouponPagination.styles.scss";
+
 export const AdminCouponPagination: FC = () => {
   const {
     stateFetch: { pagination },
@@ -18,7 +20,7 @@ export const AdminCouponPagination: FC = () => {
     dispatch(fetchAdminCouponsAsync(page));
 
   return (
-    <div className="admin-coupons__function">
+    <div className="admin-coupons-pagination">
       <Pagination
         currentPage={pagination?.current_page || 1}
         onChangePage={onChangePageHandler}
