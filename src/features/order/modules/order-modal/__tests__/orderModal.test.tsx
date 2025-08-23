@@ -3,7 +3,7 @@ import { renderWithProviders } from "../../../../../utils/test.utils";
 
 import OrderModal from "../OrderModal.component";
 
-import type { Order } from "../../../DTOs/adminOrders.type";
+import type { Order } from "../../../DTOs/adminOrders.dtos";
 
 describe("OrderModal test suite.", () => {
   const orderData = {

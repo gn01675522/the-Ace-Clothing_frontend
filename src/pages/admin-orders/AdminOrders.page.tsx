@@ -65,18 +65,18 @@ const AdminOrders: FC = () => {
   return (
     <>
       {isLoading && <Loading />}
+      {isModalOpen && targetData && (
+        <OrderModal targetData={targetData} closeAction={setIsModalOpen} />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          dataType={DELETE_MODAL_TYPE.adminOrder}
+          id={deleteTarget.id}
+          title={deleteTarget.title}
+          closeAction={setIsDeleteModalOpen}
+        />
+      )}
       <div className="admin-orders">
-        {isModalOpen && targetData && (
-          <OrderModal targetData={targetData} closeAction={setIsModalOpen} />
-        )}
-        {isDeleteModalOpen && (
-          <DeleteModal
-            dataType={DELETE_MODAL_TYPE.adminOrder}
-            id={deleteTarget.id}
-            title={deleteTarget.title}
-            closeAction={setIsDeleteModalOpen}
-          />
-        )}
         <h3 className="admin-orders__title">訂單列表</h3>
         <div className="admin-orders__content">
           <AdminTable<Order>

@@ -8,7 +8,7 @@ import { selectUserOrders } from "../../store/client/userOrder.selector";
 import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { OrderDetail } from "../../DTOs/userOrder.types";
+import type { OrderDetail } from "../../DTOs/userOrder.dtos";
 
 import "./OrderDetails.styles.scss";
 
@@ -23,7 +23,7 @@ type PropsType = {
   email: string;
 };
 
-const OrderDetails: FC<PropsType> = ({ email }) => {
+export const OrderDetails: FC<PropsType> = ({ email }) => {
   const [orderList, setOrderList] = useState<OrderDetail[]>([]);
   const orderDetail = useSelector(selectUserOrders);
 
@@ -97,5 +97,3 @@ const OrderDetails: FC<PropsType> = ({ email }) => {
     </div>
   );
 };
-
-export default OrderDetails;

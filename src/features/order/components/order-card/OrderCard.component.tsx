@@ -2,7 +2,7 @@ import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
 import type { Product } from "features/product/DTOs/userProduct.types";
-import type { AdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
+import type { IGetAdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
 
 import "./OrderCard.styles.scss";
 
@@ -10,7 +10,7 @@ export type OrderCardProductsType = {
   id: string;
   product_id: string;
   qty: number;
-  coupon: AdminCoupon;
+  coupon: IGetAdminCoupon;
   final_total: number;
   product: Product;
   total: number;
@@ -20,7 +20,7 @@ type PropsType = {
   products: OrderCardProductsType[];
 };
 
-const OrderCard: FC<PropsType> = ({ products }) => {
+export const OrderCard: FC<PropsType> = ({ products }) => {
   return (
     <div className="order-card">
       <input
@@ -60,5 +60,3 @@ const OrderCard: FC<PropsType> = ({ products }) => {
     </div>
   );
 };
-
-export default OrderCard;

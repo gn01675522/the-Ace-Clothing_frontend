@@ -7,7 +7,7 @@ import {
 } from "./adminOrder.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { Order } from "../../DTOs/adminOrders.type";
+import type { Order } from "../../DTOs/adminOrders.dtos";
 import type { Pagination } from "../../../../shared/types/types";
 
 type AdminOrderState = {

@@ -1,9 +1,9 @@
 import type { UserBasicInfo } from "../../../shared/types/interface";
-import type { Pagination } from "../../../shared/types/types";
-import type { AdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
+import type { PaginationType } from "../../../shared/types/types";
+import type { IGetAdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
 import type { Product } from "features/product/DTOs/userProduct.types";
 
-export interface OrderDetail {
+export interface IOrderDetail {
   create_at: number;
   id: string;
   is_paid: boolean;
@@ -12,7 +12,7 @@ export interface OrderDetail {
     id: string;
     product_id: string;
     qty: number;
-    coupon: AdminCoupon;
+    coupon: IGetAdminCoupon;
     final_total: number;
     product: Product;
     total: number;
@@ -21,13 +21,13 @@ export interface OrderDetail {
   user: UserBasicInfo;
 }
 
-export interface OrderDetailWithNum extends OrderDetail {
+export interface OrderDetailWithNum extends IOrderDetail {
   num: number;
 }
 
-export interface OrderDetails {
+export interface IOrderDetails {
   success: true;
   orders: OrderDetailWithNum[];
-  pagination: Pagination;
+  pagination: PaginationType;
   messages: string[];
 }
