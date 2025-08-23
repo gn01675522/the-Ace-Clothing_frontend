@@ -8,11 +8,11 @@ import {
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type { Order } from "../../DTOs/adminOrders.dtos";
-import type { Pagination } from "../../../../shared/types/types";
+import type { PaginationType } from "../../../../shared/types/types";
 
 type AdminOrderState = {
   readonly orders: Order[];
-  readonly pagination: Pagination | null;
+  readonly pagination: PaginationType | null;
   readonly tempData: Order | null;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
@@ -32,6 +32,9 @@ export const adminOrderSlice = createSlice({
   reducers: {
     setAdminOrdersTempData(state, action: PayloadAction<Order>) {
       state.tempData = action.payload;
+    },
+    setClearAdminOrderState() {
+      return INITIAL_STATE;
     },
   },
   extraReducers: (builder) => {
@@ -76,5 +79,6 @@ export const adminOrderSlice = createSlice({
   },
 });
 
-export const { setAdminOrdersTempData } = adminOrderSlice.actions;
+export const { setAdminOrdersTempData, setClearAdminOrderState } =
+  adminOrderSlice.actions;
 export const adminOrderReducer = adminOrderSlice.reducer;

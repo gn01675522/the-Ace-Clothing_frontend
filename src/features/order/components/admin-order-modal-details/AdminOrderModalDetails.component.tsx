@@ -1,4 +1,6 @@
-import type { FC, ChangeEvent } from "react";
+import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+
+import type { FC } from "react";
 import type { Order } from "../../DTOs/adminOrders.dtos";
 
 const formContent = {
@@ -10,19 +12,12 @@ const formContent = {
   ],
 };
 
-type PropsType = {
-  targetData: Order;
-  formData: Order | null;
-  handleChange: (e: ChangeEvent<HTMLSelectElement & HTMLInputElement>) => void;
-  isLoading: boolean;
-};
+export const AdminOrderModalDetails: FC = () => {
+  const {
+    formControl: { targetData, formData, onChangeHandler },
+    stateFetch: { isLoading },
+  } = useAdminOrderContext();
 
-export const AdminOrderModalDetails: FC<PropsType> = ({
-  targetData,
-  formData,
-  handleChange,
-  isLoading,
-}) => {
   return (
     <div className="order-modal__body-upper">
       <div className="order-modal__body-customer">
@@ -36,7 +31,7 @@ export const AdminOrderModalDetails: FC<PropsType> = ({
               <div className="order-modal__body-customer-info-data">
                 <span className="order-modal__body-customer-info-data-span">
                   {(info.id === "message"
-                    ? targetData.message
+                    ? targetData?.message
                     : targetData?.user[info.id as keyof Order["user"]]) || "無"}
                 </span>
               </div>
@@ -60,7 +55,7 @@ export const AdminOrderModalDetails: FC<PropsType> = ({
               name="is_paid"
               id="is_paid"
               checked={!!formData?.is_paid}
-              onChange={handleChange}
+              onChange={onChangeHandler}
               disabled={isLoading}
             />
           </div>
@@ -73,7 +68,7 @@ export const AdminOrderModalDetails: FC<PropsType> = ({
               className="order-modal__body-payment-status-progress-select"
               name="status"
               value={formData?.status}
-              onChange={handleChange}
+              onChange={onChangeHandler}
               disabled={isLoading}
             >
               <option value={0}>未確認</option>

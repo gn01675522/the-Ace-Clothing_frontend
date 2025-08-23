@@ -1,11 +1,14 @@
+import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+
 import { OrderCard } from "../order-card/OrderCard.component";
 
 import type { FC } from "react";
-import type { Order } from "../../DTOs/adminOrders.dtos";
 
-type PropsType = { targetData: Order };
+export const AdminOrderModalList: FC = () => {
+  const {
+    formControl: { targetData },
+  } = useAdminOrderContext();
 
-export const AdminOrderModalList: FC<PropsType> = ({ targetData }) => {
   return (
     <div className="order-modal__body-order">
       {targetData?.products && (

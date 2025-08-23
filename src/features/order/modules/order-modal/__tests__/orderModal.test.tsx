@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import OrderModal from "../OrderModal.component";
+import OrderModal from "../OrderModal.module";
 
 import type { Order } from "../../../DTOs/adminOrders.dtos";
 

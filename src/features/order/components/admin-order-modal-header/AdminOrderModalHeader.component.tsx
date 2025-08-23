@@ -1,16 +1,15 @@
+import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 
-import type { FC, MouseEvent } from "react";
+import type { FC } from "react";
 
-type PropsType = {
-  formData: any;
-  onClickToClose: (e: MouseEvent<HTMLElement>) => void;
-};
+export const AdminOrderModalHeader: FC = () => {
+  const {
+    formControl: { formData },
+    modalControl: { switchAdminOrderModalOpen },
+  } = useAdminOrderContext();
 
-export const AdminOrderModalHeader: FC<PropsType> = ({
-  formData,
-  onClickToClose,
-}) => {
   return (
     <div className="order-modal__header">
       <h1 className="order-modal__header-title">
@@ -20,7 +19,7 @@ export const AdminOrderModalHeader: FC<PropsType> = ({
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={onClickToClose}
+        onClick={switchAdminOrderModalOpen}
       >
         ｘ
       </Button>
