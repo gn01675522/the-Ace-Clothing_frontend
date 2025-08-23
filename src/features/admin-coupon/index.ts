@@ -1,6 +1,9 @@
 export * from "./contexts/admin-coupon.context";
 
 export * from "./modules/coupon-modal/CouponModal.module";
+export * from "./modules/admin-coupon-overlay/AdminCouponOverlay.module";
+export * from "./modules/admin-coupon-table/AdminCouponTable.module";
+export * from "./modules/admin-coupon-pagination/AdminCouponPagination.module";
 
 export * from "./hooks/admin-coupon.hooks";
 

@@ -37,7 +37,7 @@ export const useAdminCouponContext = () => {
   return context;
 };
 
-const defaultCreateData: AdminCouponFormType = {
+export const defaultCreateData: AdminCouponFormType = {
   title: "",
   is_enabled: 1,
   percent: 80,
@@ -108,24 +108,22 @@ export const useAdminCouponFormControl = () => {
 
   useEffect(() => {
     if (createOrEdit === ADMIN_COUPON_FORM_CLASSES.edit && targetData) {
+      const { id, ...rest } = targetData;
       const newData = {
-        ...targetData,
-        due_date: targetData.due_date
-          ? formatTimestampInMilliSeconds(targetData.due_date)
+        ...rest,
+        due_date: rest.due_date
+          ? formatTimestampInMilliSeconds(rest.due_date)
           : defaultCreateData.due_date,
       };
-      setFormData({ id: targetData.id, form: newData });
-    }
-    return () => {
-      setTargetData(null);
-      setFormData({ id: null, form: defaultCreateData });
-    };
+      setFormData({ id: id, form: newData });
+    } else setFormData({ id: null, form: defaultCreateData });
   }, [targetData]);
 
   return {
     formData,
     createOrEdit,
     isSaveToSave,
+    setFormData,
     setTargetData,
     setCreateOrEdit,
     onChangeHandler,
