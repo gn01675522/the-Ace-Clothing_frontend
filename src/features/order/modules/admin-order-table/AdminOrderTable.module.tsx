@@ -36,7 +36,7 @@ export const AdminOrderTable: FC<PropsType> = ({
   };
 
   return (
-    <div className="admin-orders__content">
+    <div className="admin-orders-table">
       <AdminTable<Order>
         data={orderForTable}
         columns={tableColumns}

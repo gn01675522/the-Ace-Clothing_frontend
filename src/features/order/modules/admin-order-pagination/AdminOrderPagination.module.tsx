@@ -8,6 +8,8 @@ import { Pagination } from "../../../../modules";
 
 import type { FC } from "react";
 
+import "./AdminOrderPagination.styles.scss";
+
 export const AdminOrderPagination: FC = ({}) => {
   const {
     stateFetch: { pagination },
@@ -19,7 +21,7 @@ export const AdminOrderPagination: FC = ({}) => {
     dispatch(fetchAdminOrdersAsync(page));
   };
   return (
-    <div className="admin-orders__function">
+    <div className="admin-orders-pagination">
       <Pagination
         currentPage={pagination?.current_page || 1}
         onChangePage={onChangePageHandler}

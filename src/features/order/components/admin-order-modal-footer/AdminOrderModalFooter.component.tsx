@@ -4,6 +4,8 @@ import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 
 import type { FC } from "react";
 
+import "./AdminOrderModalFooter.styles.scss";
+
 export const AdminOrderModalFooter: FC = () => {
   const {
     modalControl: { switchAdminOrderModalOpen },
@@ -16,7 +18,7 @@ export const AdminOrderModalFooter: FC = () => {
   };
 
   return (
-    <div className="order-modal__footer">
+    <div className="admin-order-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}

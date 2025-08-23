@@ -3,6 +3,8 @@ import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
 import type { FC } from "react";
 import type { Order } from "../../DTOs/adminOrders.dtos";
 
+import "./AdminOrderModalDetails.styles.scss";
+
 const formContent = {
   customer: [
     { id: "email", title: "用戶信箱" },
@@ -19,17 +21,20 @@ export const AdminOrderModalDetails: FC = () => {
   } = useAdminOrderContext();
 
   return (
-    <div className="order-modal__body-upper">
-      <div className="order-modal__body-customer">
-        <h3 className="order-modal__body-customer-title">客戶資料</h3>
+    <div className="admin-order-modal-detail">
+      <div className="admin-order-modal-detail__customer">
+        <h3 className="admin-order-modal-detail__customer-title">客戶資料</h3>
         {formContent.customer.map((info) => {
           return (
-            <div className="order-modal__body-customer-info" key={info.id}>
-              <span className="order-modal__body-customer-info-title">
+            <div
+              className="admin-order-modal-detail__customer-info"
+              key={info.id}
+            >
+              <span className="admin-order-modal-detail__customer-info-title">
                 {info.title}
               </span>
-              <div className="order-modal__body-customer-info-data">
-                <span className="order-modal__body-customer-info-data-span">
+              <div className="admin-order-modal-detail__customer-info-data">
+                <span className="admin-order-modal-detail__customer-info-data-span">
                   {(info.id === "message"
                     ? targetData?.message
                     : targetData?.user[info.id as keyof Order["user"]]) || "無"}
@@ -39,18 +44,18 @@ export const AdminOrderModalDetails: FC = () => {
           );
         })}
       </div>
-      <div className="order-modal__body-payment">
-        <h5 className="order-modal__body-payment-title">訂單狀態</h5>
-        <div className="order-modal__body-payment-status">
-          <div className="order-modal__body-payment-status-isPaid">
+      <div className="admin-order-modal-detail__payment">
+        <h5 className="admin-order-modal-detail__payment-title">訂單狀態</h5>
+        <div className="admin-order-modal-detail__payment-status">
+          <div className="admin-order-modal-detail__payment-status-isPaid">
             <label
-              className="order-modal__body-payment-status-isPaid-title"
+              className="admin-order-modal-detail__payment-status-isPaid-title"
               htmlFor="is_paid"
             >
               付款狀態 ({formData?.is_paid ? "已付款" : "未付款"})
             </label>
             <input
-              className="order-modal__body-payment-status-isPaid-input"
+              className="admin-order-modal-detail__payment-status-isPaid-input"
               type="checkbox"
               name="is_paid"
               id="is_paid"
@@ -60,12 +65,12 @@ export const AdminOrderModalDetails: FC = () => {
             />
           </div>
 
-          <div className="order-modal__body-payment-status-progress">
-            <span className="order-modal__body-payment-status-progress-title">
+          <div className="admin-order-modal-detail__payment-status-progress">
+            <span className="admin-order-modal-detail__payment-status-progress-title">
               出貨進度
             </span>
             <select
-              className="order-modal__body-payment-status-progress-select"
+              className="admin-order-modal-detail__payment-status-progress-select"
               name="status"
               value={formData?.status}
               onChange={onChangeHandler}

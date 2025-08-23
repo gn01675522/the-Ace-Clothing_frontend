@@ -1,0 +1,13 @@
+@use "../../../../stylesheets/variables";
+
+.admin-order-modal-header {
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  justify-content: space-between;
+  border-bottom: 1px variables.$line-primary-line;
+  &__title {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+}

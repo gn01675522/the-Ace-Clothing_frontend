@@ -8,8 +8,6 @@ import { ModalContainer } from "../../../../components/index";
 
 import type { FC, MouseEvent } from "react";
 
-import "./OrderModal.styles.scss";
-
 export const OrderModal: FC = () => {
   const {
     modalControl: { setIsModalOpen },

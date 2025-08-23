@@ -1,0 +1,10 @@
+@use "../../../../stylesheets/variables";
+
+.admin-order-modal-list {
+  padding-bottom: 1rem;
+  border-bottom: 1px variables.$line-secondary-line;
+  &-total {
+    display: flex;
+    width: 100%;
+  }
+}

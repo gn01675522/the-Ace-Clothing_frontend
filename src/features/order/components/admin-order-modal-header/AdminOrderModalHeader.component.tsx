@@ -4,6 +4,8 @@ import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 
 import type { FC } from "react";
 
+import "./AdminOrderModalHeader.styles.scss";
+
 export const AdminOrderModalHeader: FC = () => {
   const {
     formControl: { formData },
@@ -11,8 +13,8 @@ export const AdminOrderModalHeader: FC = () => {
   } = useAdminOrderContext();
 
   return (
-    <div className="order-modal__header">
-      <h1 className="order-modal__header-title">
+    <div className="admin-order-modal-header">
+      <h1 className="admin-order-modal-header__title">
         {`訂單編號： ${formData?.id}`}
       </h1>
       <Button
