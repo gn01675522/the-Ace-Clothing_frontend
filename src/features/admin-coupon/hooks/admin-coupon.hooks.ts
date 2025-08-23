@@ -23,10 +23,7 @@ import {
 import { ADMIN_COUPON_FORM_CLASSES } from "../types/admin-coupon.types";
 
 import type { ChangeEvent } from "react";
-import type {
-  IGetAdminCoupon,
-  ICreateAdminCoupon,
-} from "../DTOs/adminCoupon.dtos";
+import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
 import type { AdminCouponFormType } from "../types/admin-coupon.types";
 
 export const useAdminCouponContext = () => {
@@ -110,7 +107,7 @@ export const useAdminCouponFormControl = () => {
   };
 
   useEffect(() => {
-    if (targetData) {
+    if (createOrEdit === ADMIN_COUPON_FORM_CLASSES.edit && targetData) {
       const newData = {
         ...targetData,
         due_date: targetData.due_date

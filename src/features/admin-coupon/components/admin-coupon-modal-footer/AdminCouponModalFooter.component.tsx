@@ -6,13 +6,13 @@ import type { FC } from "react";
 
 export const AdminCouponModalFooter: FC = () => {
   const {
-    modalControl: { setIsModalOpen },
+    modalControl: { switchModalOpen },
     formControl: { submitForm, isSaveToSave },
   } = useAdminCouponContext();
 
   const onSubmitHandler = () => {
     submitForm();
-    setIsModalOpen(false);
+    switchModalOpen();
   };
 
   return (
@@ -20,7 +20,7 @@ export const AdminCouponModalFooter: FC = () => {
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={() => setIsModalOpen(false)}
+        onClick={switchModalOpen}
       >
         關閉
       </Button>
