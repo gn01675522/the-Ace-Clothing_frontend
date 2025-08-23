@@ -21,13 +21,16 @@ export const AdminCouponModalBody: FC = () => {
   } = useAdminCouponContext();
 
   return (
-    <div className="coupon-modal__body">
-      <div className="coupon-modal__body-check">
-        <label className="coupon-modal__body-check-label" htmlFor="is_enabled">
+    <div className="admin-coupon-modal-body">
+      <div className="admin-coupon-modal-body__check">
+        <label
+          className="admin-coupon-modal-body__check-label"
+          htmlFor="is_enabled"
+        >
           是否啟用
         </label>
         <input
-          className="coupon-modal__body-check-input"
+          className="admin-coupon-modal-body__check-input"
           type="checkbox"
           id="is_enabled"
           name="is_enabled"
@@ -35,12 +38,15 @@ export const AdminCouponModalBody: FC = () => {
           onChange={onChangeHandler}
         />
       </div>
-      <div className="coupon-modal__body-content">
+      <div className="admin-coupon-modal-body__content">
         {adminCouponFormConfig.map((content) => {
           return (
-            <div className="coupon-modal__body-content-group" key={content.id}>
+            <div
+              className="admin-coupon-modal-body__content-group"
+              key={content.id}
+            >
               <label
-                className="coupon-modal__body-content-group-label"
+                className="admin-coupon-modal-body__content-group-label"
                 htmlFor={content.id}
               >
                 {content.title}
@@ -54,7 +60,7 @@ export const AdminCouponModalBody: FC = () => {
                     : `請輸入${content.title}`
                 }
                 name={content.id}
-                className="coupon-modal__body-content-group-input"
+                className="admin-coupon-modal-body__content-group-input"
                 value={
                   content.id === "due_date"
                     ? formatTimestampInMilliSeconds(form[content.id])

@@ -7,8 +7,6 @@ import { AdminCouponModalFooter } from "../../components/admin-coupon-modal-foot
 
 import type { FC, MouseEvent } from "react";
 
-import "./CouponModal.styles.scss";
-
 export const CouponModal: FC = () => {
   const {
     modalControl: { switchModalOpen },

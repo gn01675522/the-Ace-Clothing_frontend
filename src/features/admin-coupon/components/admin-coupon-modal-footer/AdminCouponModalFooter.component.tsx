@@ -4,6 +4,8 @@ import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
 
 import type { FC } from "react";
 
+import "./AdminCouponModalFooter.styles.scss";
+
 export const AdminCouponModalFooter: FC = () => {
   const {
     modalControl: { switchModalOpen },
@@ -16,7 +18,7 @@ export const AdminCouponModalFooter: FC = () => {
   };
 
   return (
-    <div className="coupon-modal__footer">
+    <div className="admin-coupon-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
