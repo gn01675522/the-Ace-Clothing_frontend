@@ -8,13 +8,13 @@ import {
 } from "./adminCoupon.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
-import type { AdminCoupon, AdminCouponWithId } from "../DTOs/adminCoupon.types";
-import type { Pagination } from "../../../shared/types/types";
+import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
+import type { PaginationType } from "../../../shared/types/types";
 
 type AdminCouponState = {
-  readonly coupons: AdminCoupon[];
-  readonly pagination: Pagination | null;
-  readonly tempData: AdminCouponWithId | null;
+  readonly coupons: IGetAdminCoupon[];
+  readonly pagination: PaginationType | null;
+  readonly tempData: IGetAdminCoupon | null;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
 };
@@ -30,7 +30,11 @@ const INITIAL_STATE: AdminCouponState = {
 export const adminCouponSlice = createSlice({
   name: "adminCoupon",
   initialState: INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    setClearAdminCouponState() {
+      return INITIAL_STATE;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //**************************************** 取得 API 內的 Admin Coupons 資料 Start ****************************************
@@ -86,5 +90,5 @@ export const adminCouponSlice = createSlice({
   },
 });
 
-export const {} = adminCouponSlice.actions;
+export const { setClearAdminCouponState } = adminCouponSlice.actions;
 export const adminCouponReducer = adminCouponSlice.reducer;
