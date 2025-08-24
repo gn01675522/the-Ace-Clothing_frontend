@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../hooks/adminProducts.hooks";
+import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import { Loading } from "../../../../components";
 import { ProductModal } from "../product-modal/ProductModal.module";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAdminProductsContext } from "../../hooks/adminProducts.hooks";
+import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import { Pagination } from "../../../../modules";
 

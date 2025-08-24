@@ -5,7 +5,7 @@ import {
   useAdminProductsModalControl,
   useAdminProductModalStateFetch,
   useAdminProductModalFormControl,
-} from "../hooks/adminProducts.hooks";
+} from "../hooks/admin-products.hooks";
 
 import type { ReactNode } from "react";
 

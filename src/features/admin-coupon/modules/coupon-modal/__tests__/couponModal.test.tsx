@@ -1,7 +1,5 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
-import { useAdminCouponContext } from "../../../hooks/admin-coupon.hooks";
-import { AdminCouponContextProvider } from "../../../contexts/admin-coupon.context";
 
 import { CouponModal } from "../CouponModal.module";
 
@@ -39,6 +37,7 @@ describe("CouponModal test suite.", () => {
     mockUseAdminCouponContext.mockReturnValue({
       formControl: {
         targetData: mockCoupon,
+        onChangeHandler: jest.fn(),
         formData: { id: null, form: mockDefaulCoupon },
         createOrEdit: ADMIN_COUPON_FORM_CLASSES.create,
       },
@@ -68,6 +67,7 @@ describe("CouponModal test suite.", () => {
     mockUseAdminCouponContext.mockReturnValue({
       formControl: {
         formData: newData,
+        onChangeHandler: jest.fn(),
         createOrEdit: ADMIN_COUPON_FORM_CLASSES.edit,
       },
       modalControl: { switchModalOpen: jest.fn() },
@@ -90,13 +90,18 @@ describe("CouponModal test suite.", () => {
   });
   test("Clicking on the 'x', '關閉' buttons triggers the backdropClose callback.", () => {
     const mockSwitchModalOpen = jest.fn();
+    const mockSetIsModalOpen = jest.fn();
+    const mockCloseModalAndClearForm = jest.fn();
     mockUseAdminCouponContext.mockReturnValue({
       formControl: {
         formData: { id: mockCoupon.id, form: mockCoupon },
+        onChangeHandler: jest.fn(),
       },
       modalControl: {
+        setIsModalOpen: mockSetIsModalOpen,
         switchModalOpen: mockSwitchModalOpen,
       },
+      closeModalAndClearForm: mockCloseModalAndClearForm,
     });
 
     renderWithProviders(<CouponModal />);
@@ -107,6 +112,6 @@ describe("CouponModal test suite.", () => {
     fireEvent.click(closeButton);
     fireEvent.click(closeXButton);
 
-    expect(mockSwitchModalOpen).toHaveBeenCalledTimes(2);
+    expect(mockCloseModalAndClearForm).toHaveBeenCalledTimes(2);
   });
 });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAdminProductsContext } from "../../hooks/adminProducts.hooks";
+import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import {
   Button,
@@ -7,6 +7,8 @@ import {
   ModalContainer,
   NoImageSVGLogo,
 } from "../../../../components/index";
+
+import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 
 import { formContent } from "./formContent.data";
 
@@ -71,7 +73,7 @@ export const ProductModal: FC = () => {
       <div className="product-modal">
         <div className="product-modal__header">
           <h1 className="product-modal__header-title">
-            {createOrEdit === "create"
+            {createOrEdit === FORM_OPERATION_OPTIONS.create
               ? "建立新商品"
               : `產品名稱：${formData.title}`}
           </h1>
@@ -97,15 +99,15 @@ export const ProductModal: FC = () => {
               placeholder="請輸入產品說明內容"
               className="form-check-input"
               onChange={onChangeHandler}
-              checked={!!formData.is_enabled}
+              checked={!!formData?.is_enabled}
             />
           </div>
           <div className="product-modal__body-upper">
             <div className="product-modal__body-upper-left">
-              {formData.imageUrl ? (
+              {formData?.imageUrl ? (
                 <img
-                  src={formData.imageUrl}
-                  alt={`主圖片：${formData.title}；無法顯示，請輸入正確連結`}
+                  src={formData?.imageUrl}
+                  alt={`主圖片：${formData?.title}；無法顯示，請輸入正確連結`}
                   className="product-modal__body-upper-left-img"
                 />
               ) : (
@@ -124,7 +126,7 @@ export const ProductModal: FC = () => {
                 placeholder="請輸入圖片連結"
                 className="product-modal__body-upper-left-input"
                 onChange={onChangeHandler}
-                value={formData.imageUrl || ""}
+                value={formData?.imageUrl || ""}
               />
             </div>
 
@@ -155,7 +157,7 @@ export const ProductModal: FC = () => {
                           : undefined
                       }
                       value={
-                        formData[
+                        formData?.[
                           content.id as keyof (
                             | AdminProduct
                             | AdminProductForCreate
@@ -189,7 +191,7 @@ export const ProductModal: FC = () => {
                     className="product-modal__body-middle-group-textarea"
                     onChange={onChangeHandler}
                     value={
-                      formData[
+                      formData?.[
                         content.id as keyof (
                           | AdminProduct
                           | AdminProductForCreate
@@ -223,13 +225,13 @@ export const ProductModal: FC = () => {
               </h6>
             </label>
             <div className="product-modal__body-lower-content">
-              {formData.imagesUrl.map((url, i) => {
+              {formData?.imagesUrl.map((url, i) => {
                 return (
                   <div
                     className="product-modal__body-lower-content-item"
                     key={i}
                   >
-                    {formData.imagesUrl[i] ? (
+                    {formData?.imagesUrl[i] ? (
                       <img
                         src={url}
                         alt={`圖片：${formData.title}，第${
@@ -289,7 +291,9 @@ export const ProductModal: FC = () => {
             type="button"
             buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
             onClick={onSubmitHandler}
-            disabled={formData.title.length === 0 || formData.unit.length === 0}
+            disabled={
+              formData?.title?.length === 0 || formData?.unit?.length === 0
+            }
           >
             儲存
           </Button>

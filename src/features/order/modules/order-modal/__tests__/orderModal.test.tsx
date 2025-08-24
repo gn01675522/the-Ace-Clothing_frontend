@@ -1,9 +1,14 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import OrderModal from "../OrderModal.module";
+import { OrderModal } from "../OrderModal.module";
 
 import type { Order } from "../../../DTOs/adminOrders.dtos";
+
+const mockUseAdminOrderContext = jest.fn();
+jest.mock("../../../hooks/admin-order.hooks", () => ({
+  useAdminOrderContext: () => mockUseAdminOrderContext(),
+}));
 
 describe("OrderModal test suite.", () => {
   const orderData = {
@@ -59,9 +64,19 @@ describe("OrderModal test suite.", () => {
   beforeEach(() => onClick.mockClear());
 
   test("Should render order data correctly.", () => {
-    renderWithProviders(
-      <OrderModal targetData={orderData} closeAction={onClick} />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    const mockSubmitForm = jest.fn();
+    mockUseAdminOrderContext.mockReturnValue({
+      formControl: {
+        targetData: orderData,
+        formData: orderData,
+        onChangeHandler: jest.fn(),
+        submitForm: mockSubmitForm,
+      },
+      stateFetch: { isLoading: false },
+      modalControl: { switchAdminOrderModalOpen: mockSwitchModalOpen },
+    });
+    renderWithProviders(<OrderModal />);
     const emailElement = screen.getByText(orderData.user.email);
     const nameElement = screen.getByText(orderData.user.name);
     const addressElement = screen.getByText(orderData.user.address);
@@ -85,9 +100,22 @@ describe("OrderModal test suite.", () => {
     expect(deliveryStateElement).toBeInTheDocument();
   });
   test("Clicking on the 'x', '儲存', '關閉' buttons triggers the backdropClose callback.", () => {
-    renderWithProviders(
-      <OrderModal targetData={orderData} closeAction={onClick} />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    const mockSetIsModalOpen = jest.fn();
+    const mockSubmitForm = jest.fn();
+    mockUseAdminOrderContext.mockReturnValue({
+      formControl: {
+        targetData: orderData,
+        onChangeHandler: jest.fn(),
+        submitForm: mockSubmitForm,
+      },
+      stateFetch: { isLoading: false },
+      modalControl: {
+        switchAdminOrderModalOpen: mockSwitchModalOpen,
+        setIsModalOpen: mockSetIsModalOpen,
+      },
+    });
+    renderWithProviders(<OrderModal />);
     const closeButton = screen.getByText(/關閉/i);
     const saveButton = screen.getByText(/儲存/i);
     const closeXButton = screen.getByLabelText(/Close/i);
@@ -96,6 +124,6 @@ describe("OrderModal test suite.", () => {
     fireEvent.click(saveButton);
     fireEvent.click(closeXButton);
 
-    expect(onClick).toHaveBeenCalledTimes(3);
+    expect(mockSwitchModalOpen).toHaveBeenCalledTimes(3);
   });
 });

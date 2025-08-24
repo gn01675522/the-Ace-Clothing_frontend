@@ -2,7 +2,30 @@ import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
 import { ProductModal } from "../ProductModal.module";
-import type { AdminProduct } from "features/product/DTOs/adminProduct.types";
+import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
+import type {
+  AdminProduct,
+  AdminProductForCreate,
+} from "../../../DTOs/adminProduct.types";
+
+const mockUseAdminProductContext = jest.fn();
+jest.mock("../../../hooks/admin-products.hooks", () => ({
+  useAdminProductsContext: () => mockUseAdminProductContext(),
+}));
+
+const mockDefaultFormData: AdminProductForCreate = {
+  title: "",
+  category: "",
+  origin_price: 0,
+  price: 0,
+  unit: "",
+  num: 0,
+  description: "",
+  content: "",
+  is_enabled: 0,
+  imageUrl: "",
+  imagesUrl: [],
+};
 
 describe("ProductModal test suite.", () => {
   const onClick = jest.fn();
@@ -24,13 +47,18 @@ describe("ProductModal test suite.", () => {
   beforeEach(() => onClick.mockClear());
 
   test("Should trigger the closeAction callback when Clicking on the 'x', '儲存', '關閉' buttons.", () => {
-    renderWithProviders(
-      <ProductModal
-        createOrEdit="edit"
-        targetData={productData}
-        closeAction={onClick}
-      />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    const mockSubmitForm = jest.fn();
+    mockUseAdminProductContext.mockReturnValue({
+      formControl: {
+        targetData: productData,
+        createOrEdit: FORM_OPERATION_OPTIONS.create,
+        onChangeHandler: jest.fn(),
+        submitForm: mockSubmitForm,
+      },
+      modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
+    });
+    renderWithProviders(<ProductModal />);
     const closeButtonElement = screen.getByText(/關閉/i);
     const saveButtonElement = screen.getByText(/儲存/i);
     const closeXButtonElement = screen.getByLabelText(/Close/i);
@@ -39,33 +67,42 @@ describe("ProductModal test suite.", () => {
     fireEvent.click(saveButtonElement);
     fireEvent.click(closeXButtonElement);
 
-    expect(onClick).toHaveBeenCalledTimes(3);
+    expect(mockSwitchModalOpen).toHaveBeenCalledTimes(3);
   });
 
   test("Should disable the '儲存' button when nothing passed.", () => {
-    renderWithProviders(
-      <ProductModal
-        createOrEdit="create"
-        targetData={null}
-        closeAction={onClick}
-      />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    mockUseAdminProductContext.mockReturnValue({
+      formControl: {
+        submitForm: jest.fn(),
+        onChangeHandler: jest.fn(),
+        targetData: null,
+        formData: mockDefaultFormData,
+        createOrEdit: FORM_OPERATION_OPTIONS.create,
+      },
+      modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
+    });
+    renderWithProviders(<ProductModal />);
 
     const saveButtonElement = screen.getByText(/儲存/i);
 
     fireEvent.click(saveButtonElement);
 
-    expect(onClick).not.toHaveBeenCalledTimes(1);
+    expect(mockSwitchModalOpen).not.toHaveBeenCalled();
   });
 
   test("Should render correctly in create mode.", () => {
-    renderWithProviders(
-      <ProductModal
-        createOrEdit="create"
-        targetData={null}
-        closeAction={onClick}
-      />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    mockUseAdminProductContext.mockReturnValue({
+      formControl: {
+        targetData: productData,
+        formData: productData,
+        onChangeHandler: jest.fn(),
+        createOrEdit: FORM_OPERATION_OPTIONS.create,
+      },
+      modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
+    });
+    renderWithProviders(<ProductModal />);
 
     const saveElement = screen.getByText(/建立新商品/i);
 
@@ -73,13 +110,17 @@ describe("ProductModal test suite.", () => {
   });
 
   test("Should render correctly in edit mode.", () => {
-    renderWithProviders(
-      <ProductModal
-        createOrEdit="edit"
-        targetData={productData}
-        closeAction={onClick}
-      />
-    );
+    const mockSwitchModalOpen = jest.fn();
+    mockUseAdminProductContext.mockReturnValue({
+      formControl: {
+        targetData: productData,
+        formData: productData,
+        onChangeHandler: jest.fn(),
+        createOrEdit: FORM_OPERATION_OPTIONS.edit,
+      },
+      modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
+    });
+    renderWithProviders(<ProductModal />);
 
     const titleElement = screen.getByText(`產品名稱：${productData.title}`);
     const categoryElement = screen.getByDisplayValue(productData.category);

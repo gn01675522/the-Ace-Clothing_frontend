@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import ProductCard from "../ProductCard.component";
+import { ProductCard } from "../ProductCard.component";
 
 import { PRODUCT_CATEGORIES } from "../../../../../shared/types";
 

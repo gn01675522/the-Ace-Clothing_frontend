@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../hooks/adminProducts.hooks";
+import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 import { AdminTable } from "../../../../modules";
