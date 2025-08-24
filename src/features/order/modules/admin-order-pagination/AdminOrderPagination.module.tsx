@@ -10,7 +10,7 @@ import type { FC } from "react";
 
 import "./AdminOrderPagination.styles.scss";
 
-export const AdminOrderPagination: FC = ({}) => {
+export const AdminOrderPagination: FC = () => {
   const {
     stateFetch: { pagination },
   } = useAdminOrderContext();

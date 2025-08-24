@@ -141,7 +141,7 @@ export const useAdminCouponStateFetch = () => {
   useEffect(() => {
     dispatch(fetchAdminCouponsAsync());
     return () => {
-      setClearAdminCouponState();
+      dispatch(setClearAdminCouponState());
     };
   }, []);
 

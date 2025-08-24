@@ -81,7 +81,7 @@ export const useAdminOrderStateFetch = () => {
   useEffect(() => {
     dispatch(fetchAdminOrdersAsync());
     return () => {
-      setClearAdminOrderState();
+      dispatch(setClearAdminOrderState());
     };
   }, []);
 

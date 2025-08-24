@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import ProductModal from "../ProductModal.component";
+import { ProductModal } from "../ProductModal.module";
 import type { AdminProduct } from "features/product/DTOs/adminProduct.types";
 
 describe("ProductModal test suite.", () => {

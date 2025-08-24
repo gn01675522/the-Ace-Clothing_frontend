@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../../../../store/redux-hooks";
+import { useState } from "react";
+import { useAdminProductsContext } from "../../hooks/adminProducts.hooks";
 
 import {
   Button,
@@ -9,22 +8,9 @@ import {
   NoImageSVGLogo,
 } from "../../../../components/index";
 
-import {
-  updateAdminProductAsync,
-  createAdminProductAsync,
-} from "../../store/admin/adminProduct.asyncThunk";
-
 import { formContent } from "./formContent.data";
 
-import type {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-  MouseEvent,
-  Dispatch,
-  SetStateAction,
-} from "react";
-import type { Product } from "../../DTOs/userProduct.types";
+import type { FC, KeyboardEvent, MouseEvent } from "react";
 
 import type {
   AdminProduct,
@@ -33,39 +19,18 @@ import type {
 
 import "./ProductModal.styles.scss";
 
-const defaultFormData: AdminProductForCreate = {
-  title: "",
-  category: "",
-  origin_price: 0,
-  price: 0,
-  unit: "",
-  num: 0,
-  description: "",
-  content: "",
-  is_enabled: 0,
-  imageUrl: "",
-  imagesUrl: [],
-};
-
-type PropsType = {
-  createOrEdit: "create" | "edit";
-  targetData: AdminProduct | null;
-  closeAction: Dispatch<SetStateAction<boolean>>;
-};
-
-const ProductModal: FC<PropsType> = ({
-  createOrEdit,
-  targetData,
-  closeAction,
-}) => {
-  const [formData, setFormData] = useState<
-    AdminProductForCreate | AdminProduct
-  >(defaultFormData);
+export const ProductModal: FC = () => {
+  const {
+    formControl: {
+      formData,
+      createOrEdit,
+      submitForm,
+      setFormData,
+      onChangeHandler,
+    },
+    modalControl: { switchAdminProductModalOpen },
+  } = useAdminProductsContext();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-
-  const dispatch = useAppDispatch();
-
-  const { category } = useParams();
 
   //* 增加新增 imagesUrl 的 input
   const onAddInput = () => {
@@ -73,13 +38,11 @@ const ProductModal: FC<PropsType> = ({
       ...formData,
       imagesUrl: [...formData.imagesUrl, ""],
     });
-    if (isToggleOpen === false) {
-      setIsToggleOpen(true);
-    }
+    if (isToggleOpen === false) setIsToggleOpen(true);
   };
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) closeAction(false);
+    if (e.target === e.currentTarget) switchAdminProductModalOpen();
   };
 
   //* 刪除 imagesUrl
@@ -88,41 +51,12 @@ const ProductModal: FC<PropsType> = ({
     setFormData({ ...formData, imagesUrl: [...filterImages] });
   };
 
-  //* 針對每個 input 在新增內容時放入 formData
-  const onChangeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    i?: number
-  ) => {
-    const { value, name } = e.target;
-    if (["price", "origin_price"].includes(name)) {
-      setFormData({ ...formData, [name]: Number(value) });
-    } else if (
-      name === "is_enabled" &&
-      e.target instanceof HTMLInputElement &&
-      e.target.type === "checkbox"
-    ) {
-      setFormData({ ...formData, [name as keyof Product]: +e.target.checked });
-    } else if (name.startsWith("imagesUrl")) {
-      const newImages = [...formData.imagesUrl] as string[];
-      newImages[i!] = value;
-      setFormData({ ...formData, imagesUrl: newImages });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const onOpenToggle = () => {
-    setIsToggleOpen(!isToggleOpen);
-  };
+  const onOpenToggle = () => setIsToggleOpen(!isToggleOpen);
 
   //* 按下儲存鍵後提交資料
   const onSubmitHandler = () => {
-    if (createOrEdit === "create") {
-      dispatch(createAdminProductAsync(formData));
-    } else {
-      dispatch(updateAdminProductAsync(formData as AdminProduct));
-    }
-    closeAction(false);
+    submitForm();
+    switchAdminProductModalOpen();
   };
 
   //* 避免 user 新增到小數點
@@ -131,15 +65,6 @@ const ProductModal: FC<PropsType> = ({
       e.preventDefault();
     }
   };
-
-  //* 根據 type 開啟相對應 modal，並放入相對應資料
-  useEffect(() => {
-    if (createOrEdit === "create") {
-      setFormData({ ...defaultFormData, category: `${category}-` });
-    } else if (createOrEdit === "edit" && targetData) {
-      setFormData(targetData);
-    }
-  }, [createOrEdit, targetData, category]);
 
   return (
     <ModalContainer backdropClose={onClickToClose}>
@@ -373,5 +298,3 @@ const ProductModal: FC<PropsType> = ({
     </ModalContainer>
   );
 };
-
-export default ProductModal;
