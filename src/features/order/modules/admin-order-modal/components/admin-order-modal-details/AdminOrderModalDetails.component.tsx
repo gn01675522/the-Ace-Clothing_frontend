@@ -1,7 +1,7 @@
-import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
 
 import type { FC } from "react";
-import type { Order } from "../../DTOs/adminOrders.dtos";
+import type { Order } from "../../../../DTOs/adminOrders.dtos";
 
 import "./AdminOrderModalDetails.styles.scss";
 

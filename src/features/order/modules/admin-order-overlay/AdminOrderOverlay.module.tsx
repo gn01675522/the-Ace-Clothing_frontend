@@ -1,6 +1,6 @@
 import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
 
-import { OrderModal } from "../order-modal/OrderModal.module";
+import { AdminOrderModal } from "../admin-order-modal/AdminOrderModal.module";
 import { Loading } from "../../../../components";
 
 import type { FC } from "react";
@@ -14,7 +14,7 @@ export const AdminOrderOverlay: FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      {isModalOpen && targetData && <OrderModal />}
+      {isModalOpen && targetData && <AdminOrderModal />}
     </>
   );
 };

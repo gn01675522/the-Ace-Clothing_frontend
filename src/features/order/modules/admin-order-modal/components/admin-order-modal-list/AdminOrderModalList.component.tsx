@@ -1,6 +1,6 @@
-import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
 
-import { OrderCard } from "../order-card/OrderCard.component";
+import { OrderCard } from "../../../../components/order-card/OrderCard.component";
 
 import type { FC } from "react";
 

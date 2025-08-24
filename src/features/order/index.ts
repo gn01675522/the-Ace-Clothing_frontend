@@ -1,4 +1,4 @@
-export * from "./modules/order-modal/OrderModal.module";
+export * from "./modules/admin-order-modal/AdminOrderModal.module";
 export * from "./modules/admin-order-overlay/AdminOrderOverlay.module";
 export * from "./modules/admin-order-pagination/AdminOrderPagination.module";
 export * from "./modules/admin-order-table/AdminOrderTable.module";
