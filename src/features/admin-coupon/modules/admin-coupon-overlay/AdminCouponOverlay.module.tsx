@@ -1,7 +1,7 @@
 import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
 
 import { Loading } from "../../../../components";
-import { CouponModal } from "../coupon-modal/CouponModal.module";
+import { AdminCouponModal } from "../admin-coupon-modal/AdminCouponModal.module";
 
 import type { FC } from "react";
 
@@ -14,7 +14,7 @@ export const AdminCouponOverlay: FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      {isModalOpen && <CouponModal />}
+      {isModalOpen && <AdminCouponModal />}
     </>
   );
 };

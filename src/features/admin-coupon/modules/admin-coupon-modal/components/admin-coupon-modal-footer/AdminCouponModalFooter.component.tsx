@@ -1,6 +1,6 @@
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
 
-import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
 import type { FC } from "react";
 

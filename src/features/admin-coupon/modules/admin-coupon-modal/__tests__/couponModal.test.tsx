@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import { CouponModal } from "../CouponModal.module";
+import { CouponModal } from "../AdminCouponModal.module";
 
 import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
 import { ADMIN_COUPON_FORM_CLASSES } from "../../../types/admin-coupon.types";

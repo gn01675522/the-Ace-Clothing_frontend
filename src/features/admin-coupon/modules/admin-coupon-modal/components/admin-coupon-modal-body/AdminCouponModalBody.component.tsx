@@ -1,14 +1,14 @@
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
 
-import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
+import { formatTimestampInMilliSeconds } from "../../../../../../utils/common.utils";
 
-import { adminCouponFormConfig } from "../../config/admin-coupon.config";
+import { adminCouponFormConfig } from "../../../../config/admin-coupon.config";
 
 import type { FC } from "react";
 import type {
   IGetAdminCoupon,
   ICreateAdminCoupon,
-} from "../../DTOs/adminCoupon.dtos";
+} from "../../../../DTOs/adminCoupon.dtos";
 
 import "./AdminCouponModalBody.styles.scss";
 

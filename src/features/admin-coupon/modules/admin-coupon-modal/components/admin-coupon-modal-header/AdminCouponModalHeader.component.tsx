@@ -1,7 +1,7 @@
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
-import { ADMIN_COUPON_FORM_CLASSES } from "../../types/admin-coupon.types";
+import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
+import { ADMIN_COUPON_FORM_CLASSES } from "../../../../types/admin-coupon.types";
 
-import { Button, BUTTON_TYPE_CLASS } from "../../../../components/index";
+import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
 import type { FC } from "react";
 

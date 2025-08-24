@@ -1,13 +1,13 @@
 import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
 
 import { ModalContainer } from "../../../../components/index";
-import { AdminCouponModalHeader } from "../../components/admin-coupon-modal-header/AdminCouponModalHeader.component";
-import { AdminCouponModalBody } from "../../components/admin-coupon-modal-body/AdminCouponModalBody.component";
-import { AdminCouponModalFooter } from "../../components/admin-coupon-modal-footer/AdminCouponModalFooter.component";
+import { AdminCouponModalHeader } from "./components/admin-coupon-modal-header/AdminCouponModalHeader.component";
+import { AdminCouponModalBody } from "./components/admin-coupon-modal-body/AdminCouponModalBody.component";
+import { AdminCouponModalFooter } from "./components/admin-coupon-modal-footer/AdminCouponModalFooter.component";
 
 import type { FC, MouseEvent } from "react";
 
-export const CouponModal: FC = () => {
+export const AdminCouponModal: FC = () => {
   const {
     modalControl: { switchModalOpen },
   } = useAdminCouponContext();
