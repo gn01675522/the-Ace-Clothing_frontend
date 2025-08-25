@@ -1,7 +1,7 @@
 import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import { Loading } from "../../../../components";
-import { ProductModal } from "../product-modal/ProductModal.module";
+import { AdminProductModal } from "../product-modal/AdminProductModal.module";
 
 import type { FC } from "react";
 
@@ -13,7 +13,7 @@ export const AdminProductsModalOverlay: FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      {isModalOpen && <ProductModal />}
+      {isModalOpen && <AdminProductModal />}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import { OrderModal } from "../AdminOrderModal.module";
+import { AdminOrderModal } from "../AdminOrderModal.module";
 
 import type { Order } from "../../../DTOs/adminOrders.dtos";
 
@@ -76,7 +76,7 @@ describe("OrderModal test suite.", () => {
       stateFetch: { isLoading: false },
       modalControl: { switchAdminOrderModalOpen: mockSwitchModalOpen },
     });
-    renderWithProviders(<OrderModal />);
+    renderWithProviders(<AdminOrderModal />);
     const emailElement = screen.getByText(orderData.user.email);
     const nameElement = screen.getByText(orderData.user.name);
     const addressElement = screen.getByText(orderData.user.address);
@@ -115,7 +115,7 @@ describe("OrderModal test suite.", () => {
         setIsModalOpen: mockSetIsModalOpen,
       },
     });
-    renderWithProviders(<OrderModal />);
+    renderWithProviders(<AdminOrderModal />);
     const closeButton = screen.getByText(/關閉/i);
     const saveButton = screen.getByText(/儲存/i);
     const closeXButton = screen.getByLabelText(/Close/i);

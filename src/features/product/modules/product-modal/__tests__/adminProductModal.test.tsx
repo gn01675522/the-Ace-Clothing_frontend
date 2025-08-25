@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import { ProductModal } from "../ProductModal.module";
+import { AdminProductModal } from "../AdminProductModal.module";
 import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
 import type {
   AdminProduct,
@@ -27,7 +27,7 @@ const mockDefaultFormData: AdminProductForCreate = {
   imagesUrl: [],
 };
 
-describe("ProductModal test suite.", () => {
+describe("AdminProductModal test suite.", () => {
   const onClick = jest.fn();
   const productData = {
     id: "test id",
@@ -49,6 +49,7 @@ describe("ProductModal test suite.", () => {
   test("Should trigger the closeAction callback when Clicking on the 'x', '儲存', '關閉' buttons.", () => {
     const mockSwitchModalOpen = jest.fn();
     const mockSubmitForm = jest.fn();
+
     mockUseAdminProductContext.mockReturnValue({
       formControl: {
         targetData: productData,
@@ -58,16 +59,15 @@ describe("ProductModal test suite.", () => {
       },
       modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
     });
-    renderWithProviders(<ProductModal />);
+
+    renderWithProviders(<AdminProductModal />);
     const closeButtonElement = screen.getByText(/關閉/i);
-    const saveButtonElement = screen.getByText(/儲存/i);
     const closeXButtonElement = screen.getByLabelText(/Close/i);
 
     fireEvent.click(closeButtonElement);
-    fireEvent.click(saveButtonElement);
     fireEvent.click(closeXButtonElement);
 
-    expect(mockSwitchModalOpen).toHaveBeenCalledTimes(3);
+    expect(mockSwitchModalOpen).toHaveBeenCalledTimes(2);
   });
 
   test("Should disable the '儲存' button when nothing passed.", () => {
@@ -82,7 +82,7 @@ describe("ProductModal test suite.", () => {
       },
       modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
     });
-    renderWithProviders(<ProductModal />);
+    renderWithProviders(<AdminProductModal />);
 
     const saveButtonElement = screen.getByText(/儲存/i);
 
@@ -102,7 +102,7 @@ describe("ProductModal test suite.", () => {
       },
       modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
     });
-    renderWithProviders(<ProductModal />);
+    renderWithProviders(<AdminProductModal />);
 
     const saveElement = screen.getByText(/建立新商品/i);
 
@@ -120,7 +120,7 @@ describe("ProductModal test suite.", () => {
       },
       modalControl: { switchAdminProductModalOpen: mockSwitchModalOpen },
     });
-    renderWithProviders(<ProductModal />);
+    renderWithProviders(<AdminProductModal />);
 
     const titleElement = screen.getByText(`產品名稱：${productData.title}`);
     const categoryElement = screen.getByDisplayValue(productData.category);

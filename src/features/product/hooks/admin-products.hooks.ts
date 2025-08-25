@@ -61,6 +61,9 @@ export const useAdminProductModalFormControl = (
 
   const dispatch = useAppDispatch();
 
+  const isSaveToSave =
+    formData?.title?.length > 0 || formData?.unit?.length > 0;
+
   //* 針對每個 input 在新增內容時放入 formData
   const onChangeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -104,6 +107,7 @@ export const useAdminProductModalFormControl = (
   return {
     formData,
     createOrEdit,
+    isSaveToSave,
     setCreateOrEdit,
     submitForm,
     setFormData,

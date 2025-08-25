@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../utils/test.utils";
 
-import { CouponModal } from "../AdminCouponModal.module";
+import { AdminCouponModal } from "../AdminCouponModal.module";
 
 import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
 import { ADMIN_COUPON_FORM_CLASSES } from "../../../types/admin-coupon.types";
@@ -43,7 +43,7 @@ describe("CouponModal test suite.", () => {
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
-    renderWithProviders(<CouponModal />);
+    renderWithProviders(<AdminCouponModal />);
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
     const percentInput = screen.getByLabelText("折扣(e.g: 8折 = 80)");
@@ -72,7 +72,7 @@ describe("CouponModal test suite.", () => {
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
-    renderWithProviders(<CouponModal />);
+    renderWithProviders(<AdminCouponModal />);
 
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
@@ -104,7 +104,7 @@ describe("CouponModal test suite.", () => {
       closeModalAndClearForm: mockCloseModalAndClearForm,
     });
 
-    renderWithProviders(<CouponModal />);
+    renderWithProviders(<AdminCouponModal />);
 
     const closeButton = screen.getByText(/關閉/i);
     const closeXButton = screen.getByLabelText(/Close/i);
