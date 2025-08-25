@@ -1,14 +1,10 @@
 import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
 
-import { formatTimestampInMilliSeconds } from "../../../../../../utils/common.utils";
+import { GenericInput } from "../../../../../../components/index";
 
 import { adminCouponFormConfig } from "../../../../config/admin-coupon.config";
 
 import type { FC } from "react";
-import type {
-  IGetAdminCoupon,
-  ICreateAdminCoupon,
-} from "../../../../DTOs/adminCoupon.dtos";
 
 import "./AdminCouponModalBody.styles.scss";
 
@@ -19,6 +15,9 @@ export const AdminCouponModalBody: FC = () => {
       onChangeHandler,
     },
   } = useAdminCouponContext();
+
+  const { couponTitle, couponCode, couponPercent, couponDueDate } =
+    adminCouponFormConfig(form);
 
   return (
     <div className="admin-coupon-modal-body">
@@ -38,44 +37,12 @@ export const AdminCouponModalBody: FC = () => {
           onChange={onChangeHandler}
         />
       </div>
+
       <div className="admin-coupon-modal-body__content">
-        {adminCouponFormConfig.map((content) => {
-          return (
-            <div
-              className="admin-coupon-modal-body__content-group"
-              key={content.id}
-            >
-              <label
-                className="admin-coupon-modal-body__content-group-label"
-                htmlFor={content.id}
-              >
-                {content.title}
-              </label>
-              <input
-                type={content.type}
-                id={content.id}
-                placeholder={
-                  content.id === "percent"
-                    ? undefined
-                    : `請輸入${content.title}`
-                }
-                name={content.id}
-                className="admin-coupon-modal-body__content-group-input"
-                value={
-                  content.id === "due_date"
-                    ? formatTimestampInMilliSeconds(form[content.id])
-                    : form[
-                        content.id as keyof (
-                          | IGetAdminCoupon
-                          | ICreateAdminCoupon
-                        )
-                      ]
-                }
-                onChange={onChangeHandler}
-              />
-            </div>
-          );
-        })}
+        <GenericInput {...couponTitle} onChange={onChangeHandler} />
+        <GenericInput {...couponCode} onChange={onChangeHandler} />
+        <GenericInput {...couponPercent} onChange={onChangeHandler} />
+        <GenericInput {...couponDueDate} onChange={onChangeHandler} />
       </div>
     </div>
   );
