@@ -1,5 +1,5 @@
 export * from "./modules/admin-products-modal-overlay/AdminProductsModalOverlay.module";
-export * from "./modules/product-modal/AdminProductModal.module";
+export * from "./modules/admin-product-modal/AdminProductModal.module";
 export * from "./modules/admin-product-table/AdminProductTable.module";
 export * from "./modules/admin-product-pagination/AdminProductPagination.module";
 

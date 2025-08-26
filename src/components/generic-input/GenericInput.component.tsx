@@ -23,11 +23,11 @@ export const GenericInput: FC<IGenericInput> = ({
   }`;
 
   return (
-    <div className={combinedWrapperClasses}>
+    <fieldset className={combinedWrapperClasses}>
       <label htmlFor={id} className={combinedLabelClasses}>
         {title}
       </label>
-      <input type={type} className={combinedInputClasses} {...props} />
-    </div>
+      <input type={type} className={combinedInputClasses} id={id} {...props} />
+    </fieldset>
   );
 };

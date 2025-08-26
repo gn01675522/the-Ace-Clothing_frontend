@@ -10,6 +10,8 @@ import {
 
 import type { FC } from "react";
 
+import "./AdminProductModalToggleList.styles.scss";
+
 export const AdminProductModalToggleList: FC = () => {
   const {
     formControl: { formData, setFormData, onChangeHandler },
@@ -39,34 +41,37 @@ export const AdminProductModalToggleList: FC = () => {
       <input
         id="trigger-check"
         type="checkbox"
-        className="product-modal__body-lower-trigger"
+        className="admin-product-modal-toggle-list__trigger"
         checked={isToggleOpen}
         onChange={onOpenToggle}
       />
       <label
-        className="product-modal__body-lower-toggle"
+        className="admin-product-modal-toggle-list__toggle"
         htmlFor="trigger-check"
       >
-        <div className="product-modal__body-lower-triangle" />
-        <h6 className="product-modal__body-lower-toggle-title">開啟圖片列表</h6>
+        <div className="admin-product-modal-toggle-list__triangle" />
+        <h6 className="admin-product-modal-toggle-list__title">開啟圖片列表</h6>
       </label>
-      <div className="product-modal__body-lower-content">
+      <div className="admin-product-modal-toggle-list__content">
         {formData?.imagesUrl.map((url, i) => {
           return (
-            <div className="product-modal__body-lower-content-item" key={i}>
+            <div
+              className="admin-product-modal-toggle-list__content-item"
+              key={i}
+            >
               {formData?.imagesUrl[i] ? (
                 <img
                   src={url}
                   alt={`圖片：${formData.title}，第${
                     i + 1
                   }張；無法顯示，請輸入正確連結`}
-                  className="product-modal__body-lower-content-item-img"
+                  className="admin-product-modal-toggle-list__content-item-img"
                 />
               ) : (
-                <NoImageSVGLogo className="product-modal__body-lower-content-item-alt" />
+                <NoImageSVGLogo className="admin-product-modal-toggle-list__content-item-alt" />
               )}
               <label
-                className="product-modal__body-lower-content-item-label"
+                className="admin-product-modal-toggle-list__content-item-label"
                 htmlFor={`images${i}`}
               >
                 圖片 - {i + 1}
@@ -84,7 +89,7 @@ export const AdminProductModalToggleList: FC = () => {
                 name={`imagesUrl${i}`}
                 id={`images${i}`}
                 placeholder="請輸入圖片連結"
-                className="product-modal__body-lower-content-item-input"
+                className="admin-product-modal-toggle-list__content-item-input"
                 onChange={(e) => onChangeHandler(e, i)}
                 value={url || ""}
               />

@@ -4,6 +4,8 @@ import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
 import type { FC } from "react";
 
+import "./AdminProductModalFooter.styles.scss";
+
 export const AdminProductModalFooter: FC = () => {
   const {
     formControl: { isSaveToSave, submitForm },
@@ -17,7 +19,7 @@ export const AdminProductModalFooter: FC = () => {
   };
 
   return (
-    <div className="product-modal__footer">
+    <div className="admin-product-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}

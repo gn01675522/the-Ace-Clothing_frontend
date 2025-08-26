@@ -1,7 +1,7 @@
 import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
 
 import { Loading } from "../../../../components";
-import { AdminProductModal } from "../product-modal/AdminProductModal.module";
+import { AdminProductModal } from "../admin-product-modal/AdminProductModal.module";
 
 import type { FC } from "react";
 
