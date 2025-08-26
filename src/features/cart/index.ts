@@ -1,6 +1,9 @@
 export * from "./modules/cart-item/CartItem.module";
+export * from "./modules/cart-overlay/CartOverlay.module";
 
 export * from "./components/cart-icon/CartIcon.component";
+export * from "./components/set-discount/SetDiscount.component";
+export * from "./components/cart-brief/CartBrief.component";
 
 export * from "./DTOs/cart.dtos";
 

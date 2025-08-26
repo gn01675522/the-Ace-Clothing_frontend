@@ -27,7 +27,7 @@ const AdminProductsContent: FC = () => {
     deleteTarget,
     setDeleteTarget,
   } = useDeleteModalControl();
-  //todo 待後端完成需重構此部分
+  //todo 待後端完成需重構 pagination 部分
   const [currentPage, setCurrentPage] = useState(1);
 
   //* 打開刪除 modal
