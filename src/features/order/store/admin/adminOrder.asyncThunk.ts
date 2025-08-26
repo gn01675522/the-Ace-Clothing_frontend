@@ -4,12 +4,12 @@ import axios, { type AxiosResponse } from "axios";
 import { setHandleMessage } from "../../../../store/message/message.slice";
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { Pagination } from "../../../../shared/types/types";
-import type { Order } from "../../DTOs/adminOrders.type";
+import type { PaginationType } from "../../../../shared/types/types";
+import type { Order } from "../../DTOs/adminOrders.dtos";
 
 //* 擷取 admin orders api 中的資料
 export const fetchAdminOrdersAsync = createAppAsyncThunk<
-  { orders: Order[]; pagination: Pagination },
+  { orders: Order[]; pagination: PaginationType },
   number | undefined
 >("adminOrders/fetchAdminOrders", async (page = 1, { rejectWithValue }) => {
   try {

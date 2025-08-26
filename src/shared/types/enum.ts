@@ -8,3 +8,8 @@ export enum PRODUCT_CATEGORIES {
   urban = "urban",
   bohemian = "bohemian",
 }
+
+export enum FORM_OPERATION_OPTIONS {
+  edit = "edit",
+  create = "create",
+}

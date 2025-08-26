@@ -25,7 +25,7 @@ export const selectAdminProductError = createSelector(
 );
 
 //* 將全部的產品依據傳入值分類
-const classifyAdminProducts = (category: string) =>
+export const classifyAdminProducts = (category: string) =>
   createSelector([selectAdminProducts], (products) =>
     products.filter((product) => product.category.split("-")[0] === category)
   );

@@ -25,7 +25,11 @@ const INITIAL_STATE: AdminProductState = {
 export const adminProductSlice = createSlice({
   name: "adminProduct",
   initialState: INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    setClearAdminProductState() {
+      return INITIAL_STATE;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAdminProductAsync.pending, (state) => {
@@ -79,5 +83,5 @@ export const adminProductSlice = createSlice({
   },
 });
 
-export const {} = adminProductSlice.actions;
+export const { setClearAdminProductState } = adminProductSlice.actions;
 export const adminProductReducer = adminProductSlice.reducer;

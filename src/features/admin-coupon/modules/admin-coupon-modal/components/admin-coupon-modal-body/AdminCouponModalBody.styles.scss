@@ -1,0 +1,21 @@
+@use "../../../../../../stylesheets/variables";
+
+.admin-coupon-modal-body {
+  padding-bottom: 1rem;
+  border-bottom: 2px variables.$line-secondary-line;
+  &__check {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    justify-content: space-between;
+    border-bottom: 2px variables.$line-secondary-line;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}

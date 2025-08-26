@@ -1,5 +1,12 @@
-export { default as ProductCard } from "./components/product-card/ProductCard.component";
-export { default as ProductModal } from "./components/product-modal/ProductModal.component";
+export * from "./modules/admin-products-modal-overlay/AdminProductsModalOverlay.module";
+export * from "./modules/admin-product-modal/AdminProductModal.module";
+export * from "./modules/admin-product-table/AdminProductTable.module";
+export * from "./modules/admin-product-pagination/AdminProductPagination.module";
+
+export * from "./components/product-card/ProductCard.component";
+
+export * from "./contexts/adminProducts.context";
+export * from "./hooks/admin-products.hooks";
 
 export * from "./store/client/userProduct.asyncThunk";
 export * from "./store/client/userProduct.selector";

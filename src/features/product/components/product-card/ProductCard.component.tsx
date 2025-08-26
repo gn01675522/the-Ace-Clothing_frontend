@@ -21,7 +21,11 @@ type PropsType = {
   isFavorite: boolean;
 };
 
-const ProductCard: FC<PropsType> = ({ product, urlParam, isFavorite }) => {
+export const ProductCard: FC<PropsType> = ({
+  product,
+  urlParam,
+  isFavorite,
+}) => {
   const dispatch = useAppDispatch();
 
   const wishlist = useAppSelector(selectUserFavorite);
@@ -74,5 +78,3 @@ const ProductCard: FC<PropsType> = ({ product, urlParam, isFavorite }) => {
     </Link>
   );
 };
-
-export default ProductCard;

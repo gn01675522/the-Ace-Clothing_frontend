@@ -6,7 +6,7 @@ import {
   fetchUserOrdersAsync,
 } from "./userOrder.asyncThunk";
 
-import { OrderDetail, OrderDetailWithNum } from "../../DTOs/userOrder.types";
+import { OrderDetail, OrderDetailWithNum } from "../../DTOs/userOrder.dtos";
 
 type UserOrderState = {
   readonly orders: OrderDetailWithNum[];

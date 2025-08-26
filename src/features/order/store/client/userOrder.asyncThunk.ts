@@ -5,7 +5,7 @@ import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type {
   OrderDetail,
   OrderDetailWithNum,
-} from "../../DTOs/userOrder.types";
+} from "../../DTOs/userOrder.dtos";
 import type { UserBasicInfo } from "../../../../shared/types/interface";
 
 //* 提交訂單

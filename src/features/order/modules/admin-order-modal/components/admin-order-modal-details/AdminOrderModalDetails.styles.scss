@@ -1,0 +1,53 @@
+@use "../../../../../../stylesheets/variables";
+
+.admin-order-modal-detail {
+  display: flex;
+  gap: 5px;
+  &__customer {
+    display: flex;
+    width: calc(50% - 2.5px);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px variables.$line-secondary-line;
+    &-title {
+      font-size: 1.5rem;
+    }
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      &-title {
+        font-weight: bold;
+      }
+    }
+  }
+  &__payment {
+    display: flex;
+    width: calc(50% - 2.5px);
+    padding: 1rem 0;
+    flex-direction: column;
+    gap: 1rem;
+    border-bottom: 1px variables.$line-secondary-line;
+    &-title {
+      font-size: 1.5rem;
+    }
+    &-status {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      &-isPaid,
+      &-progress {
+        display: flex;
+        width: calc(50% - 2.5px);
+        gap: 1rem;
+        flex-direction: column;
+        justify-content: space-between;
+        &-title {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
