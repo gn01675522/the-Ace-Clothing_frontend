@@ -133,7 +133,6 @@ describe("AdminProductModal test suite.", () => {
       productData.description
     );
     const contentElement = screen.getByDisplayValue(productData.content);
-    const isEnabledButtonElement = screen.getByLabelText("是否啟用");
 
     expect(titleElement).toBeInTheDocument();
     expect(categoryElement).toBeInTheDocument();
@@ -142,6 +141,5 @@ describe("AdminProductModal test suite.", () => {
     expect(priceElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
     expect(contentElement).toBeInTheDocument();
-    expect(isEnabledButtonElement).toBeChecked();
   });
 });

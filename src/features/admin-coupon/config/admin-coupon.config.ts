@@ -35,7 +35,7 @@ export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
     name: "title",
     type: GENERIC_INPUT_TYPES.date,
     title: "到期日",
-    value: formData.due_date,
+    value: formatTimestampInMilliSeconds(formData.due_date),
     placeholder: "請輸入到期日",
   },
 });
