@@ -1,4 +1,5 @@
-import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
+import { useCouponManagementContext } from "../../hooks/admin-coupon-modal.hooks";
+import { useAdminCouponFormControl } from "../../../../hooks/admin-coupon.hooks";
 
 import { GenericInput } from "../../../../../../components/index";
 
@@ -14,7 +15,7 @@ export const AdminCouponModalBody: FC = () => {
       formData: { form },
       onChangeHandler,
     },
-  } = useAdminCouponContext();
+  } = useCouponManagementContext();
 
   const { couponTitle, couponCode, couponPercent, couponDueDate } =
     adminCouponFormConfig(form);

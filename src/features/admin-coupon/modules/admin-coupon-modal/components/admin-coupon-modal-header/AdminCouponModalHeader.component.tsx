@@ -1,5 +1,6 @@
-import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
-import { ADMIN_COUPON_FORM_CLASSES } from "../../../../types/admin-coupon.types";
+import { useCouponManagementContext } from "../../hooks/admin-coupon-modal.hooks";
+
+import { FORM_OPERATION_OPTIONS } from "../../../../../../shared/types";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
@@ -9,12 +10,12 @@ import "./AdminCouponModalHeader.styles.scss";
 
 export const AdminCouponModalHeader: FC = () => {
   const {
-    formControl: { formData, createOrEdit },
-    closeModalAndClearForm,
-  } = useAdminCouponContext();
+    modalControl: { switchModalOpen },
+    formControl: { formData, type },
+  } = useCouponManagementContext();
 
   const titleByType =
-    createOrEdit === ADMIN_COUPON_FORM_CLASSES.create
+    type === FORM_OPERATION_OPTIONS.create
       ? "建立新優惠券"
       : `優惠券名稱： ${formData.form.title}`;
 
@@ -25,7 +26,7 @@ export const AdminCouponModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={closeModalAndClearForm}
+        onClick={switchModalOpen}
       >
         ｘ
       </Button>

@@ -1,4 +1,4 @@
-import { useAdminCouponContext } from "../../../../hooks/admin-coupon.hooks";
+import { useCouponManagementContext } from "../../hooks/admin-coupon-modal.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
@@ -10,15 +10,11 @@ export const AdminCouponModalFooter: FC = () => {
   const {
     formControl: { submitForm, isSaveToSave },
     closeModalAndClearForm,
-  } = useAdminCouponContext();
-
-  const onCloseHandler = () => {
-    closeModalAndClearForm();
-  };
+  } = useCouponManagementContext();
 
   const onSubmitHandler = () => {
     submitForm();
-    onCloseHandler();
+    closeModalAndClearForm();
   };
 
   return (
@@ -26,7 +22,7 @@ export const AdminCouponModalFooter: FC = () => {
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={onCloseHandler}
+        onClick={closeModalAndClearForm}
       >
         關閉
       </Button>

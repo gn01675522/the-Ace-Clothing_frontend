@@ -1,18 +1,16 @@
-import { useAppDispatch } from "../../../../store/redux-hooks";
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { Pagination } from "../../../../modules";
 
 import { fetchAdminCouponsAsync } from "../../store/adminCoupon.asyncThunk";
+import { selectAdminCouponsPagination } from "../../store/adminCoupon.selector";
 
 import type { FC } from "react";
 
 import "./AdminCouponPagination.styles.scss";
 
 export const AdminCouponPagination: FC = () => {
-  const {
-    stateFetch: { pagination },
-  } = useAdminCouponContext();
+  const pagination = useAppSelector(selectAdminCouponsPagination);
 
   const dispatch = useAppDispatch();
 

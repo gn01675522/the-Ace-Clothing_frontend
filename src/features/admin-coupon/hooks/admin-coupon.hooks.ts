@@ -1,7 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
-
-import { AdminCouponContext } from "../contexts/admin-coupon.context";
 
 import {
   updateAdminCouponAsync,
@@ -25,17 +23,6 @@ import { ADMIN_COUPON_FORM_CLASSES } from "../types/admin-coupon.types";
 import type { ChangeEvent } from "react";
 import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
 import type { AdminCouponFormType } from "../types/admin-coupon.types";
-
-export const useAdminCouponContext = () => {
-  const context = useContext(AdminCouponContext);
-
-  if (!context)
-    throw new Error(
-      "useAdminCouponContext must be used within AdminCouponContextProvider"
-    );
-
-  return context;
-};
 
 export const defaultCreateData: AdminCouponFormType = {
   title: "",

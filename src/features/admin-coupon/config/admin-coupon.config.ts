@@ -54,3 +54,12 @@ export const adminCouponTableColumn: Array<{
   },
   { header: "啟用狀態", accessor: "is_enabled" },
 ];
+
+export const defaultCouponCreateData: AdminCouponFormType = {
+  title: "",
+  is_enabled: 1,
+  percent: 80,
+  due_date: formatTimestampInMilliSeconds(new Date()),
+  code: "testCode",
+  num: 1,
+};

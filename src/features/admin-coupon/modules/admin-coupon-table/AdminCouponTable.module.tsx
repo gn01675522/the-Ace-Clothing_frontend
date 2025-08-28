@@ -1,10 +1,17 @@
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 import { AdminTable } from "../../../../modules";
 
+import {
+  setCouponEditModalIsOpen,
+  setCouponEditModalTargetData,
+  setCouponEditModalType,
+} from "../../store/adminCoupon.slice";
+import { selectAdminCoupons } from "../../store/adminCoupon.selector";
+
 import { adminCouponTableColumn } from "../../config/admin-coupon.config";
-import { ADMIN_COUPON_FORM_CLASSES } from "../../types/admin-coupon.types";
+import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 
 import type { FC } from "react";
 import type { IGetAdminCoupon } from "../../DTOs/adminCoupon.dtos";
@@ -12,27 +19,23 @@ import type { IGetAdminCoupon } from "../../DTOs/adminCoupon.dtos";
 import "./AdminCouponTable.styles.scss";
 
 type PropsType = {
-  onClickDeleteModalHandler: (target: IGetAdminCoupon) => void;
+  onClickDeleteHandler: (target: IGetAdminCoupon) => void;
 };
 
-export const AdminCouponTable: FC<PropsType> = ({
-  onClickDeleteModalHandler,
-}) => {
-  const {
-    formControl: { setCreateOrEdit, setTargetData },
-    stateFetch: { coupons },
-    modalControl: { switchModalOpen },
-  } = useAdminCouponContext();
+export const AdminCouponTable: FC<PropsType> = ({ onClickDeleteHandler }) => {
+  const coupons = useAppSelector(selectAdminCoupons);
+
+  const dispatch = useAppDispatch();
 
   const onClickToCreateHandler = () => {
-    setCreateOrEdit(ADMIN_COUPON_FORM_CLASSES.create);
-    switchModalOpen();
+    dispatch(setCouponEditModalType(FORM_OPERATION_OPTIONS.create));
+    dispatch(setCouponEditModalIsOpen(true));
   };
 
   const onClickToEditHandler = (coupon: IGetAdminCoupon) => {
-    setCreateOrEdit(ADMIN_COUPON_FORM_CLASSES.edit);
-    setTargetData(coupon);
-    switchModalOpen();
+    dispatch(setCouponEditModalType(FORM_OPERATION_OPTIONS.edit));
+    dispatch(setCouponEditModalTargetData(coupon));
+    dispatch(setCouponEditModalIsOpen(true));
   };
 
   return (
@@ -49,7 +52,7 @@ export const AdminCouponTable: FC<PropsType> = ({
       <AdminTable<IGetAdminCoupon>
         data={coupons}
         columns={adminCouponTableColumn}
-        onClickToDeleteHandler={onClickDeleteModalHandler}
+        onClickToDeleteHandler={onClickDeleteHandler}
         onClickToEditHandler={onClickToEditHandler}
       />
     </>

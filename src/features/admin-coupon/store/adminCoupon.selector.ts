@@ -18,7 +18,22 @@ export const selectAdminCouponsIsLoading = createSelector(
   (adminCoupon) => adminCoupon.isLoading
 );
 
-export const selectAdminCouponsTempData = createSelector(
+export const selectAdminCouponsEditModalControl = createSelector(
   [selectAdminCouponsReducer],
-  (adminCoupon) => adminCoupon.tempData
+  (adminCoupon) => adminCoupon.couponEditModalControl
+);
+
+export const selectAdminCouponsEditModalIsOpen = createSelector(
+  [selectAdminCouponsEditModalControl],
+  (modalControl) => modalControl.isOpen
+);
+
+export const selectAdminCouponsEditModalType = createSelector(
+  [selectAdminCouponsEditModalControl],
+  (modalControl) => modalControl.type
+);
+
+export const selectAdminCouponsEditModalTargetData = createSelector(
+  [selectAdminCouponsEditModalControl],
+  (modalControl) => modalControl.targetData
 );

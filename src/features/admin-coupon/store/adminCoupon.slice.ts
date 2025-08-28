@@ -7,24 +7,32 @@ import {
   updateAdminCouponAsync,
 } from "./adminCoupon.asyncThunk";
 
+import { FORM_OPERATION_OPTIONS } from "../../../shared/types";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
 import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
+import type { couponEditModalType } from "../types/admin-coupon.types";
 import type { PaginationType } from "../../../shared/types/types";
 
 type AdminCouponState = {
   readonly coupons: IGetAdminCoupon[];
   readonly pagination: PaginationType | null;
-  readonly tempData: IGetAdminCoupon | null;
-  readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
+  readonly isLoading: boolean;
+  readonly couponEditModalControl: couponEditModalType;
 };
 
 const INITIAL_STATE: AdminCouponState = {
   coupons: [],
   pagination: null,
-  tempData: null,
   isLoading: false,
   error: null,
+  couponEditModalControl: {
+    isOpen: false,
+    type: FORM_OPERATION_OPTIONS.create,
+    targetData: null,
+  },
 };
 
 export const adminCouponSlice = createSlice({
@@ -33,6 +41,33 @@ export const adminCouponSlice = createSlice({
   reducers: {
     setClearAdminCouponState() {
       return INITIAL_STATE;
+    },
+    setClearCouponEditModalControl(state) {
+      state.couponEditModalControl = INITIAL_STATE.couponEditModalControl;
+    },
+    setCouponEditModalTargetData(
+      state,
+      actions: PayloadAction<IGetAdminCoupon>
+    ) {
+      state.couponEditModalControl = {
+        ...state.couponEditModalControl,
+        targetData: actions.payload,
+      };
+    },
+    setCouponEditModalIsOpen(state, actions: PayloadAction<boolean>) {
+      state.couponEditModalControl = {
+        ...state.couponEditModalControl,
+        isOpen: actions.payload,
+      };
+    },
+    setCouponEditModalType(
+      state,
+      actions: PayloadAction<FORM_OPERATION_OPTIONS>
+    ) {
+      state.couponEditModalControl = {
+        ...state.couponEditModalControl,
+        type: actions.payload,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -90,5 +125,11 @@ export const adminCouponSlice = createSlice({
   },
 });
 
-export const { setClearAdminCouponState } = adminCouponSlice.actions;
+export const {
+  setClearAdminCouponState,
+  setClearCouponEditModalControl,
+  setCouponEditModalIsOpen,
+  setCouponEditModalTargetData,
+  setCouponEditModalType,
+} = adminCouponSlice.actions;
 export const adminCouponReducer = adminCouponSlice.reducer;
