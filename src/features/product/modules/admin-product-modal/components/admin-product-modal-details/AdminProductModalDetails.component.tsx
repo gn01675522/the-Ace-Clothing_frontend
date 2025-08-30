@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import { NoImageSVGLogo } from "../../../../../../components/index";
 import { GenericInput, ToggleSwitch } from "../../../../../../components/index";
@@ -12,7 +12,7 @@ import "./AdminProductModalDetails.styles.scss";
 export const AdminProductModalDetails: FC = () => {
   const {
     formControl: { formData, onChangeHandler },
-  } = useAdminProductsContext();
+  } = useProductManagementContext();
 
   //* 避免 user 新增到小數點
   const onPreventDotEntry = (e: KeyboardEvent<HTMLInputElement>) => {

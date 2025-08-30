@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
@@ -10,22 +10,23 @@ import "./AdminProductModalHeader.styles.scss";
 
 export const AdminProductModalHeader: FC = () => {
   const {
-    formControl: { createOrEdit, formData },
-    modalControl: { switchAdminProductModalOpen },
-  } = useAdminProductsContext();
+    modalControl: { switchModalOpen },
+    formControl: { type, formData },
+  } = useProductManagementContext();
+
+  const titleByType =
+    type === FORM_OPERATION_OPTIONS.create
+      ? "建立新商品"
+      : `產品名稱：${formData.title}`;
 
   return (
     <div className="admin-product-modal-header">
-      <h1 className="admin-product-modal-header__title">
-        {createOrEdit === FORM_OPERATION_OPTIONS.create
-          ? "建立新商品"
-          : `產品名稱：${formData.title}`}
-      </h1>
+      <h1 className="admin-product-modal-header__title">{titleByType}</h1>
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={switchAdminProductModalOpen}
+        onClick={switchModalOpen}
       >
         ｘ
       </Button>

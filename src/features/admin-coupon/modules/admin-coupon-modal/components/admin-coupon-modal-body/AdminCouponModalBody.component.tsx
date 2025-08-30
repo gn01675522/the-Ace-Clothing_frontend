@@ -1,5 +1,4 @@
 import { useCouponManagementContext } from "../../hooks/admin-coupon-modal.hooks";
-import { useAdminCouponFormControl } from "../../../../hooks/admin-coupon.hooks";
 
 import { GenericInput } from "../../../../../../components/index";
 

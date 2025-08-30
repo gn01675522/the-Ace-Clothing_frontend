@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import { GenericTextarea } from "../../../../../../components/index";
 
@@ -11,7 +11,7 @@ import "./AdminProductModalDescription.styles.scss";
 export const AdminProductModalDescription: FC = () => {
   const {
     formControl: { formData, onChangeHandler },
-  } = useAdminProductsContext();
+  } = useProductManagementContext();
 
   const { description, content } = adminProductFormDescriptionConfig(formData);
 

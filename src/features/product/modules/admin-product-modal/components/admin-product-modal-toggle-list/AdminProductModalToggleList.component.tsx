@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import {
   NoImageSVGLogo,
@@ -15,7 +15,7 @@ import "./AdminProductModalToggleList.styles.scss";
 export const AdminProductModalToggleList: FC = () => {
   const {
     formControl: { formData, setFormData, onChangeHandler },
-  } = useAdminProductsContext();
+  } = useProductManagementContext();
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 

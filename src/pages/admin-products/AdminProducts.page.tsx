@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDeleteModalControl } from "../../modules/index";
 
-import {
-  AdminProductsContextProvider,
-  useAdminProductsContext,
-} from "../../features/product/index";
+import { useAdminProductStateFetch } from "../../features/product/index";
+
+import { Loading } from "../../components/index";
 
 import {
-  AdminProductsModalOverlay,
+  AdminProductModal,
   AdminProductTable,
   AdminProductPagination,
 } from "../../features/product/index";
@@ -15,12 +15,14 @@ import {
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 
 import type { FC } from "react";
-import type { AdminProduct } from "../../features/product/DTOs/adminProduct.types";
+import type { IGetAdminProduct } from "../../features/product/DTOs/adminProduct.types";
 
 import "./AdminProducts.styles.scss";
 
-const AdminProductsContent: FC = () => {
-  const { pageCategory } = useAdminProductsContext();
+const AdminProducts: FC = () => {
+  const { category } = useParams();
+  const { isLoading } = useAdminProductStateFetch(category);
+
   const {
     isDeleteModalOpen,
     switchDeleteModalOpen,
@@ -31,14 +33,15 @@ const AdminProductsContent: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   //* 打開刪除 modal
-  const onClickToDeleteProductHandler = (target: AdminProduct) => {
+  const onClickToDeleteProductHandler = (target: IGetAdminProduct) => {
     setDeleteTarget({ id: target.id, title: target.title });
     switchDeleteModalOpen;
   };
 
   return (
-    <>
-      <AdminProductsModalOverlay />
+    <div className="admin-products">
+      <AdminProductModal />
+      {isLoading && <Loading />}
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminProduct}
@@ -47,28 +50,18 @@ const AdminProductsContent: FC = () => {
           closeAction={switchDeleteModalOpen}
         />
       )}
-      <div className="admin-products">
-        <h3 className="admin-products__title">
-          產品列表-{pageCategory?.toUpperCase()}
-        </h3>
-        <AdminProductTable
-          onClickToDeleteProductHandler={onClickToDeleteProductHandler}
-          currentPage={currentPage}
-        />
-        <AdminProductPagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
-    </>
-  );
-};
-
-const AdminProducts: FC = () => {
-  return (
-    <AdminProductsContextProvider>
-      <AdminProductsContent />
-    </AdminProductsContextProvider>
+      <h3 className="admin-products__title">
+        產品列表-{category?.toUpperCase()}
+      </h3>
+      <AdminProductTable
+        onClickDeleteHandler={onClickToDeleteProductHandler}
+        currentPage={currentPage}
+      />
+      <AdminProductPagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    </div>
   );
 };
 

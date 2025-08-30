@@ -1,4 +1,4 @@
-export interface AdminProduct {
+export interface IGetAdminProduct {
   id: string;
   category: string;
   content: string;
@@ -13,23 +13,9 @@ export interface AdminProduct {
   imagesUrl: string[];
 }
 
-export interface AdminProductForCreate {
-  title: string;
-  category: string;
-  origin_price: number;
-  price: number;
-  num: number;
-  unit: string;
-  description: string;
-  content: string;
-  is_enabled: number;
-  imageUrl: string;
-  imagesUrl: string[];
-}
-
 export interface AdminProductRes {
   success: boolean;
   products: {
-    [key: string]: AdminProduct;
+    [key: string]: IGetAdminProduct;
   };
 }

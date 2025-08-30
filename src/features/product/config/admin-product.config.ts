@@ -1,6 +1,6 @@
 import { GENERIC_INPUT_TYPES } from "../../../components/index";
 
-import { AdminProductForCreate } from "../DTOs/adminProduct.types";
+import { AdminProductForCreate } from "../types/admin-product.types";
 
 export const adminProductFormDetailsConfig = (
   formData: AdminProductForCreate
@@ -81,3 +81,17 @@ export const adminProductFormDescriptionConfig = (
     placeholder: "請輸入產品說明內容",
   },
 });
+
+export const defaultProdcutCreateData: AdminProductForCreate = {
+  title: "",
+  category: "",
+  origin_price: 0,
+  price: 0,
+  unit: "",
+  num: 0,
+  description: "",
+  content: "",
+  is_enabled: 0,
+  imageUrl: "",
+  imagesUrl: [],
+};

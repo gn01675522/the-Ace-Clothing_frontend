@@ -24,13 +24,33 @@ export const selectAdminProductError = createSelector(
   (adminProduct) => adminProduct.error
 );
 
+export const selectAdminProductEditModalControl = createSelector(
+  [selectAdminProductReducer],
+  (adminProduct) => adminProduct.productEditModalControl
+);
+
+export const selectAdminProductEditModalIsOpen = createSelector(
+  [selectAdminProductEditModalControl],
+  (modalControl) => modalControl.isOpen
+);
+
+export const selectAdminProductEditModalType = createSelector(
+  [selectAdminProductEditModalControl],
+  (modalControl) => modalControl.type
+);
+
+export const selectAdminProductEditModalTargetData = createSelector(
+  [selectAdminProductEditModalControl],
+  (modalControl) => modalControl.targetData
+);
+
 //* 將全部的產品依據傳入值分類
 export const classifyAdminProducts = (category: string) =>
   createSelector([selectAdminProducts], (products) =>
     products.filter((product) => product.category.split("-")[0] === category)
   );
 
-//* ****************************** 以下為業務邏輯 ********************************* */
+//* ****************************** 分類業務邏輯 start ********************************* */
 //* 就取出的完整產品資料將 mens 分類出來
 export const selectAdminMensProducts = classifyAdminProducts("mens");
 
@@ -46,3 +66,4 @@ export const selectAdminShoesProducts = classifyAdminProducts("shoes");
 //* 就取出的完整產品資料將 accessories 分類出來
 export const selectAdminAccessoriesProducts =
   classifyAdminProducts("accessories");
+//* ****************************** 分類業務邏輯 end ********************************* */

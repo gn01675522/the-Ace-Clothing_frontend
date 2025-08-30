@@ -12,7 +12,7 @@ import { FORM_OPERATION_OPTIONS } from "../../../shared/types";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
 import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
-import type { couponEditModalType } from "../types/admin-coupon.types";
+import type { CouponEditModalType } from "../types/admin-coupon.types";
 import type { PaginationType } from "../../../shared/types/types";
 
 type AdminCouponState = {
@@ -20,7 +20,7 @@ type AdminCouponState = {
   readonly pagination: PaginationType | null;
   readonly error: AxiosRejectTypes | null;
   readonly isLoading: boolean;
-  readonly couponEditModalControl: couponEditModalType;
+  readonly couponEditModalControl: CouponEditModalType;
 };
 
 const INITIAL_STATE: AdminCouponState = {

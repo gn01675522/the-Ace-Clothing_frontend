@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import {
   fetchAdminProductAsync,
@@ -7,19 +7,29 @@ import {
   createAdminProductAsync,
 } from "./adminProduct.asyncThunk";
 
+import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { AdminProduct } from "../../DTOs/adminProduct.types";
+import type { IGetAdminProduct } from "../../DTOs/adminProduct.types";
+import type { ProductEditModalType } from "../../types/admin-product.types";
 
 type AdminProductState = {
-  readonly products: AdminProduct[];
+  readonly products: IGetAdminProduct[];
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
+  readonly productEditModalControl: ProductEditModalType;
 };
 
 const INITIAL_STATE: AdminProductState = {
   products: [],
   isLoading: false,
   error: null,
+  productEditModalControl: {
+    isOpen: false,
+    type: FORM_OPERATION_OPTIONS.create,
+    targetData: null,
+  },
 };
 
 export const adminProductSlice = createSlice({
@@ -28,6 +38,33 @@ export const adminProductSlice = createSlice({
   reducers: {
     setClearAdminProductState() {
       return INITIAL_STATE;
+    },
+    setClearProductEditModalControl(state) {
+      state.productEditModalControl = INITIAL_STATE.productEditModalControl;
+    },
+    setProductEditModalTargetData(
+      state,
+      actions: PayloadAction<IGetAdminProduct>
+    ) {
+      state.productEditModalControl = {
+        ...state.productEditModalControl,
+        targetData: actions.payload,
+      };
+    },
+    setProductEditModalIsOpen(state, actions: PayloadAction<boolean>) {
+      state.productEditModalControl = {
+        ...state.productEditModalControl,
+        isOpen: actions.payload,
+      };
+    },
+    setProductEditModalType(
+      state,
+      actions: PayloadAction<FORM_OPERATION_OPTIONS>
+    ) {
+      state.productEditModalControl = {
+        ...state.productEditModalControl,
+        type: actions.payload,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -83,5 +120,11 @@ export const adminProductSlice = createSlice({
   },
 });
 
-export const { setClearAdminProductState } = adminProductSlice.actions;
+export const {
+  setClearAdminProductState,
+  setClearProductEditModalControl,
+  setProductEditModalTargetData,
+  setProductEditModalIsOpen,
+  setProductEditModalType,
+} = adminProductSlice.actions;
 export const adminProductReducer = adminProductSlice.reducer;

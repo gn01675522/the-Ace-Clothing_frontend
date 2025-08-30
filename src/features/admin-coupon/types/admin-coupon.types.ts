@@ -15,7 +15,7 @@ export type AdminCouponFormType = {
   num: number;
 };
 
-export type couponEditModalType = {
+export type CouponEditModalType = {
   isOpen: boolean;
   type: FORM_OPERATION_OPTIONS;
   targetData: IGetAdminCoupon | null;
