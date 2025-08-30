@@ -1,8 +1,8 @@
-import type { Pagination } from "../../../shared/types/types";
-import type { AdminCoupon } from "../../admin-coupon/index";
+import type { PaginationType } from "../../../shared/types/types";
+import type { IGetAdminCoupon } from "../../admin-coupon/index";
 import type { Product } from "../../product/DTOs/userProduct.types";
 
-export interface Order {
+export interface IOrder {
   title: string;
   create_at: number;
   id: string;
@@ -13,7 +13,7 @@ export interface Order {
       id: string;
       product_id: string;
       qty: number;
-      coupon: AdminCoupon;
+      coupon: IGetAdminCoupon;
       final_total: number;
       product: Product;
       total: number;
@@ -31,7 +31,7 @@ export interface Order {
 
 export interface AdminOrder {
   success: boolean;
-  orders: Order[];
-  pagination: Pagination;
+  orders: IOrder[];
+  pagination: PaginationType;
   messages: string[];
 }

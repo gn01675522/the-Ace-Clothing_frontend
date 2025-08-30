@@ -1,20 +1,23 @@
-import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+import { OrderManagementContextProvider } from "./contexts/admin-order-modal.contexts";
+import { useOrderManagementContext } from "./hooks/admin-order-modal.hooks";
 
+import { ModalContainer } from "../../../../components/index";
 import { AdminOrderModalHeader } from "./components/admin-order-modal-header/AdminOrderModalHeader.component";
 import { AdminOrderModalFooter } from "./components/admin-order-modal-footer/AdminOrderModalFooter.component";
 import { AdminOrderModalList } from "./components/admin-order-modal-list/AdminOrderModalList.component";
 import { AdminOrderModalDetails } from "./components/admin-order-modal-details/AdminOrderModalDetails.component";
-import { ModalContainer } from "../../../../components/index";
 
 import type { FC, MouseEvent } from "react";
 
-export const AdminOrderModal: FC = () => {
+const AdminOrderModalContent: FC = () => {
   const {
-    modalControl: { setIsModalOpen },
-  } = useAdminOrderContext();
+    modalControl: { isOpen, switchModalOpen },
+  } = useOrderManagementContext();
+
+  if (!isOpen) return;
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) setIsModalOpen(false);
+    if (e.target === e.currentTarget) switchModalOpen();
   };
 
   return (
@@ -28,5 +31,13 @@ export const AdminOrderModal: FC = () => {
         <AdminOrderModalFooter />
       </div>
     </ModalContainer>
+  );
+};
+
+export const AdminOrderModal: FC = () => {
+  return (
+    <OrderManagementContextProvider>
+      <AdminOrderModalContent />
+    </OrderManagementContextProvider>
   );
 };

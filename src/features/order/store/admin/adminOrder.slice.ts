@@ -7,15 +7,17 @@ import {
 } from "./adminOrder.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { Order } from "../../DTOs/adminOrders.dtos";
 import type { PaginationType } from "../../../../shared/types/types";
+import type { IOrder } from "../../DTOs/adminOrders.dtos";
+import type { OrderEditModalTypes } from "../../types/admin-orders.types";
 
 type AdminOrderState = {
-  readonly orders: Order[];
+  readonly orders: IOrder[];
   readonly pagination: PaginationType | null;
-  readonly tempData: Order | null;
+  readonly tempData: IOrder | null;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
+  readonly orderEditModalControl: OrderEditModalTypes;
 };
 
 const INITIAL_STATE: AdminOrderState = {
@@ -24,17 +26,33 @@ const INITIAL_STATE: AdminOrderState = {
   tempData: null,
   isLoading: false,
   error: null,
+  orderEditModalControl: {
+    isOpen: false,
+    targetData: null,
+  },
 };
 
 export const adminOrderSlice = createSlice({
   name: "adminOrders",
   initialState: INITIAL_STATE,
   reducers: {
-    setAdminOrdersTempData(state, action: PayloadAction<Order>) {
-      state.tempData = action.payload;
-    },
     setClearAdminOrderState() {
       return INITIAL_STATE;
+    },
+    setClearCouponEditModalControl(state) {
+      state.orderEditModalControl = INITIAL_STATE.orderEditModalControl;
+    },
+    setOrderEditModalOpenAndSetting(state, actions: PayloadAction<IOrder>) {
+      state.orderEditModalControl = {
+        isOpen: true,
+        targetData: actions.payload,
+      };
+    },
+    setOrderEditModalIsOpen(state, actions: PayloadAction<boolean>) {
+      state.orderEditModalControl = {
+        ...state.orderEditModalControl,
+        isOpen: actions.payload,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -79,6 +97,9 @@ export const adminOrderSlice = createSlice({
   },
 });
 
-export const { setAdminOrdersTempData, setClearAdminOrderState } =
-  adminOrderSlice.actions;
+export const {
+  setClearAdminOrderState,
+  setOrderEditModalOpenAndSetting,
+  setOrderEditModalIsOpen,
+} = adminOrderSlice.actions;
 export const adminOrderReducer = adminOrderSlice.reducer;

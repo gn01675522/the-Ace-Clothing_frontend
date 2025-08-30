@@ -8,14 +8,6 @@ import {
   classifyAdminProducts,
 } from "../store/admin/adminProduct.selector";
 
-export const useAdminProductsModalControl = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const switchAdminProductModalOpen = () => setIsModalOpen(!isModalOpen);
-
-  return { isModalOpen, setIsModalOpen, switchAdminProductModalOpen };
-};
-
 export const useAdminProductStateFetch = (category: string | undefined) => {
   const productCategory = category ? category : "all";
 

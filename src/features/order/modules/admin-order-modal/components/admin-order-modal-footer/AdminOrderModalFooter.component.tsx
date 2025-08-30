@@ -1,4 +1,4 @@
-import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
+import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components";
 
@@ -8,13 +8,13 @@ import "./AdminOrderModalFooter.styles.scss";
 
 export const AdminOrderModalFooter: FC = () => {
   const {
-    modalControl: { switchAdminOrderModalOpen },
+    modalControl: { switchModalOpen },
     formControl: { submitForm },
-  } = useAdminOrderContext();
+  } = useOrderManagementContext();
 
   const onSubmitHandler = () => {
     submitForm();
-    switchAdminOrderModalOpen();
+    switchModalOpen();
   };
 
   return (
@@ -22,7 +22,7 @@ export const AdminOrderModalFooter: FC = () => {
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={switchAdminOrderModalOpen}
+        onClick={switchModalOpen}
       >
         關閉
       </Button>

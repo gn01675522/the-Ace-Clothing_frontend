@@ -7,6 +7,12 @@ import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
 import type { AdminCouponFormType } from "../types/admin-coupon.types";
 
 export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
+  couponIsEnabled: {
+    id: "is_enabled",
+    name: "is_enabled",
+    title: "是否啟用",
+    value: formData?.is_enabled,
+  },
   couponTitle: {
     id: "title",
     name: "title",
