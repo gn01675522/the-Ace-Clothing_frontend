@@ -1,6 +1,6 @@
 import { render, fireEvent } from "@testing-library/react";
 
-import { Indicator } from "../Indicator.component";
+import { Indicator } from "../indicator/Indicator.component";
 
 describe("Indicator test suite.", () => {
   test("Renders the correct number of dots.", () => {

@@ -1,6 +1,6 @@
 import { screen, render, fireEvent } from "@testing-library/react";
 
-import { Backdrop } from "../../backdrop/Backdrop.component";
+import { Backdrop } from "../backdrop/Backdrop.component";
 
 describe("Backdrop test suite.", () => {
   test("Should render children correctly.", () => {

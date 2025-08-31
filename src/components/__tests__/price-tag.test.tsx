@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 
-import { PriceTag } from "../PriceTag.component";
+import { PriceTag } from "../price-tag/PriceTag.component";
 
-import { formatNumberWithCommas } from "../../../utils/common.utils";
+import { formatNumberWithCommas } from "../../utils/common.utils";
 
 describe("PriceTag test suite.", () => {
   test("Should render correctly when price is lower than original price.", () => {

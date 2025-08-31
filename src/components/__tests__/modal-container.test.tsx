@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ModalContainer } from "../ModalContainer.component";
+import { ModalContainer } from "../modal-container/ModalContainer.component";
 
 const onClick = jest.fn();
 
