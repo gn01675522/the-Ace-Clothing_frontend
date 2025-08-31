@@ -6,11 +6,11 @@ import {
   fetchUserOrdersAsync,
 } from "./userOrder.asyncThunk";
 
-import { OrderDetail, OrderDetailWithNum } from "../../DTOs/userOrder.dtos";
+import { UserOrderDto, UserOrderDtoWithNum } from "../../DTOs/userOrder.dtos";
 
 type UserOrderState = {
-  readonly orders: OrderDetailWithNum[];
-  readonly orderData: OrderDetail | null;
+  readonly orders: UserOrderDtoWithNum[];
+  readonly orderData: UserOrderDto | null;
   readonly orderId: string | null;
   readonly error: Error | null;
   readonly isLoading: boolean;

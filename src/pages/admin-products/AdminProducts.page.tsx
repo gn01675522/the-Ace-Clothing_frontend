@@ -15,7 +15,7 @@ import {
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
 
 import type { FC } from "react";
-import type { IGetAdminProduct } from "../../features/product/DTOs/adminProduct.types";
+import type { AdminProductDto } from "../../features/product/DTOs/adminProduct.dtos";
 
 import "./AdminProducts.styles.scss";
 
@@ -33,7 +33,7 @@ const AdminProducts: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   //* 打開刪除 modal
-  const onClickToDeleteProductHandler = (target: IGetAdminProduct) => {
+  const onClickToDeleteProductHandler = (target: AdminProductDto) => {
     setDeleteTarget({ id: target.id, title: target.title });
     switchDeleteModalOpen;
   };

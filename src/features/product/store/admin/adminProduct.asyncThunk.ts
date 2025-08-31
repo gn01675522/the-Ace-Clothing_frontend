@@ -1,17 +1,18 @@
-import { createAppAsyncThunk } from "../../../../store/redux-utils";
 import axios from "axios";
+import { createAppAsyncThunk } from "../../../../store/redux-utils";
 
 import { setHandleMessage } from "../../../../store/message/message.slice";
 
 import type { AxiosResponse } from "axios";
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type {
-  AdminProduct,
-  AdminProductForCreate,
-} from "../../DTOs/adminProduct.types";
+  AdminProductDto,
+  CreateProductDto,
+} from "../../DTOs/adminProduct.dtos";
+import type { APIRejectResponse } from "../../../../shared/types";
 
 //********** Helper **********
-const cleanedDataHelper = (formData: AdminProduct | AdminProductForCreate) => {
+const cleanedDataHelper = (formData: AdminProductDto | CreateProductDto) => {
   const cleanImagesArray = formData.imagesUrl.filter((url) => url !== "");
   const cleanedData = { ...formData, imagesUrl: cleanImagesArray };
   return cleanedData;
@@ -20,7 +21,7 @@ const cleanedDataHelper = (formData: AdminProduct | AdminProductForCreate) => {
 
 //* 取得 product data
 export const fetchAdminProductAsync = createAppAsyncThunk<
-  { products: AdminProduct[] },
+  { products: AdminProductDto[] },
   void
 >("adminProduct/fetchAdminProduct", async (_, { rejectWithValue }) => {
   try {
@@ -30,7 +31,7 @@ export const fetchAdminProductAsync = createAppAsyncThunk<
 
     return { products: res.data.products };
   } catch (e) {
-    const error = e as AxiosRejectTypes;
+    const error = e as APIRejectResponse;
 
     if (!error.response) {
       throw e;
@@ -49,18 +50,20 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
         `/v2/api/${process.env.APP_API_PATH}/admin/product/${id}`
       )) as AxiosResponse;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
@@ -68,7 +71,10 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
 );
 
 //* 更新 products data
-export const updateAdminProductAsync = createAppAsyncThunk<void, AdminProduct>(
+export const updateAdminProductAsync = createAppAsyncThunk<
+  void,
+  AdminProductDto
+>(
   "adminProduct/updateAdminProduct",
   async (formData, { dispatch, rejectWithValue }) => {
     const newFormData = cleanedDataHelper(formData);
@@ -78,18 +84,20 @@ export const updateAdminProductAsync = createAppAsyncThunk<void, AdminProduct>(
         { data: newFormData }
       )) as AxiosResponse;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
@@ -99,7 +107,7 @@ export const updateAdminProductAsync = createAppAsyncThunk<void, AdminProduct>(
 //* 新增 products data
 export const createAdminProductAsync = createAppAsyncThunk<
   void,
-  AdminProductForCreate
+  CreateProductDto
 >(
   "adminProduct/createAdminProduct",
   async (data, { dispatch, rejectWithValue }) => {
@@ -110,7 +118,7 @@ export const createAdminProductAsync = createAppAsyncThunk<
         { data: newFormData }
       )) as AxiosResponse;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
@@ -121,7 +129,9 @@ export const createAdminProductAsync = createAppAsyncThunk<
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }

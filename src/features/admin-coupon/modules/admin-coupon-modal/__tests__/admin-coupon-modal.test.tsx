@@ -8,12 +8,12 @@ import { ADMIN_COUPON_FORM_CLASSES } from "../../../types/admin-coupon.types";
 
 import type { IGetAdminCoupon } from "../../../DTOs/adminCoupon.dtos";
 
-const mockUseAdminCouponContext = jest.fn();
-jest.mock("../../../hooks/admin-coupon.hooks", () => ({
-  useAdminCouponContext: () => mockUseAdminCouponContext(),
+const mockUseCouponManagementContext = jest.fn();
+jest.mock("../hooks/admin-coupon-modal.hooks", () => ({
+  useAdminCouponContext: () => mockUseCouponManagementContext(),
 }));
 
-const mockDefaulCoupon = {
+const mockDefaultCoupon = {
   title: "",
   is_enabled: 1,
   percent: 80,
@@ -34,12 +34,12 @@ const mockCoupon: IGetAdminCoupon = {
 
 describe("CouponModal test suite.", () => {
   test("When the value of createOrEdit is ‘create’, the form within the modal should either only display the default data or be empty.", () => {
-    mockUseAdminCouponContext.mockReturnValue({
+    mockUseCouponManagementContext.mockReturnValue({
       formControl: {
         targetData: mockCoupon,
         onChangeHandler: jest.fn(),
-        formData: { id: null, form: mockDefaulCoupon },
-        createOrEdit: ADMIN_COUPON_FORM_CLASSES.create,
+        formData: { id: null, form: mockDefaultCoupon },
+        type: ADMIN_COUPON_FORM_CLASSES.create,
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
@@ -64,11 +64,11 @@ describe("CouponModal test suite.", () => {
   test("When createOrEdit is set to ‘edit’, the form within the modal will display the corresponding values based on the provided targetData.", async () => {
     const { id, ...rest } = mockCoupon;
     const newData = { id, form: rest };
-    mockUseAdminCouponContext.mockReturnValue({
+    mockUseCouponManagementContext.mockReturnValue({
       formControl: {
         formData: newData,
         onChangeHandler: jest.fn(),
-        createOrEdit: ADMIN_COUPON_FORM_CLASSES.edit,
+        type: ADMIN_COUPON_FORM_CLASSES.edit,
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
@@ -92,7 +92,7 @@ describe("CouponModal test suite.", () => {
     const mockSwitchModalOpen = jest.fn();
     const mockSetIsModalOpen = jest.fn();
     const mockCloseModalAndClearForm = jest.fn();
-    mockUseAdminCouponContext.mockReturnValue({
+    mockUseCouponManagementContext.mockReturnValue({
       formControl: {
         formData: { id: mockCoupon.id, form: mockCoupon },
         onChangeHandler: jest.fn(),

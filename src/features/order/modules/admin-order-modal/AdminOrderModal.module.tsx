@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../../../store/redux-hooks";
+
 import { OrderManagementContextProvider } from "./contexts/admin-order-modal.contexts";
 import { useOrderManagementContext } from "./hooks/admin-order-modal.hooks";
 
@@ -7,17 +9,15 @@ import { AdminOrderModalFooter } from "./components/admin-order-modal-footer/Adm
 import { AdminOrderModalList } from "./components/admin-order-modal-list/AdminOrderModalList.component";
 import { AdminOrderModalDetails } from "./components/admin-order-modal-details/AdminOrderModalDetails.component";
 
+import { selectAdminOrderEditModalIsOpen } from "../../store/admin/adminOrder.selector";
+
 import type { FC, MouseEvent } from "react";
 
 const AdminOrderModalContent: FC = () => {
-  const {
-    modalControl: { isOpen, switchModalOpen },
-  } = useOrderManagementContext();
-
-  if (!isOpen) return;
+  const { closeModalAndClearForm } = useOrderManagementContext();
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) switchModalOpen();
+    if (e.target === e.currentTarget) closeModalAndClearForm();
   };
 
   return (
@@ -35,6 +35,9 @@ const AdminOrderModalContent: FC = () => {
 };
 
 export const AdminOrderModal: FC = () => {
+  const isOpen = useAppSelector(selectAdminOrderEditModalIsOpen);
+  if (!isOpen) return;
+
   return (
     <OrderManagementContextProvider>
       <AdminOrderModalContent />

@@ -1,37 +1,49 @@
-import { createAppAsyncThunk } from "../../../store/redux-utils";
 import axios from "axios";
+
+import { createAppAsyncThunk } from "../../../store/redux-utils";
 
 import { setHandleMessage } from "../../../store/message/message.slice";
 
-import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../../../store/redux-utils";
 import type {
-  IGetAdminCoupon,
-  ICreateAdminCoupon,
+  AdminCouponDto,
+  CreateCouponDto,
+  FetchAdminCouponResDto,
 } from "../DTOs/adminCoupon.dtos";
 import type { PaginationType } from "../../../shared/types/types";
+import type {
+  APIResponse,
+  APIRejectResponse,
+  APIGeneralResDto,
+} from "../../../shared/types";
 
 //* 擷取 api 上關於 admin coupons 的資料
 export const fetchAdminCouponsAsync = createAppAsyncThunk<
-  { coupons: IGetAdminCoupon[]; pagination: PaginationType },
+  { coupons: AdminCouponDto[]; pagination: PaginationType },
   number | undefined
->("adminCoupons/fetchAdminCoupons", async (page = 1, { rejectWithValue }) => {
-  try {
-    const res = await axios.get(
-      `/v2/api/${process.env.APP_API_PATH}/admin/coupons?page=${page}`
-    );
+>(
+  "adminCoupons/fetchAdminCoupons",
+  async (page = 1, { rejectWithValue, dispatch }) => {
+    try {
+      const res = (await axios.get(
+        `/v2/api/${process.env.APP_API_PATH}/admin/coupons?page=${page}`
+      )) as APIResponse<FetchAdminCouponResDto>;
 
-    return { coupons: res.data.coupons, pagination: res.data.pagination };
-  } catch (e) {
-    const error = e as AxiosRejectTypes;
+      return { coupons: res.data.coupons, pagination: res.data.pagination };
+    } catch (e) {
+      const error = e as APIRejectResponse;
 
-    if (!error.response) {
-      throw e;
+      if (!error.response) {
+        throw e;
+      }
+
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
+
+      return rejectWithValue(error);
     }
-
-    return rejectWithValue(error);
   }
-});
+);
 
 //* 刪除 api 上關於 admin coupons 的資料
 export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
@@ -40,19 +52,24 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
     try {
       const res = (await axios.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${id}`
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       dispatch(fetchAdminCouponsAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({
+          type: error.response.data.success,
+          res: error,
+        })
+      );
 
       return rejectWithValue(error);
     }
@@ -62,7 +79,7 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
 //* 創造 admin coupons 資料
 export const createAdminCouponAsync = createAppAsyncThunk<
   void,
-  ICreateAdminCoupon
+  CreateCouponDto
 >(
   "adminCoupons/createAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
@@ -70,19 +87,24 @@ export const createAdminCouponAsync = createAppAsyncThunk<
       const res = (await axios.post(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon`,
         { data: formData }
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       dispatch(fetchAdminCouponsAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({
+          type: error.response.data.success,
+          res: error,
+        })
+      );
 
       return rejectWithValue(error);
     }
@@ -90,29 +112,31 @@ export const createAdminCouponAsync = createAppAsyncThunk<
 );
 
 //* 更新 api 上關於 admin coupons 的資料
-export const updateAdminCouponAsync = createAppAsyncThunk<
-  void,
-  IGetAdminCoupon
->(
+export const updateAdminCouponAsync = createAppAsyncThunk<void, AdminCouponDto>(
   "adminCoupons/updateAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${formData.id}`,
         { data: formData }
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       dispatch(fetchAdminCouponsAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({
+          type: error.response.data.success,
+          res: error,
+        })
+      );
 
       return rejectWithValue(error);
     }

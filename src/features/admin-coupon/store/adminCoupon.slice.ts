@@ -11,12 +11,12 @@ import { FORM_OPERATION_OPTIONS } from "../../../shared/types";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../store/redux-utils";
-import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
+import type { AdminCouponDto } from "../DTOs/adminCoupon.dtos";
 import type { CouponEditModalType } from "../types/admin-coupon.types";
 import type { PaginationType } from "../../../shared/types/types";
 
 type AdminCouponState = {
-  readonly coupons: IGetAdminCoupon[];
+  readonly coupons: AdminCouponDto[];
   readonly pagination: PaginationType | null;
   readonly error: AxiosRejectTypes | null;
   readonly isLoading: boolean;
@@ -45,28 +45,19 @@ export const adminCouponSlice = createSlice({
     setClearCouponEditModalControl(state) {
       state.couponEditModalControl = INITIAL_STATE.couponEditModalControl;
     },
-    setCouponEditModalTargetData(
+    setCouponEditModalOpenAndSetting(
       state,
-      actions: PayloadAction<IGetAdminCoupon>
+      actions: PayloadAction<Omit<CouponEditModalType, "isOpen">>
     ) {
       state.couponEditModalControl = {
-        ...state.couponEditModalControl,
-        targetData: actions.payload,
+        isOpen: true,
+        ...actions.payload,
       };
     },
     setCouponEditModalIsOpen(state, actions: PayloadAction<boolean>) {
       state.couponEditModalControl = {
         ...state.couponEditModalControl,
         isOpen: actions.payload,
-      };
-    },
-    setCouponEditModalType(
-      state,
-      actions: PayloadAction<FORM_OPERATION_OPTIONS>
-    ) {
-      state.couponEditModalControl = {
-        ...state.couponEditModalControl,
-        type: actions.payload,
       };
     },
   },
@@ -129,7 +120,6 @@ export const {
   setClearAdminCouponState,
   setClearCouponEditModalControl,
   setCouponEditModalIsOpen,
-  setCouponEditModalTargetData,
-  setCouponEditModalType,
+  setCouponEditModalOpenAndSetting,
 } = adminCouponSlice.actions;
 export const adminCouponReducer = adminCouponSlice.reducer;

@@ -10,14 +10,17 @@ import "./AdminProductModalHeader.styles.scss";
 
 export const AdminProductModalHeader: FC = () => {
   const {
-    modalControl: { switchModalOpen },
-    formControl: { type, formData },
+    formControl: {
+      type,
+      formData: { form },
+    },
+    closeModalAndClearForm,
   } = useProductManagementContext();
 
   const titleByType =
     type === FORM_OPERATION_OPTIONS.create
       ? "建立新商品"
-      : `產品名稱：${formData.title}`;
+      : `產品名稱：${form.title}`;
 
   return (
     <div className="admin-product-modal-header">
@@ -26,7 +29,7 @@ export const AdminProductModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={switchModalOpen}
+        onClick={closeModalAndClearForm}
       >
         ｘ
       </Button>

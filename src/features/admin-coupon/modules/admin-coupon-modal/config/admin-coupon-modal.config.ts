@@ -1,17 +1,15 @@
-import { formatTimestampInMilliSeconds } from "../../../utils/common.utils";
+import { GENERIC_INPUT_TYPES } from "../../../../../components/index";
 
-import { GENERIC_INPUT_TYPES } from "../../../components/index";
+import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
 
-import type { ReactNode } from "react";
-import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
-import type { AdminCouponFormType } from "../types/admin-coupon.types";
+import type { AdminCouponFormType } from "../../../types/admin-coupon.types";
 
 export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
   couponIsEnabled: {
     id: "is_enabled",
     name: "is_enabled",
     title: "是否啟用",
-    value: formData?.is_enabled,
+    checked: !!formData?.is_enabled,
   },
   couponTitle: {
     id: "title",
@@ -23,7 +21,7 @@ export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
   },
   couponCode: {
     id: "code",
-    name: "title",
+    name: "code",
     type: GENERIC_INPUT_TYPES.text,
     title: "優惠碼",
     value: formData.code,
@@ -31,14 +29,14 @@ export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
   },
   couponPercent: {
     id: "percent",
-    name: "title",
+    name: "percent",
     type: GENERIC_INPUT_TYPES.number,
     title: "折扣(e.g: 8折 = 80)",
     value: formData.percent,
   },
   couponDueDate: {
     id: "due_date",
-    name: "title",
+    name: "due_date",
     type: GENERIC_INPUT_TYPES.date,
     title: "到期日",
     value: formatTimestampInMilliSeconds(formData.due_date),
@@ -46,22 +44,7 @@ export const adminCouponFormConfig = (formData: AdminCouponFormType) => ({
   },
 });
 
-export const adminCouponTableColumn: Array<{
-  header: string;
-  accessor: keyof IGetAdminCoupon;
-  render?: (value: IGetAdminCoupon[keyof IGetAdminCoupon]) => ReactNode;
-}> = [
-  { header: "優惠碼", accessor: "code" },
-  { header: "折扣", accessor: "percent" },
-  {
-    header: "到期日",
-    accessor: "due_date",
-    render: (value) => formatTimestampInMilliSeconds(value),
-  },
-  { header: "啟用狀態", accessor: "is_enabled" },
-];
-
-export const defaultCouponCreateData: AdminCouponFormType = {
+export const defaultCouponFormStructure: AdminCouponFormType = {
   title: "",
   is_enabled: 1,
   percent: 80,

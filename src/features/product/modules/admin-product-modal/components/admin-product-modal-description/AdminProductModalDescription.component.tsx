@@ -2,7 +2,7 @@ import { useProductManagementContext } from "../../hooks/admin-product-modal.hoo
 
 import { GenericTextarea } from "../../../../../../components/index";
 
-import { adminProductFormDescriptionConfig } from "../../../../config/admin-product.config";
+import { adminProductFormDescriptionConfig } from "../../config/admin-product-modal.config";
 
 import type { FC } from "react";
 
@@ -10,10 +10,13 @@ import "./AdminProductModalDescription.styles.scss";
 
 export const AdminProductModalDescription: FC = () => {
   const {
-    formControl: { formData, onChangeHandler },
+    formControl: {
+      formData: { form },
+      onChangeHandler,
+    },
   } = useProductManagementContext();
 
-  const { description, content } = adminProductFormDescriptionConfig(formData);
+  const { description, content } = adminProductFormDescriptionConfig(form);
 
   return (
     <div className="product-modal__body-middle">

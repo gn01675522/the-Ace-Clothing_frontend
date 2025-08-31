@@ -1,9 +1,9 @@
 import type { UserBasicInfo } from "../../../shared/types/interface";
-import type { PaginationType } from "../../../shared/types/types";
-import type { IGetAdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
-import type { Product } from "features/product/DTOs/userProduct.types";
+import type { AdminCouponDto } from "features/admin-coupon/DTOs/adminCoupon.dtos";
+import type { UserProducts } from "features/product/DTOs/userProduct.dtos";
+import type { APIResponseWithoutData } from "../../../shared/types/interface";
 
-export interface IOrderDetail {
+export interface UserOrderDto {
   create_at: number;
   id: string;
   is_paid: boolean;
@@ -12,22 +12,19 @@ export interface IOrderDetail {
     id: string;
     product_id: string;
     qty: number;
-    coupon: IGetAdminCoupon;
+    coupon: AdminCouponDto;
     final_total: number;
-    product: Product;
+    product: UserProducts;
     total: number;
   }[];
   total: number;
   user: UserBasicInfo;
 }
 
-export interface OrderDetailWithNum extends IOrderDetail {
+export interface UserOrderDtoWithNum extends UserOrderDto {
   num: number;
 }
 
-export interface IOrderDetails {
-  success: true;
-  orders: OrderDetailWithNum[];
-  pagination: PaginationType;
-  messages: string[];
+export interface FetchAdminOrderResDto extends APIResponseWithoutData {
+  orders: UserOrderDtoWithNum[];
 }

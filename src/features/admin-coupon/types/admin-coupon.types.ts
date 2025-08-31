@@ -1,5 +1,5 @@
-import type { IGetAdminCoupon } from "../DTOs/adminCoupon.dtos";
 import type { FORM_OPERATION_OPTIONS } from "shared/types";
+import type { AdminCouponDto } from "../DTOs/adminCoupon.dtos";
 
 export enum ADMIN_COUPON_FORM_CLASSES {
   create = "create",
@@ -18,5 +18,5 @@ export type AdminCouponFormType = {
 export type CouponEditModalType = {
   isOpen: boolean;
   type: FORM_OPERATION_OPTIONS;
-  targetData: IGetAdminCoupon | null;
+  targetData: AdminCouponDto | null;
 };

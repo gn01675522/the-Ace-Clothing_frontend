@@ -9,7 +9,7 @@ import "./AdminOrderModalHeader.styles.scss";
 export const AdminOrderModalHeader: FC = () => {
   const {
     formControl: { formData },
-    modalControl: { switchModalOpen },
+    closeModalAndClearForm,
   } = useOrderManagementContext();
 
   return (
@@ -21,7 +21,7 @@ export const AdminOrderModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={switchModalOpen}
+        onClick={closeModalAndClearForm}
       >
         ｘ
       </Button>

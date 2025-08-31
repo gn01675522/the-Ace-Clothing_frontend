@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../../../store/redux-hooks";
+
 import { ProductManagementContextProvider } from "./contexts/admin-product-modal.contexts";
 
 import { useProductManagementContext } from "./hooks/admin-product-modal.hooks";
@@ -10,18 +12,17 @@ import { AdminProductModalDescription } from "./components/admin-product-modal-d
 import { AdminProductModalToggleList } from "./components/admin-product-modal-toggle-list/AdminProductModalToggleList.component";
 import { AdminProductModalFooter } from "./components/admin-product-modal-footer/AdminProductModalFooter.component";
 
+import { selectAdminProductEditModalIsOpen } from "../../store/admin/adminProduct.selector";
+
 import type { FC, MouseEvent } from "react";
 
 import "./AdminProductModal.styles.scss";
 
 const AdminProductModalContent: FC = () => {
-  const {
-    modalControl: { isOpen, switchModalOpen },
-  } = useProductManagementContext();
-  if (!isOpen) return;
+  const { closeModalAndClearForm } = useProductManagementContext();
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) switchModalOpen();
+    if (e.target === e.currentTarget) closeModalAndClearForm();
   };
 
   return (
@@ -45,6 +46,9 @@ const AdminProductModalContent: FC = () => {
 };
 
 export const AdminProductModal: FC = () => {
+  const isOpen = useAppSelector(selectAdminProductEditModalIsOpen);
+  if (!isOpen) return;
+
   return (
     <ProductManagementContextProvider>
       <AdminProductModalContent />

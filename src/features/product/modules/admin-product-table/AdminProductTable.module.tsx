@@ -14,17 +14,17 @@ import { classifyAdminProducts } from "../../store/admin/adminProduct.selector";
 import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 
 import type { FC } from "react";
-import type { IGetAdminProduct } from "../../DTOs/adminProduct.types";
+import type { AdminProductDto } from "../../DTOs/adminProduct.dtos";
 
 const tableColumns = [
   { header: "分類", accessor: "category" },
   { header: "名稱", accessor: "title" },
   { header: "售價", accessor: "price" },
   { header: "啟用狀態", accessor: "is_enabled" },
-] as { header: string; accessor: keyof IGetAdminProduct }[];
+] as { header: string; accessor: keyof AdminProductDto }[];
 
 type PropsType = {
-  onClickDeleteHandler: (target: IGetAdminProduct) => void;
+  onClickDeleteHandler: (target: AdminProductDto) => void;
   currentPage: number;
 };
 
@@ -48,7 +48,7 @@ export const AdminProductTable: FC<PropsType> = ({
     dispatch(setProductEditModalIsOpen(true));
   };
 
-  const onClickToEditHandler = (product: IGetAdminProduct) => {
+  const onClickToEditHandler = (product: AdminProductDto) => {
     dispatch(setProductEditModalType(FORM_OPERATION_OPTIONS.edit));
     dispatch(setProductEditModalTargetData(product));
     dispatch(setProductEditModalIsOpen(true));

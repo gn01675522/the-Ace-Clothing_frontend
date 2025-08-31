@@ -5,7 +5,7 @@ import { ProductCard } from "../ProductCard.component";
 
 import { PRODUCT_CATEGORIES } from "../../../../../shared/types";
 
-import type { Product } from "features/product/DTOs/userProduct.types";
+import type { Product } from "features/product/DTOs/userProduct.dtos";
 
 describe("ProductCard test suite.", () => {
   const product = {

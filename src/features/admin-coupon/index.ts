@@ -10,5 +10,3 @@ export * from "./store/adminCoupon.slice";
 
 export * from "./DTOs/adminCoupon.dtos";
 export * from "./types/admin-coupon.types";
-
-export * from "./config/admin-coupon.config";

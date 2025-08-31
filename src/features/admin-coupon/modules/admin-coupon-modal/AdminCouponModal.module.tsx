@@ -1,3 +1,5 @@
+import { useAppSelector } from "../../../../store/redux-hooks";
+
 import { CouponManagementContextProvider } from "./contexts/admin-coupon-modal.context";
 import { useCouponManagementContext } from "./hooks/admin-coupon-modal.hooks";
 
@@ -6,17 +8,15 @@ import { AdminCouponModalHeader } from "./components/admin-coupon-modal-header/A
 import { AdminCouponModalBody } from "./components/admin-coupon-modal-body/AdminCouponModalBody.component";
 import { AdminCouponModalFooter } from "./components/admin-coupon-modal-footer/AdminCouponModalFooter.component";
 
+import { selectAdminCouponsEditModalIsOpen } from "../../store/adminCoupon.selector";
+
 import type { FC, MouseEvent } from "react";
 
 const AdminCouponModalContent: FC = () => {
-  const {
-    modalControl: { isOpen, switchModalOpen },
-  } = useCouponManagementContext();
-
-  if (!isOpen) return;
+  const { closeModalAndClearForm } = useCouponManagementContext();
 
   const onClickHandler = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) switchModalOpen();
+    if (e.target === e.currentTarget) closeModalAndClearForm();
   };
 
   return (
@@ -31,6 +31,9 @@ const AdminCouponModalContent: FC = () => {
 };
 
 export const AdminCouponModal: FC = () => {
+  const isOpen = useAppSelector(selectAdminCouponsEditModalIsOpen);
+  if (!isOpen) return;
+
   return (
     <CouponManagementContextProvider>
       <AdminCouponModalContent />

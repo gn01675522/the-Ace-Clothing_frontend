@@ -1,10 +1,10 @@
 import type { FORM_OPERATION_OPTIONS } from "../../../shared/types";
-import type { IGetAdminProduct } from "../DTOs/adminProduct.types";
+import type { AdminProductDto } from "../DTOs/adminProduct.dtos";
 
 export type ProductEditModalType = {
   isOpen: boolean;
   type: FORM_OPERATION_OPTIONS;
-  targetData: IGetAdminProduct | null;
+  targetData: AdminProductDto | null;
 };
 
 export interface AdminProductForCreate {

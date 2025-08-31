@@ -6,17 +6,17 @@ import { setOrderEditModalOpenAndSetting } from "../../store/admin/adminOrder.sl
 import { selectAdminOrders } from "../../store/admin/adminOrder.selector";
 
 import type { FC } from "react";
-import type { IOrder } from "../../DTOs/adminOrders.dtos";
+import type { AdminOrderDto } from "../../DTOs/adminOrders.dtos";
 
 const tableColumns = [
   { header: "訂單 ID", accessor: "id" },
   { header: "用戶信箱", accessor: "email" },
   { header: "訂單金額", accessor: "total" },
   { header: "付款狀態", accessor: "is_paid" },
-] as { header: string; accessor: keyof IOrder }[];
+] as { header: string; accessor: keyof AdminOrderDto }[];
 
 type PropsType = {
-  onClickToOpenDeleteModal: (order: IOrder) => void;
+  onClickToOpenDeleteModal: (order: AdminOrderDto) => void;
 };
 
 export const AdminOrderTable: FC<PropsType> = ({
@@ -30,13 +30,13 @@ export const AdminOrderTable: FC<PropsType> = ({
     email: order.user.email,
   }));
 
-  const onClickToOpenModal = (order: IOrder) => {
+  const onClickToOpenModal = (order: AdminOrderDto) => {
     dispatch(setOrderEditModalOpenAndSetting(order));
   };
 
   return (
     <div className="admin-orders-table">
-      <AdminTable<IOrder>
+      <AdminTable<AdminOrderDto>
         data={orderForTable}
         columns={tableColumns}
         onClickToEditHandler={onClickToOpenModal}

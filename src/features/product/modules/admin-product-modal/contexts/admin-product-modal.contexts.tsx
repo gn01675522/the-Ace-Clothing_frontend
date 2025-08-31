@@ -9,7 +9,7 @@ import {
 
 import { setClearProductEditModalControl } from "../../../store/admin/adminProduct.slice";
 
-import { defaultProdcutCreateData } from "../../../config/admin-product.config";
+import { defaultProdcutFormStructure } from "../config/admin-product-modal.config";
 
 import type { ReactNode } from "react";
 
@@ -36,7 +36,7 @@ export const ProductManagementContextProvider = ({
 
   const closeModalAndClearForm = () => {
     modalControl.switchModalOpen();
-    // formControl.setFormData({ id: null, form: defaultProdcutCreateData });
+    formControl.setFormData({ id: null, form: defaultProdcutFormStructure });
     dispatch(setClearProductEditModalControl());
   };
 

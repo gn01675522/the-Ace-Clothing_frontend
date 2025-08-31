@@ -9,7 +9,7 @@ import {
   AdminCouponTable,
   AdminCouponPagination,
   AdminCouponModal,
-  type IGetAdminCoupon,
+  type AdminCouponDto,
 } from "../../features/admin-coupon/index";
 
 import type { FC } from "react";
@@ -26,7 +26,7 @@ const AdminCoupons: FC = () => {
     switchDeleteModalOpen,
   } = useDeleteModalControl();
 
-  const onClickDeleteModalHandler = (target: IGetAdminCoupon) => {
+  const onClickDeleteModalHandler = (target: AdminCouponDto) => {
     setDeleteTarget({ id: target.id, title: target.title });
     switchDeleteModalOpen();
   };

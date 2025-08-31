@@ -1,6 +1,6 @@
-import { IOrder } from "../DTOs/adminOrders.dtos";
+import { AdminOrderDto } from "../DTOs/adminOrders.dtos";
 
 export type OrderEditModalTypes = {
   isOpen: boolean;
-  targetData: IOrder | null;
+  targetData: AdminOrderDto | null;
 };

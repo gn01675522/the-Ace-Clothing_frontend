@@ -13,7 +13,7 @@ import { setUserFavorite } from "../../features/user/store/user.slice";
 import { selectUserProducts } from "../../features/product/index";
 
 import type { FC, FormEvent, ChangeEvent } from "react";
-import type { Product } from "../../features/product/DTOs/userProduct.types";
+import type { Product } from "../../features/product/DTOs/userProduct.dtos";
 
 import "./Member.styles.scss";
 

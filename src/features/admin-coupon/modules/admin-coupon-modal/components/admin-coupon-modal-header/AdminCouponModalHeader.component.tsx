@@ -10,7 +10,7 @@ import "./AdminCouponModalHeader.styles.scss";
 
 export const AdminCouponModalHeader: FC = () => {
   const {
-    modalControl: { switchModalOpen },
+    closeModalAndClearForm,
     formControl: { formData, type },
   } = useCouponManagementContext();
 
@@ -26,7 +26,7 @@ export const AdminCouponModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={switchModalOpen}
+        onClick={closeModalAndClearForm}
       >
         ｘ
       </Button>

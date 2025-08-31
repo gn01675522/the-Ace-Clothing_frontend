@@ -13,12 +13,12 @@ import {
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { Product } from "../../../../features/product/DTOs/userProduct.types";
+import type { UserProductsDto } from "../../../product/DTOs/userProduct.dtos";
 
 import "./Wishlist.styles.scss";
 
 type PropsType = {
-  wishlist: Product[];
+  wishlist: UserProductsDto[];
   onClickToRemoveFavorite: (id: string) => void;
 };
 

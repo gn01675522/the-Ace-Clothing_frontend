@@ -1,12 +1,16 @@
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
 import axios from "axios";
 
-import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type {
-  OrderDetail,
-  OrderDetailWithNum,
+  UserOrderDto,
+  UserOrderDtoWithNum,
 } from "../../DTOs/userOrder.dtos";
 import type { UserBasicInfo } from "../../../../shared/types/interface";
+import type {
+  APIResponse,
+  APIGeneralResDto,
+  APIRejectResponse,
+} from "../../../../shared/types/interface";
 
 //* 提交訂單
 export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(
@@ -25,7 +29,7 @@ export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(
       );
       return res.data.orderId;
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
@@ -38,7 +42,7 @@ export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(
 
 //* 取得單筆 user 訂單
 export const fetchUserSingleOrderAsync = createAppAsyncThunk<
-  OrderDetail,
+  UserOrderDto,
   string
 >("userOrder/fetchUserSingleOrder", async (orderId, { rejectWithValue }) => {
   try {
@@ -48,7 +52,7 @@ export const fetchUserSingleOrderAsync = createAppAsyncThunk<
 
     return res.data.order;
   } catch (e) {
-    const error = e as AxiosRejectTypes;
+    const error = e as APIRejectResponse;
 
     if (!error.response) {
       throw e;
@@ -60,7 +64,7 @@ export const fetchUserSingleOrderAsync = createAppAsyncThunk<
 
 //* 取得全部 user 訂單
 export const fetchUserOrdersAsync = createAppAsyncThunk<
-  OrderDetailWithNum[],
+  UserOrderDtoWithNum[],
   void
 >("userOrder/fetchUserOrders", async (_, { rejectWithValue }) => {
   try {
@@ -68,7 +72,7 @@ export const fetchUserOrdersAsync = createAppAsyncThunk<
 
     return res.data.orders;
   } catch (e) {
-    const error = e as AxiosRejectTypes;
+    const error = e as APIRejectResponse;
 
     if (!error.response) {
       throw e;

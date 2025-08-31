@@ -6,15 +6,11 @@ import {
 
 import { OrderManagementContext } from "../contexts/admin-order-modal.contexts";
 
-import { setOrderEditModalIsOpen } from "../../../store/admin/adminOrder.slice";
 import { updateAdminOrdersAsync } from "../../../store/admin/adminOrder.asyncThunk";
-import {
-  selectAdminOrderEditModalIsOpen,
-  selectAdminOrderEditModalTargetData,
-} from "../../../store/admin/adminOrder.selector";
+import { selectAdminOrderEditModalTargetData } from "../../../store/admin/adminOrder.selector";
 
 import type { ChangeEvent } from "react";
-import type { IOrder } from "../../../DTOs/adminOrders.dtos";
+import type { AdminOrderDto } from "../../../DTOs/adminOrders.dtos";
 
 export const useOrderManagementContext = () => {
   const context = useContext(OrderManagementContext);
@@ -28,7 +24,7 @@ export const useOrderManagementContext = () => {
 };
 
 export const useAdminOrderModalFormControl = () => {
-  const [formData, setFormData] = useState<IOrder | null>(null);
+  const [formData, setFormData] = useState<AdminOrderDto | null>(null);
 
   const targetData = useAppSelector(selectAdminOrderEditModalTargetData);
 
@@ -59,14 +55,4 @@ export const useAdminOrderModalFormControl = () => {
     onChangeHandler,
     submitForm,
   };
-};
-
-export const useAdminOrderEditModalControl = () => {
-  const isOpen = useAppSelector(selectAdminOrderEditModalIsOpen);
-
-  const dispatch = useAppDispatch();
-
-  const switchModalOpen = () => dispatch(setOrderEditModalIsOpen(!isOpen));
-
-  return { isOpen, switchModalOpen };
 };

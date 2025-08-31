@@ -1,16 +1,18 @@
 import { createContext } from "react";
+import { useAppDispatch } from "../../../../../store/redux-hooks";
+
+import { useAdminOrderModalFormControl } from "../hooks/admin-order-modal.hooks";
 
 import {
-  useAdminOrderEditModalControl,
-  useAdminOrderModalFormControl,
-} from "../hooks/admin-order-modal.hooks";
+  setClearOrderEditModalControl,
+  setOrderEditModalIsOpen,
+} from "../../../store/admin/adminOrder.slice";
 
 import type { ReactNode } from "react";
 
 type ContextType = {
-  modalControl: ReturnType<typeof useAdminOrderEditModalControl>;
   formControl: ReturnType<typeof useAdminOrderModalFormControl>;
-  //   closeModalAndClearForm: () => void;
+  closeModalAndClearForm: () => void;
 };
 
 type ContextPropsType = {
@@ -23,9 +25,16 @@ export const OrderManagementContextProvider = ({
   children,
 }: ContextPropsType) => {
   const formControl = useAdminOrderModalFormControl();
-  const modalControl = useAdminOrderEditModalControl();
 
-  const value = { modalControl, formControl };
+  const dispatch = useAppDispatch();
+
+  const closeModalAndClearForm = () => {
+    formControl.setFormData(null);
+    dispatch(setClearOrderEditModalControl());
+    dispatch(setOrderEditModalIsOpen(false));
+  };
+
+  const value = { formControl, closeModalAndClearForm };
 
   return (
     <OrderManagementContext value={value}>{children}</OrderManagementContext>

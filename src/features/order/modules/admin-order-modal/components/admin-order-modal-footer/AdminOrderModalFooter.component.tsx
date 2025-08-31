@@ -8,13 +8,13 @@ import "./AdminOrderModalFooter.styles.scss";
 
 export const AdminOrderModalFooter: FC = () => {
   const {
-    modalControl: { switchModalOpen },
+    closeModalAndClearForm,
     formControl: { submitForm },
   } = useOrderManagementContext();
 
   const onSubmitHandler = () => {
     submitForm();
-    switchModalOpen();
+    closeModalAndClearForm();
   };
 
   return (
@@ -22,7 +22,7 @@ export const AdminOrderModalFooter: FC = () => {
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={switchModalOpen}
+        onClick={closeModalAndClearForm}
       >
         關閉
       </Button>

@@ -19,9 +19,9 @@ import {
 
 import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
 
+import { defaultProdcutFormStructure } from "../config/admin-product-modal.config";
+
 import type { ChangeEvent } from "react";
-import type { IGetAdminProduct } from "../../../DTOs/adminProduct.types";
-import type { Product } from "../../../DTOs/userProduct.types";
 import type { AdminProductForCreate } from "../../../types/admin-product.types";
 
 export const useProductManagementContext = () => {
@@ -35,25 +35,13 @@ export const useProductManagementContext = () => {
   return context;
 };
 
-const defaultFormData: AdminProductForCreate = {
-  title: "",
-  category: "",
-  origin_price: 0,
-  price: 0,
-  unit: "",
-  num: 0,
-  description: "",
-  content: "",
-  is_enabled: 0,
-  imageUrl: "",
-  imagesUrl: [],
-};
-
 export const useAdminProductModalFormControl = (
   category: string | undefined
 ) => {
-  const [formData, setFormData] =
-    useState<AdminProductForCreate>(defaultFormData);
+  const [formData, setFormData] = useState<{
+    id: string | null;
+    form: AdminProductForCreate;
+  }>({ id: null, form: defaultProdcutFormStructure });
 
   const targetData = useAppSelector(selectAdminProductEditModalTargetData);
   const type = useAppSelector(selectAdminProductEditModalType);
@@ -61,7 +49,7 @@ export const useAdminProductModalFormControl = (
   const dispatch = useAppDispatch();
 
   const isSaveToSave =
-    formData?.title?.length > 0 || formData?.unit?.length > 0;
+    formData.form.title.length > 0 || formData.form.unit.length > 0;
 
   //* 針對每個 input 在新增內容時放入 formData
   const onChangeHandler = (
@@ -69,20 +57,27 @@ export const useAdminProductModalFormControl = (
     i?: number
   ) => {
     const { value, name } = e.target;
+
     if (["price", "origin_price"].includes(name)) {
-      setFormData({ ...formData, [name]: Number(value) });
+      const newForm = { ...formData.form, [name]: Number(value) };
+      setFormData((prev) => ({ ...prev, form: newForm }));
     } else if (
       name === "is_enabled" &&
       e.target instanceof HTMLInputElement &&
       e.target.type === "checkbox"
     ) {
-      setFormData({ ...formData, [name as keyof Product]: +e.target.checked });
+      const newForm = { ...formData.form, [name]: +e.target.checked };
+      setFormData((prev) => ({ ...prev, form: newForm }));
     } else if (name.startsWith("imagesUrl")) {
-      const newImages = [...formData.imagesUrl] as string[];
+      const newImages = [...formData.form.imagesUrl];
       newImages[i!] = value;
-      setFormData({ ...formData, imagesUrl: newImages });
+      const newForm = { ...formData.form, imagesUrl: newImages };
+      setFormData((prev) => ({ ...prev, form: newForm }));
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData((prev) => ({
+        ...prev,
+        form: { ...prev.form, [name]: value },
+      }));
     }
   };
 
@@ -90,16 +85,22 @@ export const useAdminProductModalFormControl = (
     if (type === FORM_OPERATION_OPTIONS.create) {
       dispatch(createAdminProductAsync(formData));
     } else {
-      dispatch(updateAdminProductAsync(formData as IGetAdminProduct));
+      const newData = { id: formData.id, ...formData.form };
+
+      dispatch(updateAdminProductAsync(newData));
     }
   };
 
   //* 根據 type 開啟相對應 modal，並放入相對應資料
   useEffect(() => {
     if (type === FORM_OPERATION_OPTIONS.create) {
-      setFormData({ ...defaultFormData, category: `${category}-` });
+      setFormData({
+        id: null,
+        form: { ...defaultProdcutFormStructure, category: `${category}-` },
+      });
     } else if (type === FORM_OPERATION_OPTIONS.edit && targetData) {
-      setFormData(targetData);
+      const { id, ...rest } = targetData;
+      setFormData({ id, form: rest });
     }
   }, [type, targetData, category]);
 

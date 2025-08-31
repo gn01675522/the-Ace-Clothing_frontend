@@ -12,7 +12,7 @@ import {
 import {
   AdminOrderPagination,
   AdminOrderTable,
-  type IOrder,
+  type AdminOrderDto,
 } from "../../features/order/index";
 
 import type { FC } from "react";
@@ -29,7 +29,7 @@ const AdminOrders: FC = () => {
   } = useDeleteModalControl();
 
   //* 打開刪除 modal
-  const onClickToOpenDeleteModal = (order: IOrder) => {
+  const onClickToOpenDeleteModal = (order: AdminOrderDto) => {
     setDeleteTarget({ id: order.id, title: order.id });
     switchDeleteModalOpen();
   };
@@ -37,7 +37,6 @@ const AdminOrders: FC = () => {
   return (
     <div className="admin-orders">
       {isLoading && <Loading />}
-      <AdminOrderModal />
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminOrder}
@@ -46,6 +45,7 @@ const AdminOrders: FC = () => {
           closeAction={switchDeleteModalOpen}
         />
       )}
+      <AdminOrderModal />
       <h3 className="admin-orders__title">訂單列表</h3>
       <AdminOrderTable onClickToOpenDeleteModal={onClickToOpenDeleteModal} />
 

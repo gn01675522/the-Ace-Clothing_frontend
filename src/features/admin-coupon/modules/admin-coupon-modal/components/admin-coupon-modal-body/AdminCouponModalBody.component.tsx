@@ -2,7 +2,7 @@ import { useCouponManagementContext } from "../../hooks/admin-coupon-modal.hooks
 
 import { GenericInput, ToggleSwitch } from "../../../../../../components/index";
 
-import { adminCouponFormConfig } from "../../../../config/admin-coupon.config";
+import { adminCouponFormConfig } from "../../config/admin-coupon-modal.config";
 
 import type { FC } from "react";
 

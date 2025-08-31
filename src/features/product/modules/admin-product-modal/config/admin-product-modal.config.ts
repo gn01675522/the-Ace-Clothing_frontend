@@ -1,6 +1,6 @@
-import { GENERIC_INPUT_TYPES } from "../../../components/index";
+import { GENERIC_INPUT_TYPES } from "../../../../../components/index";
 
-import { AdminProductForCreate } from "../types/admin-product.types";
+import type { AdminProductForCreate } from "../../../types/admin-product.types";
 
 export const adminProductFormDetailsConfig = (
   formData: AdminProductForCreate
@@ -9,7 +9,7 @@ export const adminProductFormDetailsConfig = (
     id: "is_enabled",
     name: "is_enabled",
     title: "是否啟用",
-    value: formData?.is_enabled,
+    checked: !!formData.is_enabled,
   },
   productMainImgUrl: {
     id: "image",
@@ -82,7 +82,7 @@ export const adminProductFormDescriptionConfig = (
   },
 });
 
-export const defaultProdcutCreateData: AdminProductForCreate = {
+export const defaultProdcutFormStructure: AdminProductForCreate = {
   title: "",
   category: "",
   origin_price: 0,

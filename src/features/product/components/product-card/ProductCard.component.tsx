@@ -10,7 +10,7 @@ import {
 import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 
 import type { FC, MouseEvent } from "react";
-import type { Product } from "../../DTOs/userProduct.types";
+import type { Product } from "../../DTOs/userProduct.dtos";
 import type { PRODUCT_CATEGORIES } from "../../../../shared/types";
 
 import "./ProductCard.styles.scss";

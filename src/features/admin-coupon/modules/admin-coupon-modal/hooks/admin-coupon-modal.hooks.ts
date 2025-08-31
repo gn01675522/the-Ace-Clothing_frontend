@@ -7,18 +7,16 @@ import {
 
 import { CouponManagementContext } from "../contexts/admin-coupon-modal.context";
 
-import { setCouponEditModalIsOpen } from "../../../store/adminCoupon.slice";
 import {
   updateAdminCouponAsync,
   createAdminCouponAsync,
 } from "../../../store/adminCoupon.asyncThunk";
 import {
   selectAdminCouponsEditModalTargetData,
-  selectAdminCouponsEditModalIsOpen,
   selectAdminCouponsEditModalType,
 } from "../../../store/adminCoupon.selector";
 
-import { defaultCouponCreateData } from "../../../config/admin-coupon.config";
+import { defaultCouponFormStructure } from "../config/admin-coupon-modal.config";
 
 import {
   formatTimestampInMilliSeconds,
@@ -46,7 +44,7 @@ export const useAdminCouponEditModalFormControl = () => {
     form: AdminCouponFormType;
     id: string | null;
   }>({
-    form: defaultCouponCreateData,
+    form: defaultCouponFormStructure,
     id: null,
   });
 
@@ -105,10 +103,10 @@ export const useAdminCouponEditModalFormControl = () => {
         ...rest,
         due_date: rest.due_date
           ? formatTimestampInMilliSeconds(rest.due_date)
-          : defaultCouponCreateData.due_date,
+          : defaultCouponFormStructure.due_date,
       };
       setFormData({ id: id, form: newData });
-    } else setFormData({ id: null, form: defaultCouponCreateData });
+    } else setFormData({ id: null, form: defaultCouponFormStructure });
   }, [targetData]);
 
   return {
@@ -119,13 +117,4 @@ export const useAdminCouponEditModalFormControl = () => {
     onChangeHandler,
     submitForm,
   };
-};
-
-export const useAdminCouponEditModalControl = () => {
-  const isOpen = useAppSelector(selectAdminCouponsEditModalIsOpen);
-  const dispatch = useAppDispatch();
-
-  const switchModalOpen = () => dispatch(setCouponEditModalIsOpen(!isOpen));
-
-  return { isOpen, switchModalOpen };
 };

@@ -1,6 +1,6 @@
-import type { IGeneralResponse } from "../../../shared/types";
+import type { APIResponseWithoutData } from "../../../shared/types";
 
-export interface IGetAdminCoupon {
+export interface AdminCouponDto {
   id: string;
   title: string;
   is_enabled: 1 | 0;
@@ -10,8 +10,8 @@ export interface IGetAdminCoupon {
   num: number;
 }
 
-export type ICreateAdminCoupon = Omit<IGetAdminCoupon, "id">;
+export type CreateCouponDto = Omit<AdminCouponDto, "id">;
 
-export interface IAdminCouponRes extends IGeneralResponse {
-  coupons: IGetAdminCoupon[];
+export interface FetchAdminCouponResDto extends APIResponseWithoutData {
+  coupons: AdminCouponDto[];
 }

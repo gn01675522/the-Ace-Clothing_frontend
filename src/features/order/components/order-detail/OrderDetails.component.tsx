@@ -8,7 +8,7 @@ import { selectUserOrders } from "../../store/client/userOrder.selector";
 import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { OrderDetail } from "../../DTOs/userOrder.dtos";
+import type { UserOrderDto } from "../../DTOs/userOrder.dtos";
 
 import "./OrderDetails.styles.scss";
 
@@ -24,7 +24,7 @@ type PropsType = {
 };
 
 export const OrderDetails: FC<PropsType> = ({ email }) => {
-  const [orderList, setOrderList] = useState<OrderDetail[]>([]);
+  const [orderList, setOrderList] = useState<UserOrderDto[]>([]);
   const orderDetail = useSelector(selectUserOrders);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useProductManagementContext } from "../../hooks/admin-product-modal.hoo
 import { NoImageSVGLogo } from "../../../../../../components/index";
 import { GenericInput, ToggleSwitch } from "../../../../../../components/index";
 
-import { adminProductFormDetailsConfig } from "../../../../config/admin-product.config";
+import { adminProductFormDetailsConfig } from "../../config/admin-product-modal.config";
 
 import type { FC, KeyboardEvent } from "react";
 
@@ -11,7 +11,10 @@ import "./AdminProductModalDetails.styles.scss";
 
 export const AdminProductModalDetails: FC = () => {
   const {
-    formControl: { formData, onChangeHandler },
+    formControl: {
+      formData: { form },
+      onChangeHandler,
+    },
   } = useProductManagementContext();
 
   //* 避免 user 新增到小數點
@@ -29,17 +32,17 @@ export const AdminProductModalDetails: FC = () => {
     productUnit,
     productOriginPrice,
     productPrice,
-  } = adminProductFormDetailsConfig(formData);
+  } = adminProductFormDetailsConfig(form);
 
   return (
     <>
       <ToggleSwitch {...productIsEnabled} onChange={onChangeHandler} />
       <div className="admin-product-modal-details__content">
         <div className="admin-product-modal-details__content-left">
-          {formData?.imageUrl ? (
+          {form.imageUrl ? (
             <img
-              src={formData?.imageUrl}
-              alt={`主圖片：${formData?.title}；無法顯示，請輸入正確連結`}
+              src={form.imageUrl}
+              alt={`主圖片：${form.title}；無法顯示，請輸入正確連結`}
               className="admin-product-modal-details__content-left-img"
             />
           ) : (

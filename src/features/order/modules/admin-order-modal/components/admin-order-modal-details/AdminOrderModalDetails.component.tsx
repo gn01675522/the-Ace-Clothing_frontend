@@ -5,7 +5,7 @@ import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
 import { selectAdminOrdersIsLoading } from "../../../../store/admin/adminOrder.selector";
 
 import type { FC } from "react";
-import type { IOrder } from "../../../../DTOs/adminOrders.dtos";
+import type { AdminOrderDto } from "../../../../DTOs/adminOrders.dtos";
 
 import "./AdminOrderModalDetails.styles.scss";
 
@@ -42,8 +42,9 @@ export const AdminOrderModalDetails: FC = () => {
                 <span className="admin-order-modal-detail__customer-info-data-span">
                   {(info.id === "message"
                     ? targetData?.message
-                    : targetData?.user[info.id as keyof IOrder["user"]]) ||
-                    "無"}
+                    : targetData?.user[
+                        info.id as keyof AdminOrderDto["user"]
+                      ]) || "無"}
                 </span>
               </div>
             </div>

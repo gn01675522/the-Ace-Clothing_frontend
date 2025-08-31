@@ -1,4 +1,6 @@
-export type Product = {
+import { APIResponseWithoutData } from "../../../shared/types";
+
+export type UserProductsDto = {
   id: string;
   category: string;
   content: string;
@@ -13,13 +15,6 @@ export type Product = {
   unit: string;
 };
 
-export type ProductWithId = {
-  success: boolean;
-  product: Product;
-};
-
-export type UserProducts = {
-  success: boolean;
-  products: Product[];
-  messages: string[];
-};
+export interface FetchUserProductsResDto extends APIResponseWithoutData {
+  products: UserProductsDto[];
+}

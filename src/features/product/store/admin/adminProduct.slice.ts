@@ -11,11 +11,11 @@ import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { IGetAdminProduct } from "../../DTOs/adminProduct.types";
+import type { AdminProductDto } from "../../DTOs/adminProduct.dtos";
 import type { ProductEditModalType } from "../../types/admin-product.types";
 
 type AdminProductState = {
-  readonly products: IGetAdminProduct[];
+  readonly products: AdminProductDto[];
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
   readonly productEditModalControl: ProductEditModalType;
@@ -44,7 +44,7 @@ export const adminProductSlice = createSlice({
     },
     setProductEditModalTargetData(
       state,
-      actions: PayloadAction<IGetAdminProduct>
+      actions: PayloadAction<AdminProductDto>
     ) {
       state.productEditModalControl = {
         ...state.productEditModalControl,

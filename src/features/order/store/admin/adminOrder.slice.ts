@@ -8,13 +8,13 @@ import {
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type { PaginationType } from "../../../../shared/types/types";
-import type { IOrder } from "../../DTOs/adminOrders.dtos";
+import type { AdminOrderDto } from "../../DTOs/adminOrders.dtos";
 import type { OrderEditModalTypes } from "../../types/admin-orders.types";
 
 type AdminOrderState = {
-  readonly orders: IOrder[];
+  readonly orders: AdminOrderDto[];
   readonly pagination: PaginationType | null;
-  readonly tempData: IOrder | null;
+  readonly tempData: AdminOrderDto | null;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
   readonly orderEditModalControl: OrderEditModalTypes;
@@ -39,10 +39,13 @@ export const adminOrderSlice = createSlice({
     setClearAdminOrderState() {
       return INITIAL_STATE;
     },
-    setClearCouponEditModalControl(state) {
+    setClearOrderEditModalControl(state) {
       state.orderEditModalControl = INITIAL_STATE.orderEditModalControl;
     },
-    setOrderEditModalOpenAndSetting(state, actions: PayloadAction<IOrder>) {
+    setOrderEditModalOpenAndSetting(
+      state,
+      actions: PayloadAction<AdminOrderDto>
+    ) {
       state.orderEditModalControl = {
         isOpen: true,
         targetData: actions.payload,
@@ -99,6 +102,7 @@ export const adminOrderSlice = createSlice({
 
 export const {
   setClearAdminOrderState,
+  setClearOrderEditModalControl,
   setOrderEditModalOpenAndSetting,
   setOrderEditModalIsOpen,
 } = adminOrderSlice.actions;
