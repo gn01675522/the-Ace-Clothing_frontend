@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 
-import { OrderCard } from "../OrderCard.component";
+import { OrderCard } from "../../components/order-card/OrderCard.component";
 
-import { formatNumberWithCommas } from "../../../../../utils/common.utils";
+import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
-import type { OrderCardProductsType } from "../OrderCard.component";
+import type { OrderCardProductsType } from "../../components/order-card/OrderCard.component";
 
 const products = [
   {

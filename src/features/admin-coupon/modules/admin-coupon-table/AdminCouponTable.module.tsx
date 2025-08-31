@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
 import { AdminTable } from "../../../../modules";
 
-import { setCouponEditModalOpenAndSetting } from "../../store/adminCoupon.slice";
-import { selectAdminCoupons } from "../../store/adminCoupon.selector";
+import { setCouponEditModalOpenAndSetting } from "../../store/admin-coupon.slice";
+import { selectAdminCoupons } from "../../store/admin-coupon.selector";
 
 import { adminCouponTableColumn } from "./config/admin-coupon-table.config";
 import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";

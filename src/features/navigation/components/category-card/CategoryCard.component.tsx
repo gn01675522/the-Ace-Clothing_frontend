@@ -20,7 +20,7 @@ type CategoryCardProps = {
   index: number;
 };
 
-const CategoryCard: FC<CategoryCardProps> = ({ category, index }) => {
+export const CategoryCard: FC<CategoryCardProps> = ({ category, index }) => {
   const { title, url, path } = category;
   const cardNumber = index + 1;
   const match = useMatch("admin/products");
@@ -41,5 +41,3 @@ const CategoryCard: FC<CategoryCardProps> = ({ category, index }) => {
     </NavLink>
   );
 };
-
-export default CategoryCard;

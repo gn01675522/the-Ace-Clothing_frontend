@@ -1,10 +1,10 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../../../utils/test.utils";
+import { renderWithProviders } from "../../../../utils/test.utils";
 
-import { AdminProductModal } from "../AdminProductModal.module";
-import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
-import type { IGetAdminProduct } from "../../../DTOs/adminProduct.dtos";
-import type { AdminProductForCreate } from "../../../types/admin-product.types";
+import { AdminProductModal } from "../../modules/admin-product-modal/AdminProductModal.module";
+import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
+import type { AdminProductDto } from "../../DTOs/adminProduct.dtos";
+import type { AdminProductForCreate } from "../../types/admin-product.types";
 
 const mockUseProductManagementContext = jest.fn();
 jest.mock("../hooks/admin-product-modal.hooks", () => ({
@@ -40,7 +40,7 @@ describe("AdminProductModal test suite.", () => {
     is_enabled: 1,
     imageUrl: "https://test.com",
     imagesUrl: ["https://test1.com", "https://test2.com"],
-  } as IGetAdminProduct;
+  } as AdminProductDto;
 
   beforeEach(() => onClick.mockClear());
 

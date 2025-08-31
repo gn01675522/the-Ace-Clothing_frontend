@@ -1,11 +1,11 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../../../utils/test.utils";
+import { renderWithProviders } from "../../../../utils/test.utils";
 
-import { ProductCard } from "../ProductCard.component";
+import { ProductCard } from "../../components/product-card/ProductCard.component";
 
-import { PRODUCT_CATEGORIES } from "../../../../../shared/types";
+import { PRODUCT_CATEGORIES } from "../../../../shared/types";
 
-import type { Product } from "features/product/DTOs/userProduct.dtos";
+import type { UserProductsDto } from "../../DTOs/userProduct.dtos";
 
 describe("ProductCard test suite.", () => {
   const product = {
@@ -21,7 +21,7 @@ describe("ProductCard test suite.", () => {
     price: 2000,
     title: "test hat",
     unit: "unit",
-  } as Product;
+  } as UserProductsDto;
 
   test("Should render correct icon when isFavorite is true.", () => {
     renderWithProviders(

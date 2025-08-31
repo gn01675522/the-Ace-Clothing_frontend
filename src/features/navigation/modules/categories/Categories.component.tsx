@@ -1,4 +1,4 @@
-import CategoryCard from "../../components/category-card/CategoryCard.component";
+import { CategoryCard } from "../../components/category-card/CategoryCard.component";
 
 import { CATEGORIES_DATA } from "./categories.data";
 

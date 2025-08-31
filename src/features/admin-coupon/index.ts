@@ -4,9 +4,9 @@ export * from "./modules/admin-coupon-pagination/AdminCouponPagination.module";
 
 export * from "./hooks/admin-coupon.hooks";
 
-export * from "./store/adminCoupon.asyncThunk";
-export * from "./store/adminCoupon.selector";
-export * from "./store/adminCoupon.slice";
+export * from "./store/admin-coupon.asyncThunk";
+export * from "./store/admin-coupon.selector";
+export * from "./store/admin-coupon.slice";
 
 export * from "./DTOs/adminCoupon.dtos";
 export * from "./types/admin-coupon.types";

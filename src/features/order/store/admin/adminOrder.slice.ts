@@ -20,7 +20,7 @@ type AdminOrderState = {
   readonly orderEditModalControl: OrderEditModalTypes;
 };
 
-const INITIAL_STATE: AdminOrderState = {
+export const INITIAL_STATE: AdminOrderState = {
   orders: [],
   pagination: null,
   tempData: null,

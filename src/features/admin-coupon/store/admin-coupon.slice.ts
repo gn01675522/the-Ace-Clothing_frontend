@@ -5,7 +5,7 @@ import {
   createAdminCouponAsync,
   deleteAdminCouponsAsync,
   updateAdminCouponAsync,
-} from "./adminCoupon.asyncThunk";
+} from "./admin-coupon.asyncThunk";
 
 import { FORM_OPERATION_OPTIONS } from "../../../shared/types";
 
@@ -23,7 +23,7 @@ type AdminCouponState = {
   readonly couponEditModalControl: CouponEditModalType;
 };
 
-const INITIAL_STATE: AdminCouponState = {
+export const INITIAL_STATE: AdminCouponState = {
   coupons: [],
   pagination: null,
   isLoading: false,

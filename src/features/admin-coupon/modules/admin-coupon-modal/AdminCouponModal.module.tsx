@@ -8,7 +8,7 @@ import { AdminCouponModalHeader } from "./components/admin-coupon-modal-header/A
 import { AdminCouponModalBody } from "./components/admin-coupon-modal-body/AdminCouponModalBody.component";
 import { AdminCouponModalFooter } from "./components/admin-coupon-modal-footer/AdminCouponModalFooter.component";
 
-import { selectAdminCouponsEditModalIsOpen } from "../../store/adminCoupon.selector";
+import { selectAdminCouponsEditModalIsOpen } from "../../store/admin-coupon.selector";
 
 import type { FC, MouseEvent } from "react";
 

@@ -1,8 +1,8 @@
 import { screen } from "@testing-library/react";
 
-import { renderWithProviders } from "../../../../../utils/test.utils";
+import { renderWithProviders } from "../../../../utils/test.utils";
 
-import CategoryCard from "../CategoryCard.component";
+import { CategoryCard } from "../../components/category-card/CategoryCard.component";
 
 describe("Category card test suite.", () => {
   test("Should render CategoryCard with correct class and image src.", () => {

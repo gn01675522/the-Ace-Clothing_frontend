@@ -42,7 +42,9 @@ export const useAdminOrderModalFormControl = () => {
     }
   };
 
-  const submitForm = () => dispatch(updateAdminOrdersAsync(formData));
+  const submitForm = () => {
+    if (formData) dispatch(updateAdminOrdersAsync(formData));
+  };
 
   useEffect(() => {
     if (targetData) setFormData({ ...targetData });

@@ -10,11 +10,11 @@ import { CouponManagementContext } from "../contexts/admin-coupon-modal.context"
 import {
   updateAdminCouponAsync,
   createAdminCouponAsync,
-} from "../../../store/adminCoupon.asyncThunk";
+} from "../../../store/admin-coupon.asyncThunk";
 import {
   selectAdminCouponsEditModalTargetData,
   selectAdminCouponsEditModalType,
-} from "../../../store/adminCoupon.selector";
+} from "../../../store/admin-coupon.selector";
 
 import { defaultCouponFormStructure } from "../config/admin-coupon-modal.config";
 

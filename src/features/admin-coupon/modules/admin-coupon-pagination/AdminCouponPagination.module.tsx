@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { Pagination } from "../../../../modules";
 
-import { fetchAdminCouponsAsync } from "../../store/adminCoupon.asyncThunk";
-import { selectAdminCouponsPagination } from "../../store/adminCoupon.selector";
+import { fetchAdminCouponsAsync } from "../../store/admin-coupon.asyncThunk";
+import { selectAdminCouponsPagination } from "../../store/admin-coupon.selector";
 
 import type { FC } from "react";
 

@@ -6,7 +6,7 @@ import { useAdminCouponEditModalFormControl } from "../hooks/admin-coupon-modal.
 import {
   setClearCouponEditModalControl,
   setCouponEditModalIsOpen,
-} from "../../../store/adminCoupon.slice";
+} from "../../../store/admin-coupon.slice";
 
 import { defaultCouponFormStructure } from "../config/admin-coupon-modal.config";
 

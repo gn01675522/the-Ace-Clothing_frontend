@@ -1,12 +1,15 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../../../utils/test.utils";
+import { renderWithProviders } from "../../../../utils/test.utils";
 
-import { AdminCouponModal } from "../AdminCouponModal.module";
+import { AdminCouponModal } from "../../modules/admin-coupon-modal/AdminCouponModal.module";
 
-import { formatTimestampInMilliSeconds } from "../../../../../utils/common.utils";
-import { ADMIN_COUPON_FORM_CLASSES } from "../../../types/admin-coupon.types";
+import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
+import { ADMIN_COUPON_FORM_CLASSES } from "../../types/admin-coupon.types";
 
-import type { IGetAdminCoupon } from "../../../DTOs/adminCoupon.dtos";
+import { INITIAL_STATE } from "../../store/admin-coupon.slice";
+import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
+
+import type { AdminCouponDto } from "../../DTOs/adminCoupon.dtos";
 
 const mockUseCouponManagementContext = jest.fn();
 jest.mock("../hooks/admin-coupon-modal.hooks", () => ({
@@ -22,7 +25,7 @@ const mockDefaultCoupon = {
   num: 1,
 };
 
-const mockCoupon: IGetAdminCoupon = {
+const mockCoupon: AdminCouponDto = {
   id: "1234567",
   title: "just for test",
   is_enabled: 0,
@@ -43,7 +46,20 @@ describe("CouponModal test suite.", () => {
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
-    renderWithProviders(<AdminCouponModal />);
+
+    renderWithProviders(<AdminCouponModal />, {
+      preloadedState: {
+        adminCoupon: {
+          ...INITIAL_STATE,
+          couponEditModalControl: {
+            isOpen: true,
+            type: FORM_OPERATION_OPTIONS.create,
+            targetData: null,
+          },
+        },
+      },
+    });
+
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
     const percentInput = screen.getByLabelText("折扣(e.g: 8折 = 80)");
@@ -72,7 +88,18 @@ describe("CouponModal test suite.", () => {
       },
       modalControl: { switchModalOpen: jest.fn() },
     });
-    renderWithProviders(<AdminCouponModal />);
+    renderWithProviders(<AdminCouponModal />, {
+      preloadedState: {
+        adminCoupon: {
+          ...INITIAL_STATE,
+          couponEditModalControl: {
+            isOpen: true,
+            type: FORM_OPERATION_OPTIONS.edit,
+            targetData: mockCoupon,
+          },
+        },
+      },
+    });
 
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
@@ -104,7 +131,18 @@ describe("CouponModal test suite.", () => {
       closeModalAndClearForm: mockCloseModalAndClearForm,
     });
 
-    renderWithProviders(<AdminCouponModal />);
+    renderWithProviders(<AdminCouponModal />, {
+      preloadedState: {
+        adminCoupon: {
+          ...INITIAL_STATE,
+          couponEditModalControl: {
+            isOpen: true,
+            type: FORM_OPERATION_OPTIONS.create,
+            targetData: null,
+          },
+        },
+      },
+    });
 
     const closeButton = screen.getByText(/關閉/i);
     const closeXButton = screen.getByLabelText(/Close/i);
