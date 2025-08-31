@@ -1,9 +1,10 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "../../utils/test.utils";
 
-import { DeleteModal } from "../DeleteModal.module";
-
-import { DELETE_MODAL_TYPE } from "../DeleteModal.module";
+import {
+  DeleteModal,
+  DELETE_MODAL_TYPE,
+} from "../delete-modal/DeleteModal.module";
 
 describe("DeleteModal test suite.", () => {
   test("Clicking on the 'ｘ', '取消', '確認刪除' buttons triggers the closeAction callback.", () => {

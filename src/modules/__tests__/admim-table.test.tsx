@@ -1,7 +1,7 @@
 import { screen, render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { AdminTable } from "../AdminTable.module";
+import { AdminTable } from "../admin-table/AdminTable.module";
 
 type dataType = {
   id: number;

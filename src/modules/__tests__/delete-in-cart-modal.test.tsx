@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithProviders } from "../../../utils/test.utils";
+import { renderWithProviders } from "../../utils/test.utils";
 
-import { DeleteInCartModal } from "../DeleteInCartModal.module";
+import { DeleteInCartModal } from "../delete-in-cart-modal/DeleteInCartModal.module";
 
 describe("DeleteInCartModal test suite.", () => {
   test("Clicking on the '確定刪除', '取消刪除' buttons triggers the backdropClose callback.", () => {
