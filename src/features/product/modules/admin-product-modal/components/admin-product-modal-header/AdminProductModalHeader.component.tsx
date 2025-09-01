@@ -14,7 +14,7 @@ export const AdminProductModalHeader: FC = () => {
       type,
       formData: { form },
     },
-    closeModalAndClearForm,
+    onCloseHandler,
   } = useProductManagementContext();
 
   const titleByType =
@@ -29,7 +29,7 @@ export const AdminProductModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={closeModalAndClearForm}
+        onClick={onCloseHandler}
       >
         ｘ
       </Button>

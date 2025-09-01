@@ -3,25 +3,11 @@ import userEvent from "@testing-library/user-event";
 
 import { AdminTable } from "../admin-table/AdminTable.module";
 
-type dataType = {
-  id: number;
-  name: string;
-  age: number;
-  gender: "male" | "female";
-};
-
-const data: dataType[] = [
-  { id: 1, name: "Jack", age: 23, gender: "male" },
-  { id: 2, name: "Susan", age: 60, gender: "female" },
-  { id: 3, name: "Millie", age: 27, gender: "female" },
-];
-
-const columns = [
-  { header: "id", accessor: "id" },
-  { header: "name", accessor: "name" },
-  { header: "age", accessor: "age" },
-  { header: "gender", accessor: "gender" },
-] as { header: string; accessor: keyof dataType }[];
+import {
+  mockTableData,
+  mockColumns,
+  type mockTableDataTypes,
+} from "../__mocks__/mocks";
 
 describe("Admin Table test suite.", () => {
   test("Calls onClickToEdit and onClickToDelete when edit and delete buttons are clicked.", async () => {
@@ -30,9 +16,9 @@ describe("Admin Table test suite.", () => {
     const user = userEvent.setup();
 
     render(
-      <AdminTable<dataType>
-        data={data}
-        columns={columns}
+      <AdminTable<mockTableDataTypes>
+        data={mockTableData}
+        columns={mockColumns}
         onClickToEditHandler={onClickToEdit}
         onClickToDeleteHandler={onClickToDelete}
       />
@@ -48,32 +34,32 @@ describe("Admin Table test suite.", () => {
     await user.click(deleteButtons[0]);
 
     expect(onClickToEdit).toHaveBeenCalledTimes(1);
-    expect(onClickToEdit).toHaveBeenCalledWith(data[0]);
+    expect(onClickToEdit).toHaveBeenCalledWith(mockTableData[0]);
 
     expect(onClickToDelete).toHaveBeenCalledTimes(1);
-    expect(onClickToDelete).toHaveBeenCalledWith(data[0]);
+    expect(onClickToDelete).toHaveBeenCalledWith(mockTableData[0]);
   });
 
   test("Renders all headers correctly using test data.", () => {
     render(
-      <AdminTable<dataType>
-        data={data}
-        columns={columns}
+      <AdminTable<mockTableDataTypes>
+        data={mockTableData}
+        columns={mockColumns}
         onClickToEditHandler={jest.fn()}
         onClickToDeleteHandler={jest.fn()}
       />
     );
 
-    columns.forEach((column) => {
+    mockColumns.forEach((column) => {
       expect(screen.getByText(column.header)).toBeInTheDocument();
     });
   });
 
   test("Renders all data rows correctly using test data.", () => {
     render(
-      <AdminTable<dataType>
-        data={data}
-        columns={columns}
+      <AdminTable<mockTableDataTypes>
+        data={mockTableData}
+        columns={mockColumns}
         onClickToEditHandler={jest.fn()}
         onClickToDeleteHandler={jest.fn()}
       />
@@ -82,10 +68,10 @@ describe("Admin Table test suite.", () => {
     const rows = screen.getAllByRole("row");
 
     //* 由於 header 也會是一行，所以這邊的 length 會 +1
-    expect(rows).toHaveLength(data.length + 1);
+    expect(rows).toHaveLength(mockTableData.length + 1);
 
     rows.slice(1).forEach((rowElement, index) => {
-      const rowData = data[index];
+      const rowData = mockTableData[index];
       const { getByText } = within(rowElement);
 
       expect(getByText(rowData.id.toString())).toBeInTheDocument();

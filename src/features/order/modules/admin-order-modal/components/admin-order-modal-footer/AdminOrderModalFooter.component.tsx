@@ -7,22 +7,14 @@ import type { FC } from "react";
 import "./AdminOrderModalFooter.styles.scss";
 
 export const AdminOrderModalFooter: FC = () => {
-  const {
-    closeModalAndClearForm,
-    formControl: { submitForm },
-  } = useOrderManagementContext();
-
-  const onSubmitHandler = () => {
-    submitForm();
-    closeModalAndClearForm();
-  };
+  const { onCloseHandler, onSubmitHandler } = useOrderManagementContext();
 
   return (
     <div className="admin-order-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={closeModalAndClearForm}
+        onClick={onCloseHandler}
       >
         關閉
       </Button>

@@ -1,5 +1,8 @@
 import { createContext } from "react";
-import { useAppDispatch } from "../../../../../store/redux-hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../store/redux-hooks";
 
 import { useAdminCouponEditModalFormControl } from "../hooks/admin-coupon-modal.hooks";
 
@@ -7,14 +10,19 @@ import {
   setClearCouponEditModalControl,
   setCouponEditModalIsOpen,
 } from "../../../store/admin-coupon.slice";
+import {
+  selectAdminCouponsEditModalTargetData,
+  selectAdminCouponsEditModalType,
+} from "../../../store/admin-coupon.selector";
 
 import { defaultCouponFormStructure } from "../config/admin-coupon-modal.config";
 
 import type { ReactNode } from "react";
 
-type ContextType = {
+export type ContextType = {
   formControl: ReturnType<typeof useAdminCouponEditModalFormControl>;
-  closeModalAndClearForm: () => void;
+  onCloseHandler: () => void;
+  onSubmitHandler: () => void;
 };
 
 type ContextPropsType = {
@@ -26,17 +34,25 @@ export const CouponManagementContext = createContext<ContextType | null>(null);
 export const CouponManagementContextProvider = ({
   children,
 }: ContextPropsType) => {
-  const formControl = useAdminCouponEditModalFormControl();
+  const targetData = useAppSelector(selectAdminCouponsEditModalTargetData);
+  const type = useAppSelector(selectAdminCouponsEditModalType);
+
+  const formControl = useAdminCouponEditModalFormControl({ targetData, type });
 
   const dispatch = useAppDispatch();
 
-  const closeModalAndClearForm = () => {
+  const onCloseHandler = () => {
     formControl.setFormData({ id: null, form: defaultCouponFormStructure });
     dispatch(setClearCouponEditModalControl());
     dispatch(setCouponEditModalIsOpen(false));
   };
 
-  const value = { formControl, closeModalAndClearForm };
+  const onSubmitHandler = () => {
+    formControl.submitForm();
+    onCloseHandler();
+  };
+
+  const value = { formControl, onCloseHandler, onSubmitHandler };
 
   return (
     <CouponManagementContext.Provider value={value}>

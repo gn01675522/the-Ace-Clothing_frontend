@@ -1,9 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../../store/redux-hooks";
+import { useAppDispatch } from "../../../../../store/redux-hooks";
 
 import { CouponManagementContext } from "../contexts/admin-coupon-modal.context";
 
@@ -11,10 +8,6 @@ import {
   updateAdminCouponAsync,
   createAdminCouponAsync,
 } from "../../../store/admin-coupon.asyncThunk";
-import {
-  selectAdminCouponsEditModalTargetData,
-  selectAdminCouponsEditModalType,
-} from "../../../store/admin-coupon.selector";
 
 import { defaultCouponFormStructure } from "../config/admin-coupon-modal.config";
 
@@ -26,6 +19,7 @@ import {
 import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
 
 import type { ChangeEvent } from "react";
+import type { AdminCouponDto } from "../../../DTOs/adminCoupon.dtos";
 import type { AdminCouponFormType } from "../../../types/admin-coupon.types";
 
 export const useCouponManagementContext = () => {
@@ -39,7 +33,13 @@ export const useCouponManagementContext = () => {
   return context;
 };
 
-export const useAdminCouponEditModalFormControl = () => {
+export const useAdminCouponEditModalFormControl = ({
+  targetData,
+  type,
+}: {
+  targetData: AdminCouponDto | null;
+  type: any;
+}) => {
   const [formData, setFormData] = useState<{
     form: AdminCouponFormType;
     id: string | null;
@@ -47,9 +47,6 @@ export const useAdminCouponEditModalFormControl = () => {
     form: defaultCouponFormStructure,
     id: null,
   });
-
-  const targetData = useAppSelector(selectAdminCouponsEditModalTargetData);
-  const type = useAppSelector(selectAdminCouponsEditModalType);
 
   const dispatch = useAppDispatch();
 
@@ -79,13 +76,13 @@ export const useAdminCouponEditModalFormControl = () => {
   const submitForm = () => {
     if (!isSaveToSave) return;
 
-    if (type == FORM_OPERATION_OPTIONS.create) {
+    if (type === FORM_OPERATION_OPTIONS.create) {
       const newData = {
         ...formData.form,
         due_date: formatDateToMilliSeconds(formData.form.due_date),
       };
       dispatch(createAdminCouponAsync(newData));
-    } else if (type == FORM_OPERATION_OPTIONS.edit && formData.id) {
+    } else if (type === FORM_OPERATION_OPTIONS.edit && formData.id) {
       const newData = {
         ...formData.form,
         id: formData.id,

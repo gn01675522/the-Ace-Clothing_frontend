@@ -17,7 +17,7 @@ import type { FC } from "react";
 import "./AdminCoupons.styles.scss";
 
 const AdminCoupons: FC = () => {
-  const { isLoading } = useAdminCouponStateFetch();
+  const { isLoading, isEditCouponModalOpen } = useAdminCouponStateFetch();
 
   const {
     isDeleteModalOpen,
@@ -34,7 +34,7 @@ const AdminCoupons: FC = () => {
   return (
     <div className="admin-coupons">
       {isLoading && <Loading />}
-      <AdminCouponModal />
+      {isEditCouponModalOpen && <AdminCouponModal />}
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminCoupon}

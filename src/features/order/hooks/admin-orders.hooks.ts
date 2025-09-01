@@ -7,6 +7,7 @@ import {
   selectAdminOrdersIsLoading,
   selectAdminOrders,
   selectAdminOrdersPagination,
+  selectAdminOrderEditModalIsOpen,
 } from "../store/admin/adminOrder.selector";
 
 export const useAdminOrderStateFetch = () => {
@@ -15,6 +16,7 @@ export const useAdminOrderStateFetch = () => {
   const orders = useAppSelector(selectAdminOrders);
   const pagination = useAppSelector(selectAdminOrdersPagination);
   const isLoading = useAppSelector(selectAdminOrdersIsLoading);
+  const isOrderEditModalOpen = useAppSelector(selectAdminOrderEditModalIsOpen);
 
   useEffect(() => {
     dispatch(fetchAdminOrdersAsync());
@@ -23,5 +25,5 @@ export const useAdminOrderStateFetch = () => {
     };
   }, []);
 
-  return { orders, pagination, isLoading };
+  return { orders, pagination, isLoading, isOrderEditModalOpen };
 };

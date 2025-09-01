@@ -21,7 +21,8 @@ import "./AdminProducts.styles.scss";
 
 const AdminProducts: FC = () => {
   const { category } = useParams();
-  const { isLoading } = useAdminProductStateFetch(category);
+  const { isLoading, isProductEditModalOpen } =
+    useAdminProductStateFetch(category);
 
   const {
     isDeleteModalOpen,
@@ -40,8 +41,8 @@ const AdminProducts: FC = () => {
 
   return (
     <div className="admin-products">
-      <AdminProductModal />
       {isLoading && <Loading />}
+      {isProductEditModalOpen && <AdminProductModal />}
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminProduct}

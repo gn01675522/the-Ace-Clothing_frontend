@@ -20,7 +20,7 @@ import type { FC } from "react";
 import "./AdminOrders.styles.scss";
 
 const AdminOrders: FC = () => {
-  const { isLoading } = useAdminOrderStateFetch();
+  const { isLoading, isOrderEditModalOpen } = useAdminOrderStateFetch();
   const {
     deleteTarget,
     isDeleteModalOpen,
@@ -37,6 +37,7 @@ const AdminOrders: FC = () => {
   return (
     <div className="admin-orders">
       {isLoading && <Loading />}
+      {isOrderEditModalOpen && <AdminOrderModal />}
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminOrder}
@@ -45,7 +46,6 @@ const AdminOrders: FC = () => {
           closeAction={switchDeleteModalOpen}
         />
       )}
-      <AdminOrderModal />
       <h3 className="admin-orders__title">訂單列表</h3>
       <AdminOrderTable onClickToOpenDeleteModal={onClickToOpenDeleteModal} />
 

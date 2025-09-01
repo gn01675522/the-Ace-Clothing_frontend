@@ -16,7 +16,8 @@ import type { ReactNode } from "react";
 type ContextType = {
   modalControl: ReturnType<typeof useAdminProductEditModalControl>;
   formControl: ReturnType<typeof useAdminProductModalFormControl>;
-  closeModalAndClearForm: () => void;
+  onCloseHandler: () => void;
+  onSubmitHandler: () => void;
 };
 
 type ContextPropsType = {
@@ -34,13 +35,20 @@ export const ProductManagementContextProvider = ({
 
   const dispatch = useAppDispatch();
 
-  const closeModalAndClearForm = () => {
+  const onCloseHandler = () => {
     modalControl.switchModalOpen();
     formControl.setFormData({ id: null, form: defaultProdcutFormStructure });
     dispatch(setClearProductEditModalControl());
   };
 
-  const value = { formControl, modalControl, closeModalAndClearForm };
+  const onSubmitHandler = () => {};
+
+  const value = {
+    formControl,
+    modalControl,
+    onCloseHandler,
+    onSubmitHandler,
+  };
 
   return (
     <ProductManagementContext.Provider value={value}>

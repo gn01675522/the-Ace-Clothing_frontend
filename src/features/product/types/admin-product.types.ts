@@ -16,7 +16,7 @@ export interface AdminProductForCreate {
   unit: string;
   description: string;
   content: string;
-  is_enabled: number;
+  is_enabled: 0 | 1;
   imageUrl: string;
   imagesUrl: string[];
 }

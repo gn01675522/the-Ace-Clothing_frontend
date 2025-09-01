@@ -66,7 +66,7 @@ export const useAdminProductModalFormControl = (
       e.target instanceof HTMLInputElement &&
       e.target.type === "checkbox"
     ) {
-      const newForm = { ...formData.form, [name]: +e.target.checked };
+      const newForm = { ...formData.form, [name]: +e.target.checked as 0 | 1 };
       setFormData((prev) => ({ ...prev, form: newForm }));
     } else if (name.startsWith("imagesUrl")) {
       const newImages = [...formData.form.imagesUrl];
@@ -83,8 +83,9 @@ export const useAdminProductModalFormControl = (
 
   const submitForm = () => {
     if (type === FORM_OPERATION_OPTIONS.create) {
-      dispatch(createAdminProductAsync(formData));
-    } else {
+      const newData = { ...formData.form };
+      dispatch(createAdminProductAsync(newData));
+    } else if (type === FORM_OPERATION_OPTIONS.edit && formData.id) {
       const newData = { id: formData.id, ...formData.form };
 
       dispatch(updateAdminProductAsync(newData));

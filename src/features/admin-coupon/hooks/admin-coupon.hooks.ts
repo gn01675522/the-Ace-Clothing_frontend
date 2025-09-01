@@ -6,6 +6,7 @@ import {
   selectAdminCoupons,
   selectAdminCouponsPagination,
   selectAdminCouponsIsLoading,
+  selectAdminCouponsEditModalIsOpen,
 } from "../store/admin-coupon.selector";
 import { setClearAdminCouponState } from "../store/admin-coupon.slice";
 
@@ -15,6 +16,9 @@ export const useAdminCouponStateFetch = () => {
   const coupons = useAppSelector(selectAdminCoupons);
   const pagination = useAppSelector(selectAdminCouponsPagination);
   const isLoading = useAppSelector(selectAdminCouponsIsLoading);
+  const isEditCouponModalOpen = useAppSelector(
+    selectAdminCouponsEditModalIsOpen
+  );
 
   useEffect(() => {
     dispatch(fetchAdminCouponsAsync());
@@ -23,5 +27,5 @@ export const useAdminCouponStateFetch = () => {
     };
   }, []);
 
-  return { coupons, pagination, isLoading };
+  return { coupons, pagination, isLoading, isEditCouponModalOpen };
 };

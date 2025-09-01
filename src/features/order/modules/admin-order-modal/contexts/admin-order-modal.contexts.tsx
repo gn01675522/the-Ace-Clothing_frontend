@@ -12,7 +12,8 @@ import type { ReactNode } from "react";
 
 type ContextType = {
   formControl: ReturnType<typeof useAdminOrderModalFormControl>;
-  closeModalAndClearForm: () => void;
+  onCloseHandler: () => void;
+  onSubmitHandler: () => void;
 };
 
 type ContextPropsType = {
@@ -28,13 +29,18 @@ export const OrderManagementContextProvider = ({
 
   const dispatch = useAppDispatch();
 
-  const closeModalAndClearForm = () => {
+  const onCloseHandler = () => {
     formControl.setFormData(null);
     dispatch(setClearOrderEditModalControl());
     dispatch(setOrderEditModalIsOpen(false));
   };
 
-  const value = { formControl, closeModalAndClearForm };
+  const onSubmitHandler = () => {
+    formControl.submitForm();
+    onCloseHandler();
+  };
+
+  const value = { formControl, onCloseHandler, onSubmitHandler };
 
   return (
     <OrderManagementContext value={value}>{children}</OrderManagementContext>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
 
 import { setClearAdminProductState } from "../store/admin/adminProduct.slice";
@@ -6,6 +6,7 @@ import { fetchAdminProductAsync } from "../store/admin/adminProduct.asyncThunk";
 import {
   selectAdminProductIsLoading,
   classifyAdminProducts,
+  selectAdminProductEditModalIsOpen,
 } from "../store/admin/adminProduct.selector";
 
 export const useAdminProductStateFetch = (category: string | undefined) => {
@@ -13,6 +14,9 @@ export const useAdminProductStateFetch = (category: string | undefined) => {
 
   const products = useAppSelector(classifyAdminProducts(productCategory));
   const isLoading = useAppSelector(selectAdminProductIsLoading);
+  const isProductEditModalOpen = useAppSelector(
+    selectAdminProductEditModalIsOpen
+  );
 
   const dispatch = useAppDispatch();
 
@@ -23,5 +27,5 @@ export const useAdminProductStateFetch = (category: string | undefined) => {
     };
   }, []);
 
-  return { products, isLoading };
+  return { products, isLoading, isProductEditModalOpen };
 };

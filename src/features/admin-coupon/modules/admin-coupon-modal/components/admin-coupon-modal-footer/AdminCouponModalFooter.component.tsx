@@ -8,21 +8,17 @@ import "./AdminCouponModalFooter.styles.scss";
 
 export const AdminCouponModalFooter: FC = () => {
   const {
-    formControl: { submitForm, isSaveToSave },
-    closeModalAndClearForm,
+    formControl: { isSaveToSave },
+    onCloseHandler,
+    onSubmitHandler,
   } = useCouponManagementContext();
-
-  const onSubmitHandler = () => {
-    submitForm();
-    closeModalAndClearForm();
-  };
 
   return (
     <div className="admin-coupon-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={closeModalAndClearForm}
+        onClick={onCloseHandler}
       >
         關閉
       </Button>

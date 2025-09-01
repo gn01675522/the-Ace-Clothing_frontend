@@ -4,67 +4,37 @@ import { renderWithProviders } from "../../../../utils/test.utils";
 import { AdminCouponModal } from "../../modules/admin-coupon-modal/AdminCouponModal.module";
 
 import { formatTimestampInMilliSeconds } from "../../../../utils/common.utils";
-import { ADMIN_COUPON_FORM_CLASSES } from "../../types/admin-coupon.types";
 
-import { INITIAL_STATE } from "../../store/admin-coupon.slice";
 import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
+import { useCouponManagementContext } from "../../modules/admin-coupon-modal/hooks/admin-coupon-modal.hooks";
 
-import type { AdminCouponDto } from "../../DTOs/adminCoupon.dtos";
+import {
+  mockCouponData,
+  mockAdminCouponModalFormDefaultData,
+} from "../../__mocks__/modules.mocks";
 
-const mockUseCouponManagementContext = jest.fn();
-jest.mock("../hooks/admin-coupon-modal.hooks", () => ({
-  useAdminCouponContext: () => mockUseCouponManagementContext(),
-}));
-
-const mockDefaultCoupon = {
-  title: "",
-  is_enabled: 1,
-  percent: 80,
-  due_date: formatTimestampInMilliSeconds(new Date()),
-  code: "testCode",
-  num: 1,
-};
-
-const mockCoupon: AdminCouponDto = {
-  id: "1234567",
-  title: "just for test",
-  is_enabled: 0,
-  percent: 65,
-  due_date: 1736553600000,
-  code: "justForTest",
-  num: 2,
-};
+jest.mock("../../modules/admin-coupon-modal/hooks/admin-coupon-modal.hooks");
 
 describe("CouponModal test suite.", () => {
-  test("When the value of createOrEdit is ‘create’, the form within the modal should either only display the default data or be empty.", () => {
-    mockUseCouponManagementContext.mockReturnValue({
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("When the value of type is ‘create’, the form within the modal should either only display the default data or be empty.", () => {
+    (useCouponManagementContext as jest.Mock).mockReturnValue({
       formControl: {
-        targetData: mockCoupon,
-        onChangeHandler: jest.fn(),
-        formData: { id: null, form: mockDefaultCoupon },
-        type: ADMIN_COUPON_FORM_CLASSES.create,
+        formData: { id: null, form: mockAdminCouponModalFormDefaultData },
+        type: FORM_OPERATION_OPTIONS.create,
       },
-      modalControl: { switchModalOpen: jest.fn() },
     });
 
-    renderWithProviders(<AdminCouponModal />, {
-      preloadedState: {
-        adminCoupon: {
-          ...INITIAL_STATE,
-          couponEditModalControl: {
-            isOpen: true,
-            type: FORM_OPERATION_OPTIONS.create,
-            targetData: null,
-          },
-        },
-      },
-    });
+    renderWithProviders(<AdminCouponModal />);
 
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
     const percentInput = screen.getByLabelText("折扣(e.g: 8折 = 80)");
     const dueDateInput = screen.getByLabelText("到期日");
-    const isEnabledCheckbox = screen.getByLabelText("是否啟用");
+    const isEnabledCheckbox = screen.getByRole("checkbox");
 
     expect(titleInput).toHaveValue("");
     //* 預設為 testCode
@@ -77,35 +47,20 @@ describe("CouponModal test suite.", () => {
     expect(isEnabledCheckbox).toBeChecked();
   });
 
-  test("When createOrEdit is set to ‘edit’, the form within the modal will display the corresponding values based on the provided targetData.", async () => {
-    const { id, ...rest } = mockCoupon;
-    const newData = { id, form: rest };
-    mockUseCouponManagementContext.mockReturnValue({
+  test("When type is set to ‘edit’, the form within the modal will display the corresponding values based on the provided targetData.", async () => {
+    (useCouponManagementContext as jest.Mock).mockReturnValue({
       formControl: {
-        formData: newData,
-        onChangeHandler: jest.fn(),
-        type: ADMIN_COUPON_FORM_CLASSES.edit,
-      },
-      modalControl: { switchModalOpen: jest.fn() },
-    });
-    renderWithProviders(<AdminCouponModal />, {
-      preloadedState: {
-        adminCoupon: {
-          ...INITIAL_STATE,
-          couponEditModalControl: {
-            isOpen: true,
-            type: FORM_OPERATION_OPTIONS.edit,
-            targetData: mockCoupon,
-          },
-        },
+        formData: { id: mockCouponData.id, form: mockCouponData },
+        type: FORM_OPERATION_OPTIONS.create,
       },
     });
+    renderWithProviders(<AdminCouponModal />);
 
     const titleInput = screen.getByLabelText("標題");
     const codeInput = screen.getByLabelText("優惠碼");
     const percentInput = screen.getByLabelText("折扣(e.g: 8折 = 80)");
     const dueDateInput = screen.getByLabelText("到期日");
-    const isEnabledCheckbox = screen.getByLabelText("是否啟用");
+    const isEnabledCheckbox = screen.getByRole("checkbox");
 
     expect(titleInput).toHaveValue("just for test");
     expect(codeInput).toHaveValue("justForTest");
@@ -116,40 +71,33 @@ describe("CouponModal test suite.", () => {
     );
   });
   test("Clicking on the 'x', '關閉' buttons triggers the backdropClose callback.", () => {
-    const mockSwitchModalOpen = jest.fn();
-    const mockSetIsModalOpen = jest.fn();
-    const mockCloseModalAndClearForm = jest.fn();
-    mockUseCouponManagementContext.mockReturnValue({
+    const mockOnCloseHandler = jest.fn();
+    const mockOnSubmitHandler = jest.fn();
+
+    (useCouponManagementContext as jest.Mock).mockReturnValue({
+      onCloseHandler: mockOnCloseHandler,
+      onSubmitHandler: mockOnSubmitHandler,
       formControl: {
-        formData: { id: mockCoupon.id, form: mockCoupon },
-        onChangeHandler: jest.fn(),
+        formData: {
+          id: mockCouponData.id,
+          form: mockCouponData,
+        },
+        isSaveToSave: true,
+        type: FORM_OPERATION_OPTIONS.create,
       },
-      modalControl: {
-        setIsModalOpen: mockSetIsModalOpen,
-        switchModalOpen: mockSwitchModalOpen,
-      },
-      closeModalAndClearForm: mockCloseModalAndClearForm,
     });
 
-    renderWithProviders(<AdminCouponModal />, {
-      preloadedState: {
-        adminCoupon: {
-          ...INITIAL_STATE,
-          couponEditModalControl: {
-            isOpen: true,
-            type: FORM_OPERATION_OPTIONS.create,
-            targetData: null,
-          },
-        },
-      },
-    });
+    renderWithProviders(<AdminCouponModal />);
 
     const closeButton = screen.getByText(/關閉/i);
     const closeXButton = screen.getByLabelText(/Close/i);
+    const saveButton = screen.getByText(/儲存/i);
 
     fireEvent.click(closeButton);
     fireEvent.click(closeXButton);
+    fireEvent.click(saveButton);
 
-    expect(mockCloseModalAndClearForm).toHaveBeenCalledTimes(2);
+    expect(mockOnCloseHandler).toHaveBeenCalledTimes(2);
+    expect(mockOnSubmitHandler).toHaveBeenCalledTimes(1);
   });
 });

@@ -25,6 +25,8 @@ export const AdminOrderModalDetails: FC = () => {
 
   const isLoading = useAppSelector(selectAdminOrdersIsLoading);
 
+  console.log(targetData);
+
   return (
     <div className="admin-order-modal-detail">
       <div className="admin-order-modal-detail__customer">
