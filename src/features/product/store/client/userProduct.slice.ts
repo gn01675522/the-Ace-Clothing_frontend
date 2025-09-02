@@ -6,11 +6,11 @@ import {
 } from "./userProduct.asyncThunk";
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
-import type { Product, ProductWithId } from "../../DTOs/userProduct.types";
+import type { UserProductsDto } from "../../DTOs/userProduct.dtos";
 
 type UserProductState = {
-  readonly products: Product[];
-  readonly product: Product | null;
+  readonly products: UserProductsDto[];
+  readonly product: UserProductsDto | null;
   readonly pagination: {};
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;

@@ -1,8 +1,8 @@
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { Product } from "features/product/DTOs/userProduct.types";
-import type { IGetAdminCoupon } from "features/admin-coupon/DTOs/adminCoupon.dtos";
+import type { UserProductsDto } from "features/product/DTOs/userProduct.dtos";
+import type { AdminCouponDto } from "features/admin-coupon/DTOs/adminCoupon.dtos";
 
 import "./OrderCard.styles.scss";
 
@@ -10,9 +10,9 @@ export type OrderCardProductsType = {
   id: string;
   product_id: string;
   qty: number;
-  coupon: IGetAdminCoupon;
+  coupon: AdminCouponDto;
   final_total: number;
-  product: Product;
+  product: UserProductsDto;
   total: number;
 };
 

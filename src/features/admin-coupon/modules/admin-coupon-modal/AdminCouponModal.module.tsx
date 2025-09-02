@@ -1,4 +1,5 @@
-import { useAdminCouponContext } from "../../hooks/admin-coupon.hooks";
+import { CouponManagementContextProvider } from "./contexts/admin-coupon-modal.context";
+import { useCouponManagementContext } from "./hooks/admin-coupon-modal.hooks";
 
 import { ModalContainer } from "../../../../components/index";
 import { AdminCouponModalHeader } from "./components/admin-coupon-modal-header/AdminCouponModalHeader.component";
@@ -7,13 +8,11 @@ import { AdminCouponModalFooter } from "./components/admin-coupon-modal-footer/A
 
 import type { FC, MouseEvent } from "react";
 
-export const AdminCouponModal: FC = () => {
-  const {
-    modalControl: { switchModalOpen },
-  } = useAdminCouponContext();
+const AdminCouponModalContent: FC = () => {
+  const { onCloseHandler } = useCouponManagementContext();
 
   const onClickHandler = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) switchModalOpen();
+    if (e.target === e.currentTarget) onCloseHandler();
   };
 
   return (
@@ -24,5 +23,13 @@ export const AdminCouponModal: FC = () => {
         <AdminCouponModalFooter />
       </div>
     </ModalContainer>
+  );
+};
+
+export const AdminCouponModal: FC = () => {
+  return (
+    <CouponManagementContextProvider>
+      <AdminCouponModalContent />
+    </CouponManagementContextProvider>
   );
 };

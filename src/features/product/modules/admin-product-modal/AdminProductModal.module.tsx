@@ -1,4 +1,6 @@
-import { useAdminProductsContext } from "../../hooks/admin-products.hooks";
+import { ProductManagementContextProvider } from "./contexts/admin-product-modal.contexts";
+
+import { useProductManagementContext } from "./hooks/admin-product-modal.hooks";
 
 import { ModalContainer } from "../../../../components/index";
 
@@ -12,13 +14,11 @@ import type { FC, MouseEvent } from "react";
 
 import "./AdminProductModal.styles.scss";
 
-export const AdminProductModal: FC = () => {
-  const {
-    modalControl: { switchAdminProductModalOpen },
-  } = useAdminProductsContext();
+const AdminProductModalContent: FC = () => {
+  const { onCloseHandler } = useProductManagementContext();
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) switchAdminProductModalOpen();
+    if (e.target === e.currentTarget) onCloseHandler();
   };
 
   return (
@@ -27,9 +27,7 @@ export const AdminProductModal: FC = () => {
         <AdminProductModalHeader />
         <div className="product-modal__body">
           <AdminProductModalDetails />
-
           <AdminProductModalDescription />
-
           <div className="product-modal__body-lower">
             <h6 className="product-modal__body-lower-title">
               次要圖片(可多張)
@@ -40,5 +38,13 @@ export const AdminProductModal: FC = () => {
         <AdminProductModalFooter />
       </div>
     </ModalContainer>
+  );
+};
+
+export const AdminProductModal: FC = () => {
+  return (
+    <ProductManagementContextProvider>
+      <AdminProductModalContent />
+    </ProductManagementContextProvider>
   );
 };

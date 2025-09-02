@@ -1,8 +1,8 @@
-import type { Pagination } from "../../../shared/types/types";
-import type { AdminCoupon } from "../../admin-coupon/index";
-import type { Product } from "../../product/DTOs/userProduct.types";
+import type { AdminCouponDto } from "../../admin-coupon/index";
+import type { UserProducts } from "../../product/DTOs/userProduct.dtos";
+import type { APIResponseWithoutData } from "../../../shared/types";
 
-export interface Order {
+export interface AdminOrderDto {
   title: string;
   create_at: number;
   id: string;
@@ -13,9 +13,9 @@ export interface Order {
       id: string;
       product_id: string;
       qty: number;
-      coupon: AdminCoupon;
+      coupon: AdminCouponDto;
       final_total: number;
-      product: Product;
+      product: UserProducts;
       total: number;
     }
   ];
@@ -29,9 +29,6 @@ export interface Order {
   };
 }
 
-export interface AdminOrder {
-  success: boolean;
-  orders: Order[];
-  pagination: Pagination;
-  messages: string[];
+export interface FetchAdminOrderResDto extends APIResponseWithoutData {
+  orders: AdminOrderDto[];
 }

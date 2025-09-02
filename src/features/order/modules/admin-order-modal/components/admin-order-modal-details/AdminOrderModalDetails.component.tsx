@@ -1,7 +1,11 @@
-import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
+import { useAppSelector } from "../../../../../../store/redux-hooks";
+
+import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
+
+import { selectAdminOrdersIsLoading } from "../../../../store/admin/adminOrder.selector";
 
 import type { FC } from "react";
-import type { Order } from "../../../../DTOs/adminOrders.dtos";
+import type { AdminOrderDto } from "../../../../DTOs/adminOrders.dtos";
 
 import "./AdminOrderModalDetails.styles.scss";
 
@@ -17,8 +21,11 @@ const formContent = {
 export const AdminOrderModalDetails: FC = () => {
   const {
     formControl: { targetData, formData, onChangeHandler },
-    stateFetch: { isLoading },
-  } = useAdminOrderContext();
+  } = useOrderManagementContext();
+
+  const isLoading = useAppSelector(selectAdminOrdersIsLoading);
+
+  console.log(targetData);
 
   return (
     <div className="admin-order-modal-detail">
@@ -37,7 +44,9 @@ export const AdminOrderModalDetails: FC = () => {
                 <span className="admin-order-modal-detail__customer-info-data-span">
                   {(info.id === "message"
                     ? targetData?.message
-                    : targetData?.user[info.id as keyof Order["user"]]) || "無"}
+                    : targetData?.user[
+                        info.id as keyof AdminOrderDto["user"]
+                      ]) || "無"}
                 </span>
               </div>
             </div>

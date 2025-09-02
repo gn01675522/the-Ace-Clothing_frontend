@@ -1,8 +1,7 @@
-import { useAppDispatch } from "../../../../store/redux-hooks";
-
-import { useAdminOrderContext } from "../../hooks/admin-order.hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { fetchAdminOrdersAsync } from "../../store/admin/adminOrder.asyncThunk";
+import { selectAdminOrdersPagination } from "../../store/admin/adminOrder.selector";
 
 import { Pagination } from "../../../../modules";
 
@@ -11,9 +10,7 @@ import type { FC } from "react";
 import "./AdminOrderPagination.styles.scss";
 
 export const AdminOrderPagination: FC = () => {
-  const {
-    stateFetch: { pagination },
-  } = useAdminOrderContext();
+  const pagination = useAppSelector(selectAdminOrdersPagination);
 
   const dispatch = useAppDispatch();
 

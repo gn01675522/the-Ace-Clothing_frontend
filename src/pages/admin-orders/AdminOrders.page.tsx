@@ -1,21 +1,26 @@
 import { useDeleteModalControl } from "../../modules";
 
+import { Loading } from "../../components";
+
 import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules";
 
-import { AdminOrderContextProvider } from "../../features/order/index";
+import {
+  useAdminOrderStateFetch,
+  AdminOrderModal,
+} from "../../features/order/index";
 
 import {
-  AdminOrderOverlay,
   AdminOrderPagination,
   AdminOrderTable,
-  type Order,
+  type AdminOrderDto,
 } from "../../features/order/index";
 
 import type { FC } from "react";
 
 import "./AdminOrders.styles.scss";
 
-const AdminOrdersContent: FC = () => {
+const AdminOrders: FC = () => {
+  const { isLoading, isOrderEditModalOpen } = useAdminOrderStateFetch();
   const {
     deleteTarget,
     isDeleteModalOpen,
@@ -24,14 +29,15 @@ const AdminOrdersContent: FC = () => {
   } = useDeleteModalControl();
 
   //* 打開刪除 modal
-  const onClickToOpenDeleteModal = (order: Order) => {
+  const onClickToOpenDeleteModal = (order: AdminOrderDto) => {
     setDeleteTarget({ id: order.id, title: order.id });
     switchDeleteModalOpen();
   };
 
   return (
-    <>
-      <AdminOrderOverlay />
+    <div className="admin-orders">
+      {isLoading && <Loading />}
+      {isOrderEditModalOpen && <AdminOrderModal />}
       {isDeleteModalOpen && (
         <DeleteModal
           dataType={DELETE_MODAL_TYPE.adminOrder}
@@ -40,21 +46,11 @@ const AdminOrdersContent: FC = () => {
           closeAction={switchDeleteModalOpen}
         />
       )}
-      <div className="admin-orders">
-        <h3 className="admin-orders__title">訂單列表</h3>
-        <AdminOrderTable onClickToOpenDeleteModal={onClickToOpenDeleteModal} />
+      <h3 className="admin-orders__title">訂單列表</h3>
+      <AdminOrderTable onClickToOpenDeleteModal={onClickToOpenDeleteModal} />
 
-        <AdminOrderPagination />
-      </div>
-    </>
-  );
-};
-
-const AdminOrders: FC = () => {
-  return (
-    <AdminOrderContextProvider>
-      <AdminOrdersContent />
-    </AdminOrderContextProvider>
+      <AdminOrderPagination />
+    </div>
   );
 };
 

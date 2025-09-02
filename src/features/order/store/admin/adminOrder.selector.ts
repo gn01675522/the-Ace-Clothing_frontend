@@ -18,7 +18,17 @@ export const selectAdminOrdersIsLoading = createSelector(
   (adminOrder) => adminOrder.isLoading
 );
 
-export const selectAdminOrdersTempData = createSelector(
+export const selectAdminOrderEditModalControl = createSelector(
   [selectAdminOrdersReducer],
-  (adminOrder) => adminOrder.tempData
+  (adminCoupon) => adminCoupon.orderEditModalControl
+);
+
+export const selectAdminOrderEditModalIsOpen = createSelector(
+  [selectAdminOrderEditModalControl],
+  (modalControl) => modalControl.isOpen
+);
+
+export const selectAdminOrderEditModalTargetData = createSelector(
+  [selectAdminOrderEditModalControl],
+  (modalControl) => modalControl.targetData
 );

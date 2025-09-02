@@ -1,4 +1,4 @@
-import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
+import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components";
 
@@ -9,8 +9,8 @@ import "./AdminOrderModalHeader.styles.scss";
 export const AdminOrderModalHeader: FC = () => {
   const {
     formControl: { formData },
-    modalControl: { switchAdminOrderModalOpen },
-  } = useAdminOrderContext();
+    onCloseHandler,
+  } = useOrderManagementContext();
 
   return (
     <div className="admin-order-modal-header">
@@ -21,7 +21,7 @@ export const AdminOrderModalHeader: FC = () => {
         type="button"
         buttonType={BUTTON_TYPE_CLASS.squareBlackSm}
         aria-label="Close"
-        onClick={switchAdminOrderModalOpen}
+        onClick={onCloseHandler}
       >
         ｘ
       </Button>

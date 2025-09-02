@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import {
   NoImageSVGLogo,
@@ -14,24 +14,31 @@ import "./AdminProductModalToggleList.styles.scss";
 
 export const AdminProductModalToggleList: FC = () => {
   const {
-    formControl: { formData, setFormData, onChangeHandler },
-  } = useAdminProductsContext();
+    formControl: {
+      formData: { form },
+      setFormData,
+      onChangeHandler,
+    },
+  } = useProductManagementContext();
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   //* 增加新增 imagesUrl 的 input
   const onAddInput = () => {
-    setFormData({
-      ...formData,
-      imagesUrl: [...formData.imagesUrl, ""],
-    });
+    setFormData((prev) => ({
+      ...prev,
+      form: { ...form, imagesUrl: [...form.imagesUrl, ""] },
+    }));
     if (isToggleOpen === false) setIsToggleOpen(true);
   };
 
   //* 刪除 imagesUrl
   const onRemoveInput = (i: number) => {
-    const filterImages = formData.imagesUrl.filter((_, index) => index !== i);
-    setFormData({ ...formData, imagesUrl: [...filterImages] });
+    const filterImages = form.imagesUrl.filter((_, index) => index !== i);
+    setFormData((prev) => ({
+      ...prev,
+      form: { ...form, imagesUrl: [...filterImages] },
+    }));
   };
 
   const onOpenToggle = () => setIsToggleOpen(!isToggleOpen);
@@ -53,16 +60,16 @@ export const AdminProductModalToggleList: FC = () => {
         <h6 className="admin-product-modal-toggle-list__title">開啟圖片列表</h6>
       </label>
       <div className="admin-product-modal-toggle-list__content">
-        {formData?.imagesUrl.map((url, i) => {
+        {form?.imagesUrl.map((url, i) => {
           return (
             <div
               className="admin-product-modal-toggle-list__content-item"
               key={i}
             >
-              {formData?.imagesUrl[i] ? (
+              {form?.imagesUrl[i] ? (
                 <img
                   src={url}
-                  alt={`圖片：${formData.title}，第${
+                  alt={`圖片：${form.title}，第${
                     i + 1
                   }張；無法顯示，請輸入正確連結`}
                   className="admin-product-modal-toggle-list__content-item-img"

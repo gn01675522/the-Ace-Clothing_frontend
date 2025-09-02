@@ -1,11 +1,9 @@
-export * from "./modules/admin-products-modal-overlay/AdminProductsModalOverlay.module";
 export * from "./modules/admin-product-modal/AdminProductModal.module";
 export * from "./modules/admin-product-table/AdminProductTable.module";
 export * from "./modules/admin-product-pagination/AdminProductPagination.module";
 
 export * from "./components/product-card/ProductCard.component";
 
-export * from "./contexts/adminProducts.context";
 export * from "./hooks/admin-products.hooks";
 
 export * from "./store/client/userProduct.asyncThunk";

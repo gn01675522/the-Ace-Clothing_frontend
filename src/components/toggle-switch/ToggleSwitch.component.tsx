@@ -16,7 +16,7 @@ export const ToggleSwitch: FC<IToggleSwitch> = ({
   const combinedWrapperClass = `toggle-switch ${
     wrapperClass ? wrapperClass : ""
   }`;
-  const combinedTitleClass = `toggle-switch__title ${
+  const combinedTitleClass = `toggle-switch__title sr-only ${
     labelClass ? labelClass : ""
   }`;
   const combinedToggleWrapperClass = `toggle-switch__toggle-wrapper ${
@@ -28,7 +28,7 @@ export const ToggleSwitch: FC<IToggleSwitch> = ({
 
   return (
     <fieldset className={combinedWrapperClass}>
-      <span className={combinedTitleClass}>{title}</span>
+      <legend className={combinedTitleClass}>{title}</legend>
       <input
         id={id}
         {...props}

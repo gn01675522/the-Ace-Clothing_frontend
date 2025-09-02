@@ -1,4 +1,4 @@
-import { useAdminOrderContext } from "../../../../hooks/admin-order.hooks";
+import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
 
 import { OrderCard } from "../../../../components/order-card/OrderCard.component";
 
@@ -9,7 +9,7 @@ import "./AdminOrderModalList.styles.scss";
 export const AdminOrderModalList: FC = () => {
   const {
     formControl: { targetData },
-  } = useAdminOrderContext();
+  } = useOrderManagementContext();
 
   return (
     <div className="admin-order-modal-list">

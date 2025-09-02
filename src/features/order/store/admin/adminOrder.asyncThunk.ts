@@ -1,28 +1,37 @@
+import axios from "axios";
+
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
-import axios, { type AxiosResponse } from "axios";
 
 import { setHandleMessage } from "../../../../store/message/message.slice";
 
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type { PaginationType } from "../../../../shared/types/types";
-import type { Order } from "../../DTOs/adminOrders.dtos";
+import type {
+  AdminOrderDto,
+  FetchAdminOrderResDto,
+} from "../../DTOs/adminOrders.dtos";
+import type {
+  APIResponse,
+  APIRejectResponse,
+  APIGeneralResDto,
+} from "../../../../shared/types";
 
 //* 擷取 admin orders api 中的資料
 export const fetchAdminOrdersAsync = createAppAsyncThunk<
-  { orders: Order[]; pagination: PaginationType },
+  { orders: AdminOrderDto[]; pagination: PaginationType },
   number | undefined
 >("adminOrders/fetchAdminOrders", async (page = 1, { rejectWithValue }) => {
   try {
-    const res = await axios.get(
+    const res = (await axios.get(
       `/v2/api/${process.env.APP_API_PATH}/admin/orders?page=${page}`
-    );
+    )) as APIResponse<FetchAdminOrderResDto>;
 
     return {
       orders: res.data.orders,
       pagination: res.data.pagination,
     };
   } catch (e) {
-    const error = e as AxiosRejectTypes;
+    const error = e as APIRejectResponse;
 
     if (!error.response) {
       throw e;
@@ -33,27 +42,29 @@ export const fetchAdminOrdersAsync = createAppAsyncThunk<
 });
 
 //* 更新 admin orders api 中的資料
-export const updateAdminOrdersAsync = createAppAsyncThunk<void, Order>(
+export const updateAdminOrdersAsync = createAppAsyncThunk<void, AdminOrderDto>(
   "adminOrders/updateAdminOrders",
   async (data, { dispatch, rejectWithValue }) => {
     try {
       const res = (await axios.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${data.id}`,
         { data }
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminOrdersAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
@@ -67,9 +78,9 @@ export const deleteAdminOrdersAsync = createAppAsyncThunk<void, string>(
     try {
       const res = (await axios.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${id}`
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminOrdersAsync());
@@ -80,7 +91,9 @@ export const deleteAdminOrdersAsync = createAppAsyncThunk<void, string>(
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }

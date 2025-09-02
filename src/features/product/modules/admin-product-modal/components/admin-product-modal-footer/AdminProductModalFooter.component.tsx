@@ -1,4 +1,4 @@
-import { useAdminProductsContext } from "../../../../hooks/admin-products.hooks";
+import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../../../components/index";
 
@@ -8,22 +8,17 @@ import "./AdminProductModalFooter.styles.scss";
 
 export const AdminProductModalFooter: FC = () => {
   const {
-    formControl: { isSaveToSave, submitForm },
-    modalControl: { switchAdminProductModalOpen },
-  } = useAdminProductsContext();
-
-  //* 按下儲存鍵後提交資料
-  const onSubmitHandler = () => {
-    submitForm();
-    switchAdminProductModalOpen();
-  };
+    formControl: { isSaveToSave },
+    onSubmitHandler,
+    onCloseHandler,
+  } = useProductManagementContext();
 
   return (
     <div className="admin-product-modal-footer">
       <Button
         type="button"
         buttonType={BUTTON_TYPE_CLASS.rectBlackNm}
-        onClick={switchAdminProductModalOpen}
+        onClick={onCloseHandler}
       >
         關閉
       </Button>

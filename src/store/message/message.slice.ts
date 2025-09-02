@@ -50,9 +50,9 @@ export const messageSlice = createSlice({
 
       state.hasMessage = true;
 
-      if (type === "success") {
+      if (type === true) {
         state.message = successMessageHelper(res);
-      } else if (type === "error") {
+      } else if (type === false) {
         state.message = errorMessageHelper(res);
       }
     },
@@ -62,10 +62,7 @@ export const messageSlice = createSlice({
 const { setClearMessage, setMessage } = messageSlice.actions;
 
 export const setHandleMessage =
-  (payload: {
-    res: AxiosRejectTypes | AxiosResponse;
-    type: "success" | "error" | "";
-  }) =>
+  (payload: { res: AxiosRejectTypes | AxiosResponse; type: boolean }) =>
   (dispatch: AppDispatch) => {
     dispatch(setMessage(payload));
     setTimeout(() => {
