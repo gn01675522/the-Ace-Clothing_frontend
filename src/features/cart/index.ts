@@ -1,5 +1,5 @@
 export * from "./modules/cart-item/CartItem.module";
-export * from "./modules/cart-overlay/CartOverlay.module";
+export * from "./modules/delete-in-cart-modal/DeleteInCartModal.module";
 
 export * from "./components/cart-icon/CartIcon.component";
 export * from "./components/set-discount/SetDiscount.component";

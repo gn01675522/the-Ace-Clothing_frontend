@@ -41,8 +41,10 @@ type PropsType = {
 };
 
 export const ScrollList: FC<PropsType> = ({ type }) => {
+  useFetchProductsList();
   const products = useAppSelector(selectorByType(type));
   const wishlist = useAppSelector(selectUserFavorite);
+  useDetectWishlistChange(wishlist);
 
   const {
     listContainerRef,
@@ -55,8 +57,6 @@ export const ScrollList: FC<PropsType> = ({ type }) => {
     onScrollHandler,
     onStopScroll,
   } = useDragToScrollList();
-  useFetchProductsList();
-  useDetectWishlistChange(wishlist);
 
   return (
     <div className="scroll-list" ref={listContainerRef}>
@@ -71,11 +71,13 @@ export const ScrollList: FC<PropsType> = ({ type }) => {
           {products.map((product) => {
             const category = product.category.split("-")[0];
             return (
-              <li style={{ width: `${setWidthByListContainer}px` }}>
+              <li
+                style={{ width: `${setWidthByListContainer}px` }}
+                key={product.id}
+              >
                 <ScrollItem
                   product={product}
                   urlParam={category}
-                  key={product.id}
                   isDragging={draggingProgress}
                   isFavorite={wishlist.includes(product.id)}
                 />

@@ -12,6 +12,7 @@ import {
   selectCartModalOpen,
   selectCartIsLoading,
 } from "../store/cart.selector";
+import { selectHasMessage } from "../../../store/message/message.selector";
 
 import type { ChangeEvent } from "react";
 
@@ -74,18 +75,23 @@ export const useCartSetCouponControl = () => {
 
 export const useCartStateFetch = () => {
   const cartItems = useAppSelector(selectCartItems);
-  const isModalOpen = useAppSelector(selectCartModalOpen);
+  const isDeleteModalOpen = useAppSelector(selectCartModalOpen);
   const isLoading = useAppSelector(selectCartIsLoading);
+  const hasMessage = useAppSelector(selectHasMessage);
 
   const dispatch = useAppDispatch();
 
-  const onClickToCloseModalInBackdrop = () => {
-    dispatch(setCartIsModalOpen(false));
-  };
+  const onCloseDeleteModal = () => dispatch(setCartIsModalOpen(false));
 
   useEffect(() => {
     dispatch(fetchCartItemsAsync());
   }, []);
 
-  return { cartItems, isModalOpen, isLoading, onClickToCloseModalInBackdrop };
+  return {
+    cartItems,
+    isDeleteModalOpen,
+    isLoading,
+    hasMessage,
+    onCloseDeleteModal,
+  };
 };

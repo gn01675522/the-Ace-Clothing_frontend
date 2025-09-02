@@ -1,8 +1,9 @@
-import type { AdminCoupon } from "../../admin-coupon/DTOs/adminCoupon.dtos";
+import type { AdminCouponDto } from "../../admin-coupon/DTOs/adminCoupon.dtos";
+import type { APIResponseWithoutData } from "../../../shared/types";
 
-export interface CartItems {
+export interface CartItemDto {
   id: string;
-  coupon: AdminCoupon;
+  coupon: AdminCouponDto;
   final_total: number;
   product: {
     category: string;
@@ -23,12 +24,14 @@ export interface CartItems {
   total: number;
 }
 
-export interface Cart {
-  carts: CartItems[];
+export interface CartInfoDto {
+  carts: CartItemDto[];
   total: number;
   final_total: number;
 }
-
+export interface FetchCartItemsResDto extends APIResponseWithoutData {
+  cart: CartInfoDto;
+}
 export interface CartItemAddToCart {
   product_id: string;
   qty: number;

@@ -13,3 +13,8 @@ export enum FORM_OPERATION_OPTIONS {
   edit = "edit",
   create = "create",
 }
+
+export enum QUANTITY_OPERATION_OPTIONS {
+  plus = "plus",
+  minus = "minus",
+}

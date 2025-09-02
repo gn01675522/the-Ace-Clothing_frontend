@@ -1,16 +1,16 @@
-import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import {
   Button,
   BUTTON_TYPE_CLASS,
   ModalContainer,
-} from "../../components/index";
+} from "../../../../components/index";
 
 import {
   setCartIsModalOpen,
   selectCartTempData,
   setRemoveItemFromCartAsync,
-} from "../../features/cart/index";
+} from "../../../../features/cart/index";
 
 import type { FC } from "react";
 

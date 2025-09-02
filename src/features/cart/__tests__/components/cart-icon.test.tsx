@@ -2,14 +2,15 @@ import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/test.utils";
 
 import { CartIcon } from "../../components/cart-icon/CartIcon.component";
+import { mockCartItems } from "../../__mocks__/components.mocks";
 
 import { INITIAL_STATE } from "../../store/cart.slice";
 
-import type { CartItems } from "../../DTOs/cart.dtos";
+import type { CartItemDto } from "../../DTOs/cart.dtos";
 
 describe("Cart Icon test suite.", () => {
   test("Renders only the cart icon when the cart is empty.", () => {
-    const initialCartItems: CartItems[] = [];
+    const initialCartItems: CartItemDto[] = [];
 
     renderWithProviders(<CartIcon />, {
       preloadedState: {
@@ -34,45 +35,12 @@ describe("Cart Icon test suite.", () => {
     expect(cartLogo).not.toBeInTheDocument();
   });
   test("Renders CartIcon with preloaded state and displays the correct item number.", () => {
-    const initialCartItems: CartItems[] = [
-      {
-        id: "test1",
-        coupon: {
-          code: "test2",
-          due_date: 100,
-          id: "test_code",
-          is_enabled: 1,
-          percent: 20,
-          title: "testCode",
-          num: 1,
-        },
-        final_total: 1500,
-        product: {
-          category: "men",
-          content: "test",
-          description: "for test",
-          id: "test_1",
-          imageUrl: "https://test.com",
-          imagesUrl: [],
-          is_enabled: 1,
-          num: 5,
-          origin_price: 5,
-          price: 5,
-          title: "just for test",
-          unit: "test",
-        },
-        product_id: "test_product_1",
-        qty: 5,
-        total: 2000,
-      },
-    ];
-
     renderWithProviders(<CartIcon />, {
       preloadedState: {
         cart: {
           ...INITIAL_STATE,
           cart: {
-            carts: initialCartItems,
+            carts: mockCartItems,
             total: 1,
             final_total: 1,
           },
@@ -81,7 +49,7 @@ describe("Cart Icon test suite.", () => {
     });
 
     const getItemNumberOnIcon = screen.getByText(
-      initialCartItems.length.toString()
+      mockCartItems.length.toString()
     );
     expect(getItemNumberOnIcon).toBeInTheDocument();
   });

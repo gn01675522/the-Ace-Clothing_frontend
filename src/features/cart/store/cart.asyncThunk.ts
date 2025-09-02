@@ -1,21 +1,33 @@
+import axios from "axios";
+
 import { createAppAsyncThunk } from "../../../store/redux-utils";
-import axios, { type AxiosResponse } from "axios";
 
 import { setHandleMessage } from "../../../store/message/message.slice";
 
-import type { AxiosRejectTypes } from "../../../store/redux-utils";
-import type { CartItems, Cart, CartItemAddToCart } from "../DTOs/cart.dtos";
+import type {
+  APIResponse,
+  APIRejectResponse,
+  APIGeneralResDto,
+} from "../../../shared/types";
+import type {
+  CartItemDto,
+  CartInfoDto,
+  FetchCartItemsResDto,
+  CartItemAddToCart,
+} from "../DTOs/cart.dtos";
 
 //* fetch 目前的購物車內商品資訊
-export const fetchCartItemsAsync = createAppAsyncThunk<Cart, void>(
+export const fetchCartItemsAsync = createAppAsyncThunk<CartInfoDto, void>(
   "cart/fetchCartItems",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`/v2/api/${process.env.APP_API_PATH}/cart`);
+      const res = (await axios.get(
+        `/v2/api/${process.env.APP_API_PATH}/cart`
+      )) as APIResponse<FetchCartItemsResDto>;
 
-      return res.data.data;
+      return res.data.cart;
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
@@ -35,19 +47,21 @@ export const setAddItemToCartAsync = createAppAsyncThunk<
     const res = (await axios.post(
       `/v2/api/${process.env.APP_API_PATH}/cart`,
       data
-    )) as AxiosResponse;
+    )) as APIResponse<APIGeneralResDto>;
 
-    dispatch(setHandleMessage({ type: "success", res }));
+    dispatch(setHandleMessage({ type: res.data.success, res }));
 
     dispatch(fetchCartItemsAsync());
   } catch (e) {
-    const error = e as AxiosRejectTypes;
+    const error = e as APIRejectResponse;
 
     if (!error.response) {
       throw e;
     }
 
-    dispatch(setHandleMessage({ type: "error", res: error }));
+    dispatch(
+      setHandleMessage({ type: error.response.data.success, res: error })
+    );
 
     return rejectWithValue(error);
   }
@@ -60,19 +74,21 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<void, string>(
     try {
       const res = (await axios.delete(
         `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       dispatch(fetchCartItemsAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
@@ -82,7 +98,7 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<void, string>(
 //* 修改購物車內商品
 export const setUpdateCartItemAsync = createAppAsyncThunk<
   void,
-  { item: CartItems; quantity: number }
+  { item: CartItemDto; quantity: number }
 >(
   "cart/setUpdateCartItem",
   async ({ item, quantity }, { dispatch, rejectWithValue }) => {
@@ -93,19 +109,21 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       const res = (await axios.put(
         `/v2/api/${process.env.APP_API_PATH}/cart/${item.id}`,
         data
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
 
       dispatch(fetchCartItemsAsync());
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
@@ -122,17 +140,19 @@ export const setAddCouponForCartAsync = createAppAsyncThunk<void, string>(
         {
           data: { code },
         }
-      )) as AxiosResponse;
+      )) as APIResponse<APIGeneralResDto>;
 
-      dispatch(setHandleMessage({ type: "success", res }));
+      dispatch(setHandleMessage({ type: res.data.success, res }));
     } catch (e) {
-      const error = e as AxiosRejectTypes;
+      const error = e as APIRejectResponse;
 
       if (!error.response) {
         throw e;
       }
 
-      dispatch(setHandleMessage({ type: "error", res: error }));
+      dispatch(
+        setHandleMessage({ type: error.response.data.success, res: error })
+      );
 
       return rejectWithValue(error);
     }
