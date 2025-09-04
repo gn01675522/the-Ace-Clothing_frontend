@@ -4,7 +4,7 @@ import type { AxiosResponse } from "axios";
 import type { AppDispatch } from "../store";
 import type { AxiosRejectTypes } from "../redux-utils";
 
-type Message = {
+type MessageDto = {
   type: "success" | "error" | "danger" | "";
   title: string;
   text: string;
@@ -12,7 +12,7 @@ type Message = {
 
 type MessageState = {
   readonly hasMessage: boolean;
-  readonly message: Message;
+  readonly message: MessageDto;
 };
 
 const INITIAL_STATE: MessageState = {
@@ -21,7 +21,9 @@ const INITIAL_STATE: MessageState = {
 };
 
 //********** Helper **********
-const successMessageHelper = (res: { data: { message: string } }): Message => ({
+const successMessageHelper = (res: {
+  data: { message: string };
+}): MessageDto => ({
   type: "success",
   title: "更新成功",
   text: res.data.message,
@@ -29,7 +31,7 @@ const successMessageHelper = (res: { data: { message: string } }): Message => ({
 
 const errorMessageHelper = (error: {
   response: { data: { message: string } };
-}): Message => ({
+}): MessageDto => ({
   type: "danger",
   title: "失敗",
   text: Array.isArray(error?.response?.data?.message)
@@ -62,7 +64,7 @@ export const messageSlice = createSlice({
 const { setClearMessage, setMessage } = messageSlice.actions;
 
 export const setHandleMessage =
-  (payload: { res: AxiosRejectTypes | AxiosResponse; type: boolean }) =>
+  (payload: { type: boolean; res: AxiosRejectTypes | AxiosResponse }) =>
   (dispatch: AppDispatch) => {
     dispatch(setMessage(payload));
     setTimeout(() => {

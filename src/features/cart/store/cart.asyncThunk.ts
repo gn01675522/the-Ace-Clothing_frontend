@@ -25,7 +25,7 @@ export const fetchCartItemsAsync = createAppAsyncThunk<CartInfoDto, void>(
         `/v2/api/${process.env.APP_API_PATH}/cart`
       )) as APIResponse<FetchCartItemsResDto>;
 
-      return res.data.cart;
+      return res.data.data;
     } catch (e) {
       const error = e as APIRejectResponse;
 

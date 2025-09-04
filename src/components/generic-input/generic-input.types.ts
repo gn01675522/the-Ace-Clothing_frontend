@@ -4,12 +4,12 @@ export enum GENERIC_INPUT_TYPES {
   text = "text",
   number = "number",
   date = "date",
+  email = "email",
+  tel = "tel",
 }
 
 export interface IGenericInput extends ComponentPropsWithRef<"input"> {
-  id: string;
-  title: string;
-  type: GENERIC_INPUT_TYPES;
+  message?: string;
   wrapperClass?: string;
   labelClass?: string;
   inputClass?: string;

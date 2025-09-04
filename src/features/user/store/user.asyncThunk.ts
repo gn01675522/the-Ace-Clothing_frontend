@@ -19,7 +19,7 @@ export const setCurrentUserAsync = createAppAsyncThunk<
 
     document.cookie = `hexToken=${token}; expires=${new Date(expired)};`;
 
-    dispatch(setHandleMessage({ type: "success", res }));
+    dispatch(setHandleMessage({ type: res.data.success, res }));
 
     return res.data.success;
   } catch (e) {
@@ -29,7 +29,9 @@ export const setCurrentUserAsync = createAppAsyncThunk<
       throw e;
     }
 
-    dispatch(setHandleMessage({ type: "error", res: error }));
+    dispatch(
+      setHandleMessage({ type: error.response.data.success, res: error })
+    );
 
     return rejectWithValue(error);
   }

@@ -5,8 +5,6 @@ import { AdminOrderModal } from "../../modules/admin-order-modal/AdminOrderModal
 
 import { useOrderManagementContext } from "../../modules/admin-order-modal/hooks/admin-order-modal.hooks";
 
-import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
-
 import { mockOrderData } from "../../__mocks__/modules.mocks";
 
 jest.mock("../../modules/admin-order-modal/hooks/admin-order-modal.hooks");

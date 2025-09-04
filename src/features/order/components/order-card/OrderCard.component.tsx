@@ -1,61 +1,40 @@
 import { formatNumberWithCommas } from "../../../../utils/common.utils";
 
 import type { FC } from "react";
-import type { UserProductsDto } from "features/product/DTOs/userProduct.dtos";
-import type { AdminCouponDto } from "features/admin-coupon/DTOs/adminCoupon.dtos";
 
 import "./OrderCard.styles.scss";
 
-export type OrderCardProductsType = {
-  id: string;
-  product_id: string;
-  qty: number;
-  coupon: AdminCouponDto;
-  final_total: number;
-  product: UserProductsDto;
-  total: number;
-};
-
 type PropsType = {
-  products: OrderCardProductsType[];
+  imageUrl: string;
+  title: string;
+  qty: number;
+  final_total: number;
 };
 
-export const OrderCard: FC<PropsType> = ({ products }) => {
+export const OrderCard: FC<PropsType> = ({
+  imageUrl,
+  title,
+  qty,
+  final_total,
+}) => {
   return (
     <div className="order-card">
-      <input
-        className="order-card__input"
-        id="order-card__trigger"
-        type="checkbox"
+      <img
+        src={imageUrl}
+        className="order-card__img"
+        alt={`order product: ${title}`}
       />
-      <label htmlFor="order-card__trigger" className="order-card__toggle">
-        <div className="order-card__toggle-triangle"></div>
-        <h2 className="order-card__toggle-title">訂單內容</h2>
-      </label>
-      <div className="order-card__content">
-        {products?.map((item) => {
-          return (
-            <div className="order-card__item" key={item.id}>
-              <img
-                src={item.product.imageUrl}
-                className="order-card__item-img"
-                alt={`order product: ${item.product.title}`}
-              />
-              <div className="order-card__item-info">
-                <div className="d-flex justify-content-between fw-bold">
-                  <p className="mb-0">
-                    {item.product.title}x{item.qty}
-                  </p>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <p className="mb-0">
-                    NT$ {formatNumberWithCommas(Math.round(item.final_total))}
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="order-card__info">
+        <div className="d-flex justify-content-between fw-bold">
+          <p className="mb-0">
+            {title} x {qty}
+          </p>
+        </div>
+        <div className="d-flex justify-content-between">
+          <p className="mb-0">
+            NT$ {formatNumberWithCommas(Math.round(final_total))}
+          </p>
+        </div>
       </div>
     </div>
   );

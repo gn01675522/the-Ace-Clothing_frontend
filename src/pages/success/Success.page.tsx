@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { useParams, Link } from "react-router-dom";
 
 import { OrderCard, SummaryCard } from "../../features/order/index";
+import { ToggleList } from "../../components/index";
 
 import { ProductCard } from "../../features/product/index";
 
@@ -38,6 +39,16 @@ const Success: FC = () => {
   const wishlist = useAppSelector(selectUserFavorite);
   const recommendProducts = useAppSelector(selectRecommendProducts);
 
+  const productInOrder = userData?.products || {};
+  const productList = Object.values(productInOrder).map((item) => ({
+    id: item.product.id,
+    imageUrl: item.product.imageUrl,
+    title: item.product.title,
+    qty: item.qty,
+    final_total: item.final_total,
+  }));
+  console.log(productList);
+
   const clearOrderState = () => {
     dispatch(setClearUserOrderState());
   };
@@ -61,7 +72,7 @@ const Success: FC = () => {
     <div className="success">
       <div className="success__order-detail">
         <h1 className="success__order-detail-title">訂購完成</h1>
-        <SummaryCard total={totalPrice!} userData={userData!} />
+        <SummaryCard final_total={totalPrice!} userData={userData!} />
         <div className="success__actions">
           <Link
             to="/"
@@ -71,7 +82,11 @@ const Success: FC = () => {
             返回首頁
           </Link>
         </div>
-        <OrderCard products={products!} />
+        <ToggleList title="訂單內容">
+          {productList.map((product) => (
+            <OrderCard key={product.id} {...product} />
+          ))}
+        </ToggleList>
       </div>
       <div className="success__recommend">
         <h2 className="success__recommend-title">您或許還想買</h2>
