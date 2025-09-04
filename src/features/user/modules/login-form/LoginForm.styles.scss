@@ -1,0 +1,18 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &-label {
+      font-size: 12px;
+    }
+    &-email,
+    &-password {
+      width: 300px;
+      height: 40px;
+    }
+  }
+}

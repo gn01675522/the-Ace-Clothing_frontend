@@ -6,6 +6,7 @@ export enum GENERIC_INPUT_TYPES {
   date = "date",
   email = "email",
   tel = "tel",
+  password = "password",
 }
 
 export interface IGenericInput extends ComponentPropsWithRef<"input"> {

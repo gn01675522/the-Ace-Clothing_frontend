@@ -13,7 +13,7 @@ import { setUserFavorite } from "../../features/user/store/user.slice";
 import { selectUserProducts } from "../../features/product/index";
 
 import type { FC, FormEvent, ChangeEvent } from "react";
-import type { Product } from "../../features/product/DTOs/userProduct.dtos";
+import type { UserProductsDto } from "../../features/product/DTOs/userProduct.dtos";
 
 import "./Member.styles.scss";
 
@@ -38,7 +38,7 @@ const Member: FC = () => {
       acc.push(product);
     }
     return acc;
-  }, [] as Product[]);
+  }, [] as UserProductsDto[]);
 
   const onSearchOrder = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

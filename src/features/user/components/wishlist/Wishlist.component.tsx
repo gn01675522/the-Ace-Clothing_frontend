@@ -22,7 +22,10 @@ type PropsType = {
   onClickToRemoveFavorite: (id: string) => void;
 };
 
-const Wishlist: FC<PropsType> = ({ wishlist, onClickToRemoveFavorite }) => {
+export const Wishlist: FC<PropsType> = ({
+  wishlist,
+  onClickToRemoveFavorite,
+}) => {
   const cartItems = useAppSelector(selectCartItems);
   const isLoading = useAppSelector(selectCartIsLoading);
   const dispatch = useAppDispatch();
@@ -95,5 +98,3 @@ const Wishlist: FC<PropsType> = ({ wishlist, onClickToRemoveFavorite }) => {
     </div>
   );
 };
-
-export default Wishlist;
