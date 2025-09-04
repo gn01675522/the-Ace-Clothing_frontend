@@ -1,5 +1,4 @@
 import type { UserBasicInfo } from "../../../shared/types/interface";
-import type { AdminCouponDto } from "features/admin-coupon/DTOs/adminCoupon.dtos";
 import type { UserProductsDto } from "features/product/DTOs/userProduct.dtos";
 import type { APIResponseWithoutData } from "../../../shared/types/interface";
 

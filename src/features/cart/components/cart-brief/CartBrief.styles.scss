@@ -1,0 +1,14 @@
+@use "../../../../stylesheets/variables";
+
+.cart-brief {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+  border: 1px variables.$line-secondary-line;
+  background-color: variables.$color-primary-bg;
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+}

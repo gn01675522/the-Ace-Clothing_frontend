@@ -7,6 +7,8 @@ import { classifyAdminProducts } from "../../store/admin/adminProduct.selector";
 
 import type { Dispatch, FC, SetStateAction } from "react";
 
+import "./AdminProductPagination.styles.scss";
+
 type PropsType = {
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
@@ -25,7 +27,7 @@ export const AdminProductPagination: FC<PropsType> = ({
   const onChangePage = (page: number) => setCurrentPage(page);
 
   return (
-    <div className="admin-products__function">
+    <div className="admin-products-pagination">
       <Pagination
         onChangePage={onChangePage}
         pageCount={pageCount}

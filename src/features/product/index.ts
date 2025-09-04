@@ -3,6 +3,7 @@ export * from "./modules/admin-product-table/AdminProductTable.module";
 export * from "./modules/admin-product-pagination/AdminProductPagination.module";
 
 export * from "./components/product-card/ProductCard.component";
+export * from "./components/product-card-mini/ProductCardMini.component";
 
 export * from "./hooks/admin-products.hooks";
 

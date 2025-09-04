@@ -6,13 +6,14 @@ import {
   useDetectWishlistChange,
 } from "../../hooks/marketing.hooks";
 
+import { ProductCardMini } from "../../../product/index";
+
 import {
   Button,
   BUTTON_TYPE_CLASS,
   LeftArrowSVGIcon,
   RightArrowSVGIcon,
 } from "../../../../components/index";
-import { ScrollItem } from "../../components/scroll-item/ScrollItem.component";
 
 import { selectUserFavorite } from "../../../user/index";
 
@@ -75,7 +76,7 @@ export const ScrollList: FC<PropsType> = ({ type }) => {
                 style={{ width: `${setWidthByListContainer}px` }}
                 key={product.id}
               >
-                <ScrollItem
+                <ProductCardMini
                   product={product}
                   urlParam={category}
                   isDragging={draggingProgress}

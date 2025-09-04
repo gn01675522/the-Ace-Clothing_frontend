@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 import { Link } from "react-router-dom";
 
@@ -12,7 +11,7 @@ import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 
 import type { FC, MouseEvent } from "react";
 
-import "./ScrollItem.styles.scss";
+import "./ProductCardMini.styles.scss";
 
 type PropsType = {
   product: any;
@@ -21,7 +20,7 @@ type PropsType = {
   isFavorite: boolean;
 };
 
-export const ScrollItem: FC<PropsType> = ({
+export const ProductCardMini: FC<PropsType> = ({
   product,
   urlParam,
   isDragging,
@@ -48,32 +47,34 @@ export const ScrollItem: FC<PropsType> = ({
   return (
     <Link
       to={`/${urlParam}/${id}`}
-      className={`scroll-item scroll-item${isDragging ? "--dragging" : ""}`}
+      className={`product-card-mini product-card-mini${
+        isDragging ? "--dragging" : ""
+      }`}
       draggable="false"
     >
-      <div className="scroll-item__preview">
+      <div className="product-card-mini__preview">
         <img
           src={imageUrl}
-          className="scroll-item__preview-img"
+          className="product-card-mini__preview-img"
           alt={`product in urlParam:${title}`}
         />
       </div>
-      <div className="scroll-item__info">
-        <h4 className="scroll-item__info-title">{title}</h4>
+      <div className="product-card-mini__info">
+        <h4 className="product-card-mini__info-title">{title}</h4>
         <div
-          className="scroll-item__info-wrapper"
+          className="product-card-mini__info-wrapper"
           onClick={(e) =>
             isFavorite ? onRemoveFavorite(e, id) : onAddFavorite(e, id)
           }
         >
           {isFavorite ? (
-            <RedHeartSVGIcon className="scroll-item__info-favorite" />
+            <RedHeartSVGIcon className="product-card-mini__info-favorite" />
           ) : (
-            <WhiteHeartSVGIcon className="scroll-item__info-favorite" />
+            <WhiteHeartSVGIcon className="product-card-mini__info-favorite" />
           )}
         </div>
       </div>
-      <div className="scroll-item__price">
+      <div className="product-card-mini__price">
         <PriceTag origin_price={origin_price} price={price} />
       </div>
     </Link>

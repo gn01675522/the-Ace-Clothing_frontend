@@ -16,6 +16,8 @@ import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 import type { FC } from "react";
 import type { AdminProductDto } from "../../DTOs/adminProduct.dtos";
 
+import "./AdminProductTable.styles.scss";
+
 const tableColumns = [
   { header: "分類", accessor: "category" },
   { header: "名稱", accessor: "title" },
@@ -56,7 +58,7 @@ export const AdminProductTable: FC<PropsType> = ({
 
   return (
     <>
-      <div className="admin-products__actions">
+      <div className="admin-product-table">
         <Button
           type="button"
           buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
