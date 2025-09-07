@@ -1,0 +1,46 @@
+@use "../../../../../../stylesheets/variables";
+@use "../../../../../../stylesheets/mixin";
+
+.product-info-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  &__content {
+    line-height: 1.5rem;
+  }
+  &__material {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px variables.$line-secondary-line;
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px variables.$line-primary-line;
+      &-title {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 1.5rem;
+        padding-bottom: 1rem;
+      }
+    }
+  }
+
+  &__info {
+    &-item {
+      margin-left: 18px;
+      line-height: 1.5rem;
+      list-style-type: disc;
+      list-style-position: outside;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    &__info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

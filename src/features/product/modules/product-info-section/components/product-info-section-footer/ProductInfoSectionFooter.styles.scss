@@ -1,0 +1,44 @@
+@use "../../../../../../stylesheets/variables";
+
+.product-info-section-footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  height: min-content;
+  &__alert {
+    font-size: 8px;
+    color: variables.$color-fourth-text;
+  }
+
+  &__quantity {
+    display: flex;
+    width: 100%;
+    border: 1px variables.$line-fifth;
+    border-radius: 4px;
+    justify-content: space-between;
+    button {
+      width: 50px;
+    }
+  }
+  &__input {
+    width: calc(100% - 100px);
+    border: none;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__favorite {
+    width: 20px;
+    height: 20px;
+    color: black;
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
+}

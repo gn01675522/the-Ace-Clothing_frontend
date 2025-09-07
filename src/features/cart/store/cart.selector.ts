@@ -33,3 +33,8 @@ export const selectCartItemsQuantity = createSelector(
   [selectCartItems],
   (cart) => cart.carts.length
 );
+
+export const selectCartItemById = (product_id: string) =>
+  createSelector([selectCartItems], (cart) =>
+    cart.carts.find((item) => item.product_id === product_id)
+  );
