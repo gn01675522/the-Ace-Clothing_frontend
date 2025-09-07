@@ -10,25 +10,21 @@ import {
 import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 
 import type { FC, MouseEvent } from "react";
-import type { Product } from "../../DTOs/userProduct.dtos";
+import type { UserProductsDto } from "../../DTOs/userProduct.dtos";
 import type { PRODUCT_CATEGORIES } from "../../../../shared/types";
 
 import "./ProductCard.styles.scss";
 
 type PropsType = {
-  product: Product;
+  product: UserProductsDto;
   urlParam: PRODUCT_CATEGORIES;
-  isFavorite: boolean;
 };
 
-export const ProductCard: FC<PropsType> = ({
-  product,
-  urlParam,
-  isFavorite,
-}) => {
+export const ProductCard: FC<PropsType> = ({ product, urlParam }) => {
   const dispatch = useAppDispatch();
 
   const wishlist = useAppSelector(selectUserFavorite);
+  const isFavorite = wishlist.includes(product.id);
 
   const { id, imageUrl, title, origin_price, price } = product;
 
