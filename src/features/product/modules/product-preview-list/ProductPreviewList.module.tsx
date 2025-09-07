@@ -24,13 +24,7 @@ export const ProductPreviewList: FC = () => {
     <>
       <div className="products-preview-list">
         {productsPerPage.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              urlParam={category as PRODUCT_CATEGORIES}
-            />
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
       </div>
       <nav className="products-preview-list__pagination">

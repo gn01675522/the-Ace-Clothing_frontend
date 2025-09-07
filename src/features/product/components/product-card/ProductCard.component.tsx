@@ -17,16 +17,17 @@ import "./ProductCard.styles.scss";
 
 type PropsType = {
   product: UserProductsDto;
-  urlParam: PRODUCT_CATEGORIES;
 };
 
-export const ProductCard: FC<PropsType> = ({ product, urlParam }) => {
+export const ProductCard: FC<PropsType> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const wishlist = useAppSelector(selectUserFavorite);
   const isFavorite = wishlist.includes(product.id);
 
-  const { id, imageUrl, title, origin_price, price } = product;
+  const { id, imageUrl, title, origin_price, price, category } = product;
+
+  const productCategory = category.split("-")[0];
 
   const onAddFavorite = (e: MouseEvent<HTMLDivElement>, id: string) => {
     e.stopPropagation();
@@ -43,12 +44,12 @@ export const ProductCard: FC<PropsType> = ({ product, urlParam }) => {
   };
 
   return (
-    <Link to={`/${urlParam}/${id}`} className="products-card">
+    <Link to={`/${productCategory}/${id}`} className="products-card">
       <div className="products-card__preview">
         <img
           src={imageUrl}
           className="products-card__img"
-          alt={`product in ${urlParam}: ${title}`}
+          alt={`product in ${productCategory}: ${title}`}
         />
       </div>
       <div className="products-card__content">
