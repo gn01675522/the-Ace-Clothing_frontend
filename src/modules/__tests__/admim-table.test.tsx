@@ -1,7 +1,7 @@
 import { screen, render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { AdminTable } from "../admin-table/AdminTable.module";
+import { GenericTable } from "../generic-table/GenericTable.module";
 
 import {
   mockTableData,
@@ -9,14 +9,14 @@ import {
   type mockTableDataTypes,
 } from "../__mocks__/mocks";
 
-describe("Admin Table test suite.", () => {
+describe("Generic Table test suite.", () => {
   test("Calls onClickToEdit and onClickToDelete when edit and delete buttons are clicked.", async () => {
     const onClickToEdit = jest.fn((arg) => arg);
     const onClickToDelete = jest.fn((arg) => arg);
     const user = userEvent.setup();
 
     render(
-      <AdminTable<mockTableDataTypes>
+      <GenericTable<mockTableDataTypes>
         data={mockTableData}
         columns={mockColumns}
         onClickToEditHandler={onClickToEdit}
@@ -42,7 +42,7 @@ describe("Admin Table test suite.", () => {
 
   test("Renders all headers correctly using test data.", () => {
     render(
-      <AdminTable<mockTableDataTypes>
+      <GenericTable<mockTableDataTypes>
         data={mockTableData}
         columns={mockColumns}
         onClickToEditHandler={jest.fn()}
@@ -57,7 +57,7 @@ describe("Admin Table test suite.", () => {
 
   test("Renders all data rows correctly using test data.", () => {
     render(
-      <AdminTable<mockTableDataTypes>
+      <GenericTable<mockTableDataTypes>
         data={mockTableData}
         columns={mockColumns}
         onClickToEditHandler={jest.fn()}

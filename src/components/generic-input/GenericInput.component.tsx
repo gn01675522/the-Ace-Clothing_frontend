@@ -12,15 +12,9 @@ export const GenericInput: FC<IGenericInput> = ({
   inputClass,
   ...props
 }) => {
-  const combinedWrapperClasses = `generic-input ${
-    wrapperClass ? wrapperClass : ""
-  }`;
-  const combinedLabelClasses = `generic-input__label ${
-    labelClass ? labelClass : ""
-  }`;
-  const combinedInputClasses = `generic-input__input ${
-    inputClass ? inputClass : ""
-  }`;
+  const combinedWrapperClasses = `generic-input ${wrapperClass ?? ""}`;
+  const combinedLabelClasses = `generic-input__label ${labelClass ?? ""}`;
+  const combinedInputClasses = `generic-input__input ${inputClass ?? ""}`;
   const combinedMessageClasses = `generic-input__msg`;
 
   return (

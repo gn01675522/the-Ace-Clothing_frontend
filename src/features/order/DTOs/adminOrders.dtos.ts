@@ -1,5 +1,5 @@
 import type { AdminCouponDto } from "../../admin-coupon/index";
-import type { UserProducts } from "../../product/DTOs/userProduct.dtos";
+import type { UserProductsDto } from "../../product/DTOs/userProduct.dtos";
 import type { APIResponseWithoutData } from "../../../shared/types";
 
 export interface AdminOrderDto {
@@ -15,7 +15,7 @@ export interface AdminOrderDto {
       qty: number;
       coupon: AdminCouponDto;
       final_total: number;
-      product: UserProducts;
+      product: UserProductsDto;
       total: number;
     }
   ];

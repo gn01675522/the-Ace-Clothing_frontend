@@ -1,0 +1,15 @@
+@use "../../../../stylesheets/variables";
+
+.data-table-row {
+  height: 45px;
+  td {
+    outline: 1px variables.$line-primary-line;
+    text-align: center;
+  }
+  &:nth-child(even) {
+    background-color: variables.$color-fourth-bg;
+    button {
+      background-color: transparent;
+    }
+  }
+}

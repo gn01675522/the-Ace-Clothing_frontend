@@ -21,6 +21,7 @@ export const LoginForm: FC = () => {
     <form className="login-form">
       <GenericInput
         {...email}
+        value={data.username}
         onChange={handleChange}
         wrapperClass="login-form__item"
         labelClass="login-form__item-label"
@@ -28,6 +29,7 @@ export const LoginForm: FC = () => {
       />
       <GenericInput
         {...passward}
+        value={data.password}
         onChange={handleChange}
         wrapperClass="login-form__item"
         labelClass="login-form__item-label"

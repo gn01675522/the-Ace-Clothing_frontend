@@ -22,7 +22,7 @@ export const useLoginFormControl = () => {
   //* 取得 user 輸入資料
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   //* 點選登入後，使用 redux 來登入

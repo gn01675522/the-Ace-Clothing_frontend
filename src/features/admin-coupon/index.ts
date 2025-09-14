@@ -1,6 +1,5 @@
 export * from "./modules/admin-coupon-modal/AdminCouponModal.module";
 export * from "./modules/admin-coupon-table/AdminCouponTable.module";
-export * from "./modules/admin-coupon-pagination/AdminCouponPagination.module";
 
 export * from "./hooks/admin-coupon.hooks";
 

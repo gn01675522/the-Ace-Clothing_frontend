@@ -1,4 +1,4 @@
-import { Pagination } from "../../../../modules/index";
+import { Pagination } from "../../../../components/index";
 import { ProductCard } from "../../components/product-card/ProductCard.component";
 
 import {

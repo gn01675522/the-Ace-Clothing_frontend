@@ -4,7 +4,7 @@ export const loginFormConfig = {
   email: {
     id: "email",
     title: "帳號",
-    name: GENERIC_INPUT_TYPES.email,
+    name: "username",
     type: GENERIC_INPUT_TYPES.email,
     placeholder: "請輸入電子信箱",
     autoComplete: "username",
@@ -13,7 +13,7 @@ export const loginFormConfig = {
   passward: {
     id: "password",
     title: "密碼",
-    name: GENERIC_INPUT_TYPES.password,
+    name: "password",
     type: GENERIC_INPUT_TYPES.password,
     placeholder: "請輸入密碼",
     autoComplete: "current-password",

@@ -1,0 +1,24 @@
+@use "../../stylesheets/variables";
+
+.table {
+  width: 100%;
+  height: min-content;
+  background-color: variables.$color-primary-bg;
+}
+
+.table-row {
+  height: 45px;
+  &:nth-child(even) {
+    background-color: variables.$color-fourth-bg;
+    button {
+      background-color: transparent;
+    }
+  }
+}
+
+.table-cell {
+  height: 100%;
+  line-height: 100%;
+  text-align: center;
+  outline: 1px variables.$line-primary-line;
+}

@@ -1,6 +1,3 @@
 export * from "./delete-modal/DeleteModal.module";
 export * from "./delete-modal/hooks/delete-modal.hooks";
-
-export * from "./admin-table/AdminTable.module";
-
-export * from "./pagination/Pagination.component";
+export * from "./data-table/DataTable.module";

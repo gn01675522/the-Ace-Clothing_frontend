@@ -11,14 +11,10 @@ export const GenericTextarea: FC<IGenericTextarea> = ({
   textareaClass,
   ...props
 }) => {
-  const combinedWrapperClasses = `generic-textarea ${
-    wrapperClass ? wrapperClass : ""
-  }`;
-  const combinedLabelClasses = `generic-textarea__label ${
-    labelClass ? labelClass : ""
-  }`;
+  const combinedWrapperClasses = `generic-textarea ${wrapperClass ?? ""}`;
+  const combinedLabelClasses = `generic-textarea__label ${labelClass ?? ""}`;
   const combinedTextareaClasses = `generic-textarea__textarea ${
-    textareaClass ? textareaClass : ""
+    textareaClass ?? ""
   }`;
 
   return (

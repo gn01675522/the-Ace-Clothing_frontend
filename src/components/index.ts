@@ -9,8 +9,9 @@ export * from "./generic-input/GenericInput.component";
 export * from "./generic-textarea/GenericTextarea.component";
 export * from "./toggle-switch/ToggleSwitch.component";
 export * from "./toggle-list/ToggleList.component";
-
+export * from "./pagination/Pagination.component";
 export * from "./generic-input/generic-input.types";
+export * from "./table/Table.components";
 
 export * from "./SVG-icons/AceSVGIcon.component";
 export * from "./SVG-icons/CartSVGIcon.component";

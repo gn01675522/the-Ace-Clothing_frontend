@@ -1,12 +1,16 @@
 import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
 
 import { Button, BUTTON_TYPE_CLASS } from "../../../../components";
-import { AdminTable } from "../../../../modules";
+import { DataTable } from "../../../../modules";
 
 import { setCouponEditModalOpenAndSetting } from "../../store/admin-coupon.slice";
-import { selectAdminCoupons } from "../../store/admin-coupon.selector";
+import { fetchAdminCouponsAsync } from "../../store/admin-coupon.asyncThunk";
+import {
+  selectAdminCoupons,
+  selectAdminCouponsPagination,
+} from "../../store/admin-coupon.selector";
 
-import { adminCouponTableColumn } from "./config/admin-coupon-table.config";
+import { adminCouponTableConfig } from "./config/admin-coupon-table.config";
 import { FORM_OPERATION_OPTIONS } from "../../../../shared/types";
 
 import type { FC } from "react";
@@ -20,6 +24,7 @@ type PropsType = {
 
 export const AdminCouponTable: FC<PropsType> = ({ onClickDeleteHandler }) => {
   const coupons = useAppSelector(selectAdminCoupons);
+  const pagination = useAppSelector(selectAdminCouponsPagination);
 
   const dispatch = useAppDispatch();
 
@@ -39,6 +44,18 @@ export const AdminCouponTable: FC<PropsType> = ({ onClickDeleteHandler }) => {
       })
     );
 
+  const paginationAction = {
+    currentPage: pagination?.current_page || 1,
+    pageCount: pagination?.total_pages || 1,
+    onChangePage: (page: number) => dispatch(fetchAdminCouponsAsync(page)),
+  };
+
+  const tableConfig = adminCouponTableConfig({
+    couponData: coupons,
+    onClickToEditHandler,
+    onClickToDeleteHandler: onClickDeleteHandler,
+  });
+
   return (
     <>
       <div className="admin-coupon-table-content">
@@ -50,11 +67,9 @@ export const AdminCouponTable: FC<PropsType> = ({ onClickDeleteHandler }) => {
           建立新優惠券
         </Button>
       </div>
-      <AdminTable<AdminCouponDto>
-        data={coupons}
-        columns={adminCouponTableColumn}
-        onClickToDeleteHandler={onClickDeleteHandler}
-        onClickToEditHandler={onClickToEditHandler}
+      <DataTable
+        config={tableConfig}
+        actionControl={{ pagination: paginationAction }}
       />
     </>
   );

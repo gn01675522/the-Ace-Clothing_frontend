@@ -1,5 +1,4 @@
 export * from "./modules/admin-order-modal/AdminOrderModal.module";
-export * from "./modules/admin-order-pagination/AdminOrderPagination.module";
 export * from "./modules/admin-order-table/AdminOrderTable.module";
 export * from "./modules/checkout-form/CheckoutForm.module";
 

@@ -1,0 +1,14 @@
+@use "../../stylesheets/variables";
+
+.data-table__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.data-table {
+  width: 100%;
+  height: min-content;
+  background-color: variables.$color-primary-bg;
+}

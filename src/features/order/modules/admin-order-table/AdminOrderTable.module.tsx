@@ -1,19 +1,20 @@
-import { useAppDispatch, useAppSelector } from "../../../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "@/store/redux-hooks";
 
-import { AdminTable } from "../../../../modules";
+import { DataTable } from "@/modules/index";
 
 import { setOrderEditModalOpenAndSetting } from "../../store/admin/adminOrder.slice";
-import { selectAdminOrders } from "../../store/admin/adminOrder.selector";
+import { fetchAdminOrdersAsync } from "../../store/admin/adminOrder.asyncThunk";
+import {
+  selectAdminOrders,
+  selectAdminOrdersPagination,
+} from "../../store/admin/adminOrder.selector";
+
+import { adminOrderTableConfig } from "./config/admin-order-table.config";
 
 import type { FC } from "react";
 import type { AdminOrderDto } from "../../DTOs/adminOrders.dtos";
 
-const tableColumns = [
-  { header: "訂單 ID", accessor: "id" },
-  { header: "用戶信箱", accessor: "email" },
-  { header: "訂單金額", accessor: "total" },
-  { header: "付款狀態", accessor: "is_paid" },
-] as { header: string; accessor: keyof AdminOrderDto }[];
+import "./AdminOrderTable.styles.scss";
 
 type PropsType = {
   onClickToOpenDeleteModal: (order: AdminOrderDto) => void;
@@ -23,24 +24,31 @@ export const AdminOrderTable: FC<PropsType> = ({
   onClickToOpenDeleteModal,
 }) => {
   const orders = useAppSelector(selectAdminOrders);
+  const pagination = useAppSelector(selectAdminOrdersPagination);
+
   const dispatch = useAppDispatch();
 
-  const orderForTable = orders.map((order) => ({
-    ...order,
-    email: order.user.email,
-  }));
+  const paginationAction = {
+    currentPage: pagination?.current_page || 1,
+    pageCount: pagination?.total_pages || 1,
+    onChangePage: (page: number) => dispatch(fetchAdminOrdersAsync(page)),
+  };
 
   const onClickToOpenModal = (order: AdminOrderDto) => {
     dispatch(setOrderEditModalOpenAndSetting(order));
   };
 
+  const tableConfig = adminOrderTableConfig({
+    orderData: orders,
+    onClickToDeleteHandler: onClickToOpenDeleteModal,
+    onClickToEditHandler: onClickToOpenModal,
+  });
+
   return (
     <div className="admin-orders-table">
-      <AdminTable<AdminOrderDto>
-        data={orderForTable}
-        columns={tableColumns}
-        onClickToEditHandler={onClickToOpenModal}
-        onClickToDeleteHandler={onClickToOpenDeleteModal}
+      <DataTable
+        config={tableConfig}
+        actionControl={{ pagination: paginationAction }}
       />
     </div>
   );
