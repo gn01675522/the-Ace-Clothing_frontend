@@ -1,0 +1,61 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.product-card-mini {
+  width: 100%;
+  height: 350px;
+  &--dragging {
+    pointer-events: none;
+  }
+  &:hover > &__preview > &__preview-img {
+    @include mixin.img-cubic-transition;
+  }
+  &__preview {
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    &-img {
+      width: inherit;
+      height: 100%;
+      @include mixin.img-cover-center;
+      pointer-events: none;
+    }
+  }
+  &__info {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    color: variables.$color-primary-text;
+    &-title {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+    &-favorite {
+      width: 20px;
+      height: 20px;
+      color: black;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+  &__price {
+    display: flex;
+    font-weight: lighter;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    &-sale {
+      color: variables.$color-fourth-text;
+    }
+  }
+}

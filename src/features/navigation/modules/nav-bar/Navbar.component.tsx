@@ -2,6 +2,7 @@ import {
   useDropdownControl,
   useFetchCartItems,
 } from "../../hooks/navigation.hooks";
+import { NavList } from "../../components/nav-list/NavList.component";
 
 import { Hamburger } from "../../components/hamburger/Hamburger.component";
 import { DropdownList } from "../../components/dropdown-list/DropdownList.component";
@@ -13,15 +14,11 @@ import type { FC } from "react";
 
 import "./Navbar.styles.scss";
 
-const navOption = [
-  { title: "男裝", link: "/mens" },
-  { title: "女裝", link: "/womens" },
-  { title: "鞋子", link: "/shoes" },
-  { title: "帽子", link: "/hats" },
-  { title: "飾品", link: "/accessories" },
-];
+type PropsType = {
+  navOption: { id: string; title: string; link: string }[];
+};
 
-export const NavBar: FC = () => {
+export const NavBar: FC<PropsType> = ({ navOption }) => {
   const { isDropdownOpen, dropdownRef, onClickIsDropdownOpen } =
     useDropdownControl();
 
@@ -30,6 +27,11 @@ export const NavBar: FC = () => {
   return (
     <nav className="navbar">
       <NavLogo />
+      <NavList
+        navOption={navOption}
+        axisDirection="x"
+        containerClass="navbar__nav-list"
+      />
       <DropdownList
         list={navOption}
         isDropdown={isDropdownOpen}

@@ -1,4 +1,5 @@
 import { useOrderManagementContext } from "../../hooks/admin-order-modal.hooks";
+import { ToggleList } from "../../../../../../components/index";
 
 import { OrderCard } from "../../../../components/order-card/OrderCard.component";
 
@@ -15,7 +16,11 @@ export const AdminOrderModalList: FC = () => {
     <div className="admin-order-modal-list">
       {targetData?.products && (
         <>
-          <OrderCard products={Object.values(targetData.products)} />
+          <ToggleList title="訂單內容">
+            {Object.values(targetData.products).map((product) => (
+              <OrderCard key={product.id} {...product.product} />
+            ))}
+          </ToggleList>
           <div className="admin-order-modal-list__total">
             <div className="admin-order-modal-list__total-title">總金額：</div>
             <div className="admin-order-modal-list__total-price">

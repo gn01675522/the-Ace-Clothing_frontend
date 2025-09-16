@@ -8,15 +8,12 @@ import { mockSummaryInfoData } from "../../__mocks__/components.mocks";
 
 describe("SummaryCard test suite.", () => {
   test("Should render correctly when every props has data.", () => {
-    render(
-      <SummaryCard
-        total={mockSummaryInfoData.total}
-        userData={mockSummaryInfoData.userData}
-      />
-    );
+    render(<SummaryCard {...mockSummaryInfoData} />);
 
     const totalPriceElement = screen.getAllByText(
-      `NT$ ${formatNumberWithCommas(Math.round(mockSummaryInfoData.total))}`
+      `NT$ ${formatNumberWithCommas(
+        Math.round(mockSummaryInfoData.final_total)
+      )}`
     );
     const nameElement = screen.getByText(
       mockSummaryInfoData.userData.user.name

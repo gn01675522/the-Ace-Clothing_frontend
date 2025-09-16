@@ -1,0 +1,35 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.discount-banner {
+  width: 100%;
+  padding: 0 1rem;
+  &__content {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    padding: 1rem;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    background-color: variables.$color-eight-bg;
+  }
+  h2 {
+    line-height: 3rem;
+    font-size: 36px;
+    font-weight: bold;
+  }
+  p {
+    line-height: 1.5rem;
+    font-size: 1rem;
+  }
+
+  @include mixin.normalBreakPoint(large) {
+    padding: 0 7rem;
+    &-content {
+      h2 {
+        font-size: 60px;
+      }
+    }
+  }
+}

@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDeleteModalControl } from "../../modules/index";
 
-import { useAdminProductStateFetch } from "../../features/product/index";
+import {
+  DeleteModal,
+  DELETE_MODAL_TYPE,
+  useDeleteModalControl,
+} from "@/modules/index";
 
-import { Loading } from "../../components/index";
+import { Loading } from "@/components/index";
 
 import {
   AdminProductModal,
   AdminProductTable,
-  AdminProductPagination,
-} from "../../features/product/index";
-
-import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
+  useAdminProductStateFetch,
+  type AdminProductDto,
+} from "@/features/product/index";
 
 import type { FC } from "react";
-import type { AdminProductDto } from "../../features/product/DTOs/adminProduct.dtos";
 
 import "./AdminProducts.styles.scss";
 
@@ -56,9 +57,6 @@ const AdminProducts: FC = () => {
       </h3>
       <AdminProductTable
         onClickDeleteHandler={onClickToDeleteProductHandler}
-        currentPage={currentPage}
-      />
-      <AdminProductPagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

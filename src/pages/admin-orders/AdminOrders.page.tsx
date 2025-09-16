@@ -1,19 +1,17 @@
-import { useDeleteModalControl } from "../../modules";
+import {
+  DeleteModal,
+  DELETE_MODAL_TYPE,
+  useDeleteModalControl,
+} from "@/modules";
 
-import { Loading } from "../../components";
-
-import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules";
+import { Loading } from "@/components";
 
 import {
   useAdminOrderStateFetch,
   AdminOrderModal,
-} from "../../features/order/index";
-
-import {
-  AdminOrderPagination,
   AdminOrderTable,
   type AdminOrderDto,
-} from "../../features/order/index";
+} from "@/features/order/index";
 
 import type { FC } from "react";
 
@@ -48,8 +46,6 @@ const AdminOrders: FC = () => {
       )}
       <h3 className="admin-orders__title">訂單列表</h3>
       <AdminOrderTable onClickToOpenDeleteModal={onClickToOpenDeleteModal} />
-
-      <AdminOrderPagination />
     </div>
   );
 };

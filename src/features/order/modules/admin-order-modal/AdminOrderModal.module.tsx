@@ -10,10 +10,10 @@ import { AdminOrderModalDetails } from "./components/admin-order-modal-details/A
 import type { FC, MouseEvent } from "react";
 
 const AdminOrderModalContent: FC = () => {
-  const { closeModalAndClearForm } = useOrderManagementContext();
+  const { onCloseHandler } = useOrderManagementContext();
 
   const onClickToClose = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) closeModalAndClearForm();
+    if (e.target === e.currentTarget) onCloseHandler();
   };
 
   return (

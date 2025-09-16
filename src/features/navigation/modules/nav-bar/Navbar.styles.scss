@@ -14,15 +14,20 @@
   align-items: center;
   z-index: 1000;
   @include mixin.shadow;
-
   @include mixin.normalBreakPoint(medium) {
     padding: 0 4rem;
+  }
+  &__nav-list {
+    display: none;
   }
 
   @include mixin.normalBreakPoint(large) {
     padding: 0 7rem;
     &__home-logo {
       margin-right: 1rem;
+    }
+    &__nav-list {
+      display: flex;
     }
   }
 }

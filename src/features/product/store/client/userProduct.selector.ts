@@ -26,13 +26,13 @@ export const selectUserProductIsLoading = createSelector(
 );
 
 //* 針對 api 產品資料裡 category 來做出拆分的工廠函式
-const classifyUserProducts = (category: PRODUCT_CATEGORIES) =>
+export const classifyUserProducts = (category: PRODUCT_CATEGORIES) =>
   createSelector([selectUserProducts], (products) =>
     products.filter((product) => product.category.split("-")[0] === category)
   );
 
 //* 針對 api 產品資料裡在名稱前面有設定風格類別的產品進行拆分
-const classifyProductsStyle = (style: "Urban" | "Bohemian") =>
+export const classifyProductsStyle = (style: "Urban" | "Bohemian") =>
   createSelector([selectUserProducts], (products) =>
     products.filter((product) => product.title.split(" ")[0] === style)
   );

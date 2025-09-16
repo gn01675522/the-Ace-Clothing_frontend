@@ -28,7 +28,7 @@ export const selectUserOrderProducts = createSelector(
   [selectUserSingleOrder],
   (orderData) => {
     if (orderData?.products) return Object.values(orderData?.products);
-    else return null;
+    else return [];
   }
 );
 

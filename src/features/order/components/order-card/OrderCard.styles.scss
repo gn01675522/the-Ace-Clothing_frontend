@@ -4,65 +4,17 @@
 .order-card {
   display: flex;
   width: 100%;
-  flex-direction: column;
-  gap: 1rem;
-  &__input {
-    display: none;
+  padding: 1rem;
+  gap: 10px;
+  background-color: variables.$color-primary-bg;
+  &__img {
+    width: 100px;
+    height: 100px;
+    @include mixin.img-cover-center;
   }
-  &__input:checked ~ &__content {
+  &__info {
     display: flex;
-  }
-  &__input:checked ~ &__toggle &__toggle-triangle {
-    border-width: 0 8px 12px 8px;
-    border-color: transparent transparent variables.$color-primary-bg
-      transparent;
-  }
-  &__toggle {
-    display: flex;
-    position: relative;
-    background-color: variables.$color-secondary-bg;
-    gap: 1rem;
-    padding: 12px;
-    justify-content: center;
-    cursor: pointer;
-    &-triangle {
-      position: absolute;
-      border-style: solid;
-      border-width: 12px 8px 0 8px;
-      border-color: variables.$color-primary-bg transparent transparent
-        transparent;
-      top: 14px;
-      left: 12px;
-    }
-    &-title {
-      font-size: 1rem;
-      color: variables.$color-secondary-text;
-      font-weight: bold;
-      text-align: center;
-    }
-  }
-
-  &__content {
-    display: none;
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-  &__item {
-    display: flex;
-    width: 100%;
-    padding: 1rem;
-    gap: 10px;
-    background-color: variables.$color-primary-bg;
-    &-img {
-      width: 100px;
-      height: 100px;
-      @include mixin.img-cover-center;
-    }
-    &-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    justify-content: center;
   }
 }

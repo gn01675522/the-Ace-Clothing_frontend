@@ -1,0 +1,52 @@
+@use "../../../../../../stylesheets/variables";
+
+.product-info-section-header {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  justify-content: space-between;
+  border-bottom: 1px variables.$line-secondary-line;
+  &__wrapper {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+  &__subtitle {
+    font-size: 16px;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: variables.$color-fifth-text;
+    text-align: start;
+    letter-spacing: 0;
+    margin-top: 10px;
+  }
+  &__price {
+    display: flex;
+    font-weight: lighter;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 3rem;
+    color: variables.$color-fifth-text;
+    &-percent {
+      font-size: 16px;
+      font-weight: bold;
+      color: variables.$color-fourth-text;
+    }
+
+    &-tag {
+      display: flex;
+      gap: 10px;
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1320px) {
+    &__title {
+      font-size: 2rem;
+    }
+  }
+}

@@ -7,23 +7,25 @@ import { formatNumberWithCommas } from "../../../../utils/common.utils";
 import { mockOrderCardProductsList } from "../../__mocks__/components.mocks";
 
 describe("OrderCard test suite.", () => {
-  test("Should render product data info correcly.", () => {
-    render(<OrderCard products={mockOrderCardProductsList} />);
+  test("Should render order data info correcly.", () => {
+    render(<OrderCard {...mockOrderCardProductsList} />);
 
-    mockOrderCardProductsList.forEach((product) => {
-      const imgElement = screen.getByAltText(
-        `order product: ${product.product.title}`
-      );
-      const productInfoElement = screen.getByText(
-        `${product.product.title}x${product.qty}`
-      );
-      const priceElement = screen.getByText(
-        `NT$ ${formatNumberWithCommas(Math.round(product.final_total))}`
-      );
-
-      expect(imgElement).toHaveAttribute("src", product.product.imageUrl);
-      expect(productInfoElement).toBeInTheDocument();
-      expect(priceElement).toBeInTheDocument();
-    });
+    const imgElement = screen.getByAltText(
+      `order product: ${mockOrderCardProductsList.title}`
+    );
+    const productInfoElement = screen.getByText(
+      `${mockOrderCardProductsList.title} x ${mockOrderCardProductsList.qty}`
+    );
+    const priceElement = screen.getByText(
+      `NT$ ${formatNumberWithCommas(
+        Math.round(mockOrderCardProductsList.final_total)
+      )}`
+    );
+    expect(imgElement).toHaveAttribute(
+      "src",
+      mockOrderCardProductsList.imageUrl
+    );
+    expect(productInfoElement).toBeInTheDocument();
+    expect(priceElement).toBeInTheDocument();
   });
 });

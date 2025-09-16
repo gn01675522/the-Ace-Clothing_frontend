@@ -1,27 +1,41 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "typeRoots": ["./src/env.d.ts", "./node_modules/@types"],
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx",
-    "module": "commonjs",
+    /* Base Options: */
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "skipLibCheck": true,
+    "target": "es2022",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
+    "moduleDetection": "force",
     "isolatedModules": true,
+
+    /* Strict */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "checkJs": true,
+
+    /* Bundled */
+    "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "baseUrl": "src",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
+    "incremental": true,
+
+    /* Path Aliases */
+    "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "test-utils": ["./src/utils/test.utils"]
     },
-    "types": ["jest","node"]
+
+    /* Other */
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node"]
   },
-  "include": ["src", "./jest-setup.ts"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "./jest-setup.ts"],
   "exclude": ["node_modules", "build", "dist"]
 }

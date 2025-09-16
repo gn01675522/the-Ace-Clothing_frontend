@@ -1,0 +1,18 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.checkout-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @include mixin.normalBreakPoint(medium) {
+    width: 50vw;
+    &-group {
+      padding: 1rem;
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    width: 30vw;
+  }
+}

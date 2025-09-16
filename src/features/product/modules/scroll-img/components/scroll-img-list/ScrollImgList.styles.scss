@@ -1,0 +1,23 @@
+@use "../../../../../../stylesheets/variables";
+@use "../../../../../../stylesheets/mixin";
+
+.scroll-img-list {
+  white-space: nowrap;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  &__item {
+    display: inline-block;
+    width: 100%;
+    height: calc(100vh - 60px);
+    img {
+      width: 100%;
+      height: 100%;
+      outline: 2px variables.$line-primary-line;
+      @include mixin.img-cover-center;
+    }
+  }
+  @include mixin.normalBreakPoint(medium) {
+    height: min-content;
+    white-space: unset;
+  }
+}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "test": "jest",
+    "test": "jest --bail --verbose",
     "dev": "webpack serve --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.dev.js"
   },
@@ -85,7 +85,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(s?css)$": "identity-obj-proxy"
+      "\\.(s?css)$": "identity-obj-proxy",
+      "^@/(.*)$": "<rootDir>/src/$1"
     },
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [

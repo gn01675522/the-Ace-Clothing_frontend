@@ -1,12 +1,13 @@
 export * from "./modules/admin-order-modal/AdminOrderModal.module";
-export * from "./modules/admin-order-pagination/AdminOrderPagination.module";
 export * from "./modules/admin-order-table/AdminOrderTable.module";
+export * from "./modules/checkout-form/CheckoutForm.module";
 
 export * from "./components/order-card/OrderCard.component";
 export * from "./components/order-detail/OrderDetails.component";
 export * from "./components/summary-card/SummaryCard.component";
 
 export * from "./hooks/admin-orders.hooks";
+export * from "./hooks/user-orders.hooks";
 
 export * from "./store/client/userOrder.asyncThunk";
 export * from "./store/client/userOrder.selector";

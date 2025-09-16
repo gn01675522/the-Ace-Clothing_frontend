@@ -1,0 +1,25 @@
+@use "../../../../stylesheets/mixin";
+
+.products-preview-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto, 1fr);
+  justify-content: space-around;
+  grid-gap: 2rem;
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+  }
+
+  @include mixin.normalBreakPoint(small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mixin.normalBreakPoint(medium) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include mixin.normalBreakPoint(large) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+  }
+}

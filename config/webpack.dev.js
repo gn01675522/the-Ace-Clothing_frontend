@@ -29,7 +29,7 @@ module.exports = {
     filename: "static/js/[name].js",
     chunkFilename: "static/js/[name].chunk.js",
     assetModuleFilename: "static/media/[hash:10][ext][query]",
-    publicPath: '/',
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -77,6 +77,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "../src"),
+    },
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   plugins: [

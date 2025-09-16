@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "./InfoSource.styles.scss";
 
 import {
   AceSVGIcon,
@@ -19,6 +18,10 @@ import hexSchool from "../../assets/hexSchool.png";
 
 import { INFO_SOURCE_DATA } from "./infoSource.data";
 
+import type { ReactNode } from "react";
+
+import "./InfoSource.styles.scss";
+
 const { logos, icons, pictures, apis } = INFO_SOURCE_DATA;
 
 const INFO_CATEGORY = [
@@ -37,7 +40,7 @@ enum CATEGORY_TYPE {
 
 const attachment = (
   category: CATEGORY_TYPE
-): (JSX.Element | string)[] | string[] | undefined =>
+): (ReactNode | string)[] | string[] | undefined =>
   ({
     [CATEGORY_TYPE.logos]: [
       <AceSVGIcon className="info-source__card-view-img" />,

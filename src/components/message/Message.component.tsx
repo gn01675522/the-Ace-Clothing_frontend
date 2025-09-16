@@ -25,17 +25,15 @@ export const Message: FC = () => {
   const MessageIcon = getIcon(type as MESSAGE_TYPE);
 
   return (
-    <>
-      <div className="message">
-        <div className="message__left">
-          <MessageIcon className="message__left-icon" />
-        </div>
-        <div className="message__right">
-          <div className="message__right-content">
-            <span>{text}</span>
-          </div>
+    <div className="message">
+      <div className="message__left">
+        <MessageIcon className="message__left-icon" />
+      </div>
+      <div className="message__right">
+        <div className="message__right-content">
+          <span>{text}</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };

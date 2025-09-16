@@ -6,10 +6,10 @@ export interface CartItemDto {
   coupon: AdminCouponDto;
   final_total: number;
   product: {
+    id: string;
     category: string;
     content: string;
     description: string;
-    id: string;
     imageUrl: string;
     imagesUrl: string[];
     is_enabled: 1 | 0;
@@ -30,7 +30,7 @@ export interface CartInfoDto {
   final_total: number;
 }
 export interface FetchCartItemsResDto extends APIResponseWithoutData {
-  cart: CartInfoDto;
+  data: CartInfoDto;
 }
 export interface CartItemAddToCart {
   product_id: string;

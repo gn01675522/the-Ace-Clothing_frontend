@@ -1,0 +1,16 @@
+@use "../../../../stylesheets/variables";
+
+.data-table-header {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: variables.$color-third-bg;
+  color: white;
+  &__row {
+    width: 100%;
+    text-align: center;
+    th {
+      outline: 1px variables.$line-primary-line;
+    }
+  }
+}

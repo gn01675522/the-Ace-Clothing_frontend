@@ -8,20 +8,27 @@ type PropsType = {
   list: { title: string; link: string }[];
   isDropdown: boolean;
   ref?: RefObject<HTMLUListElement | null>;
+  className?: string;
 };
 
-export const DropdownList: FC<PropsType> = ({ list, isDropdown, ref }) => {
+export const DropdownList: FC<PropsType> = ({
+  list,
+  isDropdown,
+  ref,
+  className,
+}) => {
+  const containerClass = `dropdown-list ${className ?? ""} ${
+    isDropdown ? "dropdown-list--dropdown" : ""
+  }`;
+
   return (
-    <ul
-      className={`nav-list ${isDropdown ? "nav-list--dropdown" : ""}`}
-      ref={ref}
-    >
+    <ul className={containerClass} ref={ref}>
       {list.map((item) => (
-        <li key={item.title} className="nav-list__item">
+        <li key={item.title} className="dropdown-list__item">
           <NavLink
             to={item.link}
             aria-label={item.title}
-            className="nav-list__item-link"
+            className="dropdown-list__item-link"
           >
             {item.title}
           </NavLink>

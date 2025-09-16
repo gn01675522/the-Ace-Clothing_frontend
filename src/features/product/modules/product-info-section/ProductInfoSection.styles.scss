@@ -1,0 +1,22 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.product-detail__sale-info {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem 8vw 2rem 8vw;
+  flex-direction: column;
+  justify-content: center;
+
+  @include mixin.normalBreakPoint(medium) {
+    position: sticky;
+    width: 50%;
+    height: min-content;
+    top: 0;
+    padding: 6vh 4vw;
+  }
+  @include mixin.normalBreakPoint(large) {
+    padding: 6vh 10vw;
+  }
+}

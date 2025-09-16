@@ -1,0 +1,19 @@
+@use "../../../../stylesheets/variables";
+@use "../../../../stylesheets/mixin";
+
+.scroll-img {
+  height: min-content;
+  position: relative;
+  &:hover button {
+    opacity: 0.6;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+  }
+  @include mixin.normalBreakPoint(medium) {
+    position: sticky;
+    width: 50%;
+    top: 0;
+    button {
+      display: none;
+    }
+  }
+}

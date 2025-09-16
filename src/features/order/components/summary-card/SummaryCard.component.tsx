@@ -5,19 +5,19 @@ import type { FC } from "react";
 import "./SummaryCard.styles.scss";
 
 type PropsType = {
-  total: number;
+  final_total: number;
   userData?: {
     user: { name: string; tel: string; address: string; email: string };
   };
 };
 
-export const SummaryCard: FC<PropsType> = ({ total, userData }) => {
+export const SummaryCard: FC<PropsType> = ({ final_total, userData }) => {
   return (
     <div className="summary-card">
       <h2 className="summary-card__title">訂單資訊</h2>
       <div className="summary-card__item">
         <span>小計</span>
-        <span>NT$ {formatNumberWithCommas(Math.round(total))}</span>
+        <span>NT$ {formatNumberWithCommas(Math.round(final_total))}</span>
       </div>
       <div className="summary-card__item">
         <span>運費</span>
@@ -25,7 +25,7 @@ export const SummaryCard: FC<PropsType> = ({ total, userData }) => {
       </div>
       <div className="summary-card__item">
         <span>總金額</span>
-        <span>NT$ {formatNumberWithCommas(Math.round(total))}</span>
+        <span>NT$ {formatNumberWithCommas(Math.round(final_total))}</span>
       </div>
       {userData && (
         <>

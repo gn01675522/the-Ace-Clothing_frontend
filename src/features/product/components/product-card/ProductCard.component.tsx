@@ -10,27 +10,23 @@ import {
 import { setUserFavorite, selectUserFavorite } from "../../../user/index";
 
 import type { FC, MouseEvent } from "react";
-import type { Product } from "../../DTOs/userProduct.dtos";
-import type { PRODUCT_CATEGORIES } from "../../../../shared/types";
+import type { UserProductsDto } from "../../DTOs/userProduct.dtos";
 
 import "./ProductCard.styles.scss";
 
 type PropsType = {
-  product: Product;
-  urlParam: PRODUCT_CATEGORIES;
-  isFavorite: boolean;
+  product: UserProductsDto;
 };
 
-export const ProductCard: FC<PropsType> = ({
-  product,
-  urlParam,
-  isFavorite,
-}) => {
+export const ProductCard: FC<PropsType> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const wishlist = useAppSelector(selectUserFavorite);
+  const isFavorite = wishlist.includes(product.id);
 
-  const { id, imageUrl, title, origin_price, price } = product;
+  const { id, imageUrl, title, origin_price, price, category } = product;
+
+  const productCategory = category.split("-")[0];
 
   const onAddFavorite = (e: MouseEvent<HTMLDivElement>, id: string) => {
     e.stopPropagation();
@@ -47,12 +43,12 @@ export const ProductCard: FC<PropsType> = ({
   };
 
   return (
-    <Link to={`/${urlParam}/${id}`} className="products-card">
+    <Link to={`/${productCategory}/${id}`} className="products-card">
       <div className="products-card__preview">
         <img
           src={imageUrl}
           className="products-card__img"
-          alt={`product in ${urlParam}: ${title}`}
+          alt={`product in ${productCategory}: ${title}`}
         />
       </div>
       <div className="products-card__content">

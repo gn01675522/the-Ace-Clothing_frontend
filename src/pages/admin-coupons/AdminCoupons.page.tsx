@@ -1,16 +1,15 @@
-import { DeleteModal, DELETE_MODAL_TYPE } from "../../modules/index";
-import { useDeleteModalControl } from "../../modules/index";
+import { DeleteModal, DELETE_MODAL_TYPE } from "@/modules/index";
+import { useDeleteModalControl } from "@/modules/index";
 
-import { useAdminCouponStateFetch } from "../../features/admin-coupon/index";
+import { useAdminCouponStateFetch } from "@/features/admin-coupon/index";
 
-import { Loading } from "../../components/index";
+import { Loading } from "@/components/index";
 
 import {
   AdminCouponTable,
-  AdminCouponPagination,
   AdminCouponModal,
   type AdminCouponDto,
-} from "../../features/admin-coupon/index";
+} from "@/features/admin-coupon/index";
 
 import type { FC } from "react";
 
@@ -45,7 +44,6 @@ const AdminCoupons: FC = () => {
       )}
       <h3 className="admin-coupons__title">優惠券列表</h3>
       <AdminCouponTable onClickDeleteHandler={onClickDeleteModalHandler} />
-      <AdminCouponPagination />
     </div>
   );
 };

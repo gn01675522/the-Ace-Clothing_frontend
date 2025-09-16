@@ -19,7 +19,7 @@ export const AdminProductModalDescription: FC = () => {
   const { description, content } = adminProductFormDescriptionConfig(form);
 
   return (
-    <div className="product-modal__body-middle">
+    <div className="admin-product-modal-description">
       <GenericTextarea {...description} onChange={onChangeHandler} />
       <GenericTextarea {...content} onChange={onChangeHandler} />
     </div>

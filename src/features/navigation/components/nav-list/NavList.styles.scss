@@ -1,0 +1,50 @@
+@use "../../../../stylesheets/mixin";
+@use "../../../../stylesheets/variables";
+
+.nav-list {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: variables.$color-primary-bg;
+  &__ul {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    .active {
+      background-color: variables.$color-secondary-bg;
+      color: variables.$color-secondary-text;
+    }
+  }
+  &__item {
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    font-weight: bold;
+    background-color: variables.$color-primary-bg;
+    color: variables.$color-primary-text;
+    transition: 0.3s ease-out;
+    @include mixin.hover-button-effect;
+  }
+
+  &--x {
+    flex-direction: row;
+    &__ul {
+      flex-direction: row;
+    }
+  }
+  &--y {
+    flex-direction: column;
+    &__ul {
+      flex-direction: column;
+    }
+  }
+  @include mixin.normalBreakPoint(large) {
+    &--x {
+      width: 100%;
+    }
+    &--y {
+      width: 150px;
+      height: calc(100vh - 60px);
+    }
+  }
+}

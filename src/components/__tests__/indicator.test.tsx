@@ -37,7 +37,7 @@ describe("Indicator test suite.", () => {
 
     const dots = container.querySelectorAll(".indicator__dots");
 
-    fireEvent.click(dots[1]);
+    fireEvent.click(dots[1]!);
 
     expect(onChangeImg).toHaveBeenCalledTimes(1);
     expect(onChangeImg).toHaveBeenCalledWith(1);
