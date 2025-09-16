@@ -37,6 +37,16 @@
     box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
     transition: all 0.5s ease-in-out;
   }
-  &__active {
+
+  &__line {
+    &--active {
+      background-color: transparent;
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
   }
 }

@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../../store/redux-hooks";
+import { useState, useEffect, useLayoutEffect } from "react";
+import { useAppSelector, useAppDispatch } from "@/store/redux-hooks";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { setCurrentUserAsync } from "../store/user.asyncThunk";
 import {
@@ -48,4 +49,43 @@ export const useFetchUserState = () => {
   const message = useAppSelector(selectUserLoginMessage);
 
   return { isLoading, hasMessage, message };
+};
+
+export const useAdminUserAuth = () => {
+  const hasMessage = useAppSelector(selectHasMessage);
+
+  const navigate = useNavigate();
+
+  //* 擷取瀏覽器 token
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("hexToken="))
+    ?.split("=")[1];
+
+  //* axios 預設 headers 必須夾帶 Auth token 以便驗證
+  axios.defaults.headers.common["Authorization"] = token;
+
+  //* 登出功能，設定 hexToken 為空值
+  const logout = () => {
+    document.cookie = `hexToken=;`;
+    navigate("/login");
+  };
+
+  useLayoutEffect(() => {
+    if (!token) {
+      return navigate("/login");
+    }
+    (async () => {
+      try {
+        await axios.post("/v2/api/user/check");
+      } catch (e) {
+        const error = e as { response: { data: { success: boolean } } };
+        if (!error.response.data.success) {
+          navigate("/login");
+        }
+      }
+    })();
+  }, [navigate, token]);
+
+  return { logout, hasMessage };
 };

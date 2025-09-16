@@ -15,12 +15,13 @@ export const Hamburger: FC<PropsType> = ({
   wrapperClass,
   id = "hamburger",
 }) => {
-  const wrapeerClasses = `hamburger ${wrapperClass ? wrapperClass : ""} ${
-    isActive ? "hamburger--active" : ""
+  const combinedWrapperClass = `hamburger ${wrapperClass ?? ""}`;
+  const lineClasses = `hamburger__line ${
+    isActive ? "hamburger__line--active" : ""
   }`;
   return (
-    <button className={wrapeerClasses} onClick={onClick} id={id}>
-      <span className="hamburger__line" />
+    <button className={combinedWrapperClass} onClick={onClick} id={id}>
+      <span className={lineClasses} />
     </button>
   );
 };
