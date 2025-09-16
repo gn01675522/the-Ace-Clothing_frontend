@@ -20,6 +20,8 @@ describe("AdminProductModal test suite.", () => {
   test("Should trigger the closeAction callback when Clicking on the 'x', '儲存', '關閉' buttons.", () => {
     const mockOnCloseHandler = jest.fn();
     const mockOnSubmitHandler = jest.fn();
+    const mockOnChangeHandler = jest.fn();
+
     (useProductManagementContext as jest.Mock).mockReturnValue({
       onCloseHandler: mockOnCloseHandler,
       onSubmitHandler: mockOnSubmitHandler,
@@ -27,10 +29,12 @@ describe("AdminProductModal test suite.", () => {
         formData: { id: null, form: mockAdminProductModalFormDefaultData },
         type: FORM_OPERATION_OPTIONS.create,
         isSaveToSave: true,
+        onChangeHandler: mockOnChangeHandler,
       },
     });
 
     renderWithProviders(<AdminProductModal />);
+
     const closeButtonElement = screen.getByText(/關閉/i);
     const saveButtonElement = screen.getByText(/儲存/i);
     const closeXButtonElement = screen.getByLabelText(/Close/i);
@@ -45,12 +49,14 @@ describe("AdminProductModal test suite.", () => {
 
   test("Should disable the '儲存' button when nothing passed.", () => {
     const mockOnSubmitHandler = jest.fn();
+    const mockOnChangeHandler = jest.fn();
 
     (useProductManagementContext as jest.Mock).mockReturnValue({
       onSubmitHandler: mockOnSubmitHandler,
       formControl: {
         formData: { id: null, form: mockAdminProductModalFormDefaultData },
         type: FORM_OPERATION_OPTIONS.create,
+        onChangeHandler: mockOnChangeHandler,
       },
     });
 
@@ -64,10 +70,13 @@ describe("AdminProductModal test suite.", () => {
   });
 
   test("Should render correctly in create mode.", () => {
+    const mockOnChangeHandler = jest.fn();
+
     (useProductManagementContext as jest.Mock).mockReturnValue({
       formControl: {
         formData: { id: null, form: mockAdminProductModalFormDefaultData },
         type: FORM_OPERATION_OPTIONS.create,
+        onChangeHandler: mockOnChangeHandler,
       },
     });
 
@@ -79,10 +88,12 @@ describe("AdminProductModal test suite.", () => {
   });
 
   test("Should render correctly in edit mode.", () => {
+    const mockOnChangeHandler = jest.fn();
     (useProductManagementContext as jest.Mock).mockReturnValue({
       formControl: {
         formData: { id: mockProductData.id, form: mockProductData },
         type: FORM_OPERATION_OPTIONS.edit,
+        onChangeHandler: mockOnChangeHandler,
       },
     });
 

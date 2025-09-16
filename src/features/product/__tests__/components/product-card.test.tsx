@@ -39,7 +39,7 @@ describe("ProductCard test suite.", () => {
     renderWithProviders(<ProductCard product={mockProductCardDefaultData} />);
 
     const imgAltTextElement = screen.getByAltText(
-      `product in ${PRODUCT_CATEGORIES.hats}: ${mockProductCardDefaultData.title}`
+      `product in ${mockProductCardDefaultData.category}: ${mockProductCardDefaultData.title}`
     );
     const titleElement = screen.getByText(mockProductCardDefaultData.title);
     const priceElement = screen.getByText(/NT\$/i);
@@ -50,7 +50,7 @@ describe("ProductCard test suite.", () => {
     expect(priceElement).toBeInTheDocument();
     expect(linkElement).toHaveAttribute(
       "href",
-      `/${PRODUCT_CATEGORIES.hats}/${mockProductCardDefaultData.id}`
+      `/${mockProductCardDefaultData.category}/${mockProductCardDefaultData.id}`
     );
   });
 });
