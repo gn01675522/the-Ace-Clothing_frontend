@@ -1,7 +1,7 @@
 @use "../../stylesheets/variables";
 @use "../../stylesheets/mixin";
 
-.admin-layout-main {
+.admin-layout {
   display: flex;
   width: 100%;
   height: 100%;
@@ -12,8 +12,8 @@
   }
   &__content {
     display: flex;
-    width: 100vw;
-    height: 100%;
+    width: 100%;
+    height: calc(100vh - 120px);
     &-wrapper {
       display: flex;
       width: 100%;
@@ -26,6 +26,9 @@
   }
   &__footer {
     display: flex;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
     justify-content: center;
   }
   @include mixin.normalBreakPoint(large) {

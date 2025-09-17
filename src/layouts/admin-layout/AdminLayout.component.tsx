@@ -22,23 +22,23 @@ const AdminLayout: FC = () => {
   const { logout, hasMessage } = useAdminUserAuth();
 
   return (
-    <div className="admin-layout-main">
+    <div className="admin-layout">
       {hasMessage && <Message />}
-      <header className="admin-layout-main__header">
+      <header className="admin-layout__header">
         <AdminNavbar logout={logout} />
       </header>
-      <main className="admin-layout-main__content">
+      <main className="admin-layout__content">
         <NavList
           navOption={navOption}
           axisDirection="y"
-          containerClass="admin-layout-main__nav-list"
+          containerClass="admin-layout__nav-list"
         />
-        <div className="admin-layout-main__content-wrapper">
+        <div className="admin-layout__content-wrapper">
           <Outlet />
         </div>
       </main>
-      <footer className="admin-layout-main__footer">
-        <span className="admin-layout-main__footer-hint">
+      <footer className="admin-layout__footer">
+        <span className="admin-layout__footer-hint">
           * 請使用平板或桌上型電腦查看，以確保最佳瀏覽體驗。
         </span>
       </footer>

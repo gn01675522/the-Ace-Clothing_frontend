@@ -45,11 +45,9 @@ export const AdminOrderTable: FC<PropsType> = ({
   });
 
   return (
-    <div className="admin-orders-table">
-      <DataTable
-        config={tableConfig}
-        actionControl={{ pagination: paginationAction }}
-      />
-    </div>
+    <DataTable
+      config={tableConfig}
+      actionControl={{ pagination: paginationAction }}
+    />
   );
 };
