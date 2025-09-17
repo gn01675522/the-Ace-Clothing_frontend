@@ -1,20 +1,21 @@
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "../../utils/test.utils";
 
-import {
-  DeleteModal,
-  DELETE_MODAL_TYPE,
-} from "../delete-modal/DeleteModal.module";
+import { DeleteModal } from "../delete-modal/DeleteModal.module";
 
 describe("DeleteModal test suite.", () => {
   test("Clicking on the 'ｘ', '取消', '確認刪除' buttons triggers the closeAction callback.", () => {
-    const onClick = jest.fn();
+    const mockOnClose = jest.fn();
+    const mockOnDelete = jest.fn();
+
     renderWithProviders(
       <DeleteModal
-        dataType={DELETE_MODAL_TYPE.adminCoupon}
         id="test"
         title="test title"
-        closeAction={onClick}
+        actionControl={{
+          closeAction: mockOnClose,
+          deleteAction: mockOnDelete,
+        }}
       />
     );
 
@@ -26,17 +27,23 @@ describe("DeleteModal test suite.", () => {
     fireEvent.click(closeXButton);
     fireEvent.click(confirmDeleteButton);
 
-    expect(onClick).toHaveBeenCalledTimes(3);
+    expect(mockOnClose).toHaveBeenCalledTimes(3);
+    expect(mockOnDelete).toHaveBeenCalledTimes(1);
   });
   test("Should display title when passed title prop.", () => {
+    const mockOnClose = jest.fn();
+    const mockOnDelete = jest.fn();
+
     const title = "test title";
 
     renderWithProviders(
       <DeleteModal
-        dataType={DELETE_MODAL_TYPE.adminCoupon}
         id="test"
         title={title}
-        closeAction={() => {}}
+        actionControl={{
+          closeAction: mockOnClose,
+          deleteAction: mockOnDelete,
+        }}
       />
     );
 
