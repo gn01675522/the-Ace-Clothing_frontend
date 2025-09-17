@@ -41,7 +41,11 @@ export const ProductManagementContextProvider = ({
     dispatch(setClearProductEditModalControl());
   };
 
-  const onSubmitHandler = () => {};
+  const onSubmitHandler = () => {
+    formControl.submitForm();
+    modalControl.switchModalOpen();
+    dispatch(setClearProductEditModalControl());
+  };
 
   const value = {
     formControl,

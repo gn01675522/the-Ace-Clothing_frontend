@@ -3,7 +3,10 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
 
 import { setClearAdminProductState } from "../store/admin/adminProduct.slice";
-import { fetchAdminProductAsync } from "../store/admin/adminProduct.asyncThunk";
+import {
+  fetchAdminProductAsync,
+  deleteAdminProductAsync,
+} from "../store/admin/adminProduct.asyncThunk";
 import {
   selectAdminProductIsLoading,
   classifyAdminProducts,
@@ -41,4 +44,13 @@ export const useProductDetailPageStateFetch = () => {
   const product = useAppSelector(selectUserSingleProduct);
 
   return { id, hasMessage, product };
+};
+
+export const useAdminProductActionControl = () => {
+  const dispatch = useAppDispatch();
+
+  const deleteProductAction = (id: string) =>
+    dispatch(deleteAdminProductAsync(id));
+
+  return { deleteProductAction };
 };

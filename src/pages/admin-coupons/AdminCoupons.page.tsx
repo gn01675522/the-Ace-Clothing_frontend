@@ -1,13 +1,12 @@
-import { DeleteModal, DELETE_MODAL_TYPE } from "@/modules/index";
-import { useDeleteModalControl } from "@/modules/index";
-
-import { useAdminCouponStateFetch } from "@/features/admin-coupon/index";
+import { DeleteModal, useDeleteModalControl } from "@/modules/index";
 
 import { Loading } from "@/components/index";
 
 import {
   AdminCouponTable,
   AdminCouponModal,
+  useAdminCouponStateFetch,
+  useAdminCouponActionControl,
   type AdminCouponDto,
 } from "@/features/admin-coupon/index";
 
@@ -17,6 +16,7 @@ import "./AdminCoupons.styles.scss";
 
 const AdminCoupons: FC = () => {
   const { isLoading, isEditCouponModalOpen } = useAdminCouponStateFetch();
+  const { deleteCouponAction } = useAdminCouponActionControl();
 
   const {
     isDeleteModalOpen,
@@ -36,10 +36,12 @@ const AdminCoupons: FC = () => {
       {isEditCouponModalOpen && <AdminCouponModal />}
       {isDeleteModalOpen && (
         <DeleteModal
-          dataType={DELETE_MODAL_TYPE.adminCoupon}
           id={deleteTarget.id}
           title={deleteTarget.title}
-          closeAction={switchDeleteModalOpen}
+          actionControl={{
+            closeAction: switchDeleteModalOpen,
+            deleteAction: deleteCouponAction,
+          }}
         />
       )}
       <h3 className="admin-coupons__title">優惠券列表</h3>

@@ -1,17 +1,14 @@
-import {
-  DeleteModal,
-  DELETE_MODAL_TYPE,
-  useDeleteModalControl,
-} from "@/modules";
+import { DeleteModal, useDeleteModalControl } from "@/modules";
 
 import { Loading } from "@/components";
 
 import {
-  useAdminOrderStateFetch,
   AdminOrderModal,
   AdminOrderTable,
+  useAdminOrderStateFetch,
+  useAdminOrderActionControl,
   type AdminOrderDto,
-} from "@/features/order/index";
+} from "@/features/order";
 
 import type { FC } from "react";
 
@@ -19,6 +16,8 @@ import "./AdminOrders.styles.scss";
 
 const AdminOrders: FC = () => {
   const { isLoading, isOrderEditModalOpen } = useAdminOrderStateFetch();
+  const { deleteOrderAction } = useAdminOrderActionControl();
+
   const {
     deleteTarget,
     isDeleteModalOpen,
@@ -38,10 +37,12 @@ const AdminOrders: FC = () => {
       {isOrderEditModalOpen && <AdminOrderModal />}
       {isDeleteModalOpen && (
         <DeleteModal
-          dataType={DELETE_MODAL_TYPE.adminOrder}
           id={deleteTarget.id}
           title={deleteTarget.title}
-          closeAction={switchDeleteModalOpen}
+          actionControl={{
+            closeAction: switchDeleteModalOpen,
+            deleteAction: deleteOrderAction,
+          }}
         />
       )}
       <h3 className="admin-orders__title">訂單列表</h3>

@@ -1,8 +1,11 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "@/store/redux-hooks";
 
 import { setClearAdminOrderState } from "../store/admin/adminOrder.slice";
-import { fetchAdminOrdersAsync } from "../store/admin/adminOrder.asyncThunk";
+import {
+  fetchAdminOrdersAsync,
+  deleteAdminOrdersAsync,
+} from "../store/admin/adminOrder.asyncThunk";
 import {
   selectAdminOrdersIsLoading,
   selectAdminOrders,
@@ -26,4 +29,13 @@ export const useAdminOrderStateFetch = () => {
   }, []);
 
   return { orders, pagination, isLoading, isOrderEditModalOpen };
+};
+
+export const useAdminOrderActionControl = () => {
+  const dispatch = useAppDispatch();
+
+  const deleteOrderAction = (id: string) =>
+    dispatch(deleteAdminOrdersAsync(id));
+
+  return { deleteOrderAction };
 };

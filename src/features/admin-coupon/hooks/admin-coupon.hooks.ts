@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
 
-import { fetchAdminCouponsAsync } from "../store/admin-coupon.asyncThunk";
+import {
+  fetchAdminCouponsAsync,
+  deleteAdminCouponsAsync,
+} from "../store/admin-coupon.asyncThunk";
 import {
   selectAdminCoupons,
   selectAdminCouponsPagination,
@@ -28,4 +31,13 @@ export const useAdminCouponStateFetch = () => {
   }, []);
 
   return { coupons, pagination, isLoading, isEditCouponModalOpen };
+};
+
+export const useAdminCouponActionControl = () => {
+  const dispatch = useAppDispatch();
+
+  const deleteCouponAction = (id: string) =>
+    dispatch(deleteAdminCouponsAsync(id));
+
+  return { deleteCouponAction };
 };

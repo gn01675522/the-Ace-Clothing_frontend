@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 
-import { NavBar, Footer } from "../../features/navigation/index";
+import { NavBar, Footer } from "@/features/navigation/index";
+
+import { useToScrollToTop } from "@/shared/hooks/shared.hooks";
 
 import type { FC } from "react";
 
@@ -13,6 +15,7 @@ const navOption = [
 ];
 
 const MainLayout: FC = () => {
+  useToScrollToTop();
   return (
     <>
       <header>

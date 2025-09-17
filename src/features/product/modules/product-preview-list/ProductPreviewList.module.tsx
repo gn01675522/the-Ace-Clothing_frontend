@@ -1,13 +1,12 @@
-import { Pagination } from "../../../../components/index";
+import { Pagination } from "@/components/index";
 import { ProductCard } from "../../components/product-card/ProductCard.component";
 
 import {
   useProductPreviewListStateFetch,
   useChangePagination,
 } from "./hooks/product-preview-list.hooks";
-import { useToScrollToTop } from "../../../../shared/hooks/shared.hooks";
 
-import { PRODUCT_CATEGORIES } from "../../../../shared/types";
+import { PRODUCT_CATEGORIES } from "@/shared/types";
 
 import type { FC } from "react";
 
@@ -17,8 +16,6 @@ export const ProductPreviewList: FC = () => {
   const { category, products } = useProductPreviewListStateFetch();
   const { currentPage, onChangePage, pageCount, productsPerPage } =
     useChangePagination(products, category as PRODUCT_CATEGORIES);
-
-  useToScrollToTop({ dependencies: [currentPage] });
 
   return (
     <>

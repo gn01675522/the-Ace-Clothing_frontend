@@ -60,7 +60,7 @@ export const AdminProductModalToggleList: FC = () => {
         <h6 className="admin-product-modal-toggle-list__title">開啟圖片列表</h6>
       </label>
       <div className="admin-product-modal-toggle-list__content">
-        {form?.imagesUrl.map((url, i) => {
+        {form?.imagesUrl?.map((url, i) => {
           return (
             <div
               className="admin-product-modal-toggle-list__content-item"

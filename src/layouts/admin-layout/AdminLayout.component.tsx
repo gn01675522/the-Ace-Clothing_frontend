@@ -1,8 +1,11 @@
 import { Outlet } from "react-router-dom";
+
 import { useAdminUserAuth } from "@/features/user";
 import { AdminNavbar, NavList } from "@/features/navigation";
 
 import { Message } from "@/components/index";
+
+import { useToScrollToTop } from "@/shared/hooks/shared.hooks";
 
 import type { FC } from "react";
 
@@ -15,6 +18,7 @@ const navOption = [
 ];
 
 const AdminLayout: FC = () => {
+  useToScrollToTop();
   const { logout, hasMessage } = useAdminUserAuth();
 
   return (
