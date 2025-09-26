@@ -1,15 +1,15 @@
-import axios from "axios";
+import api from "@/shared/api/axios";
 
-import { createAppAsyncThunk } from "../../../store/redux-utils";
+import { createAppAsyncThunk } from "@/store/redux-utils";
 
-import { setHandleMessage } from "../../../store/message/message.slice";
+import { setHandleMessage } from "@/store/message/message.slice";
 
 import type {
   AdminCouponDto,
   CreateCouponDto,
   FetchAdminCouponResDto,
 } from "../DTOs/adminCoupon.dtos";
-import type { PaginationType } from "../../../shared/types/types";
+import type { PaginationType } from "@/shared/types/types";
 import type {
   APIResponse,
   APIRejectResponse,
@@ -23,8 +23,9 @@ export const fetchAdminCouponsAsync = createAppAsyncThunk<
 >(
   "adminCoupons/fetchAdminCoupons",
   async (page = 1, { rejectWithValue, dispatch }) => {
+
     try {
-      const res = (await axios.get(
+      const res = (await api.get(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupons?page=${page}`
       )) as APIResponse<FetchAdminCouponResDto>;
 
@@ -50,7 +51,7 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
   "adminCoupons/deleteAdminCoupons",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.delete(
+      const res = (await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${id}`
       )) as APIResponse<APIGeneralResDto>;
 
@@ -84,7 +85,7 @@ export const createAdminCouponAsync = createAppAsyncThunk<
   "adminCoupons/createAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.post(
+      const res = (await api.post(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon`,
         { data: formData }
       )) as APIResponse<APIGeneralResDto>;
@@ -116,7 +117,7 @@ export const updateAdminCouponAsync = createAppAsyncThunk<void, AdminCouponDto>(
   "adminCoupons/updateAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.put(
+      const res = (await api.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${formData.id}`,
         { data: formData }
       )) as APIResponse<APIGeneralResDto>;

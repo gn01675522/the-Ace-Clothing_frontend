@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/shared/api/axios";
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
 
 import { setHandleMessage } from "../../../../store/message/message.slice";
@@ -25,7 +25,7 @@ export const fetchAdminProductAsync = createAppAsyncThunk<
   void
 >("adminProduct/fetchAdminProduct", async (_, { rejectWithValue }) => {
   try {
-    const res = await axios.get(
+    const res = await api.get(
       `/v2/api/${process.env.APP_API_PATH}/admin/products/all`
     );
 
@@ -46,7 +46,7 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
   "adminProduct/deleteAdminProduct",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.delete(
+      const res = (await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/product/${id}`
       )) as AxiosResponse;
 
@@ -79,7 +79,7 @@ export const updateAdminProductAsync = createAppAsyncThunk<
   async (formData, { dispatch, rejectWithValue }) => {
     const newFormData = cleanedDataHelper(formData);
     try {
-      const res = (await axios.put(
+      const res = (await api.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/product/${formData.id}`,
         { data: newFormData }
       )) as AxiosResponse;
@@ -113,7 +113,7 @@ export const createAdminProductAsync = createAppAsyncThunk<
   async (data, { dispatch, rejectWithValue }) => {
     const newFormData = cleanedDataHelper(data);
     try {
-      const res = (await axios.post(
+      const res = (await api.post(
         `/v2/api/${process.env.APP_API_PATH}/admin/product`,
         { data: newFormData }
       )) as AxiosResponse;

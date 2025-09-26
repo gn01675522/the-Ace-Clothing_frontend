@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/shared/api/axios";
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
 
 import { setHandleMessage } from "../../../../store/message/message.slice";
@@ -12,7 +12,7 @@ export const fetchUserProductAsync = createAppAsyncThunk<
   void
 >("userProduct/fetchUserProduct", async (_, { dispatch, rejectWithValue }) => {
   try {
-    const res = await axios.get(
+    const res = await api.get(
       `/v2/api/${process.env.APP_API_PATH}/products/all`
     );
 
@@ -40,7 +40,7 @@ export const fetchUserSingleProductAsync = createAppAsyncThunk<
   "userProduct/fetchUserSingleProduct",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const productRes = await axios.get(
+      const productRes = await api.get(
         `/v2/api/${process.env.APP_API_PATH}/product/${id}`
       );
 

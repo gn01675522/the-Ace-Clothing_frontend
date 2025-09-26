@@ -1,5 +1,6 @@
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
-import axios from "axios";
+
+import api from "@/shared/api/axios";
 
 import type {
   UserOrderDto,
@@ -23,7 +24,7 @@ export const setPostUserOrderAsync = createAppAsyncThunk<string, UserBasicInfo>(
       },
     };
     try {
-      const res = await axios.post(
+      const res = await api.post(
         `/v2/api/${process.env.APP_API_PATH}/order`,
         form
       );
@@ -46,7 +47,7 @@ export const fetchUserSingleOrderAsync = createAppAsyncThunk<
   string
 >("userOrder/fetchUserSingleOrder", async (orderId, { rejectWithValue }) => {
   try {
-    const res = await axios.get(
+    const res = await api.get(
       `/v2/api/${process.env.APP_API_PATH}/order/${orderId}`
     );
 
@@ -68,7 +69,7 @@ export const fetchUserOrdersAsync = createAppAsyncThunk<
   void
 >("userOrder/fetchUserOrders", async (_, { rejectWithValue }) => {
   try {
-    const res = await axios.get(`/v2/api/${process.env.APP_API_PATH}/orders`);
+    const res = await api.get(`/v2/api/${process.env.APP_API_PATH}/orders`);
 
     return res.data.orders;
   } catch (e) {

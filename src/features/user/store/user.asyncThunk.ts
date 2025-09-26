@@ -2,7 +2,8 @@ import {
   createAppAsyncThunk,
   type AxiosRejectTypes,
 } from "../../../store/redux-utils";
-import axios from "axios";
+
+import api from "@/shared/api/axios";
 
 import { setHandleMessage } from "../../../store/message/message.slice";
 
@@ -14,7 +15,7 @@ export const setCurrentUserAsync = createAppAsyncThunk<
   { username: string; password: string }
 >("user/setCurrentUser", async (data, { dispatch, rejectWithValue }) => {
   try {
-    const res = (await axios.post(`/v2/admin/signin`, data)) as AxiosResponse;
+    const res = (await api.post(`/v2/admin/signin`, data)) as AxiosResponse;
     const { token, expired } = res.data;
 
     document.cookie = `hexToken=${token}; expires=${new Date(expired)};`;

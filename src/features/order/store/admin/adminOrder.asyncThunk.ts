@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/shared/api/axios";
 
 import { createAppAsyncThunk } from "../../../../store/redux-utils";
 
@@ -22,7 +22,7 @@ export const fetchAdminOrdersAsync = createAppAsyncThunk<
   number | undefined
 >("adminOrders/fetchAdminOrders", async (page = 1, { rejectWithValue }) => {
   try {
-    const res = (await axios.get(
+    const res = (await api.get(
       `/v2/api/${process.env.APP_API_PATH}/admin/orders?page=${page}`
     )) as APIResponse<FetchAdminOrderResDto>;
 
@@ -46,7 +46,7 @@ export const updateAdminOrdersAsync = createAppAsyncThunk<void, AdminOrderDto>(
   "adminOrders/updateAdminOrders",
   async (data, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.put(
+      const res = (await api.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${data.id}`,
         { data }
       )) as APIResponse<APIGeneralResDto>;
@@ -76,7 +76,7 @@ export const deleteAdminOrdersAsync = createAppAsyncThunk<void, string>(
   "adminOrders/deleteAdminOrders",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.delete(
+      const res = (await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${id}`
       )) as APIResponse<APIGeneralResDto>;
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/shared/api/axios";
 
 import { createAppAsyncThunk } from "../../../store/redux-utils";
 
@@ -21,7 +21,7 @@ export const fetchCartItemsAsync = createAppAsyncThunk<CartInfoDto, void>(
   "cart/fetchCartItems",
   async (_, { rejectWithValue }) => {
     try {
-      const res = (await axios.get(
+      const res = (await api.get(
         `/v2/api/${process.env.APP_API_PATH}/cart`
       )) as APIResponse<FetchCartItemsResDto>;
 
@@ -44,7 +44,7 @@ export const setAddItemToCartAsync = createAppAsyncThunk<
   { data: CartItemAddToCart }
 >("cart/setAddItemToCart", async (data, { dispatch, rejectWithValue }) => {
   try {
-    const res = (await axios.post(
+    const res = (await api.post(
       `/v2/api/${process.env.APP_API_PATH}/cart`,
       data
     )) as APIResponse<APIGeneralResDto>;
@@ -72,7 +72,7 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<void, string>(
   "cart/setRemoveItemfromCart",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.delete(
+      const res = (await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
       )) as APIResponse<APIGeneralResDto>;
 
@@ -106,7 +106,7 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       data: { product_id: item.product_id, qty: quantity },
     };
     try {
-      const res = (await axios.put(
+      const res = (await api.put(
         `/v2/api/${process.env.APP_API_PATH}/cart/${item.id}`,
         data
       )) as APIResponse<APIGeneralResDto>;
@@ -135,7 +135,7 @@ export const setAddCouponForCartAsync = createAppAsyncThunk<void, string>(
   "client/setAddCouponForCart",
   async (code, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await axios.post(
+      const res = (await api.post(
         `v2/api/${process.env.APP_API_PATH}/coupon`,
         {
           data: { code },
