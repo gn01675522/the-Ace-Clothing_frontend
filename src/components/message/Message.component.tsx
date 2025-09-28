@@ -21,6 +21,7 @@ const getIcon = (type: MESSAGE_TYPE) =>
 
 export const Message: FC = () => {
   const message = useSelector(selectMessage);
+  console.log("Show message in Message", message);
   const { type, text } = message;
   const MessageIcon = getIcon(type as MESSAGE_TYPE);
 

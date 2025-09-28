@@ -1,22 +1,30 @@
-import { APIResponseWithoutData } from "../../../shared/types";
+import { APIResDTO } from "@/shared/DTOs/api.dtos";
+import { PaginationType } from "../../../shared/types";
 
 export interface AdminProductDto {
-  id: string;
-  category: string;
-  content: string;
+  _id: string;
+  gender: { id: string; value: string };
+  category: { id: string; value: string };
+  name: string;
+  features: string[];
   description: string;
-  is_enabled: 1 | 0;
-  num: number;
-  origin_price: number;
-  price: number;
-  title: string;
-  unit: string;
-  imageUrl: string;
-  imagesUrl: string[];
+  img_urls: string[];
+  recycled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+export interface FetchAdminProductsResDto extends APIResDTO {
+  data: AdminProductDto[];
+  pagination: PaginationType;
 }
 
-export type CreateProductDto = Omit<AdminProductDto, "id">;
+export type ProductEditDataReqDTO = Omit<
+  AdminProductDto,
+  "createdAt" | "updatedAt" | "__v" | "gender" | "category" | "recycled"
+> & { gender: string; category: string };
 
-export interface FetchAdminProductsResDto extends APIResponseWithoutData {
-  products: { [key: string]: AdminProductDto };
-}
+export type ProductCreateDataReqDTO = Omit<
+  AdminProductDto,
+  "_id" | "createdAt" | "updatedAt" | "__v" | "gender" | "category" | "recycled"
+> & { gender: string; category: string };

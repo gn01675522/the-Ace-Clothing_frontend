@@ -10,6 +10,7 @@ import { adminCouponReducer } from "../features/admin-coupon/index";
 import { adminOrderReducer } from "../features/order/index";
 import { userOrderReducer } from "../features/order/index";
 import { messageReducer } from "./message/message.slice";
+import { optionReducer } from "./option/option.slice";
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -20,4 +21,5 @@ export const rootReducer = combineReducers({
   adminOrder: adminOrderReducer,
   userOrder: userOrderReducer,
   message: messageReducer,
+  option: optionReducer,
 });

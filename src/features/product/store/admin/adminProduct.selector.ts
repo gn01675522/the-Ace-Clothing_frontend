@@ -4,12 +4,10 @@ import type { RootState } from "../../../../store/store";
 const selectAdminProductReducer = (state: RootState) => state.adminProduct;
 
 //* 取出完整產品資料，並做初步排序
+//todo 後續需刪除
 export const selectAdminProducts = createSelector(
   [selectAdminProductReducer],
-  (adminProduct) =>
-    Object.values(adminProduct.products).sort((a, b) =>
-      a.category.localeCompare(b.category)
-    )
+  (adminProduct) => adminProduct.products
 );
 
 //* 取出讀取狀態
@@ -27,6 +25,11 @@ export const selectAdminProductError = createSelector(
 export const selectAdminProductEditModalControl = createSelector(
   [selectAdminProductReducer],
   (adminProduct) => adminProduct.productEditModalControl
+);
+
+export const selectAdminProductPagination = createSelector(
+  [selectAdminProductReducer],
+  (adminProduct) => adminProduct.pagination
 );
 
 export const selectAdminProductEditModalIsOpen = createSelector(
@@ -47,7 +50,7 @@ export const selectAdminProductEditModalTargetData = createSelector(
 //* 將全部的產品依據傳入值分類
 export const classifyAdminProducts = (category: string) =>
   createSelector([selectAdminProducts], (products) =>
-    products.filter((product) => product.category.split("-")[0] === category)
+    products.filter((product) => product.category.value === category)
   );
 
 //* ****************************** 分類業務邏輯 start ********************************* */

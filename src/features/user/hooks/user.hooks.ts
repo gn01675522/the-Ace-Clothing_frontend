@@ -62,23 +62,18 @@ export const useAdminUserAuth = () => {
     navigate("/login");
   };
 
-
-
-
-
-
-  useLayoutEffect(() => {
-    (async () => {
-      try {
-        await api.post("/v2/api/user/check");
-      } catch (e) {
-        const error = e as { response: { data: { success: boolean } } };
-        if (!error.response.data.success) {
-          navigate("/login");
-        }
-      }
-    })();
-  }, [navigate]);
+  // useLayoutEffect(() => {
+  //   (async () => {
+  //     try {
+  //       await api.post("/v2/api/user/check");
+  //     } catch (e) {
+  //       const error = e as { response: { data: { success: boolean } } };
+  //       if (!error.response.data.success) {
+  //         navigate("/login");
+  //       }
+  //     }
+  //   })();
+  // }, [navigate]);
 
   return { logout, hasMessage };
 };

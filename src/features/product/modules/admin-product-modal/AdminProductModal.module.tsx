@@ -6,8 +6,7 @@ import { ModalContainer } from "../../../../components/index";
 
 import { AdminProductModalHeader } from "./components/admin-product-modal-header/AdminProductModalHeader.component";
 import { AdminProductModalDetails } from "./components/admin-product-modal-details/AdminProductModalDetails.component";
-import { AdminProductModalDescription } from "./components/admin-product-modal-description/AdminProductModalDescription.component";
-import { AdminProductModalToggleList } from "./components/admin-product-modal-toggle-list/AdminProductModalToggleList.component";
+import { AdminProductModalImgs } from "./components/admin-product-modal-imgs/AdminProductModalImgs.component";
 import { AdminProductModalFooter } from "./components/admin-product-modal-footer/AdminProductModalFooter.component";
 
 import type { FC, MouseEvent } from "react";
@@ -27,12 +26,11 @@ const AdminProductModalContent: FC = () => {
         <AdminProductModalHeader />
         <div className="product-modal__body">
           <AdminProductModalDetails />
-          <AdminProductModalDescription />
           <div className="product-modal__body-lower">
             <h6 className="product-modal__body-lower-title">
-              次要圖片(可多張)
+              新增圖片(可多張)
             </h6>
-            <AdminProductModalToggleList />
+            <AdminProductModalImgs />
           </div>
         </div>
         <AdminProductModalFooter />

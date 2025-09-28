@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "@/store/redux-hooks";
+import { v4 as uuidv4 } from "uuid";
 
 import { ProductManagementContext } from "../contexts/admin-product-modal.contexts";
 
@@ -16,10 +14,24 @@ import {
   selectAdminProductEditModalType,
   selectAdminProductEditModalTargetData,
 } from "../../../store/admin/adminProduct.selector";
+import {
+  fetchOptionProductCategoriesAsync,
+  fetchOptionGendersAsync,
+} from "@/store/option/option.asyncThunk";
+import { setClearOptionState } from "@/store/option/option.slice";
+import {
+  selectOptionProductCategories,
+  selectOptionGenders,
+} from "@/store/option/option.selector";
 
-import { FORM_OPERATION_OPTIONS } from "../../../../../shared/types";
+import { FORM_OPERATION_OPTIONS } from "@/shared/types";
 
 import { defaultProdcutFormStructure } from "../config/admin-product-modal.config";
+import {
+  mapToProductForm,
+  mapToEditProductDTO,
+  mapToCreateProductDTO,
+} from "../utils/admin-product-modal.utils";
 
 import type { ChangeEvent } from "react";
 import type { AdminProductForCreate } from "../../../types/admin-product.types";
@@ -35,9 +47,7 @@ export const useProductManagementContext = () => {
   return context;
 };
 
-export const useAdminProductModalFormControl = (
-  category: string | undefined
-) => {
+export const useAdminProductModalFormControl = () => {
   const [formData, setFormData] = useState<{
     id: string | null;
     form: AdminProductForCreate;
@@ -49,30 +59,35 @@ export const useAdminProductModalFormControl = (
   const dispatch = useAppDispatch();
 
   const isSaveToSave =
-    formData.form.title.length > 0 || formData.form.unit.length > 0;
+    formData.form.name.length > 0 || formData.form.description.length > 0;
 
   //* 針對每個 input 在新增內容時放入 formData
   const onChangeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     i?: number
   ) => {
     const { value, name } = e.target;
 
-    if (["price", "origin_price"].includes(name)) {
-      const newForm = { ...formData.form, [name]: Number(value) };
-      setFormData((prev) => ({ ...prev, form: newForm }));
-    } else if (
-      name === "is_enabled" &&
-      e.target instanceof HTMLInputElement &&
-      e.target.type === "checkbox"
-    ) {
-      const newForm = { ...formData.form, [name]: +e.target.checked as 0 | 1 };
-      setFormData((prev) => ({ ...prev, form: newForm }));
-    } else if (name.startsWith("imagesUrl")) {
-      const newImages = [...formData.form.imagesUrl];
-      newImages[i!] = value;
-      const newForm = { ...formData.form, imagesUrl: newImages };
-      setFormData((prev) => ({ ...prev, form: newForm }));
+    if (name === "img_urls") {
+      setFormData((prev) => ({
+        ...prev,
+        form: {
+          ...prev.form,
+          img_urls: prev.form.img_urls.map((url, index) =>
+            index === i ? { id: url.id, url: value } : url
+          ),
+        },
+      }));
+    } else if (name === "features") {
+      setFormData((prev) => ({
+        ...prev,
+        form: {
+          ...prev.form,
+          features: prev.form.features.map((feature, index) =>
+            index === i ? { id: feature.id, feature: value } : feature
+          ),
+        },
+      }));
     } else {
       setFormData((prev) => ({
         ...prev,
@@ -81,12 +96,54 @@ export const useAdminProductModalFormControl = (
     }
   };
 
+  //* 增加新增 imagesUrl 的 input
+  const onClickToAddImgs = () => {
+    const newForm = {
+      ...formData.form,
+      img_urls: [...formData.form.img_urls, { id: uuidv4(), url: "" }],
+    };
+    setFormData((prev) => ({
+      ...prev,
+      form: newForm,
+    }));
+  };
+
+  //* 刪除 imagesUrl
+  const onRemoveInput = (id: string) => {
+    const newForm = {
+      ...formData.form,
+      img_urls: formData.form.img_urls.filter((url) => url.id !== id),
+    };
+
+    setFormData((prev) => ({
+      ...prev,
+      form: newForm,
+    }));
+  };
+
+  const onClickToAddFeature = () => {
+    const newForm = {
+      ...formData.form,
+      features: [...formData.form.features, { id: uuidv4(), feature: "" }],
+    };
+    setFormData((prev) => ({ ...prev, form: newForm }));
+  };
+
+  const onClickToRemoveFeature = (id: string) => {
+    const newForm = {
+      ...formData.form,
+      features: formData.form.features.filter((feature) => feature.id !== id),
+    };
+    setFormData((prev) => ({ ...prev, form: newForm }));
+  };
+
   const submitForm = () => {
     if (type === FORM_OPERATION_OPTIONS.create) {
-      const newData = { ...formData.form };
+      const newData = mapToCreateProductDTO(formData.form);
+
       dispatch(createAdminProductAsync(newData));
     } else if (type === FORM_OPERATION_OPTIONS.edit && formData.id) {
-      const newData = { id: formData.id, ...formData.form };
+      const newData = mapToEditProductDTO(formData.id, formData.form);
 
       dispatch(updateAdminProductAsync(newData));
     }
@@ -97,13 +154,14 @@ export const useAdminProductModalFormControl = (
     if (type === FORM_OPERATION_OPTIONS.create) {
       setFormData({
         id: null,
-        form: { ...defaultProdcutFormStructure, category: `${category}-` },
+        form: defaultProdcutFormStructure,
       });
     } else if (type === FORM_OPERATION_OPTIONS.edit && targetData) {
-      const { id, ...rest } = targetData;
-      setFormData({ id, form: rest });
+      const newData = mapToProductForm(targetData);
+
+      setFormData({ id: newData._id, form: newData });
     }
-  }, [type, targetData, category]);
+  }, [type, targetData]);
 
   return {
     formData,
@@ -112,6 +170,10 @@ export const useAdminProductModalFormControl = (
     setFormData,
     submitForm,
     onChangeHandler,
+    onClickToAddImgs,
+    onRemoveInput,
+    onClickToAddFeature,
+    onClickToRemoveFeature,
   };
 };
 
@@ -123,4 +185,21 @@ export const useAdminProductEditModalControl = () => {
   const switchModalOpen = () => dispatch(setProductEditModalIsOpen(!isOpen));
 
   return { isOpen, switchModalOpen };
+};
+
+export const useAdminProductEditModalStateFetch = () => {
+  const categories = useAppSelector(selectOptionProductCategories);
+  const genders = useAppSelector(selectOptionGenders);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOptionProductCategoriesAsync());
+    dispatch(fetchOptionGendersAsync());
+
+    return () => {
+      dispatch(setClearOptionState());
+    };
+  }, []);
+
+  return { categories, genders };
 };

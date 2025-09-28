@@ -13,9 +13,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosRejectTypes } from "../../../../store/redux-utils";
 import type { AdminProductDto } from "../../DTOs/adminProduct.dtos";
 import type { ProductEditModalType } from "../../types/admin-product.types";
+import type { PaginationType } from "../../../../shared/types";
 
 type AdminProductState = {
   readonly products: AdminProductDto[];
+  readonly pagination: PaginationType;
   readonly isLoading: boolean;
   readonly error: AxiosRejectTypes | null;
   readonly productEditModalControl: ProductEditModalType;
@@ -23,6 +25,11 @@ type AdminProductState = {
 
 const INITIAL_STATE: AdminProductState = {
   products: [],
+  pagination: {
+    total_pages: 1,
+    current_page: 1,
+    per_pages: 10,
+  },
   isLoading: false,
   error: null,
   productEditModalControl: {
@@ -73,7 +80,8 @@ export const adminProductSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAdminProductAsync.fulfilled, (state, { payload }) => {
-        state.products = payload.products;
+        state.products = payload.data.data;
+        state.pagination = payload.data.pagination;
         state.isLoading = false;
       })
       .addCase(fetchAdminProductAsync.rejected, (state, { payload }) => {

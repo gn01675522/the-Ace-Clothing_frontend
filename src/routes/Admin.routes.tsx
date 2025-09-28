@@ -9,8 +9,6 @@ const AdminLayout = lazy(
 const AdminProducts = lazy(
   () => import("../pages/admin-products/AdminProducts.page")
 );
-const AdminNav = lazy(() => import("../pages/admin-nav/AdminNav.page"));
-
 const AdminCoupons = lazy(
   () => import("../pages/admin-coupons/AdminCoupons.page")
 );
@@ -24,8 +22,7 @@ export const adminRoutes: RouteObject[] = [
     element: <AdminLayout />,
     children: [
       { index: true, element: <Navigate to="products" replace /> },
-      { path: "products/:category", element: <AdminProducts /> },
-      { path: "products", element: <AdminNav /> },
+      { path: "products", element: <AdminProducts /> },
       { path: "coupons", element: <AdminCoupons /> },
       { path: "orders", element: <AdminOrders /> },
     ],

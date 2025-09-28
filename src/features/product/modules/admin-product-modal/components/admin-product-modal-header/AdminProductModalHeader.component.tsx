@@ -10,17 +10,12 @@ import "./AdminProductModalHeader.styles.scss";
 
 export const AdminProductModalHeader: FC = () => {
   const {
-    formControl: {
-      type,
-      formData: { form },
-    },
+    formControl: { type },
     onCloseHandler,
   } = useProductManagementContext();
 
   const titleByType =
-    type === FORM_OPERATION_OPTIONS.create
-      ? "建立新商品"
-      : `產品名稱：${form.title}`;
+    type === FORM_OPERATION_OPTIONS.create ? "建立新商品" : `產品內容`;
 
   return (
     <div className="admin-product-modal-header">

@@ -11,7 +11,7 @@ export enum GENERIC_INPUT_TYPES {
 
 export interface IGenericInput extends ComponentPropsWithRef<"input"> {
   message?: string;
-  wrapperClass?: string;
+  containerClass?: string;
   labelClass?: string;
   inputClass?: string;
 }

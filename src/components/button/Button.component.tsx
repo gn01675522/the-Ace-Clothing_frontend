@@ -42,18 +42,24 @@ const getClass = (
 export type ButtonProps = {
   buttonType?: BUTTON_TYPE_CLASS;
   isLoading?: boolean;
+  buttonClass?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button: FC<ButtonProps> = ({
   children,
   buttonType,
   isLoading,
+  buttonClass,
   ...otherProps
 }) => {
-  const buttonClass = getClass(buttonType);
+  const combinedButtonClass = `${getClass(buttonType)} ${buttonClass ?? ""}`;
 
   return (
-    <button disabled={isLoading} className={buttonClass} {...otherProps}>
+    <button
+      disabled={isLoading}
+      className={combinedButtonClass}
+      {...otherProps}
+    >
       {children}
     </button>
   );

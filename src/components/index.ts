@@ -6,6 +6,7 @@ export * from "./message/Message.component";
 export * from "./backdrop/Backdrop.component";
 export * from "./price-tag/PriceTag.component";
 export * from "./generic-input/GenericInput.component";
+export * from "./generic-select/GenericSelect.component";
 export * from "./generic-textarea/GenericTextarea.component";
 export * from "./toggle-switch/ToggleSwitch.component";
 export * from "./toggle-list/ToggleList.component";

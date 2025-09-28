@@ -10,11 +10,7 @@ import type {
   FetchAdminCouponResDto,
 } from "../DTOs/adminCoupon.dtos";
 import type { PaginationType } from "@/shared/types/types";
-import type {
-  APIResponse,
-  APIRejectResponse,
-  APIGeneralResDto,
-} from "../../../shared/types";
+import type { APIResponse, APIRejectResponse } from "@/shared/types";
 
 //* 擷取 api 上關於 admin coupons 的資料
 export const fetchAdminCouponsAsync = createAppAsyncThunk<
@@ -23,7 +19,6 @@ export const fetchAdminCouponsAsync = createAppAsyncThunk<
 >(
   "adminCoupons/fetchAdminCoupons",
   async (page = 1, { rejectWithValue, dispatch }) => {
-
     try {
       const res = (await api.get(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupons?page=${page}`
@@ -51,9 +46,9 @@ export const deleteAdminCouponsAsync = createAppAsyncThunk<void, string>(
   "adminCoupons/deleteAdminCoupons",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.delete(
+      const res = await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${id}`
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -85,10 +80,10 @@ export const createAdminCouponAsync = createAppAsyncThunk<
   "adminCoupons/createAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.post(
+      const res = await api.post(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon`,
         { data: formData }
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -117,10 +112,10 @@ export const updateAdminCouponAsync = createAppAsyncThunk<void, AdminCouponDto>(
   "adminCoupons/updateAdminCoupons",
   async (formData, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.put(
+      const res = await api.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/coupon/${formData.id}`,
         { data: formData }
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 

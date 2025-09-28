@@ -23,7 +23,7 @@ export const LoginForm: FC = () => {
         {...email}
         value={data.username}
         onChange={handleChange}
-        wrapperClass="login-form__item"
+        containerClass="login-form__item"
         labelClass="login-form__item-label"
         inputClass="login-form__item-email"
       />
@@ -31,7 +31,7 @@ export const LoginForm: FC = () => {
         {...passward}
         value={data.password}
         onChange={handleChange}
-        wrapperClass="login-form__item"
+        containerClass="login-form__item"
         labelClass="login-form__item-label"
         inputClass="login-form__item-password"
       />

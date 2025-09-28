@@ -20,9 +20,10 @@
   &__toggle {
     display: flex;
     position: relative;
+    height: 36px;
     background-color: variables.$color-secondary-bg;
     gap: 1rem;
-    padding: 12px;
+    padding: 8px 8px 8px 36px;
     justify-content: center;
     cursor: pointer;
     &-triangle {
@@ -31,13 +32,16 @@
       border-width: 12px 8px 0 8px;
       border-color: variables.$color-primary-bg transparent transparent
         transparent;
-      top: 14px;
+      top: 50%;
+      transform: translateY(-50%);
       left: 12px;
     }
     &-title {
+      width: 100%;
       font-size: 1rem;
       color: variables.$color-secondary-text;
       font-weight: bold;
+      line-height: 20px;
       text-align: center;
     }
   }

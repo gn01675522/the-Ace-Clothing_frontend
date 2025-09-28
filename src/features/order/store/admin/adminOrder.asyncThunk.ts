@@ -10,11 +10,7 @@ import type {
   AdminOrderDto,
   FetchAdminOrderResDto,
 } from "../../DTOs/adminOrders.dtos";
-import type {
-  APIResponse,
-  APIRejectResponse,
-  APIGeneralResDto,
-} from "../../../../shared/types";
+import type { APIResponse, APIRejectResponse } from "@/shared/types";
 
 //* 擷取 admin orders api 中的資料
 export const fetchAdminOrdersAsync = createAppAsyncThunk<
@@ -46,10 +42,10 @@ export const updateAdminOrdersAsync = createAppAsyncThunk<void, AdminOrderDto>(
   "adminOrders/updateAdminOrders",
   async (data, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.put(
+      const res = await api.put(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${data.id}`,
         { data }
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -76,9 +72,9 @@ export const deleteAdminOrdersAsync = createAppAsyncThunk<void, string>(
   "adminOrders/deleteAdminOrders",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.delete(
+      const res = await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/admin/order/${id}`
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 

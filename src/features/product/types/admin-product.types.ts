@@ -8,15 +8,10 @@ export type ProductEditModalType = {
 };
 
 export interface AdminProductForCreate {
-  title: string;
+  name: string;
+  gender: string;
   category: string;
-  origin_price: number;
-  price: number;
-  num: number;
-  unit: string;
+  features: { id: string; feature: string }[];
   description: string;
-  content: string;
-  is_enabled: 0 | 1;
-  imageUrl: string;
-  imagesUrl: string[];
+  img_urls: { id: string; url: string }[];
 }

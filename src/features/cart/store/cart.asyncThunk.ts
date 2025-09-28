@@ -4,11 +4,7 @@ import { createAppAsyncThunk } from "../../../store/redux-utils";
 
 import { setHandleMessage } from "../../../store/message/message.slice";
 
-import type {
-  APIResponse,
-  APIRejectResponse,
-  APIGeneralResDto,
-} from "../../../shared/types";
+import type { APIResponse, APIRejectResponse } from "../../../shared/types";
 import type {
   CartItemDto,
   CartInfoDto,
@@ -44,10 +40,10 @@ export const setAddItemToCartAsync = createAppAsyncThunk<
   { data: CartItemAddToCart }
 >("cart/setAddItemToCart", async (data, { dispatch, rejectWithValue }) => {
   try {
-    const res = (await api.post(
+    const res = await api.post(
       `/v2/api/${process.env.APP_API_PATH}/cart`,
       data
-    )) as APIResponse<APIGeneralResDto>;
+    );
 
     dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -72,9 +68,9 @@ export const setRemoveItemFromCartAsync = createAppAsyncThunk<void, string>(
   "cart/setRemoveItemfromCart",
   async (id, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.delete(
+      const res = await api.delete(
         `/v2/api/${process.env.APP_API_PATH}/cart/${id}`
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -106,10 +102,10 @@ export const setUpdateCartItemAsync = createAppAsyncThunk<
       data: { product_id: item.product_id, qty: quantity },
     };
     try {
-      const res = (await api.put(
+      const res = await api.put(
         `/v2/api/${process.env.APP_API_PATH}/cart/${item.id}`,
         data
-      )) as APIResponse<APIGeneralResDto>;
+      );
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
 
@@ -135,12 +131,9 @@ export const setAddCouponForCartAsync = createAppAsyncThunk<void, string>(
   "client/setAddCouponForCart",
   async (code, { dispatch, rejectWithValue }) => {
     try {
-      const res = (await api.post(
-        `v2/api/${process.env.APP_API_PATH}/coupon`,
-        {
-          data: { code },
-        }
-      )) as APIResponse<APIGeneralResDto>;
+      const res = await api.post(`v2/api/${process.env.APP_API_PATH}/coupon`, {
+        data: { code },
+      });
 
       dispatch(setHandleMessage({ type: res.data.success, res }));
     } catch (e) {

@@ -9,7 +9,6 @@ import type {
 import type { UserBasicInfo } from "../../../../shared/types/interface";
 import type {
   APIResponse,
-  APIGeneralResDto,
   APIRejectResponse,
 } from "../../../../shared/types/interface";
 

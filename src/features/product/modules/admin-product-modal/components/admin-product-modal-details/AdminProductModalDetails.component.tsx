@@ -1,11 +1,20 @@
 import { useProductManagementContext } from "../../hooks/admin-product-modal.hooks";
 
-import { NoImageSVGLogo } from "../../../../../../components/index";
-import { GenericInput, ToggleSwitch } from "../../../../../../components/index";
+import {
+  NoImageSVGLogo,
+  GenericInput,
+  GenericSelect,
+  GenericTextarea,
+  Button,
+  BUTTON_TYPE_CLASS,
+} from "@/components/index";
 
-import { adminProductFormDetailsConfig } from "../../config/admin-product-modal.config";
+import {
+  adminProductFormDetailsConfig,
+  adminProductFormDescriptionConfig,
+} from "../../config/admin-product-modal.config";
 
-import type { FC, KeyboardEvent } from "react";
+import type { FC } from "react";
 
 import "./AdminProductModalDetails.styles.scss";
 
@@ -14,57 +23,54 @@ export const AdminProductModalDetails: FC = () => {
     formControl: {
       formData: { form },
       onChangeHandler,
+      onClickToAddFeature,
+      onClickToRemoveFeature,
     },
+    stateFetch: { categories, genders },
   } = useProductManagementContext();
 
-  //* 避免 user 新增到小數點
-  const onPreventDotEntry = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === ".") {
-      e.preventDefault();
-    }
-  };
+  const { productMainImgUrl, productGender, productTitle, productCategory } =
+    adminProductFormDetailsConfig({
+      formData: form,
+      options: { categories, genders },
+    });
 
-  const {
-    productIsEnabled,
-    productMainImgUrl,
-    productTitle,
-    productCategory,
-    productUnit,
-    productOriginPrice,
-    productPrice,
-  } = adminProductFormDetailsConfig(form);
+  const { description } = adminProductFormDescriptionConfig(form);
 
   return (
     <>
-      <ToggleSwitch {...productIsEnabled} onChange={onChangeHandler} />
-      <div className="admin-product-modal-details__content">
-        <div className="admin-product-modal-details__content-left">
-          {form.imageUrl ? (
-            <img
-              src={form.imageUrl}
-              alt={`主圖片：${form.title}；無法顯示，請輸入正確連結`}
-              className="admin-product-modal-details__content-left-img"
-            />
-          ) : (
-            <NoImageSVGLogo className="admin-product-modal-details__content-left-alt" />
-          )}
-          <GenericInput {...productMainImgUrl} onChange={onChangeHandler} />
-        </div>
-
-        <div className="admin-product-modal-details__content-right">
+      <div className="admin-product-modal-details">
+        <div className="admin-product-modal-details__wrapper">
           <GenericInput {...productTitle} onChange={onChangeHandler} />
-          <GenericInput {...productCategory} onChange={onChangeHandler} />
-          <GenericInput {...productUnit} onChange={onChangeHandler} />
-          <GenericInput
-            {...productOriginPrice}
-            onChange={onChangeHandler}
-            onKeyDown={onPreventDotEntry}
-          />
-          <GenericInput
-            {...productPrice}
-            onChange={onChangeHandler}
-            onKeyDown={onPreventDotEntry}
-          />
+          <GenericTextarea {...description} onChange={onChangeHandler} />
+          <div className="admin-product-modal-details__select">
+            <GenericSelect {...productGender} onChange={onChangeHandler} />
+            <GenericSelect {...productCategory} onChange={onChangeHandler} />
+          </div>
+          <Button
+            buttonType={BUTTON_TYPE_CLASS.rectBlackMe}
+            onClick={onClickToAddFeature}
+          >
+            新增特性
+          </Button>
+          {form.features.map((feature, i) => (
+            <div
+              key={feature.id}
+              style={{ display: "flex", gap: "10px", alignItems: "center" }}
+            >
+              <GenericInput
+                value={feature.feature}
+                name="features"
+                onChange={(e) => onChangeHandler(e, i)}
+              />
+              <Button
+                onClick={() => onClickToRemoveFeature(feature.id)}
+                style={{ width: "50px" }}
+              >
+                刪除
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
     </>

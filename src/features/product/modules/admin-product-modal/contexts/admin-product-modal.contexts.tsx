@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../../store/redux-hooks";
 
 import {
   useAdminProductEditModalControl,
   useAdminProductModalFormControl,
+  useAdminProductEditModalStateFetch,
 } from "../hooks/admin-product-modal.hooks";
 
 import { setClearProductEditModalControl } from "../../../store/admin/adminProduct.slice";
@@ -16,6 +16,7 @@ import type { ReactNode } from "react";
 type ContextType = {
   modalControl: ReturnType<typeof useAdminProductEditModalControl>;
   formControl: ReturnType<typeof useAdminProductModalFormControl>;
+  stateFetch: ReturnType<typeof useAdminProductEditModalStateFetch>;
   onCloseHandler: () => void;
   onSubmitHandler: () => void;
 };
@@ -29,9 +30,9 @@ export const ProductManagementContext = createContext<ContextType | null>(null);
 export const ProductManagementContextProvider = ({
   children,
 }: ContextPropsType) => {
-  const { category } = useParams();
-  const formControl = useAdminProductModalFormControl(category);
+  const formControl = useAdminProductModalFormControl();
   const modalControl = useAdminProductEditModalControl();
+  const stateFetch = useAdminProductEditModalStateFetch();
 
   const dispatch = useAppDispatch();
 
@@ -50,6 +51,7 @@ export const ProductManagementContextProvider = ({
   const value = {
     formControl,
     modalControl,
+    stateFetch,
     onCloseHandler,
     onSubmitHandler,
   };

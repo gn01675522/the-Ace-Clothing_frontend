@@ -1,35 +1,32 @@
 import api from "@/shared/api/axios";
-import { createAppAsyncThunk } from "../../../../store/redux-utils";
+import { createAppAsyncThunk } from "@/store/redux-utils";
 
-import { setHandleMessage } from "../../../../store/message/message.slice";
+import { setHandleMessage } from "@/store/message/message.slice";
 
 import type { AxiosResponse } from "axios";
-import type { AxiosRejectTypes } from "../../../../store/redux-utils";
+import type { AxiosRejectTypes } from "@/store/redux-utils";
 import type {
-  AdminProductDto,
-  CreateProductDto,
+  FetchAdminProductsResDto,
+  ProductEditDataReqDTO,
+  ProductCreateDataReqDTO,
 } from "../../DTOs/adminProduct.dtos";
-import type { APIRejectResponse } from "../../../../shared/types";
-
-//********** Helper **********
-const cleanedDataHelper = (formData: AdminProductDto | CreateProductDto) => {
-  const cleanImagesArray = formData.imagesUrl.filter((url) => url !== "");
-  const cleanedData = { ...formData, imagesUrl: cleanImagesArray };
-  return cleanedData;
-};
-//********** Helper **********
+import type { APIRejectResponse } from "@/shared/types";
+import type { APIResDTO } from "@/shared/DTOs/api.dtos";
 
 //* 取得 product data
 export const fetchAdminProductAsync = createAppAsyncThunk<
-  { products: AdminProductDto[] },
-  void
->("adminProduct/fetchAdminProduct", async (_, { rejectWithValue }) => {
+  AxiosResponse<FetchAdminProductsResDto>,
+  { current_page?: number; per_page?: number } | undefined
+>("adminProduct/fetchAdminProduct", async (params, { rejectWithValue }) => {
   try {
-    const res = await api.get(
-      `/v2/api/${process.env.APP_API_PATH}/admin/products/all`
-    );
+    const res = await api.get(`/product`, {
+      params: {
+        current_page: params?.current_page ?? 1,
+        per_page: params?.per_page ?? 10,
+      },
+    });
 
-    return { products: res.data.products };
+    return res;
   } catch (e) {
     const error = e as APIRejectResponse;
 
@@ -47,10 +44,10 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const res = (await api.delete(
-        `/v2/api/${process.env.APP_API_PATH}/admin/product/${id}`
-      )) as AxiosResponse;
+        `/product/${id}`
+      )) as AxiosResponse<APIResDTO>;
 
-      dispatch(setHandleMessage({ type: res.data.success, res }));
+      dispatch(setHandleMessage({ isSuccess: res.data.success, res: res }));
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
@@ -62,7 +59,7 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
       }
 
       dispatch(
-        setHandleMessage({ type: error.response.data.success, res: error })
+        setHandleMessage({ isSuccess: error.response.data.success, res: error })
       );
 
       return rejectWithValue(error);
@@ -73,18 +70,22 @@ export const deleteAdminProductAsync = createAppAsyncThunk<void, string>(
 //* 更新 products data
 export const updateAdminProductAsync = createAppAsyncThunk<
   void,
-  AdminProductDto
+  ProductEditDataReqDTO
 >(
   "adminProduct/updateAdminProduct",
-  async (formData, { dispatch, rejectWithValue }) => {
-    const newFormData = cleanedDataHelper(formData);
+  async (data, { dispatch, rejectWithValue }) => {
     try {
       const res = (await api.put(
-        `/v2/api/${process.env.APP_API_PATH}/admin/product/${formData.id}`,
-        { data: newFormData }
+        `/product/${data._id}`,
+        data
       )) as AxiosResponse;
 
-      dispatch(setHandleMessage({ type: res.data.success, res }));
+      dispatch(
+        setHandleMessage({
+          isSuccess: res.data.success,
+          res: res,
+        })
+      );
 
       //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
@@ -96,7 +97,7 @@ export const updateAdminProductAsync = createAppAsyncThunk<
       }
 
       dispatch(
-        setHandleMessage({ type: error.response.data.success, res: error })
+        setHandleMessage({ isSuccess: error.response.data.success, res: error })
       );
 
       return rejectWithValue(error);
@@ -107,20 +108,15 @@ export const updateAdminProductAsync = createAppAsyncThunk<
 //* 新增 products data
 export const createAdminProductAsync = createAppAsyncThunk<
   void,
-  CreateProductDto
+  ProductCreateDataReqDTO
 >(
   "adminProduct/createAdminProduct",
   async (data, { dispatch, rejectWithValue }) => {
-    const newFormData = cleanedDataHelper(data);
     try {
-      const res = (await api.post(
-        `/v2/api/${process.env.APP_API_PATH}/admin/product`,
-        { data: newFormData }
-      )) as AxiosResponse;
+      const res = (await api.post(`/product`, data)) as AxiosResponse;
 
-      dispatch(setHandleMessage({ type: res.data.success, res }));
+      // dispatch(setHandleMessage({ type: res.data.success, res }));
 
-      //* 刪除完畢後重新 fetch 產品列表
       dispatch(fetchAdminProductAsync());
     } catch (e) {
       const error = e as AxiosRejectTypes;
@@ -129,9 +125,9 @@ export const createAdminProductAsync = createAppAsyncThunk<
         throw e;
       }
 
-      dispatch(
-        setHandleMessage({ type: error.response.data.success, res: error })
-      );
+      // dispatch(
+      //   setHandleMessage({ type: error.response.data.success, res: error })
+      // );
 
       return rejectWithValue(error);
     }

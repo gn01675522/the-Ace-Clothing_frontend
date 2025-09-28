@@ -18,19 +18,15 @@ export const adminProductTableConfig = ({
 
   const headers = [
     { id: "category", render: "分類" },
-    { id: "title", render: "名稱" },
-    { id: "price", render: "售價" },
-    { id: "is_enabled", render: "啟用狀態" },
+    { id: "name", render: "名稱" },
     { id: "edit", render: "編輯" },
   ];
 
   const columns = adminProductData.map((data) => ({
-    id: data.id,
+    id: data._id,
     data: [
-      { id: "1", render: () => data.category },
-      { id: "2", render: () => data.title },
-      { id: "3", render: () => data.price },
-      { id: "4", render: () => (data.is_enabled ? "已啟用" : "未啟用") },
+      { id: "1", render: () => data.category.value },
+      { id: "2", render: () => data.name },
       {
         id: "5",
         render: () => (

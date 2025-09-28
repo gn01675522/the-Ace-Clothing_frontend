@@ -2,62 +2,51 @@ import { GENERIC_INPUT_TYPES } from "../../../../../components/index";
 
 import type { AdminProductForCreate } from "../../../types/admin-product.types";
 
-export const adminProductFormDetailsConfig = (
-  formData: AdminProductForCreate
-) => ({
-  productIsEnabled: {
-    id: "is_enabled",
-    name: "is_enabled",
-    title: "是否啟用",
-    checked: !!formData.is_enabled,
-  },
+type PropsType = {
+  formData: AdminProductForCreate;
+  options: {
+    categories: { id: string; name: string }[];
+    genders: { id: string; name: string }[];
+  };
+};
+
+export const adminProductFormDetailsConfig = ({
+  formData,
+  options,
+}: PropsType) => ({
   productMainImgUrl: {
     id: "image",
-    name: "imageUrl",
-    title: "品名",
-    value: formData?.imageUrl,
+    name: "img_urls",
+    title: "主要圖片",
+    value: formData?.img_urls?.[0],
     type: GENERIC_INPUT_TYPES.text,
     placeholder: "請輸入圖片連結",
   },
   productTitle: {
-    id: "title",
-    name: "title",
+    id: "name",
+    name: "name",
     title: "品名",
-    value: formData?.title,
+    value: formData?.name,
     type: GENERIC_INPUT_TYPES.text,
     placeholder: "請輸入標題",
+  },
+  productGender: {
+    id: "gender",
+    name: "gender",
+    title: "適用性別",
+    options: options.genders,
+    value: formData?.gender,
+    type: GENERIC_INPUT_TYPES.text,
+    placeholder: "請輸入性別",
   },
   productCategory: {
     id: "category",
     name: "category",
     title: "分類",
+    options: options.categories,
     value: formData?.category,
     type: GENERIC_INPUT_TYPES.text,
     placeholder: "請輸入分類",
-  },
-  productUnit: {
-    id: "unit",
-    name: "unit",
-    title: "單位",
-    value: formData?.unit,
-    type: GENERIC_INPUT_TYPES.text,
-    placeholder: "請輸入單位",
-  },
-  productOriginPrice: {
-    id: "origin_price",
-    name: "origin_price",
-    title: "原價(台幣/元)",
-    value: formData?.origin_price,
-    type: GENERIC_INPUT_TYPES.number,
-    placeholder: "請輸入原價",
-  },
-  productPrice: {
-    id: "price",
-    name: "price",
-    title: "售價(台幣/元)",
-    value: formData?.price,
-    type: GENERIC_INPUT_TYPES.number,
-    placeholder: "請輸入售價",
   },
 });
 
@@ -72,26 +61,13 @@ export const adminProductFormDescriptionConfig = (
     value: formData?.description,
     placeholder: "請輸入產品描述",
   },
-  content: {
-    id: "content",
-    name: "content",
-    title: "說明內容",
-    type: GENERIC_INPUT_TYPES.text,
-    value: formData?.content,
-    placeholder: "請輸入產品說明內容",
-  },
 });
 
 export const defaultProdcutFormStructure: AdminProductForCreate = {
-  title: "",
+  name: "",
+  gender: "",
   category: "",
-  origin_price: 0,
-  price: 0,
-  unit: "",
-  num: 0,
+  features: [],
   description: "",
-  content: "",
-  is_enabled: 0,
-  imageUrl: "",
-  imagesUrl: [],
+  img_urls: [],
 };

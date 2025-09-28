@@ -48,13 +48,13 @@ export const messageSlice = createSlice({
       return INITIAL_STATE;
     },
     setMessage(state, action) {
-      const { type, res } = action.payload;
+      const { isSuccess, res } = action.payload;
 
       state.hasMessage = true;
 
-      if (type === true) {
+      if (isSuccess === true) {
         state.message = successMessageHelper(res);
-      } else if (type === false) {
+      } else if (isSuccess === false) {
         state.message = errorMessageHelper(res);
       }
     },
@@ -64,7 +64,7 @@ export const messageSlice = createSlice({
 const { setClearMessage, setMessage } = messageSlice.actions;
 
 export const setHandleMessage =
-  (payload: { type: boolean; res: AxiosRejectTypes | AxiosResponse }) =>
+  (payload: { isSuccess: boolean; res: AxiosRejectTypes | AxiosResponse }) =>
   (dispatch: AppDispatch) => {
     dispatch(setMessage(payload));
     setTimeout(() => {
